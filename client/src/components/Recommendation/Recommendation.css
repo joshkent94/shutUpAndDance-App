@@ -1,0 +1,11 @@
+.track {
+  display: flex;
+  justify-content: space-between;
+  margin: 1.5em;
+  align-items: center;
+  width: 50%;
+}
+
+.track-info {
+  margin: 0;
+}

@@ -1,0 +1,43 @@
+#subnav {
+  display: flex;
+  width: 100%;
+  padding: 2em;
+  justify-content: space-around;
+}
+
+#search {
+  width: 250px;
+}
+
+.form-control:focus {
+  border-color: inherit;
+  box-shadow: none;
+}
+
+input::-webkit-search-cancel-button:hover {
+  cursor: pointer;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  height: 1em;
+  width: 1em;
+  border-radius: 50em;
+  background: url(https://pro.fontawesome.com/releases/v5.10.0/svgs/solid/times-circle.svg)
+    no-repeat 50% 50%;
+  background-size: contain;
+  opacity: 0;
+  pointer-events: none;
+}
+
+input[type="search"]:focus::-webkit-search-cancel-button {
+  opacity: 0.3;
+  pointer-events: all;
+}
+
+#log-out {
+  width: 150px;
+  background: linear-gradient(45deg, #b363db, #55a9c8);
+  color: white;
+  border: white;
+}

@@ -1,0 +1,27 @@
+.genre-label {
+  height: 1.8em;
+  display: flex;
+  align-items: center;
+}
+
+.genre-label:hover {
+  cursor: pointer;
+  background: linear-gradient(45deg, #b363db, #55a9c8);
+  color: white;
+}
+
+.genre-checkbox {
+  margin: 0 1em;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.genre-checkbox:hover {
+  cursor: pointer;
+}
+
+.genre {
+  margin: 0;
+  height: 100%;
+  text-transform: capitalize;
+}

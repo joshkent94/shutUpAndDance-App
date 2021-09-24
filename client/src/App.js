@@ -1,58 +1,55 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from "react-router-dom";
+import SignedIn from "./components/SignedIn/SignedIn";
+import Login from "./components/Login/Login";
+import { selectSignedIn, requestLogin, selectRegistering } from "./utils/state/preLoginSlice";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import Register from "./components/Register/Register";
+import { getUserDetails } from "./utils/state/userSlice";
 
-function App() {
+export default function App() {
+  const dispatch = useDispatch();
+  const registering = useSelector(selectRegistering);
+  const signedIn = useSelector(selectSignedIn);
+
+  useEffect(() => {
+    if (document.cookie !== "" & !signedIn) {
+      dispatch(requestLogin());
+    };
+  });
+
+  useEffect(() => {
+    if (signedIn) {
+      dispatch(getUserDetails());
+    };
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
-  );
-}
+    <Router>
 
-export default App;
+      {signedIn && <Redirect to="/signedin" />}
+      {registering && <Redirect to="/register" />}
+      {!signedIn && !registering && <Redirect to="/login" />}
+
+      <Switch>
+        <Route path="/login">
+          <Login />
+        </Route>
+      
+        <Route path="/signedin">
+          <SignedIn />
+        </Route>
+
+        <Route path="/register">
+          <Register />
+        </Route>
+      </Switch>
+
+    </Router>
+  );
+};

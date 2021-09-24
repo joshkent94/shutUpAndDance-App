@@ -1,0 +1,87 @@
+#login {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(45deg, #b363db, #55a9c8);
+}
+
+#login-form {
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-element {
+  width: 350px;
+  padding: 0.3em;
+  margin: 1em;
+  color: white;
+  background: transparent;
+}
+
+.login-element::placeholder {
+  color: white;
+  font-weight: 700;
+}
+
+.login-element:focus {
+  border-color: white;
+  caret-color: white;
+  color: white;
+  background: transparent;
+}
+
+#login-button {
+  width: 40%;
+  color: white;
+  font-weight: 700;
+  margin: 3em;
+}
+
+#login-button:hover {
+  background: white;
+  color: #55a9c8;
+}
+
+#login-button:focus {
+  box-shadow: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover {
+  border: 1px solid #ced4da;
+  -webkit-text-fill-color: white;
+  -webkit-box-shadow: 0 0 0px 1000px inset;
+  box-shadow: white;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+input:-webkit-autofill:focus {
+  border: 1px solid white;
+  -webkit-text-fill-color: white;
+  -webkit-box-shadow: 0 0 0px 1000px inset;
+  box-shadow: white;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+#message {
+  visibility: hidden;
+  color: white;
+  margin-bottom: 1em;
+}
+
+#reg-link {
+  border: none;
+  width: 500px;
+  margin: 0;
+}
+
+#reg-link:hover {
+  background: none;
+  color: white;
+  text-decoration: underline;
+}
