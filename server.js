@@ -15,6 +15,8 @@ const { updateGenres } = require('./server/queries/updateGenres');
 const { getGenres } = require('./server/queries/getGenres');
 require('dotenv').config();
 
+
+// https config
 const privateKey = fs.readFileSync(process.env.SSL_KEY_FILE, 'utf8');
 const certificate = fs.readFileSync(process.env.SSL_CRT_FILE, 'utf8');
 const credentials = {
@@ -22,6 +24,8 @@ const credentials = {
     cert: certificate
 };
 
+
+// middleware
 app.use(
   cors({
     origin: "https://localhost:3000",
@@ -49,7 +53,9 @@ app.use(session({
         httpOnly: false
     }
 }));
+app.use(express.static('client/public'));
 
+// routes
 app.get('/user', getUserDetails);
 app.get('/genres', getGenres);
 app.get('/logout', requestLogout);
