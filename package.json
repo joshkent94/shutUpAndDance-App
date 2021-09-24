@@ -1,0 +1,25 @@
+{
+  "name": "shutupanddance",
+  "version": "1.0.0",
+  "description": "Search and discuss music by genre",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-pg-simple": "^7.0.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "faker": "^5.5.3",
+    "knex": "^0.95.11",
+    "nodemon": "^2.0.12",
+    "pg": "^8.7.1",
+    "sanitize-html": "^2.5.1"
+  },
+  "author": "Josh Kent",
+  "license": "ISC"
+}
