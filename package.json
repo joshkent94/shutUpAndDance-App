@@ -4,7 +4,8 @@
   "description": "Search and discuss music by genre",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "heroku-postbuild": "cd client && npm install & npm run build"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

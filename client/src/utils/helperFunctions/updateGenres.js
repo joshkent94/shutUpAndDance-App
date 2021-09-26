@@ -1,7 +1,5 @@
-import { baseDomain } from "../envConfig";
-
 export const updateGenres = async (genres) => {
-    await fetch(`${baseDomain}/user`, {
+    await fetch(`/user`, {
         method: "PUT",
         mode: "cors",
         credentials: "include",

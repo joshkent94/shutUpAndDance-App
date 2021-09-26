@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { baseDomain } from "../envConfig";
 
 export const requestLogin = createAsyncThunk(
     'preLogin/requestLogin',
@@ -8,7 +7,7 @@ export const requestLogin = createAsyncThunk(
             email: email,
             password: password
         };
-        const response = await fetch(`${baseDomain}/authenticate`, {
+        const response = await fetch(`/authenticate`, {
             method: "POST",
             mode: "cors",
             credentials: 'include',
@@ -35,7 +34,7 @@ export const requestLogin = createAsyncThunk(
 export const logout = createAsyncThunk(
     'preLogin/logout',
     async () => {
-        const response = await fetch(`${baseDomain}/logout`, {
+        const response = await fetch(`/logout`, {
             method: "GET",
             credentials: 'include',
             mode: "cors"

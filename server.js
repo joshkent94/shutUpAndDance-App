@@ -43,7 +43,9 @@ app.use(session({
         httpOnly: false
     }
 }));
-app.use(express.static('client/public'));
+if (isProduction) {
+    app.use(express.static("client/build"));
+};
 
 // routes
 app.get('/user', getUserDetails);

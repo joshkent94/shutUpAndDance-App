@@ -1,7 +1,5 @@
-import { baseDomain } from "../envConfig";
-
 export const getGenres = async () => {
-    const response = await fetch(`${baseDomain}/genres`, {
+    const response = await fetch(`/genres`, {
         mode: "cors",
         credentials: "include"
     });

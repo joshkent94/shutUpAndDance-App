@@ -1,5 +1,3 @@
-import { baseDomain } from "../envConfig";
-
 export const submitRegistration = async (firstName, lastName, email, password, validatedPassword) => {
     if (password !== validatedPassword) {
         return {
@@ -12,7 +10,7 @@ export const submitRegistration = async (firstName, lastName, email, password, v
             email: email,
             password: password
         };
-        const response = await fetch(`${baseDomain}/register`, {
+        const response = await fetch(`/register`, {
             method: "POST",
             mode: "cors",
             credentials: 'include',

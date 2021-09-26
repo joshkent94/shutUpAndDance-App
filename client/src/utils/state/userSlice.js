@@ -1,10 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { baseDomain } from "../envConfig";
 
 export const getUserDetails = createAsyncThunk(
     'user/getUserDetails',
     async () => {
-        const response = await fetch(`${baseDomain}/user`, {
+        const response = await fetch(`/user`, {
             mode: "cors",
             credentials: "include",
         });
