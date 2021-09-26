@@ -43,6 +43,7 @@ app.use(session({
         httpOnly: false
     }
 }));
+app.set('trust proxy', true);
 if (isProduction) {
     app.use(express.static(path.join(__dirname, "client/build")));
 };
