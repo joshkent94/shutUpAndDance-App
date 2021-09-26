@@ -13,6 +13,7 @@ const { updateGenres } = require('./server/queries/updateGenres');
 const { getGenres } = require('./server/queries/getGenres');
 const path = require('path');
 const https = require('https');
+const { credentials } = require('./server/httpsConfig');
 require('dotenv').config();
 
 // middleware
@@ -60,15 +61,8 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, "client/build/index.html"));
 });
 
-// runs http server in production and https server in dev
-if (isProduction) {
-    app.listen(port, () => {
-        console.log(`App is running on port ${port}.`);
-    });
-} else {
-    const { credentials } = require('./server/httpsConfig');
-    const httpsServer = https.createServer(credentials, app);
-    httpsServer.listen(port, () => {
-        console.log(`HTTPS App is running on port ${port}.`);
-    });
-};
+// run https server
+const httpsServer = https.createServer(credentials, app);
+httpsServer.listen(port, () => {
+    console.log(`HTTPS App is running on port ${port}.`);
+});
