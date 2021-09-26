@@ -11,6 +11,7 @@ const { requestLogout } = require('./server/queries/requestLogout');
 const { getUserDetails } = require('./server/queries/getUserDetails');
 const { updateGenres } = require('./server/queries/updateGenres');
 const { getGenres } = require('./server/queries/getGenres');
+const path = require('path');
 const https = require('https');
 require('dotenv').config();
 
@@ -43,7 +44,7 @@ app.use(session({
     }
 }));
 if (isProduction) {
-    app.use(express.static("client/build"));
+    app.use(express.static(path.join(__dirname, "client/build")));
 };
 
 // routes
@@ -53,11 +54,6 @@ app.get('/logout', requestLogout);
 app.post('/authenticate', requestLogin);
 app.post('/register', register);
 app.put('/user', updateGenres);
-
-// catch all route
-app.get('*', (req, res) => {
-    res.sendFile('/client/build/index.html');
-});
 
 // runs http server in production and https server in dev
 if (isProduction) {
