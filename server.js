@@ -54,6 +54,11 @@ app.post('/authenticate', requestLogin);
 app.post('/register', register);
 app.put('/user', updateGenres);
 
+// catch all route
+app.get('*', (req, res) => {
+    res.sendFile('/client/build/index.html');
+});
+
 // runs http server in production and https server in dev
 if (isProduction) {
     app.listen(port, () => {
