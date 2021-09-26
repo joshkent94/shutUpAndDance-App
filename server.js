@@ -55,6 +55,8 @@ app.post('/authenticate', requestLogin);
 app.post('/register', register);
 app.put('/user', updateGenres);
 
+console.log(isProduction);
+
 // runs http server in production and https server in dev
 if (isProduction) {
     app.listen(port, () => {
