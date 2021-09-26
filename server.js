@@ -64,5 +64,5 @@ app.get('*', (req, res) => {
 // run https server
 const httpsServer = https.createServer(credentials, app);
 httpsServer.listen(port, () => {
-    console.log(`HTTPS App is running on port ${port}.`);
+    console.log(`App is running on port ${port}.`);
 });
