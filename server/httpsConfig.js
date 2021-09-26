@@ -1,5 +1,4 @@
 const fs = require('fs');
-require('dotenv').config();
 
 // https credentials config
 const privateKey = fs.readFileSync('~key.pem', 'utf8');
