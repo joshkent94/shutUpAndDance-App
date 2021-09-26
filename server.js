@@ -18,7 +18,7 @@ require('dotenv').config();
 // middleware
 app.use(
   cors({
-    origin: "https://localhost:3000",
+    origin: ["https://localhost:3000", "https://shut-up-and-dance.herokuapp.com"],
     credentials: true,
     optionsSuccessStatus: 204,
   }),
