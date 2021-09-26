@@ -1,11 +1,9 @@
-const fs = require('fs');
-const https = require('https');
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 3002;
 const cors = require('cors');
 const session = require('express-session');
-const { pool } = require('./server/connectionConfig');
+const { pool, isProduction } = require('./server/connectionConfig');
 const pgSession = require('connect-pg-simple')(session);
 const { register } = require('./server/queries/register');
 const { requestLogin } = require('./server/queries/requestLogin');
@@ -13,17 +11,9 @@ const { requestLogout } = require('./server/queries/requestLogout');
 const { getUserDetails } = require('./server/queries/getUserDetails');
 const { updateGenres } = require('./server/queries/updateGenres');
 const { getGenres } = require('./server/queries/getGenres');
+const { credentials } = require('./server/httpsConfig');
+const https = require('https');
 require('dotenv').config();
-
-
-// https config
-const privateKey = fs.readFileSync(process.env.SSL_KEY_FILE, 'utf8');
-const certificate = fs.readFileSync(process.env.SSL_CRT_FILE, 'utf8');
-const credentials = {
-    key: privateKey,
-    cert: certificate
-};
-
 
 // middleware
 app.use(
@@ -63,9 +53,14 @@ app.post('/authenticate', requestLogin);
 app.post('/register', register);
 app.put('/user', updateGenres);
 
-// ensures the server runs with a HTTPS connection
-// which means cookies can be sent to the browser
-const httpsServer = https.createServer(credentials, app);
-httpsServer.listen(port, () => {
-    console.log(`App is running on port ${port}.`);
-});
+// runs http server in production and https server in dev
+if (isProduction) {
+    app.listen(port, () => {
+        console.log(`App is running on port ${port}.`);
+    });
+} else {
+    const httpsServer = https.createServer(credentials, app);
+    httpsServer.listen(port, () => {
+        console.log(`HTTPS App is running on port ${port}.`);
+    });
+};
