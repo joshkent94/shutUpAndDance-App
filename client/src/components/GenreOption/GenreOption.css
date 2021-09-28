@@ -6,8 +6,8 @@
 
 .genre-label:hover {
   cursor: pointer;
-  background: linear-gradient(45deg, #b363db, #55a9c8);
-  color: white;
+  background: var(--primary-colour);
+  color: var(--secondary-colour);
 }
 
 .genre-checkbox {

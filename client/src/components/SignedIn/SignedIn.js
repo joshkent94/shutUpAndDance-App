@@ -17,6 +17,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { selectEmail, selectGenres, setGenres } from "../../utils/state/userSlice";
 import { getAccessToken, getAvailableGenres, getRecommendations, selectAccessToken } from "../../utils/state/musicSlice";
+import logo from '../../assets/inverted-logo.png';
 
 export default function SignedIn() {
   const dispatch = useDispatch();
@@ -67,6 +68,9 @@ export default function SignedIn() {
 
       <nav id="sidebar" className="active">
         <ul id="nav-list">
+          <li className="nav-element">
+            <NavLink to="/dashboard"><img src={logo} alt="logo" id="logo" /></NavLink>
+          </li>
           <li className="nav-element">
             <NavLink to="/dashboard"><i className="bi bi-house-fill nav-icon"></i><h2 className="nav-heading hide">Dashboard</h2></NavLink>
           </li>

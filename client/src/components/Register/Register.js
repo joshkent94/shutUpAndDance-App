@@ -65,6 +65,7 @@ export default function Register() {
 
     return (
         <div id="reg">
+            <div className="overlay"></div>
             <p id="message">{message}</p>
             <form id="reg-form" onSubmit={handleRegRequest}>
                 <input type="text" placeholder="Enter your first name" className="form-control reg-element" onChange={updateFirstName} required />

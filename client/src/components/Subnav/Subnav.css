@@ -10,7 +10,7 @@
 }
 
 .form-control:focus {
-  border-color: inherit;
+  border-color: var(--primary-colour);
   box-shadow: none;
 }
 
@@ -37,7 +37,13 @@ input[type="search"]:focus::-webkit-search-cancel-button {
 
 #log-out {
   width: 150px;
-  background: linear-gradient(45deg, #b363db, #55a9c8);
-  color: white;
-  border: white;
+  background: var(--primary-colour);
+  color: var(--secondary-colour);
+  border: var(--secondary-colour);
+}
+
+#log-out:hover {
+  background: var(--secondary-colour);
+  color: var(--primary-colour);
+  border: 1px solid var(--primary-colour);
 }

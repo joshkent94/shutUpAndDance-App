@@ -5,7 +5,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(45deg, #b363db, #55a9c8);
+  background: url("../../assets/login-background.jpeg") center no-repeat;
+  background-size: cover;
 }
 
 #login-form {
@@ -19,32 +20,32 @@
   width: 350px;
   padding: 0.3em;
   margin: 1em;
-  color: white;
+  color: var(--secondary-colour);
   background: transparent;
 }
 
 .login-element::placeholder {
-  color: white;
+  color: var(--secondary-colour);
   font-weight: 700;
 }
 
 .login-element:focus {
-  border-color: white;
-  caret-color: white;
-  color: white;
+  border-color: var(--secondary-colour);
+  caret-color: var(--secondary-colour);
+  color: var(--secondary-colour);
   background: transparent;
 }
 
 #login-button {
   width: 40%;
-  color: white;
+  color: var(--secondary-colour);
   font-weight: 700;
   margin: 3em;
 }
 
 #login-button:hover {
-  background: white;
-  color: #55a9c8;
+  background: var(--secondary-colour);
+  color: var(--primary-colour);
 }
 
 #login-button:focus {
@@ -53,35 +54,37 @@
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover {
-  border: 1px solid #ced4da;
-  -webkit-text-fill-color: white;
+  border: 1px solid var(--secondary-colour);
+  -webkit-text-fill-color: var(--secondary-colour);
   -webkit-box-shadow: 0 0 0px 1000px inset;
-  box-shadow: white;
+  box-shadow: var(--secondary-colour);
   transition: background-color 5000s ease-in-out 0s;
 }
 
 input:-webkit-autofill:focus {
-  border: 1px solid white;
+  border: 1px solid var(--secondary-colour);
   -webkit-text-fill-color: white;
   -webkit-box-shadow: 0 0 0px 1000px inset;
-  box-shadow: white;
+  box-shadow: var(--secondary-colour);
   transition: background-color 5000s ease-in-out 0s;
 }
 
 #message {
   visibility: hidden;
-  color: white;
+  color: var(--secondary-colour);
   margin-bottom: 1em;
+  z-index: 1;
 }
 
 #reg-link {
   border: none;
   width: 500px;
   margin: 0;
+  z-index: 1;
 }
 
 #reg-link:hover {
   background: none;
-  color: white;
+  color: var(--secondary-colour);
   text-decoration: underline;
 }

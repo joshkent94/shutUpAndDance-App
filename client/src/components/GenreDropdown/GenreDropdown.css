@@ -26,8 +26,9 @@
   display: none;
   position: absolute;
   width: inherit;
-  border: 1px #dadada solid;
-  background-color: white;
+  border: 1px var(--tertiary-colour) solid;
+  background-color: var(--secondary-colour);
   max-height: 250px;
   overflow-y: scroll;
+  border-radius: 0.25rem;
 }

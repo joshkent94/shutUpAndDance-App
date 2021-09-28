@@ -42,6 +42,7 @@ export default function Login() {
 
     return (
         <div id="login">
+            <div className="overlay"></div>
             <p id="message">{message}</p>
             <form id="login-form" onSubmit={handleLoginSubmit}>
                 <input type="email" placeholder="Enter your email address" className="form-control login-element" onChange={updateEmail} required />

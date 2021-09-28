@@ -1,8 +1,3 @@
-/*
-  purple: #b363db
-  blue: #55a9c8
-*/
-
 * {
   margin: 0;
   padding: 0;
@@ -30,4 +25,10 @@ body {
   position: sticky;
   top: 0;
   height: 100vh;
+}
+
+:root {
+  --primary-colour: #353935;
+  --secondary-colour: white;
+  --tertiary-colour: #dadada;
 }
