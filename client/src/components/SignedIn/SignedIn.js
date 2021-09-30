@@ -87,19 +87,19 @@ export default function SignedIn() {
       <nav id="sidebar" className="active">
         <ul id="nav-list">
           <li className="nav-element">
-            <NavLink to="/dashboard" id="logo-button"><img src={logo} alt="logo" id="logo" /></NavLink>
+            <NavLink to="/dashboard"><img src={logo} alt="logo" id="logo" /></NavLink>
           </li>
           <li className="nav-element">
-            <NavLink to="/dashboard" id="dashboard-button"><i className="bi bi-house-fill nav-icon"></i><h2 className="nav-heading hide">Dashboard</h2></NavLink>
+            <NavLink to="/dashboard"><i className="bi bi-house-fill nav-icon dashboard-button"></i><h2 className="nav-heading hide dashboard-button">Dashboard</h2></NavLink>
           </li>
           <li className="nav-element">
-            <NavLink to="/recommendations" id="recommendations-button"><i className="bi bi-music-note-beamed nav-icon"></i><h2 className="nav-heading hide">Recommendations</h2></NavLink>
+            <NavLink to="/recommendations"><i className="bi bi-music-note-beamed nav-icon recommendations-button"></i><h2 className="nav-heading hide recommendations-button">Recommendations</h2></NavLink>
           </li>
           <li className="nav-element">
-            <NavLink to="/forum" id="forum-button"><i className="bi bi-chat-fill nav-icon"></i><h2 className="nav-heading hide">Forum</h2></NavLink>
+            <NavLink to="/forum"><i className="bi bi-chat-fill nav-icon forum-button"></i><h2 className="nav-heading hide forum-button">Forum</h2></NavLink>
           </li>
           <li className="nav-element">
-            <NavLink to="/account" id="account-button"><i className="bi bi-person-fill nav-icon"></i><h2 className="nav-heading hide">Account</h2></NavLink>
+            <NavLink to="/account"><i className="bi bi-person-fill nav-icon account-button"></i><h2 className="nav-heading hide account-button">Account</h2></NavLink>
           </li>
         </ul>
 
