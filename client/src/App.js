@@ -27,7 +27,7 @@ export default function App() {
     if (signedIn) {
       dispatch(getUserDetails());
     };
-  }, [signedIn, dispatch]);
+  });
 
   return (
     <Router>
