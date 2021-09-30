@@ -40,6 +40,7 @@ export const logout = createAsyncThunk(
             mode: "cors"
         });
         if (response.ok) {
+            window.location.reload();
             return false;
         };
         return true;

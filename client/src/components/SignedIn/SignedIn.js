@@ -15,7 +15,7 @@ import { getGenres } from '../../utils/helperFunctions/getGenres';
 import { updateGenres } from '../../utils/helperFunctions/updateGenres';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { selectEmail, selectGenres, setGenres } from "../../utils/state/userSlice";
+import { selectEmail, selectFirstName, selectLastName, selectGenres, setGenres } from "../../utils/state/userSlice";
 import { getAccessToken, getAvailableGenres, getRecommendations, selectAccessToken } from "../../utils/state/musicSlice";
 import logo from '../../assets/inverted-logo.png';
 
@@ -23,7 +23,25 @@ export default function SignedIn() {
   const dispatch = useDispatch();
   const genres = useSelector(selectGenres);
   const userEmail = useSelector(selectEmail);
+  const userFirstName = useSelector(selectFirstName);
+  const userLastName = useSelector(selectLastName);
   const accessToken = useSelector(selectAccessToken);
+
+  useEffect(() => {
+    if (userEmail !== '') {
+      window.pendo.initialize({
+        disableCookies: true,
+        visitor: {
+          id: userEmail,
+          first_name: userFirstName,
+          last_name: userLastName
+        },
+        account: {
+          id: `${userFirstName} ${userLastName}`
+        }
+      });
+    };
+  }, [userEmail, userFirstName, userLastName]);
 
   useEffect(() => {
     if (accessToken === '' & userEmail !== '') {

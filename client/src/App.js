@@ -10,31 +10,12 @@ import { selectSignedIn, requestLogin, selectRegistering } from "./utils/state/p
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Register from "./components/Register/Register";
-import { getUserDetails, selectEmail, selectFirstName, selectLastName } from "./utils/state/userSlice";
-// import { pendo } from "./utils/helperFunctions/pendo";
+import { getUserDetails } from "./utils/state/userSlice";
 
 export default function App() {
   const dispatch = useDispatch();
   const registering = useSelector(selectRegistering);
   const signedIn = useSelector(selectSignedIn);
-  // const userEmail = useSelector(selectEmail);
-  // const userFirstName = useSelector(selectFirstName);
-  // const userLastName = useSelector(selectLastName);
-
-  // useEffect(() => {
-  //   if (signedIn & userEmail !== '') {
-  //     pendo.initialize({
-  //       visitor: {
-  //         id: userEmail,
-  //         first_name: userFirstName,
-  //         last_name: userLastName
-  //       },
-  //       account: {
-  //         // id: 'unique-account-id'
-  //       }
-  //     });
-  //   }
-  // });
 
   useEffect(() => {
     if (document.cookie !== "" & !signedIn) {
@@ -46,7 +27,7 @@ export default function App() {
     if (signedIn) {
       dispatch(getUserDetails());
     };
-  });
+  }, [signedIn, dispatch]);
 
   return (
     <Router>
