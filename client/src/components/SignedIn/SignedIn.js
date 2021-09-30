@@ -86,19 +86,19 @@ export default function SignedIn() {
 
       <nav id="sidebar" className="active">
         <ul id="nav-list">
-          <li className="nav-element" id="logo">
+          <li className="nav-element" id="logo-button">
             <NavLink to="/dashboard"><img src={logo} alt="logo" id="logo" /></NavLink>
           </li>
-          <li className="nav-element" id="dashboard">
+          <li className="nav-element" id="dashboard-button">
             <NavLink to="/dashboard"><i className="bi bi-house-fill nav-icon"></i><h2 className="nav-heading hide">Dashboard</h2></NavLink>
           </li>
-          <li className="nav-element" id="recommendations">
+          <li className="nav-element" id="recommendations-button">
             <NavLink to="/recommendations"><i className="bi bi-music-note-beamed nav-icon"></i><h2 className="nav-heading hide">Recommendations</h2></NavLink>
           </li>
-          <li className="nav-element" id="forum">
+          <li className="nav-element" id="forum-button">
             <NavLink to="/forum"><i className="bi bi-chat-fill nav-icon"></i><h2 className="nav-heading hide">Forum</h2></NavLink>
           </li>
-          <li className="nav-element" id="account">
+          <li className="nav-element" id="account-button">
             <NavLink to="/account"><i className="bi bi-person-fill nav-icon"></i><h2 className="nav-heading hide">Account</h2></NavLink>
           </li>
         </ul>
