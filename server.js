@@ -16,6 +16,7 @@ const https = require('https');
 require('dotenv').config();
 
 // middleware
+app.set('trust proxy', true);
 app.use(
   cors({
     origin: ["https://localhost:3000", "https://shut-up-and-dance.herokuapp.com"],
@@ -43,7 +44,6 @@ app.use(session({
         httpOnly: false
     }
 }));
-app.set('trust proxy', true);
 if (isProduction) {
     app.use(express.static(path.join(__dirname, "client/build")));
 };

@@ -17,6 +17,10 @@ export default function App() {
   const registering = useSelector(selectRegistering);
   const signedIn = useSelector(selectSignedIn);
 
+  if (window.location.protocol !== 'https:') {
+    window.location.replace(`https:${window.location.href.substring(window.location.protocol.length)}`);
+  };
+
   useEffect(() => {
     if (document.cookie !== "" & !signedIn) {
       dispatch(requestLogin());
