@@ -33,12 +33,15 @@ export default function SignedIn() {
         disableCookies: true,
         visitor: {
           id: userEmail,
-          first_name: userFirstName,
-          last_name: userLastName,
+          email: userEmail,
+          full_name: `${userFirstName} ${userLastName}`,
           return_url: 'https://shut-up-and-dance.herokuapp.com/dashboard'
         },
         account: {
-          id: userEmail
+          id: userEmail,
+          name: userEmail,
+          is_paying: false,
+          monthly_value: 0
         }
       });
     };
