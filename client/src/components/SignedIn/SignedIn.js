@@ -34,7 +34,8 @@ export default function SignedIn() {
         visitor: {
           id: userEmail,
           first_name: userFirstName,
-          last_name: userLastName
+          last_name: userLastName,
+          return_url: 'https://shut-up-and-dance.herokuapp.com/dashboard'
         },
         account: {
           id: userEmail
