@@ -37,7 +37,7 @@ export default function SignedIn() {
           last_name: userLastName
         },
         account: {
-          id: `${userFirstName} ${userLastName}`
+          id: userEmail
         }
       });
     };
