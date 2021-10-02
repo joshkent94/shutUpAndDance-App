@@ -1,6 +1,6 @@
-import './Recommendation.css';
+import './Suggestion.css';
 
-export default function Recommendation(props) {
+export default function Suggestion(props) {
     const track = props.track;
 
     return (

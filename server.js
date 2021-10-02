@@ -41,7 +41,8 @@ app.use(session({
     cookie: {
         sameSite: 'none',
         secure: true,
-        httpOnly: false
+        httpOnly: false,
+        maxAge: 86400000
     }
 }));
 if (isProduction) {

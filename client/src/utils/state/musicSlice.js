@@ -34,8 +34,8 @@ export const getAvailableGenres = createAsyncThunk(
     }
 );
 
-export const getRecommendations = createAsyncThunk(
-    'music/getRecommendations',
+export const getSuggestions = createAsyncThunk(
+    'music/getSuggestions',
     async ({ accessToken, genres }) => {
         if (genres.length === 0) {
             return [];
@@ -70,13 +70,13 @@ const musicSlice = createSlice({
     initialState: {
         accessToken: '',
         availableGenres: [],
-        recommendations: []
+        suggestions: []
     },
     reducers: {
         resetMusicDetails: (state, action) => {
             state.accessToken = '';
             state.availableGenres = [];
-            state.recommendations = [];
+            state.suggestions = [];
         }
     },
     extraReducers: {
@@ -86,15 +86,15 @@ const musicSlice = createSlice({
         [getAvailableGenres.fulfilled]: (state, action) => {
             state.availableGenres = action.payload;
         },
-        [getRecommendations.fulfilled]: (state, action) => {
-            state.recommendations = action.payload;
+        [getSuggestions.fulfilled]: (state, action) => {
+            state.suggestions = action.payload;
         }
     }
 });
 
 export const selectAccessToken = state => state.music.accessToken;
 export const selectAvailableGenres = state => state.music.availableGenres;
-export const selectRecommendations = state => state.music.recommendations;
+export const selectSuggestions = state => state.music.suggestions;
 export const { resetMusicDetails } = musicSlice.actions;
 const musicReducer = musicSlice.reducer;
 export default musicReducer;

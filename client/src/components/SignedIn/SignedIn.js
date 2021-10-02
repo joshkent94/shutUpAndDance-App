@@ -6,17 +6,16 @@ import {
   Redirect
 } from "react-router-dom";
 import Dashboard from "../Dashboard/Dashboard";
-import Recommendations from "../Recommendations/Recommendations";
+import Suggestions from "../Suggestions/Suggestions";
 import Forum from "../Forum/Forum";
 import Account from "../Account/Account";
-import { toggleSidebar } from "../../utils/helperFunctions/toggleSidebar";
 import './SignedIn.css';
 import { getGenres } from '../../utils/helperFunctions/getGenres';
 import { updateGenres } from '../../utils/helperFunctions/updateGenres';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { selectEmail, selectFirstName, selectLastName, selectGenres, setGenres } from "../../utils/state/userSlice";
-import { getAccessToken, getAvailableGenres, getRecommendations, selectAccessToken } from "../../utils/state/musicSlice";
+import { getAccessToken, getAvailableGenres, getSuggestions, selectAccessToken } from "../../utils/state/musicSlice";
 import logo from '../../assets/inverted-logo.png';
 
 export default function SignedIn() {
@@ -70,7 +69,7 @@ export default function SignedIn() {
 
   useEffect(() => {
     if (accessToken !== '') {
-      dispatch(getRecommendations({
+      dispatch(getSuggestions({
         accessToken: accessToken,
         genres: genres
       }));
@@ -88,28 +87,24 @@ export default function SignedIn() {
 
       <Redirect to="/dashboard" />
 
-      <nav id="sidebar" className="active">
+      <nav id="sidebar">
         <ul id="nav-list">
-          <li className="nav-element">
+          <li className="icon-element">
             <NavLink to="/dashboard"><img src={logo} alt="logo" id="logo" /></NavLink>
           </li>
           <li className="nav-element">
-            <NavLink to="/dashboard"><i className="bi bi-house-fill nav-icon dashboard-button"></i><h2 className="nav-heading hide dashboard-button">Dashboard</h2></NavLink>
+            <NavLink to="/dashboard" className="nav-option"><i className="bi bi-house-fill nav-icon dashboard-button"></i><p className="nav-title">Dashboard</p></NavLink>
           </li>
           <li className="nav-element">
-            <NavLink to="/recommendations"><i className="bi bi-music-note-beamed nav-icon recommendations-button"></i><h2 className="nav-heading hide recommendations-button">Recommendations</h2></NavLink>
+            <NavLink to="/suggestions" className="nav-option"><i className="bi bi-music-note-beamed nav-icon suggestions-button"></i><p className="nav-title">Suggestions</p></NavLink>
           </li>
           <li className="nav-element">
-            <NavLink to="/forum"><i className="bi bi-chat-fill nav-icon forum-button"></i><h2 className="nav-heading hide forum-button">Forum</h2></NavLink>
+            <NavLink to="/forum" className="nav-option"><i className="bi bi-chat-fill nav-icon forum-button"></i><p className="nav-title">Forum</p></NavLink>
           </li>
           <li className="nav-element">
-            <NavLink to="/account"><i className="bi bi-person-fill nav-icon account-button"></i><h2 className="nav-heading hide account-button">Account</h2></NavLink>
+            <NavLink to="/account" className="nav-option"><i className="bi bi-person-fill nav-icon account-button"></i><p className="nav-title">Account</p></NavLink>
           </li>
         </ul>
-
-        <button id="toggle-button" className="rotate" onClick={toggleSidebar}>
-          <i className="bi bi-arrow-left-circle-fill" id="toggle-arrow"></i>
-        </button>
       </nav>
         
       <Switch>
@@ -117,8 +112,8 @@ export default function SignedIn() {
           <Dashboard />
         </Route>
       
-        <Route path="/recommendations">
-          <Recommendations />
+        <Route path="/suggestions">
+          <Suggestions />
         </Route>
       
         <Route path="/forum">

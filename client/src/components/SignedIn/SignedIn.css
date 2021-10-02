@@ -1,7 +1,7 @@
 #sidebar {
   display: flex;
-  min-width: 280px;
-  max-width: 280px;
+  min-width: 100px;
+  max-width: 100px;
   min-height: 100vh;
   background: var(--primary-colour);
   padding: 1em;
@@ -9,13 +9,6 @@
   align-items: center;
   flex: 1;
   box-sizing: border-box;
-  transition: 0.5s;
-}
-
-#sidebar.active {
-  min-width: 80px;
-  max-width: 80px;
-  transition: 0.5s;
 }
 
 #nav-list {
@@ -27,8 +20,17 @@
   padding: 0;
 }
 
+.icon-element {
+  padding: 1em;
+}
+
+.icon-element:hover {
+  opacity: 0.7;
+}
+
 .nav-element {
   padding: 1.5em;
+  margin: 0.4em;
   height: 4em;
   line-height: 4em;
   display: flex;
@@ -50,6 +52,7 @@
 #logo {
   width: 35px;
   height: 35px;
+  margin: 0;
 }
 
 .nav-icon {
@@ -58,40 +61,15 @@
   align-items: center;
 }
 
-.nav-heading {
-  font-weight: 600;
-  font-size: 1.5em;
-  text-align: center;
-}
-
-.hide {
-  display: none;
-}
-
-#toggle-button {
-  background: none;
-  border: none;
-  color: var(--secondary-colour);
+.nav-option {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: 0.5s;
+  flex-direction: column;
 }
 
-.rotate {
-  transform: rotate(180deg);
-  transition: 0.5s;
-}
-
-#toggle-button:hover {
-  cursor: pointer;
-  opacity: 0.7;
-}
-
-#toggle-arrow {
-  display: flex;
-  align-self: center;
-  font-size: 2.5em;
+.nav-title {
+  font-size: 0.7em;
+  margin: 0;
+  line-height: 1.5rem;
 }
 
 .content {
