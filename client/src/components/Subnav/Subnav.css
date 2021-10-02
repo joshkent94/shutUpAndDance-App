@@ -34,16 +34,3 @@ input[type="search"]:focus::-webkit-search-cancel-button {
   opacity: 0.3;
   pointer-events: all;
 }
-
-#log-out {
-  width: 150px;
-  background: var(--primary-colour);
-  color: var(--secondary-colour);
-  border: var(--secondary-colour);
-}
-
-#log-out:hover {
-  background: var(--secondary-colour);
-  color: var(--primary-colour);
-  border: 1px solid var(--primary-colour);
-}

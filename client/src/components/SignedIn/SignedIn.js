@@ -17,6 +17,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectEmail, selectFirstName, selectLastName, selectGenres, setGenres } from "../../utils/state/userSlice";
 import { getAccessToken, getAvailableGenres, getSuggestions, selectAccessToken } from "../../utils/state/musicSlice";
 import logo from '../../assets/inverted-logo.png';
+import { logout } from '../../utils/state/preLoginSlice';
+import { resetUserDetails } from '../../utils/state/userSlice';
+import { resetMusicDetails } from '../../utils/state/musicSlice';
 
 export default function SignedIn() {
   const dispatch = useDispatch();
@@ -25,6 +28,13 @@ export default function SignedIn() {
   const userFirstName = useSelector(selectFirstName);
   const userLastName = useSelector(selectLastName);
   const accessToken = useSelector(selectAccessToken);
+
+  const handleLogout = e => {
+    e.preventDefault();
+    dispatch(resetUserDetails());
+    dispatch(resetMusicDetails());
+    dispatch(logout());
+  };
 
   useEffect(() => {
     if (userEmail !== '') {
@@ -90,21 +100,40 @@ export default function SignedIn() {
       <nav id="sidebar">
         <ul id="nav-list">
           <li className="icon-element">
-            <NavLink to="/dashboard"><img src={logo} alt="logo" id="logo" /></NavLink>
+            <NavLink to="/dashboard">
+              <img src={logo} alt="logo" id="logo" />
+            </NavLink>
           </li>
           <li className="nav-element">
-            <NavLink to="/dashboard" className="nav-option"><i className="bi bi-house-fill nav-icon dashboard-button"></i><p className="nav-title">Dashboard</p></NavLink>
+            <NavLink to="/dashboard" className="nav-option">
+              <i className="bi bi-house-fill nav-icon dashboard-button"></i>
+              <p className="nav-title">Dashboard</p>
+            </NavLink>
           </li>
           <li className="nav-element">
-            <NavLink to="/suggestions" className="nav-option"><i className="bi bi-music-note-beamed nav-icon suggestions-button"></i><p className="nav-title">Suggestions</p></NavLink>
+            <NavLink to="/suggestions" className="nav-option">
+              <i className="bi bi-music-note-beamed nav-icon suggestions-button"></i>
+              <p className="nav-title">Suggestions</p>
+            </NavLink>
           </li>
           <li className="nav-element">
-            <NavLink to="/forum" className="nav-option"><i className="bi bi-chat-fill nav-icon forum-button"></i><p className="nav-title">Forum</p></NavLink>
+            <NavLink to="/forum" className="nav-option">
+              <i className="bi bi-chat-fill nav-icon forum-button"></i>
+              <p className="nav-title">Forum</p>
+            </NavLink>
           </li>
           <li className="nav-element">
-            <NavLink to="/account" className="nav-option"><i className="bi bi-person-fill nav-icon account-button"></i><p className="nav-title">Account</p></NavLink>
+            <NavLink to="/account" className="nav-option">
+              <i className="bi bi-person-fill nav-icon account-button"></i>
+              <p className="nav-title">Account</p>
+            </NavLink>
           </li>
         </ul>
+
+        <button className="nav-option" id="logout" onClick={handleLogout}>
+          <i className="bi bi-box-arrow-left nav-icon"></i>
+          <p className="nav-title">Log Out</p>
+        </button>
       </nav>
         
       <Switch>
