@@ -1,12 +1,17 @@
-import Subnav from "../Subnav/Subnav";
+import { useSelector } from 'react-redux';
+import { selectFirstName } from '../../utils/state/userSlice';
 import './Account.css';
 
 export default function Account() {
+    const firstName = useSelector(selectFirstName);
+
     return (
         <div id="account">
-            <Subnav />
+            <div className="heading">
+                <h3>{firstName}'s Account</h3>
+            </div>
             <div className="content">
-                <p>Account</p>
+
             </div>
         </div>
     );
