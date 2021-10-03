@@ -5,12 +5,15 @@
   flex-direction: column;
 }
 
+.sub-heading {
+  margin: 1em;
+}
+
 #account-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  flex-grow: 1;
-  width: 75%;
+  width: 100%;
   align-items: center;
 }
 
@@ -19,31 +22,10 @@
   box-shadow: none;
 }
 
-input::-webkit-search-cancel-button:hover {
-  cursor: pointer;
-}
-
-input[type="text"]::-webkit-search-cancel-button {
-  -webkit-appearance: none;
-  height: 1em;
-  width: 1em;
-  border-radius: 50em;
-  background: url(https://pro.fontawesome.com/releases/v5.10.0/svgs/solid/times-circle.svg)
-    no-repeat 50% 50%;
-  background-size: contain;
-  opacity: 0;
-  pointer-events: none;
-}
-
-input[type="text"]:focus::-webkit-search-cancel-button {
-  opacity: 0.3;
-  pointer-events: all;
-}
-
 .account-form-element {
   display: flex;
   margin: 1.5em;
-  width: 450px;
+  width: 500px;
   justify-content: space-between;
   align-items: center;
 }
@@ -67,4 +49,30 @@ input[type="text"]:focus::-webkit-search-cancel-button {
 
 .account-submit:focus {
   box-shadow: none;
+}
+
+.account-input:-webkit-autofill,
+.account-input:-webkit-autofill:hover {
+  border: 1px solid var(--primary-colour);
+  -webkit-text-fill-color: var(--primary-colour);
+  -webkit-box-shadow: 0 0 0px 1000px inset;
+  box-shadow: var(--primary-colour);
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.account-input:-webkit-autofill:focus {
+  border: 1px solid var(--primary-colour);
+  -webkit-text-fill-color: var(--primary-colour);
+  -webkit-box-shadow: 0 0 0px 1000px inset;
+  box-shadow: var(--primary-colour);
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.account-content {
+  margin: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+  justify-content: center;
 }

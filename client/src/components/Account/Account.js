@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { showMessage } from '../../utils/helperFunctions/showMessage';
 import { updateUserDetails } from '../../utils/helperFunctions/updateUserDetails';
 import { getUserDetails, selectEmail, selectFirstName, selectLastName } from '../../utils/state/userSlice';
 import './Account.css';
@@ -11,6 +12,8 @@ export default function Account() {
     const [newFirstName, setNewFirstName] = useState(firstName);
     const [newLastName, setNewLastName] = useState(lastName);
     const [newEmail, setNewEmail] = useState(email);
+    const [newPassword, setNewPassword] = useState('');
+    const [confirmedPassword, setConfirmedPassword] = useState('');
     const dispatch = useDispatch();
 
     const handleFirstNameChange = e => {
@@ -28,17 +31,32 @@ export default function Account() {
         setNewEmail(e.target.value);
     };
 
+    const handlePasswordChange = e => {
+        e.preventDefault();
+        setNewPassword(e.target.value);
+    };
+
+    const handleConfirmedPasswordChange = e => {
+        e.preventDefault();
+        setConfirmedPassword(e.target.value);
+    };
+
     const handleDetailsSave = e => {
         e.preventDefault();
-        const details = {
-            firstName: newFirstName,
-            lastName: newLastName,
-            email: newEmail
+        if (newPassword === confirmedPassword) {
+            const details = {
+                firstName: newFirstName,
+                lastName: newLastName,
+                email: newEmail,
+                password: newPassword
+            };
+            updateUserDetails(details)
+                .then(() => {
+                    dispatch(getUserDetails());
+                });
+        } else {
+            showMessage(`Passwords don't match.`);
         };
-        updateUserDetails(details)
-            .then(() => {
-                dispatch(getUserDetails());
-            });
     };
 
     return (
@@ -46,7 +64,8 @@ export default function Account() {
             <div className="heading">
                 <h3>{firstName}'s Account</h3>
             </div>
-            <div className="content">
+            <div className="account-content">
+                <h5 className="sub-heading">Amend your account details below:</h5>
                 <form id="account-form" onSubmit={handleDetailsSave}>
                     <div className="account-form-element">
                         <label htmlFor="first-name">First Name:</label>
@@ -59,6 +78,14 @@ export default function Account() {
                     <div className="account-form-element">
                         <label htmlFor="email">Email Address:</label>
                         <input className="account-input form-control" type="email" value={newEmail} id="email" onChange={handleEmailChange} required></input>
+                    </div>
+                    <div className="account-form-element">
+                        <label htmlFor="password">New Password:</label>
+                        <input className="account-input form-control" type="password" id="password" onChange={handlePasswordChange}></input>
+                    </div>
+                    <div className="account-form-element">
+                        <label htmlFor="confirmed-password">Confirm Password:</label>
+                        <input className="account-input form-control" type="password" id="confirmed-password" onChange={handleConfirmedPasswordChange}></input>
                     </div>
 
                     <button className="account-submit btn" type="submit">

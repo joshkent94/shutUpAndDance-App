@@ -12,14 +12,14 @@ export default function Suggestions() {
     let content;
     if (suggestions.length === 0) {
         content =
-            <div className="content">
+            <div className="suggestions-content">
                 <div>
                     Select genres to see suggestions.
                 </div>
             </div>;
     } else {
         content =
-            <div className="content">
+            <div className="suggestions-content">
                 {suggestions.map(track => {
                     return <Suggestion key={track.id} track={track} />
                 })}
