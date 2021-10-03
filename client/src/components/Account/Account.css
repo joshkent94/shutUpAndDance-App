@@ -1,3 +1,70 @@
 #account {
   width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#account-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+  width: 75%;
+  align-items: center;
+}
+
+.form-control:focus {
+  border-color: var(--primary-colour);
+  box-shadow: none;
+}
+
+input::-webkit-search-cancel-button:hover {
+  cursor: pointer;
+}
+
+input[type="text"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  height: 1em;
+  width: 1em;
+  border-radius: 50em;
+  background: url(https://pro.fontawesome.com/releases/v5.10.0/svgs/solid/times-circle.svg)
+    no-repeat 50% 50%;
+  background-size: contain;
+  opacity: 0;
+  pointer-events: none;
+}
+
+input[type="text"]:focus::-webkit-search-cancel-button {
+  opacity: 0.3;
+  pointer-events: all;
+}
+
+.account-form-element {
+  display: flex;
+  margin: 1.5em;
+  width: 450px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.account-input {
+  width: 300px;
+}
+
+.account-submit {
+  margin: 3em;
+  width: 150px;
+  color: var(--secondary-colour);
+  background-color: var(--primary-colour);
+}
+
+.account-submit:hover {
+  color: var(--primary-colour);
+  background-color: var(--secondary-colour);
+  border: 1px solid var(--primary-colour);
+}
+
+.account-submit:focus {
+  box-shadow: none;
 }

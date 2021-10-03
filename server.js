@@ -13,6 +13,7 @@ const { updateGenres } = require('./server/queries/updateGenres');
 const { getGenres } = require('./server/queries/getGenres');
 const path = require('path');
 const https = require('https');
+const { updateUserDetails } = require('./server/queries/updateUserDetails');
 require('dotenv').config();
 
 // middleware
@@ -55,7 +56,8 @@ app.get('/genres', getGenres);
 app.get('/logout', requestLogout);
 app.post('/authenticate', requestLogin);
 app.post('/register', register);
-app.put('/user', updateGenres);
+app.put('/userGenres', updateGenres);
+app.put('/user', updateUserDetails);
 
 // catch all route
 app.get('*', (req, res) => {

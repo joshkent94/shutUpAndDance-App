@@ -3,7 +3,7 @@ import { selectMessage, setRegistering, setMessage } from '../../utils/state/pre
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { submitRegistration } from '../../utils/helperFunctions/submitRegistration';
-import { showMessages } from '../../utils/helperFunctions/showMessages';
+import { showInvertedMessage } from '../../utils/helperFunctions/showMessage';
 
 export default function Register() {
     const dispatch = useDispatch();
@@ -58,15 +58,14 @@ export default function Register() {
     useEffect(() => {
         if (message === 'Account created successfully.') {
             dispatch(setRegistering(false));
-        } else {
-            showMessages();
+        } else if (message !== '') {
+            showInvertedMessage(message);
         };
     }, [message, dispatch]);
 
     return (
         <div id="reg">
             <div className="overlay"></div>
-            <p id="message">{message}</p>
             <form id="reg-form" onSubmit={handleRegRequest}>
                 <input type="text" placeholder="Enter your first name" className="form-control reg-element" onChange={updateFirstName} required />
                 <input type="text" placeholder="Enter your last name" className="form-control reg-element" onChange={updateLastName} required />

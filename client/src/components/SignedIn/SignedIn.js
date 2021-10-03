@@ -17,12 +17,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectEmail, selectFirstName, selectLastName, selectGenres, setGenres } from "../../utils/state/userSlice";
 import { getAccessToken, getAvailableGenres, getSuggestions, selectAccessToken } from "../../utils/state/musicSlice";
 import logo from '../../assets/inverted-logo.png';
-import { logout } from '../../utils/state/preLoginSlice';
+import { logout, selectSignedIn } from '../../utils/state/preLoginSlice';
 import { resetUserDetails } from '../../utils/state/userSlice';
 import { resetMusicDetails } from '../../utils/state/musicSlice';
 
 export default function SignedIn() {
   const dispatch = useDispatch();
+  const SignedIn = useSelector(selectSignedIn);
   const genres = useSelector(selectGenres);
   const userEmail = useSelector(selectEmail);
   const userFirstName = useSelector(selectFirstName);
@@ -68,14 +69,15 @@ export default function SignedIn() {
   }, [accessToken, dispatch, userEmail]);
 
   useEffect(() => {
-    if (userEmail !== '' & genres.length === 0) {
-      getGenres().then(data => {
-        for (let i = 0; i < data.length; i++) {
-          dispatch(setGenres(data[i]));
-        };
-      });
+    if (userEmail !== '' & SignedIn) {
+      getGenres()
+        .then(data => {
+          for (let i = 0; i < data.length; i++) {
+            dispatch(setGenres(data[i]));
+          };
+        });
     };
-  }, [dispatch, userEmail, genres]);
+  }, [dispatch, userEmail, SignedIn]);
 
   useEffect(() => {
     if (accessToken !== '') {

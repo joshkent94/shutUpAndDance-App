@@ -26,3 +26,23 @@ body {
   --secondary-colour: white;
   --tertiary-colour: #dadada;
 }
+
+#message {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  color: var(--secondary-colour);
+  background-color: var(--primary-colour);
+  padding: 0.5em 1em;
+  border-radius: 1em;
+}
+
+#message-inverted {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  color: var(--primary-colour);
+  background-color: var(--secondary-colour);
+  padding: 0.5em 1em;
+  border-radius: 1em;
+}

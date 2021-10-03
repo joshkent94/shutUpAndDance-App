@@ -69,13 +69,6 @@ input:-webkit-autofill:focus {
   transition: background-color 5000s ease-in-out 0s;
 }
 
-#message {
-  visibility: hidden;
-  color: var(--secondary-colour);
-  margin-bottom: 1em;
-  z-index: 1;
-}
-
 #reg-link {
   border: none;
   width: 500px;

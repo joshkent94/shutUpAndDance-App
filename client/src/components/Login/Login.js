@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './Login.css';
 import { requestLogin, setRegistering, selectMessage, setMessage } from '../../utils/state/preLoginSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { showMessages } from '../../utils/helperFunctions/showMessages';
+import { showInvertedMessage } from '../../utils/helperFunctions/showMessage';
 
 export default function Login() {
     const dispatch = useDispatch();
@@ -37,13 +37,14 @@ export default function Login() {
     };
 
     useEffect(() => {
-        showMessages();
+        if (message !== '') {
+            showInvertedMessage(message);
+        };
     }, [message]);
 
     return (
         <div id="login">
             <div className="overlay"></div>
-            <p id="message">{message}</p>
             <form id="login-form" onSubmit={handleLoginSubmit}>
                 <input type="email" placeholder="Enter your email address" className="form-control login-element" onChange={updateEmail} required />
                 <input type="password" placeholder="Enter your password" className="form-control login-element" onChange={updatePassword} required />

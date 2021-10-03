@@ -1,5 +1,5 @@
 export const updateGenres = async (genres) => {
-    await fetch(`/user`, {
+    await fetch(`/userGenres`, {
         method: "PUT",
         mode: "cors",
         credentials: "include",
