@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.9e6668a3.chunk.css",
-    "main.js": "/static/js/main.0da26099.chunk.js",
-    "main.js.map": "/static/js/main.0da26099.chunk.js.map",
+    "main.css": "/static/css/main.7d3c96c0.chunk.css",
+    "main.js": "/static/js/main.0b26e60d.chunk.js",
+    "main.js.map": "/static/js/main.0b26e60d.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.71c5bbf3.js",
     "runtime-main.js.map": "/static/js/runtime-main.71c5bbf3.js.map",
     "static/js/2.4b6b1ce8.chunk.js": "/static/js/2.4b6b1ce8.chunk.js",
     "static/js/2.4b6b1ce8.chunk.js.map": "/static/js/2.4b6b1ce8.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.9e6668a3.chunk.css.map": "/static/css/main.9e6668a3.chunk.css.map",
+    "static/css/main.7d3c96c0.chunk.css.map": "/static/css/main.7d3c96c0.chunk.css.map",
     "static/js/2.4b6b1ce8.chunk.js.LICENSE.txt": "/static/js/2.4b6b1ce8.chunk.js.LICENSE.txt",
     "static/media/inverted-logo.31f83cb9.png": "/static/media/inverted-logo.31f83cb9.png",
     "static/media/Register.css": "/static/media/login-background.e5880c80.jpeg"
@@ -16,7 +16,7 @@
   "entrypoints": [
     "static/js/runtime-main.71c5bbf3.js",
     "static/js/2.4b6b1ce8.chunk.js",
-    "static/css/main.9e6668a3.chunk.css",
-    "static/js/main.0da26099.chunk.js"
+    "static/css/main.7d3c96c0.chunk.css",
+    "static/js/main.0b26e60d.chunk.js"
   ]
 }

@@ -12,23 +12,24 @@ import Account from "../Account/Account";
 import './SignedIn.css';
 import { getGenres } from '../../utils/helperFunctions/getGenres';
 import { updateGenres } from '../../utils/helperFunctions/updateGenres';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { selectEmail, selectFirstName, selectLastName, selectGenres, setGenres } from "../../utils/state/userSlice";
 import { getAccessToken, getAvailableGenres, getSuggestions, selectAccessToken } from "../../utils/state/musicSlice";
 import logo from '../../assets/inverted-logo.png';
-import { logout, selectSignedIn } from '../../utils/state/preLoginSlice';
+import { logout } from '../../utils/state/preLoginSlice';
 import { resetUserDetails } from '../../utils/state/userSlice';
 import { resetMusicDetails } from '../../utils/state/musicSlice';
 
 export default function SignedIn() {
   const dispatch = useDispatch();
-  const SignedIn = useSelector(selectSignedIn);
   const genres = useSelector(selectGenres);
   const userEmail = useSelector(selectEmail);
   const userFirstName = useSelector(selectFirstName);
   const userLastName = useSelector(selectLastName);
   const accessToken = useSelector(selectAccessToken);
+  const isFirstRenderForUpdate = useRef(true);
+  const isFirstRenderForFetch = useRef(true);
 
   const handleLogout = e => {
     e.preventDefault();
@@ -69,15 +70,26 @@ export default function SignedIn() {
   }, [accessToken, dispatch, userEmail]);
 
   useEffect(() => {
-    if (userEmail !== '' & SignedIn) {
+    if (isFirstRenderForFetch.current) {
       getGenres()
         .then(data => {
+          let equality = true;
           for (let i = 0; i < data.length; i++) {
-            dispatch(setGenres(data[i]));
+            if (data[i] !== genres[i]) {
+              equality = false;
+            };
+          };
+          if (data.length === genres.length & equality) {
+            return;
+          } else {
+            for (let i = 0; i < data.length; i++) {
+              dispatch(setGenres(data[i]));
+            };
           };
         });
+      isFirstRenderForFetch.current = false;
     };
-  }, [dispatch, userEmail, SignedIn]);
+  }, [dispatch, genres]);
 
   useEffect(() => {
     if (accessToken !== '') {
@@ -89,10 +101,12 @@ export default function SignedIn() {
   }, [genres, accessToken, dispatch]);
 
   useEffect(() => {
-    if (userEmail !== '') {
+    if (isFirstRenderForUpdate.current) {
+      isFirstRenderForUpdate.current = false;
+    } else {
       updateGenres(genres);
     };
-  }, [genres, userEmail]);
+  }, [genres]);
 
   return (
     <Router>
