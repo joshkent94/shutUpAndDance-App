@@ -68,14 +68,14 @@ export default function SignedIn() {
   }, [accessToken, dispatch, userEmail]);
 
   useEffect(() => {
-    if (userEmail !== '') {
+    if (userEmail !== '' & genres.length === 0) {
       getGenres().then(data => {
         for (let i = 0; i < data.length; i++) {
           dispatch(setGenres(data[i]));
         };
       });
     };
-  }, [dispatch, userEmail]);
+  }, [dispatch, userEmail, genres]);
 
   useEffect(() => {
     if (accessToken !== '') {

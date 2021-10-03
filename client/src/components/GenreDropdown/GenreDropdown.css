@@ -2,26 +2,6 @@
   width: 250px;
 }
 
-.selectBox {
-  position: relative;
-}
-
-.selectBox select {
-  width: 100%;
-}
-
-.selectBox:hover {
-  cursor: pointer;
-}
-
-.overSelect {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-}
-
 #genres {
   display: none;
   position: absolute;

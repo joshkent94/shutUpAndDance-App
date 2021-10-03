@@ -15,12 +15,6 @@ body {
   flex: 1;
 }
 
-#subnav {
-  position: sticky;
-  top: 0;
-  background: white;
-}
-
 #sidebar {
   position: sticky;
   top: 0;
