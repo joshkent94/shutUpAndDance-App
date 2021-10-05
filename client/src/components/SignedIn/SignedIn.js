@@ -33,9 +33,9 @@ export default function SignedIn() {
 
   const handleLogout = e => {
     e.preventDefault();
+    dispatch(logout());
     dispatch(resetUserDetails());
     dispatch(resetMusicDetails());
-    dispatch(logout());
   };
 
   useEffect(() => {
