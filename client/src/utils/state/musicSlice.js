@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { fadeSuggestions } from "../helperFunctions/fadeSuggestions";
 
 export const getAccessToken = createAsyncThunk(
     'music/getAccessToken',
@@ -37,6 +38,7 @@ export const getAvailableGenres = createAsyncThunk(
 export const getSuggestions = createAsyncThunk(
     'music/getSuggestions',
     async ({ accessToken, genres }) => {
+        fadeSuggestions();
         if (genres.length === 0) {
             return [];
         } else {

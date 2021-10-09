@@ -1,11 +1,34 @@
 .track {
   display: flex;
   justify-content: space-between;
-  margin: 1.5em;
   align-items: center;
-  width: 50%;
+  width: 75%;
+  margin: 1em;
+}
+
+.track-image {
+  width: 100px;
+}
+
+.track-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
 }
 
 .track-info {
   margin: 0;
+}
+
+.track-title {
+  font-size: 1.3em;
+  font-weight: 900;
+  text-align: end;
+}
+
+.sub-info {
+  max-width: 80%;
+  text-align: end;
 }
