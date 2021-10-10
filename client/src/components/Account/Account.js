@@ -65,7 +65,6 @@ export default function Account() {
                 <h3>{firstName}'s Account</h3>
             </div>
             <div className="account-content">
-                <h5 className="sub-heading">Amend your account details below:</h5>
                 <form id="account-form" onSubmit={handleDetailsSave}>
                     <div className="account-form-element">
                         <label htmlFor="first-name">First Name:</label>

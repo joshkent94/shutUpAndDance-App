@@ -13,10 +13,6 @@
   flex-grow: 1;
 }
 
-.sub-heading {
-  margin: 1em;
-}
-
 #account-form {
   display: flex;
   flex-direction: column;

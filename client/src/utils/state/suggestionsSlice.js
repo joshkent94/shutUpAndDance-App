@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fadeSuggestions } from "../helperFunctions/fadeSuggestions";
 
 export const getAccessToken = createAsyncThunk(
-    'music/getAccessToken',
+    'suggestions/getAccessToken',
     async () => {
         const authString = btoa(`${process.env.REACT_APP_SPOTIFY_CLIENT_ID}:${process.env.REACT_APP_SPOTIFY_CLIENT_SECRET}`);
         const response = await fetch(`https://accounts.spotify.com/api/token`, {
@@ -21,7 +21,7 @@ export const getAccessToken = createAsyncThunk(
 );
 
 export const getAvailableGenres = createAsyncThunk(
-    'music/getAvailableGenres',
+    'suggestions/getAvailableGenres',
     async ({ accessToken }) => {
         const response = await fetch(`https://api.spotify.com/v1/recommendations/available-genre-seeds`, {
             headers: {
@@ -36,7 +36,7 @@ export const getAvailableGenres = createAsyncThunk(
 );
 
 export const getSuggestions = createAsyncThunk(
-    'music/getSuggestions',
+    'suggestions/getSuggestions',
     async ({ accessToken, genres }) => {
         fadeSuggestions();
         if (genres.length === 0) {
@@ -67,15 +67,15 @@ export const getSuggestions = createAsyncThunk(
     }
 );
 
-const musicSlice = createSlice({
-    name: 'music',
+const suggestionsSlice = createSlice({
+    name: 'suggestions',
     initialState: {
         accessToken: '',
         availableGenres: [],
         suggestions: []
     },
     reducers: {
-        resetMusicDetails: (state, action) => {
+        resetSuggestionsDetails: (state, action) => {
             state.accessToken = '';
             state.availableGenres = [];
             state.suggestions = [];
@@ -94,9 +94,9 @@ const musicSlice = createSlice({
     }
 });
 
-export const selectAccessToken = state => state.music.accessToken;
-export const selectAvailableGenres = state => state.music.availableGenres;
-export const selectSuggestions = state => state.music.suggestions;
-export const { resetMusicDetails } = musicSlice.actions;
-const musicReducer = musicSlice.reducer;
-export default musicReducer;
+export const selectAccessToken = state => state.suggestions.accessToken;
+export const selectAvailableGenres = state => state.suggestions.availableGenres;
+export const selectSuggestions = state => state.suggestions.suggestions;
+export const { resetSuggestionsDetails } = suggestionsSlice.actions;
+const suggestionsReducer = suggestionsSlice.reducer;
+export default suggestionsReducer;

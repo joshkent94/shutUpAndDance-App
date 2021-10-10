@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getSuggestions, selectAccessToken, selectSuggestions } from "../../utils/state/musicSlice";
+import { getSuggestions, selectAccessToken, selectSuggestions } from "../../utils/state/suggestionsSlice";
 import Suggestion from "../Suggestion/Suggestion";
 import './Suggestions.css';
 import GenreDropdown from '../GenreDropdown/GenreDropdown';

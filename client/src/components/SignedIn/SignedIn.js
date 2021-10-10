@@ -14,12 +14,10 @@ import { getGenres } from '../../utils/helperFunctions/getGenres';
 import { updateGenres } from '../../utils/helperFunctions/updateGenres';
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { selectEmail, selectFirstName, selectLastName, selectGenres, setGenres } from "../../utils/state/userSlice";
-import { getAccessToken, getAvailableGenres, getSuggestions, selectAccessToken } from "../../utils/state/musicSlice";
+import { selectEmail, selectFirstName, selectLastName, selectGenres, setGenres, resetUserDetails } from "../../utils/state/userSlice";
+import { getAccessToken, getAvailableGenres, getSuggestions, selectAccessToken,resetSuggestionsDetails } from "../../utils/state/suggestionsSlice";
 import logo from '../../assets/inverted-logo.png';
 import { logout } from '../../utils/state/preLoginSlice';
-import { resetUserDetails } from '../../utils/state/userSlice';
-import { resetMusicDetails } from '../../utils/state/musicSlice';
 
 export default function SignedIn() {
   const dispatch = useDispatch();
@@ -35,7 +33,7 @@ export default function SignedIn() {
     e.preventDefault();
     dispatch(logout());
     dispatch(resetUserDetails());
-    dispatch(resetMusicDetails());
+    dispatch(resetSuggestionsDetails());
   };
 
   useEffect(() => {

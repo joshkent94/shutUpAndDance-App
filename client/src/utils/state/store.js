@@ -13,7 +13,8 @@ import storage from 'redux-persist/lib/storage';
 import preLoginReducer from './preLoginSlice';
 import { combineReducers } from 'redux';
 import userReducer from './userSlice';
-import musicReducer from './musicSlice';
+import suggestionsReducer from './suggestionsSlice';
+import forumReducer from './forumSlice';
 
 const persistConfig = {
   key: 'root',
@@ -23,7 +24,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
   preLogin: preLoginReducer,
   user: userReducer,
-  music: musicReducer
+  suggestions: suggestionsReducer,
+  forum: forumReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import GenreOption from '../GenreOption/GenreOption';
 import { hideCheckboxes, showCheckboxes } from '../../utils/helperFunctions/toggleCheckboxes';
-import { selectAvailableGenres } from '../../utils/state/musicSlice';
+import { selectAvailableGenres } from '../../utils/state/suggestionsSlice';
 import './GenreDropdown.css';
 import { useState } from 'react';
 import { selectGenres } from '../../utils/state/userSlice';

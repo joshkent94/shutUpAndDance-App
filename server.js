@@ -3,17 +3,18 @@ const app = express();
 const port = process.env.PORT || 3002;
 const cors = require('cors');
 const session = require('express-session');
-const { pool, isProduction } = require('./server/connectionConfig');
+const path = require('path');
+const https = require('https');
 const pgSession = require('connect-pg-simple')(session);
+const { pool, isProduction } = require('./server/connectionConfig');
 const { register } = require('./server/queries/register');
 const { requestLogin } = require('./server/queries/requestLogin');
 const { requestLogout } = require('./server/queries/requestLogout');
 const { getUserDetails } = require('./server/queries/getUserDetails');
 const { updateGenres } = require('./server/queries/updateGenres');
 const { getGenres } = require('./server/queries/getGenres');
-const path = require('path');
-const https = require('https');
 const { updateUserDetails } = require('./server/queries/updateUserDetails');
+const { newThread } = require('./server/queries/newThread');
 require('dotenv').config();
 
 // middleware
@@ -51,13 +52,14 @@ if (isProduction) {
 };
 
 // routes
-app.get('/user', getUserDetails);
-app.get('/genres', getGenres);
-app.get('/logout', requestLogout);
-app.post('/authenticate', requestLogin);
 app.post('/register', register);
-app.put('/userGenres', updateGenres);
+app.post('/authenticate', requestLogin);
+app.get('/user', getUserDetails);
 app.put('/user', updateUserDetails);
+app.get('/genres', getGenres);
+app.put('/userGenres', updateGenres);
+app.post('/thread', newThread);
+app.get('/logout', requestLogout);
 
 // catch all route
 app.get('*', (req, res) => {
