@@ -19,6 +19,20 @@ export const createThread = createAsyncThunk(
     }
 );
 
+export const searchThreads = createAsyncThunk(
+    'forum/searchThreads',
+    async ({ searchTerm }) => {
+        const response = await fetch(`/threads/${searchTerm}`, {
+            mode: "cors",
+            credentials: "include"
+        });
+        if (response.ok) {
+            const jsonResponse = await response.json();
+            return jsonResponse;
+        };
+    }
+);
+
 const forumSlice = createSlice({
     name: 'forum',
     initialState: {
@@ -27,6 +41,9 @@ const forumSlice = createSlice({
     extraReducers: {
         [createThread.fulfilled]: (state, action) => {
             return;
+        },
+        [searchThreads.fulfilled]: (state, action) => {
+            state.threads = action.payload;
         }
     }
 });

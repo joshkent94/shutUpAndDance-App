@@ -15,6 +15,7 @@ const { updateGenres } = require('./server/queries/updateGenres');
 const { getGenres } = require('./server/queries/getGenres');
 const { updateUserDetails } = require('./server/queries/updateUserDetails');
 const { newThread } = require('./server/queries/newThread');
+const { getThreads } = require('./server/queries/getThreads');
 require('dotenv').config();
 
 // middleware
@@ -58,6 +59,7 @@ app.get('/user', getUserDetails);
 app.put('/user', updateUserDetails);
 app.get('/genres', getGenres);
 app.put('/userGenres', updateGenres);
+app.get('/threads/:searchTerm', getThreads);
 app.post('/thread', newThread);
 app.get('/logout', requestLogout);
 

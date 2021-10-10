@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectFirstName } from '../../utils/state/userSlice';
 import './Forum.css';
 import {
@@ -11,14 +11,23 @@ import {
 import NewThread from '../NewThread/NewThread';
 import Thread from '../Thread/Thread';
 import ForumHome from '../ForumHome/ForumHome';
+import { searchThreads } from '../../utils/state/forumSlice';
 
 export default function Forum() {
     const firstName = useSelector(selectFirstName);
-    const [/*searchTerm*/, setSearchTerm] = useState('');
+    const [searchTerm, setSearchTerm] = useState('');
+    const dispatch = useDispatch();
+
+    const handleSearchTermChange = e => {
+        e.preventDefault();
+        setSearchTerm(e.target.value);
+    };
 
     const handleSearch = e => {
         e.preventDefault();
-        setSearchTerm(e.target.value);
+        dispatch(searchThreads({
+            searchTerm: searchTerm
+        }));
     };
 
     const match = useRouteMatch();
@@ -28,8 +37,8 @@ export default function Forum() {
             <div id="forum">
                 <div className="heading">
                     <h3>{firstName}'s Forum</h3>
-                    <form>
-                        <input className="form-control" id="search" type="search" placeholder="Search posts..." onChange={handleSearch}></input>
+                    <form onSubmit={handleSearch}>
+                        <input className="form-control" id="search" type="search" placeholder="Search posts..." onChange={handleSearchTermChange}></input>
                     </form>
                 </div>
 
