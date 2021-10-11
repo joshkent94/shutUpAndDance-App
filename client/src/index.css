@@ -30,7 +30,7 @@ body {
 
 #message {
   position: absolute;
-  top: 50px;
+  top: 4vh;
   right: 50px;
   color: var(--secondary-colour);
   background-color: var(--primary-colour);

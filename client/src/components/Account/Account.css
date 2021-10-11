@@ -47,9 +47,7 @@
 }
 
 .account-submit:hover {
-  color: var(--primary-colour);
-  background-color: var(--secondary-colour);
-  border: 1px solid var(--primary-colour);
+  color: var(--secondary-colour);
 }
 
 .account-submit:focus {

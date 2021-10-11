@@ -3,13 +3,15 @@ import {
   Switch,
   Route,
   NavLink,
-  Redirect
+  Redirect,
+  useRouteMatch
 } from "react-router-dom";
 import Dashboard from "../Dashboard/Dashboard";
 import Suggestions from "../Suggestions/Suggestions";
 import Forum from "../Forum/Forum";
+import NewThread from '../NewThread/NewThread';
+import Thread from '../Thread/Thread';
 import Account from "../Account/Account";
-import './SignedIn.css';
 import { getGenres } from '../../utils/helperFunctions/getGenres';
 import { updateGenres } from '../../utils/helperFunctions/updateGenres';
 import { useEffect, useRef } from 'react';
@@ -18,6 +20,7 @@ import { selectEmail, selectFirstName, selectLastName, selectGenres, setGenres, 
 import { getAccessToken, getAvailableGenres, getSuggestions, selectAccessToken,resetSuggestionsDetails } from "../../utils/state/suggestionsSlice";
 import logo from '../../assets/inverted-logo.png';
 import { logout } from '../../utils/state/preLoginSlice';
+import './SignedIn.css';
 
 export default function SignedIn() {
   const dispatch = useDispatch();
@@ -57,15 +60,18 @@ export default function SignedIn() {
   }, [userEmail, userFirstName, userLastName]);
 
   useEffect(() => {
-    if (accessToken === '' & userEmail !== '') {
+    if (userEmail !== '') {
       dispatch(getAccessToken());
     };
+  }, [userEmail, dispatch]);
+
+  useEffect(() => {
     if (accessToken !== '') {
       dispatch(getAvailableGenres({
         accessToken: accessToken
       }));
     };
-  }, [accessToken, dispatch, userEmail]);
+  }, [dispatch, accessToken]);
 
   useEffect(() => {
     if (isFirstRenderForFetch.current) {
@@ -160,7 +166,7 @@ export default function SignedIn() {
         </Route>
       
         <Route path="/forum">
-          <Forum />
+          <ForumRoutes />
         </Route>
       
         <Route path="/Account">
@@ -169,5 +175,23 @@ export default function SignedIn() {
       </Switch>
 
     </Router>
+  );
+};
+
+function ForumRoutes() {
+  const match = useRouteMatch();
+  
+  return (
+    <Switch>
+      <Route path={`${match.path}/new`}>
+        <NewThread />
+      </Route>
+      <Route path={`${match.path}/:threadId`}>
+        <Thread />
+      </Route>
+      <Route path={`${match.path}`}>
+        <Forum />
+      </Route>
+    </Switch>
   );
 };
