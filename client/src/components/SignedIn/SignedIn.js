@@ -10,7 +10,7 @@ import Dashboard from "../Dashboard/Dashboard";
 import Suggestions from "../Suggestions/Suggestions";
 import Forum from "../Forum/Forum";
 import NewThread from '../NewThread/NewThread';
-import Thread from '../Thread/Thread';
+import ThreadExpanded from '../ThreadExpanded/ThreadExpanded';
 import Account from "../Account/Account";
 import { getGenres } from '../../utils/helperFunctions/getGenres';
 import { updateGenres } from '../../utils/helperFunctions/updateGenres';
@@ -187,7 +187,7 @@ function ForumRoutes() {
         <NewThread />
       </Route>
       <Route path={`${match.path}/:threadId`}>
-        <Thread />
+        <ThreadExpanded />
       </Route>
       <Route path={`${match.path}`}>
         <Forum />

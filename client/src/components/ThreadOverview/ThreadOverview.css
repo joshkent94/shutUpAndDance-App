@@ -1,0 +1,49 @@
+.thread {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  padding: 1em;
+  margin: 1em;
+  background-color: var(--primary-colour);
+  color: var(--secondary-colour);
+  height: 150px;
+  border-radius: 1em;
+}
+
+.thread-title {
+  font-size: 1.3em;
+  font-weight: 900;
+}
+
+.thread-title p {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin: 0;
+  padding-bottom: 1em;
+}
+
+.thread-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.thread-info-left {
+  width: 20%;
+}
+
+.thread-sub-info {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.thread-initial-comment {
+  width: 75%;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

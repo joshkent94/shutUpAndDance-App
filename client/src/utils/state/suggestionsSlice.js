@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fadeSuggestions } from "../helperFunctions/fadeSuggestions";
 
 export const getAccessToken = createAsyncThunk(
     'suggestions/getAccessToken',
@@ -38,7 +37,6 @@ export const getAvailableGenres = createAsyncThunk(
 export const getSuggestions = createAsyncThunk(
     'suggestions/getSuggestions',
     async ({ accessToken, genres }) => {
-        fadeSuggestions();
         if (genres.length === 0) {
             return [];
         } else {

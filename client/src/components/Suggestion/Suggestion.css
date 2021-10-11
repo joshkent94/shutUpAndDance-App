@@ -3,7 +3,13 @@
   justify-content: space-between;
   align-items: center;
   width: 75%;
+  padding: 1em;
   margin: 1em;
+  background-color: var(--primary-colour);
+  min-height: 15%;
+  max-height: 15%;
+  border-radius: 1em;
+  color: var(--secondary-colour);
 }
 
 .track-image {
@@ -16,9 +22,13 @@
   align-items: flex-end;
   justify-content: center;
   width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .track-info {
+  max-width: 80%;
   margin: 0;
 }
 
@@ -26,9 +36,15 @@
   font-size: 1.3em;
   font-weight: 900;
   text-align: end;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .sub-info {
   max-width: 80%;
   text-align: end;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
