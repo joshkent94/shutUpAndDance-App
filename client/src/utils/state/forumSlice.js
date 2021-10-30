@@ -33,21 +33,63 @@ export const searchThreads = createAsyncThunk(
     }
 );
 
+export const getThread = createAsyncThunk(
+    'forum/getThread',
+    async (threadId) => {
+        const response = await fetch(`/thread/${threadId}`, {
+            mode: "cors",
+            credentials: "include"
+        });
+        if (response.ok) {
+            const jsonResponse = await response.json();
+            const thread = {
+                id: threadId,
+                ...jsonResponse
+            };
+            return thread;
+        };
+    }
+);
+
+export const getComments = createAsyncThunk(
+    'forum/getComments',
+    async (threadId) => {
+        const response = await fetch(`/comments/${threadId}`, {
+            mode: "cors",
+            credentials: "include"
+        });
+        if (response.ok) {
+            const jsonResponse = await response.json();
+            return jsonResponse;
+        };
+    }
+);
+
 const forumSlice = createSlice({
     name: 'forum',
     initialState: {
-        threads: []
+        threadOverviews: [],
+        threadInfo: {},
+        comments: []
     },
     extraReducers: {
         [createThread.fulfilled]: (state, action) => {
             return;
         },
         [searchThreads.fulfilled]: (state, action) => {
-            state.threads = action.payload;
+            state.threadOverviews = action.payload;
+        },
+        [getThread.fulfilled]: (state, action) => {
+            state.threadInfo = action.payload;
+        },
+        [getComments.fulfilled]: (state, action) => {
+            state.comments = action.payload;
         }
     }
 });
 
-export const selectThreads = state => state.forum.threads;
+export const selectThreads = state => state.forum.threadOverviews;
+export const selectThreadInfo = state => state.forum.threadInfo;
+export const selectComments = state => state.forum.comments;
 const forumReducer = forumSlice.reducer;
 export default forumReducer;

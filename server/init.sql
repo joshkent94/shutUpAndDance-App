@@ -34,3 +34,10 @@ CREATE TABLE threads (
   initial_comment TEXT NOT NULL,
   likes INTEGER NOT NULL
 );
+
+CREATE TABLE comments (
+  id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
+  thread_id uuid NOT NULL REFERENCES threads,
+  comment TEXT NOT NULL,
+  user_id INTEGER NOT NULL REFERENCES users
+);

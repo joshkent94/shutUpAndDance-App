@@ -8,6 +8,17 @@
   color: var(--secondary-colour);
   height: 150px;
   border-radius: 1em;
+  justify-content: center;
+}
+
+.thread > * {
+  background-color: var(--primary-colour);
+  color: var(--secondary-colour);
+  text-decoration: none;
+}
+
+.thread > *:hover {
+  color: var(--secondary-colour);
 }
 
 .thread-title {
