@@ -6,39 +6,25 @@ import {
 } from "react-router-dom";
 import SignedIn from "./components/SignedIn/SignedIn";
 import Login from "./components/Login/Login";
-import { selectSignedIn, requestLogin, selectRegistering } from "./utils/state/preLoginSlice";
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { selectRegistering } from "./utils/state/preLoginSlice";
+import { useSelector } from "react-redux";
 import Register from "./components/Register/Register";
-import { getUserDetails } from "./utils/state/userSlice";
+import { selectFirstName } from "./utils/state/userSlice";
 
 export default function App() {
-  const dispatch = useDispatch();
   const registering = useSelector(selectRegistering);
-  const signedIn = useSelector(selectSignedIn);
+  const firstName = useSelector(selectFirstName);
 
   if (window.location.protocol !== 'https:') {
     window.location.replace(`https:${window.location.href.substring(window.location.protocol.length)}`);
   };
 
-  useEffect(() => {
-    if (document.cookie !== "" & !signedIn) {
-      dispatch(requestLogin());
-    };
-  });
-
-  useEffect(() => {
-    if (signedIn) {
-      dispatch(getUserDetails());
-    };
-  });
-
   return (
     <Router>
 
-      {signedIn && <Redirect to="/signedin" />}
+      {firstName && <Redirect to="/signedin" />}
       {registering && <Redirect to="/register" />}
-      {!signedIn && !registering && <Redirect to="/login" />}
+      {!firstName && !registering && <Redirect to="/login" />}
 
       <Switch>
         <Route path="/login">

@@ -10,7 +10,6 @@ const { pool, isProduction } = require('./server/connectionConfig');
 const { register } = require('./server/queries/register');
 const { requestLogin } = require('./server/queries/requestLogin');
 const { requestLogout } = require('./server/queries/requestLogout');
-const { getUserDetails } = require('./server/queries/getUserDetails');
 const { updateGenres } = require('./server/queries/updateGenres');
 const { getGenres } = require('./server/queries/getGenres');
 const { updateUserDetails } = require('./server/queries/updateUserDetails');
@@ -57,7 +56,6 @@ if (isProduction) {
 // routes
 app.post('/register', register);
 app.post('/authenticate', requestLogin);
-app.get('/user', getUserDetails);
 app.put('/user', updateUserDetails);
 app.get('/genres', getGenres);
 app.put('/userGenres', updateGenres);

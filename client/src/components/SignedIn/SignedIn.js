@@ -16,10 +16,9 @@ import { getGenres } from '../../utils/helperFunctions/getGenres';
 import { updateGenres } from '../../utils/helperFunctions/updateGenres';
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { selectEmail, selectFirstName, selectLastName, selectGenres, setGenres, resetUserDetails } from "../../utils/state/userSlice";
+import { selectEmail, selectFirstName, selectLastName, selectGenres, setGenres, logout } from "../../utils/state/userSlice";
 import { getAccessToken, getAvailableGenres, getSuggestions, selectAccessToken,resetSuggestionsDetails } from "../../utils/state/suggestionsSlice";
 import logo from '../../assets/inverted-logo.png';
-import { logout } from '../../utils/state/preLoginSlice';
 import './SignedIn.css';
 
 export default function SignedIn() {
@@ -35,7 +34,6 @@ export default function SignedIn() {
   const handleLogout = e => {
     e.preventDefault();
     dispatch(logout());
-    dispatch(resetUserDetails());
     dispatch(resetSuggestionsDetails());
   };
 

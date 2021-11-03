@@ -1,14 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './Login.css';
-import { requestLogin, setRegistering, selectMessage, setMessage } from '../../utils/state/preLoginSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { showInvertedMessage } from '../../utils/helperFunctions/showMessage';
+import { setRegistering, setMessage } from '../../utils/state/preLoginSlice';
+import { useDispatch } from 'react-redux';
+import { requestLogin } from '../../utils/state/userSlice';
 
 export default function Login() {
     const dispatch = useDispatch();
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
-    const message = useSelector(selectMessage);
 
     const updateEmail = e => {
         e.preventDefault();
@@ -35,12 +34,6 @@ export default function Login() {
             message: ''
         }));
     };
-
-    useEffect(() => {
-        if (message !== '') {
-            showInvertedMessage(message);
-        };
-    }, [message]);
 
     return (
         <div id="login">

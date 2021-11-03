@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { showMessage } from '../../utils/helperFunctions/showMessage';
-import { updateUserDetails } from '../../utils/helperFunctions/updateUserDetails';
-import { getUserDetails, selectEmail, selectFirstName, selectLastName } from '../../utils/state/userSlice';
+import { selectEmail, selectFirstName, selectLastName, updateUserDetails } from '../../utils/state/userSlice';
 import './Account.css';
 
 export default function Account() {
@@ -50,10 +49,7 @@ export default function Account() {
                 email: newEmail,
                 password: newPassword
             };
-            updateUserDetails(details)
-                .then(() => {
-                    dispatch(getUserDetails());
-                });
+            dispatch(updateUserDetails(details));
         } else {
             showMessage(`Passwords don't match.`);
         };

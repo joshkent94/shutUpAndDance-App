@@ -11,7 +11,7 @@ const requestLogin = (req, res) => {
     if (session.userId) {
         res.status(200).send();
     } else {
-        pool.query(`SELECT id, salt, password
+        pool.query(`SELECT *
                     FROM users
                     WHERE email = $1`,
             [cleanEmail])
@@ -29,7 +29,11 @@ const requestLogin = (req, res) => {
                             res.status(401).send({ message: 'Password is incorrect.' });
                         } else {
                             session.userId = data.rows[0].id;
-                            res.status(200).send();
+                            res.status(200).send({
+                                firstName: data.rows[0].first_name,
+                                lastName: data.rows[0].last_name,
+                                email: data.rows[0].email
+                            });
                         };
                     });
                 };

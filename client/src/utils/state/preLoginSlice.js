@@ -1,57 +1,9 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-
-export const requestLogin = createAsyncThunk(
-    'preLogin/requestLogin',
-    async ({ email, password }) => {
-        const data = {
-            email: email,
-            password: password
-        };
-        const response = await fetch(`/authenticate`, {
-            method: "POST",
-            mode: "cors",
-            credentials: 'include',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        });
-        if (response.ok) {
-            return {
-                signedIn: true,
-                message: ''
-            };
-        } else {
-            const jsonResponse = await response.json();
-            return {
-                signedIn: false,
-                message: jsonResponse.message
-            };
-        };
-    }
-);
-
-export const logout = createAsyncThunk(
-    'preLogin/logout',
-    async () => {
-        const response = await fetch(`/logout`, {
-            method: "GET",
-            credentials: 'include',
-            mode: "cors"
-        });
-        if (response.ok) {
-            window.location.reload();
-            return false;
-        };
-        return true;
-    }
-);
+import { createSlice } from "@reduxjs/toolkit";
 
 const preLoginSlice = createSlice({
     name: 'preLogin',
     initialState: {
         registering: false,
-        signedIn: false,
         message: ''
     },
     reducers: {
@@ -60,15 +12,6 @@ const preLoginSlice = createSlice({
         },
         setMessage: (state, action) => {
             state.message = action.payload.message;
-        }
-    },
-    extraReducers: {
-        [requestLogin.fulfilled]: (state, action) => {
-            state.signedIn = action.payload.signedIn;
-            state.message = action.payload.message;
-        },
-        [logout.fulfilled]: (state, action) => {
-            state.signedIn = action.payload;
         }
     }
 });
