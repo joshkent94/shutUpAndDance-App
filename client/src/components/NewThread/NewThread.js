@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createThread } from '../../utils/state/forumSlice';
-import './NewThread.css';
 import { useHistory } from 'react-router-dom';
 import { showMessage } from "../../utils/helperFunctions/showMessage";
 import { selectFirstName } from '../../utils/state/userSlice';
+import './NewThread.css';
 
 export default function NewThread() {
     const dispatch = useDispatch();

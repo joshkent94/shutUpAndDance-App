@@ -1,18 +1,17 @@
 import './Register.css';
-import { selectMessage, setRegistering, setMessage } from '../../utils/state/preLoginSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
-import { submitRegistration } from '../../utils/helperFunctions/submitRegistration';
-import { showInvertedMessage } from '../../utils/helperFunctions/showMessage';
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { submitRegistration } from '../../utils/state/userSlice';
+import { useHistory } from 'react-router';
 
 export default function Register() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const [firstName, setFirstName] = useState(null);
     const [lastName, setLastName] = useState(null);
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
     const [validatedPassword, setValidatedPassword] = useState(null);
-    const message = useSelector(selectMessage);
 
     const updateFirstName = e => {
         e.preventDefault();
@@ -41,27 +40,18 @@ export default function Register() {
 
     const handleRegRequest = async (e) => {
         e.preventDefault();
-        const response = await submitRegistration(firstName, lastName, email, password, validatedPassword);
-        dispatch(setMessage({
-            message: response.message
+        dispatch(submitRegistration({
+            firstName,
+            lastName,
+            email,
+            password,
+            validatedPassword
         }));
     };
 
-    const handleLoginSwitch = e => {
-        e.preventDefault();
-        dispatch(setRegistering(false));
-        dispatch(setMessage({
-            message: ''
-        }));
+    const handleLoginRedirect = () => {
+        history.push('/login');
     };
-
-    useEffect(() => {
-        if (message === 'Account created successfully.') {
-            dispatch(setRegistering(false));
-        } else if (message !== '') {
-            showInvertedMessage(message);
-        };
-    }, [message, dispatch]);
 
     return (
         <div id="reg">
@@ -76,7 +66,7 @@ export default function Register() {
                     Register
                 </button>
             </form>
-            <button id="login-link" className="btn btn-outline-light reg-element" onClick={handleLoginSwitch}>Already have an account? Click here to log in.</button>
+            <button id="login-link" className="btn btn-outline-light reg-element" onClick={handleLoginRedirect}>Already have an account? Click here to log in.</button>
         </div>
     );
 };

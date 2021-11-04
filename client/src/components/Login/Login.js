@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import './Login.css';
-import { setRegistering, setMessage } from '../../utils/state/preLoginSlice';
 import { useDispatch } from 'react-redux';
 import { requestLogin } from '../../utils/state/userSlice';
+import { useHistory } from 'react-router';
 
 export default function Login() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
 
@@ -27,12 +28,8 @@ export default function Login() {
         }));
     };
 
-    const handleRegSwitch = e => {
-        e.preventDefault();
-        dispatch(setRegistering(true));
-        dispatch(setMessage({
-            message: ''
-        }));
+    const handleRegRedirect = () => {
+        history.push('/register');
     };
 
     return (
@@ -45,7 +42,7 @@ export default function Login() {
                     Log In
                 </button>
             </form>
-            <button onClick={handleRegSwitch} id="reg-link" className="btn btn-outline-light login-element">Don't have an account? Click here to sign up.</button>
+            <button onClick={handleRegRedirect} id="reg-link" className="btn btn-outline-light login-element">Don't have an account? Click here to sign up.</button>
         </div>
     );
 };

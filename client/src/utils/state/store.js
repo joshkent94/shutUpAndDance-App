@@ -10,7 +10,6 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import preLoginReducer from './preLoginSlice';
 import { combineReducers } from 'redux';
 import userReducer from './userSlice';
 import suggestionsReducer from './suggestionsSlice';
@@ -22,7 +21,6 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  preLogin: preLoginReducer,
   user: userReducer,
   suggestions: suggestionsReducer,
   forum: forumReducer

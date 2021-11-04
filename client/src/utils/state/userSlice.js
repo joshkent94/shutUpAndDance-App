@@ -1,6 +1,37 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { showInvertedMessage, showMessage } from "../helperFunctions/showMessage";
 
+export const submitRegistration = createAsyncThunk(
+    'user/submitRegistration',
+    async ({ firstName, lastName, email, password, validatedPassword }) => {
+        if (password !== validatedPassword) {
+            showMessage(`Passwords don't match.`);
+            return;
+        } else {
+            const data = {
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                password: password
+            };
+            const response = await fetch(`/register`, {
+                method: "POST",
+                mode: "cors",
+                credentials: 'include',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            });
+            const jsonResponse = await response.json();
+            showMessage(jsonResponse.message);
+            if (response.ok) {
+                return data;
+            };
+        };
+    }
+);
+
 export const requestLogin = createAsyncThunk(
     'user/requestLogin',
     async ({ email, password }) => {
@@ -90,6 +121,13 @@ const userSlice = createSlice({
         }
     },
     extraReducers: {
+        [submitRegistration.fulfilled]: (state, action) => {
+            if (action.payload) {
+                state.firstName = action.payload.firstName;
+                state.lastName = action.payload.lastName;
+                state.email = action.payload.email;
+            };
+        },
         [requestLogin.fulfilled]: (state, action) => {
             if (action.payload) {
                 state.firstName = action.payload.firstName;

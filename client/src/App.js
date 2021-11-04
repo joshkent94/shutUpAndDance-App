@@ -4,15 +4,13 @@ import {
   Route,
   Redirect
 } from "react-router-dom";
-import SignedIn from "./components/SignedIn/SignedIn";
-import Login from "./components/Login/Login";
-import { selectRegistering } from "./utils/state/preLoginSlice";
-import { useSelector } from "react-redux";
 import Register from "./components/Register/Register";
+import Login from "./components/Login/Login";
+import SignedIn from "./components/SignedIn/SignedIn";
+import { useSelector } from "react-redux";
 import { selectFirstName } from "./utils/state/userSlice";
 
 export default function App() {
-  const registering = useSelector(selectRegistering);
   const firstName = useSelector(selectFirstName);
 
   if (window.location.protocol !== 'https:') {
@@ -23,8 +21,7 @@ export default function App() {
     <Router>
 
       {firstName && <Redirect to="/signedin" />}
-      {registering && <Redirect to="/register" />}
-      {!firstName && !registering && <Redirect to="/login" />}
+      {!firstName && <Redirect to="/login" />}
 
       <Switch>
         <Route path="/login">
