@@ -1,11 +1,10 @@
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
-  NavLink,
   Redirect,
   useRouteMatch
 } from "react-router-dom";
+import Navbar from "../Navbar/Navbar";
 import Dashboard from "../Dashboard/Dashboard";
 import Suggestions from "../Suggestions/Suggestions";
 import Forum from "../Forum/Forum";
@@ -16,9 +15,8 @@ import { getGenres } from '../../utils/helperFunctions/getGenres';
 import { updateGenres } from '../../utils/helperFunctions/updateGenres';
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { selectEmail, selectFirstName, selectLastName, selectGenres, setGenres, logout } from "../../utils/state/userSlice";
-import { getAccessToken, getAvailableGenres, getSuggestions, selectAccessToken,resetSuggestionsDetails } from "../../utils/state/suggestionsSlice";
-import logo from '../../assets/inverted-logo.png';
+import { selectEmail, selectFirstName, selectLastName, selectGenres, setGenres } from "../../utils/state/userSlice";
+import { getAccessToken, getAvailableGenres, getSuggestions, selectAccessToken } from "../../utils/state/suggestionsSlice";
 import './SignedIn.css';
 
 export default function SignedIn() {
@@ -30,12 +28,6 @@ export default function SignedIn() {
   const accessToken = useSelector(selectAccessToken);
   const isFirstRenderForUpdate = useRef(true);
   const isFirstRenderForFetch = useRef(true);
-
-  const handleLogout = e => {
-    e.preventDefault();
-    dispatch(logout());
-    dispatch(resetSuggestionsDetails());
-  };
 
   useEffect(() => {
     if (userEmail !== '') {
@@ -111,68 +103,28 @@ export default function SignedIn() {
   }, [genres]);
 
   return (
-    <Router>
-
+    <div>
       <Redirect to="/dashboard" />
-
-      <nav id="sidebar">
-        <ul id="nav-list">
-          <li className="icon-element">
-            <NavLink to="/dashboard">
-              <img src={logo} alt="logo" id="logo" />
-            </NavLink>
-          </li>
-          <li className="nav-element">
-            <NavLink to="/dashboard" className="nav-option">
-              <i className="bi bi-house-fill nav-icon dashboard-button"></i>
-              <p className="nav-title">Dashboard</p>
-            </NavLink>
-          </li>
-          <li className="nav-element">
-            <NavLink to="/suggestions" className="nav-option">
-              <i className="bi bi-music-note-beamed nav-icon suggestions-button"></i>
-              <p className="nav-title">Suggestions</p>
-            </NavLink>
-          </li>
-          <li className="nav-element">
-            <NavLink to="/forum" className="nav-option">
-              <i className="bi bi-chat-fill nav-icon forum-button"></i>
-              <p className="nav-title">Forum</p>
-            </NavLink>
-          </li>
-          <li className="nav-element">
-            <NavLink to="/account" className="nav-option">
-              <i className="bi bi-person-fill nav-icon account-button"></i>
-              <p className="nav-title">Account</p>
-            </NavLink>
-          </li>
-        </ul>
-
-        <button className="nav-option" id="logout" onClick={handleLogout}>
-          <i className="bi bi-box-arrow-left nav-icon"></i>
-          <p className="nav-title">Log Out</p>
-        </button>
-      </nav>
+      <Route>
+        <Navbar />
+      </Route>
         
-      <Switch>
-        <Route path="/dashboard">
-          <Dashboard />
-        </Route>
+      <Route exact path="/dashboard">
+        <Dashboard />
+      </Route>
       
-        <Route path="/suggestions">
-          <Suggestions />
-        </Route>
+      <Route exact path="/suggestions">
+        <Suggestions />
+      </Route>
       
-        <Route path="/forum">
-          <ForumRoutes />
-        </Route>
+      <Route exact path="/forum">
+        <ForumRoutes />
+      </Route>
       
-        <Route path="/Account">
-          <Account />
-        </Route>
-      </Switch>
-
-    </Router>
+      <Route exact path="/Account">
+        <Account />
+      </Route>
+    </div>
   );
 };
 

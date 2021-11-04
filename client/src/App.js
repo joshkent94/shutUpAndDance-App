@@ -1,6 +1,5 @@
 import {
   BrowserRouter as Router,
-  Switch,
   Route,
   Redirect
 } from "react-router-dom";
@@ -23,19 +22,17 @@ export default function App() {
       {firstName && <Redirect to="/signedin" />}
       {!firstName && <Redirect to="/login" />}
 
-      <Switch>
-        <Route path="/login">
-          <Login />
-        </Route>
+      <Route exact path="/login">
+        <Login />
+      </Route>
       
-        <Route path="/signedin">
-          <SignedIn />
-        </Route>
+      <Route exact path="/signedin">
+        <SignedIn />
+      </Route>
 
-        <Route path="/register">
-          <Register />
-        </Route>
-      </Switch>
+      <Route exact path="/register">
+        <Register />
+      </Route>
 
     </Router>
   );
