@@ -1,16 +1,16 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 import GenreOption from '../GenreOption/GenreOption';
 import { hideCheckboxes, showCheckboxes } from '../../utils/helperFunctions/toggleCheckboxes';
 import { selectAvailableGenres } from '../../utils/state/suggestionsSlice';
+import { selectGenres, updateGenres } from '../../utils/state/userSlice';
 import './GenreDropdown.css';
-import { useState } from 'react';
-import { selectGenres } from '../../utils/state/userSlice';
 
 export default function GenreDropdown() {
+    const dispatch = useDispatch();
     const genreOptions = useSelector(selectAvailableGenres);
     const selectedGenres = useSelector(selectGenres);
     const [searchTerm, setSearchTerm] = useState('');
-
     const sortedGenres = selectedGenres.slice().sort();
 
     const handleSearch = e => {
@@ -25,6 +25,12 @@ export default function GenreDropdown() {
     const filteredGenres = genreOptions.filter(genre => {
         return genre.includes(searchTerm.toLowerCase())
     });
+
+    useEffect(() => {
+        if (document.cookie) {
+            dispatch(updateGenres(selectedGenres));
+        };
+    }, [dispatch, selectedGenres]);
 
     return (
         <form id="search" onFocus={showCheckboxes} onBlur={hideCheckboxes}>

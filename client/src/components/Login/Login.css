@@ -30,7 +30,7 @@
 }
 
 .login-element:focus {
-  border-color: var(--secondary-colour);
+  border-color: var(--secondary-colour) !important;
   caret-color: var(--secondary-colour);
   color: var(--secondary-colour);
   background: transparent;

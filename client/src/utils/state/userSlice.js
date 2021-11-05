@@ -100,7 +100,7 @@ export const updateUserDetails = createAsyncThunk(
 export const updateGenres = createAsyncThunk(
     'user/updateGenres',
     async (genres) => {
-        const response = await fetch(`/userGenres`, {
+        await fetch(`/userGenres`, {
             method: "PUT",
             mode: "cors",
             credentials: "include",
@@ -109,9 +109,6 @@ export const updateGenres = createAsyncThunk(
                 "Content-Type": "application/json"
             }
         });
-        if (response.ok) {
-            return genres;
-        };
     }
 );
 
@@ -122,6 +119,22 @@ const userSlice = createSlice({
         lastName: '',
         email: '',
         genres: []
+    },
+    reducers: {
+        setGenres: (state, action) => {
+            if (state.genres.indexOf(action.payload) === -1 & state.genres.length < 5) {
+                return {
+                    ...state,
+                    genres: [...state.genres, action.payload]
+                };
+            } else {
+                const newGenres = state.genres.filter(genre => genre !== action.payload);
+                return {
+                    ...state,
+                    genres: newGenres
+                };
+            };
+        }
     },
     extraReducers: {
         [submitRegistration.fulfilled]: (state, action) => {
@@ -153,9 +166,7 @@ const userSlice = createSlice({
             };
         },
         [updateGenres.fulfilled]: (state, action) => {
-            if (action.payload) {
-                state.genres = action.payload;
-            };
+            return;
         }
     }
 });
@@ -164,5 +175,6 @@ export const selectFirstName = state => state.user.firstName;
 export const selectLastName = state => state.user.lastName;
 export const selectEmail = state => state.user.email;
 export const selectGenres = state => state.user.genres;
+export const { setGenres } = userSlice.actions;
 const userReducer = userSlice.reducer;
 export default userReducer;
