@@ -1,14 +1,21 @@
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectGenres, setGenres } from "../../utils/state/userSlice";
+import { selectGenres, updateGenres } from "../../utils/state/userSlice";
 import './GenreOption.css';
 
 export default function GenreOption(props) {
+    const dispatch = useDispatch();
     const genre = props.genre;
     const selectedGenres = useSelector(selectGenres);
-    const dispatch = useDispatch();
+    const [localGenres, setLocalGenres] = useState(selectedGenres);
 
     const handleGenreSelect = e => {
-        dispatch(setGenres(e.target.value));
+        if (localGenres.includes(e.target.value)) {
+            setLocalGenres(genres => genres.filter(genre => genre !== e.target.value));
+        } else {
+            setLocalGenres(genres => [...genres, e.target.value]);
+        };
+        dispatch(updateGenres(localGenres));
     };
 
     return (

@@ -21,6 +21,7 @@ export default function GenreDropdown() {
     const filteredSortedGenres = sortedGenres.filter(genre => {
         return genre.includes(searchTerm.toLowerCase())
     });
+    
     const filteredGenres = genreOptions.filter(genre => {
         return genre.includes(searchTerm.toLowerCase())
     });
