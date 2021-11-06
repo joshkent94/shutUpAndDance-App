@@ -5,7 +5,7 @@ export const submitRegistration = createAsyncThunk(
     'user/submitRegistration',
     async ({ firstName, lastName, email, password, validatedPassword }) => {
         if (password !== validatedPassword) {
-            showMessage(`Passwords don't match.`);
+            showInvertedMessage(`Passwords don't match.`);
             return;
         } else {
             const data = {
@@ -24,7 +24,7 @@ export const submitRegistration = createAsyncThunk(
                 body: JSON.stringify(data)
             });
             const jsonResponse = await response.json();
-            showMessage(jsonResponse.message);
+            showInvertedMessage(jsonResponse.message);
             if (response.ok) {
                 return data;
             };
