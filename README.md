@@ -33,7 +33,7 @@ A project to test out my PERN stack developer skills.
 
 ## Setup
 
-Node is required to work on this app. Clone the repo and run npm install in both the root folder and client folder. Create a postgresql database and run the commands in init.sql file in the server folder to create database schema. Create a .env file in both the root folder and client folder. The one in the root folder should contain database connection details and a session secret, the one in the client folder should contain details to run a https development server and the Spotify client ID and secret.
+Node is required to work on this app. Clone the repo and run npm install in both the root folder and client folder. Create a postgresql database and run the commands in init.sql file in the server folder to create database schema. Create a .env file in both the root folder and client folder. The one in the root folder should contain database connection details and a session secret, the one in the client folder should contain details to run a react https development server and the Spotify client ID and secret. Lastly, create a file called httpsConfig.js in the server folder that should contain the credentials to run a https express server.
 
 ## Features
 
