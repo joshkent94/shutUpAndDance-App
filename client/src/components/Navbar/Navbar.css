@@ -50,6 +50,11 @@
   width: 100%;
 }
 
+a.active p {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
 #logo {
   width: 35px;
   height: 35px;
@@ -68,7 +73,7 @@
 }
 
 .nav-title {
-  font-size: 0.75em;
+  font-size: 0.8em;
   margin: 0;
   line-height: 1.5rem;
 }
