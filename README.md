@@ -18,6 +18,8 @@ A project to test out my PERN stack developer skills.
 
 ## Screenshot
 
+![Screenshot of app working](./client/src/assets/in-action.png)
+
 ## Technologies
 
 - HTML
@@ -31,13 +33,15 @@ A project to test out my PERN stack developer skills.
 
 ## Setup
 
-No prior setup required. Users must register an account to access the app.
+Node is required to work on this app. Clone the repo and run npm install in both the root folder and client folder. Create a postgresql database and run the commands in init.sql file in the server folder to create database schema. Create a .env file in both the root folder and client folder. The one in the root folder should contain database connection details and a session secret, the one in the client folder should contain details to run a https development server and the Spotify client ID and secret.
 
 ## Features
 
 Features ready:
 
--
+- Register for an account, login and have sessions persist.
+- Select favourite music genres and receive song suggestions based on your choices.
+- Amend and save account details.
 
 ## Status
 
