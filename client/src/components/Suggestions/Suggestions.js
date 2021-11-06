@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getSuggestions, selectAccessToken, selectSuggestions } from "../../utils/state/suggestionsSlice";
 import Suggestion from "../Suggestion/Suggestion";
-import './Suggestions.css';
 import GenreDropdown from '../GenreDropdown/GenreDropdown';
 import { selectFirstName, selectGenres } from "../../utils/state/userSlice";
+import { getSuggestions, selectAccessToken, selectSuggestions } from "../../utils/state/suggestionsSlice";
 import crowd from '../../assets/signed-in-background.jpeg';
+import './Suggestions.css';
 
 export default function Suggestions() {
     const suggestions = useSelector(selectSuggestions);
