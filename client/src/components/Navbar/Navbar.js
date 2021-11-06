@@ -1,8 +1,9 @@
-import logo from '../../assets/inverted-logo.png';
 import { NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { resetSuggestionsDetails } from '../../utils/state/suggestionsSlice';
 import { logout } from '../../utils/state/userSlice';
-import { useDispatch } from 'react-redux';
+import './Navbar.css';
+import logo from '../../assets/inverted-logo.png';
 
 export default function Navbar() {
     const dispatch = useDispatch();

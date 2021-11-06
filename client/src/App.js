@@ -18,6 +18,7 @@ import Account from "./components/Account/Account";
 import NewThread from "./components/NewThread/NewThread";
 import ThreadExpanded from "./components/ThreadExpanded/ThreadExpanded";
 import Forum from "./components/Forum/Forum";
+import './App.css';
 
 export default function App() {
   const dispatch = useDispatch();
