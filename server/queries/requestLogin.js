@@ -33,19 +33,21 @@ const requestLogin = (req, res) => {
             return data;
         })
         .then(data => {
-            pool.query(`SELECT *
-                        FROM genres INNER JOIN users ON (genres.user_id = users.id)
-                        WHERE genres.user_id = ($1)`,
-                [data.rows[0].id])
-                .then(data => {
-                    session.userId = data.rows[0].id;
-                    res.status(200).send({
-                        firstName: data.rows[0].first_name,
-                        lastName: data.rows[0].last_name,
-                        email: data.rows[0].email,
-                        genres: data.rows[0].genres
+            if (data.rows[0]) {
+                pool.query(`SELECT *
+                        FROM users INNER JOIN genres ON (users.id = genres.user_id)
+                        WHERE users.id = ($1)`,
+                    [data.rows[0].id])
+                    .then(data => {
+                        session.userId = data.rows[0].id;
+                        res.status(200).send({
+                            firstName: data.rows[0].first_name,
+                            lastName: data.rows[0].last_name,
+                            email: data.rows[0].email,
+                            genres: data.rows[0].genres
+                        });
                     });
-                });
+            };
         });
 };
 
