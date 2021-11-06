@@ -7,8 +7,8 @@ import {
 } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectEmail, selectFirstName, selectGenres, selectLastName } from "./utils/state/userSlice";
-import { getAccessToken, getAvailableGenres, getSuggestions, selectAccessToken } from "./utils/state/suggestionsSlice";
+import { selectEmail, selectFirstName, selectLastName } from "./utils/state/userSlice";
+import { getAccessToken } from "./utils/state/suggestionsSlice";
 import Register from "./components/Register/Register";
 import Login from "./components/Login/Login";
 import Navbar from "./components/Navbar/Navbar";
@@ -25,8 +25,6 @@ export default function App() {
   const userEmail = useSelector(selectEmail);
   const userFirstName = useSelector(selectFirstName);
   const userLastName = useSelector(selectLastName);
-  const genres = useSelector(selectGenres);
-  const accessToken = useSelector(selectAccessToken);
 
   // redirect to https if try to access via http
   if (window.location.protocol !== 'https:') {
@@ -60,26 +58,6 @@ export default function App() {
       dispatch(getAccessToken());
     };
   }, [userEmail, dispatch]);
-
-
-  // to move to appropriate components
-  useEffect(() => {
-    if (accessToken !== '') {
-      dispatch(getAvailableGenres({
-        accessToken: accessToken
-      }));
-    };
-  }, [dispatch, accessToken]);
-  
-  useEffect(() => {
-    if (accessToken !== '') {
-      dispatch(getSuggestions({
-        accessToken: accessToken,
-        genres: genres
-      }));
-    };
-  }, [genres, accessToken, dispatch]);
-
 
   return (
     <Router>

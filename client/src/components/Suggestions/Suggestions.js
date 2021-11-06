@@ -1,17 +1,38 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Suggestion from "../Suggestion/Suggestion";
 import GenreDropdown from '../GenreDropdown/GenreDropdown';
 import { selectFirstName, selectGenres } from "../../utils/state/userSlice";
-import { getSuggestions, selectAccessToken, selectSuggestions } from "../../utils/state/suggestionsSlice";
+import { getAvailableGenres, getSuggestions, selectAccessToken, selectAvailableGenres, selectSuggestions } from "../../utils/state/suggestionsSlice";
 import crowd from '../../assets/signed-in-background.jpeg';
 import './Suggestions.css';
 
 export default function Suggestions() {
     const suggestions = useSelector(selectSuggestions);
+    const availableGenres = useSelector(selectAvailableGenres);
     const firstName = useSelector(selectFirstName);
     const accessToken = useSelector(selectAccessToken);
     const genres = useSelector(selectGenres);
     const dispatch = useDispatch();
+
+    // get genre list from Spotify
+    useEffect(() => {
+        if (accessToken !== '' && availableGenres.length === 0) {
+            dispatch(getAvailableGenres({
+                accessToken: accessToken
+            }));
+        };
+    }, [dispatch, accessToken, availableGenres]);
+  
+    // get song suggestions from Spotify
+    useEffect(() => {
+        if (accessToken !== '' && suggestions.length === 0) {
+            dispatch(getSuggestions({
+                accessToken: accessToken,
+                genres: genres
+            }));
+        };
+    }, [genres, accessToken, dispatch, suggestions]);
 
     const handleRedoClick = () => {
         dispatch(getSuggestions({
