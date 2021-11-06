@@ -1,34 +1,40 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from "react-router-dom";
 import { selectFirstName } from '../../utils/state/userSlice';
 import { searchThreads, selectThreads } from '../../utils/state/forumSlice';
-import { Link } from "react-router-dom";
-import './Forum.css';
 import ThreadOverview from '../ThreadOverview/ThreadOverview';
+import './Forum.css';
 
 export default function Forum() {
-    const firstName = useSelector(selectFirstName);
-    const [searchTerm, setSearchTerm] = useState('');
     const dispatch = useDispatch();
+    const [searchTerm, setSearchTerm] = useState('');
+    const firstName = useSelector(selectFirstName);
     const threads = useSelector(selectThreads);
 
+    // update local search term state
     const handleSearchTermChange = e => {
         e.preventDefault();
         setSearchTerm(e.target.value);
     };
 
-    const handleSearch = e => {
-        e.preventDefault();
+    // search for threads whenever search term is updated
+    useEffect(() => {
         dispatch(searchThreads({
             searchTerm: searchTerm
         }));
+    }, [searchTerm, dispatch]);
+
+    // prevent form submit from reloading the page
+    const handleFormSubmit = e => {
+        e.preventDefault();
     };
 
     return (
         <div id="forum">
             <div className="heading">
                 <h3>{firstName}'s Forum</h3>
-                <form onSubmit={handleSearch}>
+                <form onSubmit={handleFormSubmit}>
                     <input className="form-control" id="search" type="search" placeholder="Search threads..." onChange={handleSearchTermChange}></input>
                 </form>
             </div>

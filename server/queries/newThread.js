@@ -8,8 +8,14 @@ const newThread = (req, res) => {
                 VALUES ($1, $2, $3, 0)
                 RETURNING *`,
         [req.session.userId, cleanTitle, cleanComment])
-        .then(() => {
-            res.status(201).send();
+        .then((data) => {
+            pool.query(`SELECT threads.id, threads.title, threads.initial_comment, threads.likes, users.first_name, users.last_name
+                FROM threads INNER JOIN users ON (threads.creator_user_id = users.id)
+                WHERE threads.id = ($1)`,
+                [data.rows[0].id])
+                .then(data => {
+                    res.status(201).send(data.rows[0]);
+                });
         });
 };
 

@@ -7,7 +7,7 @@ export const createThread = createAsyncThunk(
             title: title,
             comment: comment
         };
-        await fetch('/thread', {
+        const response = await fetch('/thread', {
             method: "POST",
             mode: "cors",
             credentials: "include",
@@ -16,19 +16,27 @@ export const createThread = createAsyncThunk(
             },
             body: JSON.stringify(data)
         });
+        if (response.ok) {
+            const jsonResponse = await response.json();
+            return jsonResponse;
+        };
     }
 );
 
 export const searchThreads = createAsyncThunk(
     'forum/searchThreads',
     async ({ searchTerm }) => {
-        const response = await fetch(`/threads/${searchTerm}`, {
-            mode: "cors",
-            credentials: "include"
-        });
-        if (response.ok) {
-            const jsonResponse = await response.json();
-            return jsonResponse;
+        if (searchTerm) {
+            const response = await fetch(`/threads/${searchTerm}`, {
+                mode: "cors",
+                credentials: "include"
+            });
+            if (response.ok) {
+                const jsonResponse = await response.json();
+                return jsonResponse;
+            };
+        } else {
+            return [];
         };
     }
 );
@@ -74,7 +82,7 @@ const forumSlice = createSlice({
     },
     extraReducers: {
         [createThread.fulfilled]: (state, action) => {
-            return;
+            state.threadInfo = action.payload;
         },
         [searchThreads.fulfilled]: (state, action) => {
             state.threadOverviews = action.payload;
