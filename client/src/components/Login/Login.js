@@ -1,12 +1,10 @@
 import { useState } from 'react';
-import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { requestLogin } from '../../utils/state/userSlice';
 import './Login.css';
 
 export default function Login() {
     const dispatch = useDispatch();
-    const history = useHistory();
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
 
@@ -28,10 +26,6 @@ export default function Login() {
         }));
     };
 
-    const handleSignUpRedirect = () => {
-        history.push('/signup');
-    };
-
     return (
         <div id="login">
             <form id="login-form" onSubmit={handleLoginSubmit}>
@@ -41,7 +35,6 @@ export default function Login() {
                     Log In
                 </button>
             </form>
-            <button onClick={handleSignUpRedirect} id="reg-link" className="btn btn-outline-light login-element">Don't have an account? Click here to sign up.</button>
         </div>
     );
 };

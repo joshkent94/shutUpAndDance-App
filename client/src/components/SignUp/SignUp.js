@@ -1,12 +1,10 @@
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { useHistory } from 'react-router';
-import { submitRegistration } from '../../utils/state/userSlice';
+import { submitSignUp } from '../../utils/state/userSlice';
 import './SignUp.css';
 
 export default function SignUp() {
     const dispatch = useDispatch();
-    const history = useHistory();
     const [firstName, setFirstName] = useState(null);
     const [lastName, setLastName] = useState(null);
     const [email, setEmail] = useState(null);
@@ -38,9 +36,9 @@ export default function SignUp() {
         setValidatedPassword(e.target.value);
     };
 
-    const handleRegRequest = async (e) => {
+    const handleSignUpRequest = async (e) => {
         e.preventDefault();
-        dispatch(submitRegistration({
+        dispatch(submitSignUp({
             firstName,
             lastName,
             email,
@@ -49,23 +47,18 @@ export default function SignUp() {
         }));
     };
 
-    const handleLoginRedirect = () => {
-        history.push('/login');
-    };
-
     return (
-        <div id="reg">
-            <form id="reg-form" onSubmit={handleRegRequest}>
-                <input type="text" placeholder="Enter your first name" className="form-control reg-element" onChange={updateFirstName} required />
-                <input type="text" placeholder="Enter your last name" className="form-control reg-element" onChange={updateLastName} required />
-                <input type="email" placeholder="Enter your email address" className="form-control reg-element" onChange={updateEmail} required />
-                <input type="password" placeholder="Enter your password" className="form-control reg-element" onChange={updatePassword} required />
-                <input type="password" placeholder="Validate your password" className="form-control reg-element" onChange={updateValidatedPassword} required />
-                <button id="reg-button" type="submit" className="btn btn-outline-light">
+        <div id="sign-up">
+            <form id="sign-up-form" onSubmit={handleSignUpRequest}>
+                <input type="text" placeholder="Enter your first name" className="form-control sign-up-element" onChange={updateFirstName} required />
+                <input type="text" placeholder="Enter your last name" className="form-control sign-up-element" onChange={updateLastName} required />
+                <input type="email" placeholder="Enter your email address" className="form-control sign-up-element" onChange={updateEmail} required />
+                <input type="password" placeholder="Enter your password" className="form-control sign-up-element" onChange={updatePassword} required />
+                <input type="password" placeholder="Validate your password" className="form-control sign-up-element" onChange={updateValidatedPassword} required />
+                <button id="sign-up-button" type="submit" className="btn btn-outline-light">
                     Sign Up
                 </button>
             </form>
-            <button id="login-link" className="btn btn-outline-light reg-element" onClick={handleLoginRedirect}>Already have an account? Click here to log in.</button>
         </div>
     );
 };

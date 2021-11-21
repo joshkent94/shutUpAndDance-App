@@ -79,7 +79,7 @@ a.active p {
   line-height: 1.5rem;
 }
 
-#logout {
+.bottom-nav {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -90,6 +90,10 @@ a.active p {
   padding: 1.2em 0;
 }
 
-#logout:hover {
+.bottom-nav:hover {
   opacity: 0.7;
+}
+
+.pre-login-button {
+  padding-top: 0;
 }

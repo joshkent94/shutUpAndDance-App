@@ -7,7 +7,7 @@ const path = require('path');
 const https = require('https');
 const pgSession = require('connect-pg-simple')(session);
 const { pool, isProduction } = require('./server/connectionConfig');
-const { register } = require('./server/queries/register');
+const { signUp } = require('./server/queries/signUp');
 const { requestLogin } = require('./server/queries/requestLogin');
 const { requestLogout } = require('./server/queries/requestLogout');
 const { updateGenres } = require('./server/queries/updateGenres');
@@ -54,7 +54,7 @@ if (isProduction) {
 };
 
 // routes
-app.post('/register', register);
+app.post('/signup', signUp);
 app.post('/authenticate', requestLogin);
 app.put('/user', updateUserDetails);
 app.get('/genres', getGenres);

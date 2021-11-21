@@ -67,30 +67,32 @@ export default function App() {
 
       <Switch>
         <Route path="/signup">
+          <Navbar />
           <SignUp />
         </Route>
 
         <Route path="/login">
+          <Navbar />
           <Login />
         </Route>
       
         <Route path="/dashboard">
-          <Navbar/>
+          <Navbar />
           <Dashboard />
         </Route>
       
         <Route path="/suggestions">
-          <Navbar/>
+          <Navbar />
           <Suggestions />
         </Route>
       
         <Route path="/forum">
-          <Navbar/>
+          <Navbar />
           <ForumRoutes />
         </Route>
       
         <Route path="/account">
-          <Navbar/>
+          <Navbar />
           <Account />
         </Route>
       </Switch>

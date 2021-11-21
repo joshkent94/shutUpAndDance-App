@@ -2,7 +2,7 @@ const { pool } = require('../connectionConfig');
 const bcrypt = require('bcryptjs');
 const sanitizeHtml = require('sanitize-html');
 
-const register = (req, res) => {
+const signUp = (req, res) => {
     const cleanFirstName = sanitizeHtml(req.body.firstName);
     const cleanLastName = sanitizeHtml(req.body.lastName);
     const cleanEmail = sanitizeHtml(req.body.email);
@@ -36,4 +36,4 @@ const register = (req, res) => {
         });
 };
 
-module.exports = { register };
+module.exports = { signUp };
