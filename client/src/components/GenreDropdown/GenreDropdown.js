@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import GenreOption from '../GenreOption/GenreOption';
 import { hideCheckboxes, showCheckboxes } from '../../utils/helperFunctions/toggleCheckboxes';
 import { selectAvailableGenres } from '../../utils/state/suggestionsSlice';
@@ -12,6 +12,7 @@ export default function GenreDropdown() {
     const selectedGenres = useSelector(selectGenres);
     const [searchTerm, setSearchTerm] = useState('');
     const sortedGenres = selectedGenres.slice().sort();
+    const firstRender = useRef(true);
 
     const handleSearch = e => {
         e.preventDefault();
@@ -28,6 +29,10 @@ export default function GenreDropdown() {
 
     useEffect(() => {
         if (document.cookie) {
+            if (firstRender.current) {
+                firstRender.current = false;
+                return;
+            }
             dispatch(updateGenres(selectedGenres));
         };
     }, [dispatch, selectedGenres]);

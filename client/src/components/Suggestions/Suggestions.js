@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Suggestion from "../Suggestion/Suggestion";
 import GenreDropdown from '../GenreDropdown/GenreDropdown';
@@ -14,6 +14,8 @@ export default function Suggestions() {
     const accessToken = useSelector(selectAccessToken);
     const genres = useSelector(selectGenres);
     const dispatch = useDispatch();
+    const firstRenderOne = useRef(true);
+    const firstRenderTwo = useRef(true);
 
     // get genre list from Spotify
     useEffect(() => {
@@ -24,22 +26,38 @@ export default function Suggestions() {
         };
     }, [dispatch, accessToken, availableGenres]);
   
-    // get song suggestions from Spotify
+    // get song suggestions from Spotify if suggestions are blank
+    // or the user's selected genres change
     useEffect(() => {
-        if (accessToken !== '' && suggestions.length === 0) {
+        if (firstRenderOne.current) {
+            firstRenderOne.current = false;
+            return;
+        }
+        if (accessToken !== '') {
             dispatch(getSuggestions({
                 accessToken: accessToken,
                 genres: genres
             }));
         };
-    }, [genres, accessToken, dispatch, suggestions]);
+    }, [genres, accessToken, dispatch]);
+    useEffect(() => {
+        if (firstRenderTwo.current) {
+            firstRenderTwo.current = false;
+            if (suggestions.length === 0 && firstName) {
+                dispatch(getSuggestions({
+                    accessToken: accessToken,
+                    genres: genres
+                }));
+            };
+        };
+    });
 
     const handleRedoClick = () => {
         dispatch(getSuggestions({
             accessToken: accessToken,
             genres: genres
         }));
-    };
+    }
 
     let content;
     if (suggestions.length === 0) {
