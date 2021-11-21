@@ -1,7 +1,7 @@
 import { useState } from 'react';
+import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { requestLogin } from '../../utils/state/userSlice';
-import { useHistory } from 'react-router';
 import './Login.css';
 
 export default function Login() {

@@ -1,8 +1,8 @@
-import './SignUp.css';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { submitRegistration } from '../../utils/state/userSlice';
 import { useHistory } from 'react-router';
+import { submitRegistration } from '../../utils/state/userSlice';
+import './SignUp.css';
 
 export default function SignUp() {
     const dispatch = useDispatch();

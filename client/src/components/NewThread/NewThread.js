@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createThread } from '../../utils/state/forumSlice';
 import { useHistory } from 'react-router-dom';
-import { showMessage } from "../../utils/helperFunctions/showMessage";
+import { createThread } from '../../utils/state/forumSlice';
 import { selectFirstName } from '../../utils/state/userSlice';
+import { showMessage } from "../../utils/helperFunctions/showMessage";
 import './NewThread.css';
 
 export default function NewThread() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const [title, setTitle] = useState('');
     const [comment, setComment] = useState('');
-    const history = useHistory();
     const firstName = useSelector(selectFirstName);
 
     const handleTitleChange = e => {
@@ -31,8 +31,11 @@ export default function NewThread() {
             dispatch(createThread({
                 title: title,
                 comment: comment
-            }));
-            history.push('/forum');
+            }))
+                .unwrap()
+                .then(thread => {
+                    history.push(`/forum/${thread.id}`);
+                });
         };
     };
 
