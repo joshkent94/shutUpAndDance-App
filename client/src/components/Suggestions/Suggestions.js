@@ -58,7 +58,7 @@ export default function Suggestions() {
                 <div id="suggestions-right">
                 <img src={crowd} alt='crowd' id="suggestions-image" />
                 <button className="btn account-submit" id="re-do" onClick={handleRedoClick}>
-                    Go Again
+                    Get Suggestions
                 </button>
                 </div>
             </div>;

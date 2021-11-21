@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { showInvertedMessage, showMessage } from "../helperFunctions/showMessage";
+import { showMessage } from "../helperFunctions/showMessage";
 
 export const submitSignUp = createAsyncThunk(
     'user/submitSignUp',
     async ({ firstName, lastName, email, password, validatedPassword }) => {
         if (password !== validatedPassword) {
-            showInvertedMessage(`Passwords don't match.`);
+            showMessage(`Passwords don't match.`);
             return;
         } else {
             const data = {
@@ -24,7 +24,7 @@ export const submitSignUp = createAsyncThunk(
                 body: JSON.stringify(data)
             });
             const jsonResponse = await response.json();
-            showInvertedMessage(jsonResponse.message);
+            showMessage(jsonResponse.message);
             if (response.ok) {
                 return data;
             };
@@ -57,7 +57,7 @@ export const requestLogin = createAsyncThunk(
                 genres: jsonResponse.genres
             };
         } else {
-            showInvertedMessage(jsonResponse.message);
+            showMessage(jsonResponse.message);
         };
     }
 );
@@ -100,7 +100,7 @@ export const updateUserDetails = createAsyncThunk(
 export const updateGenres = createAsyncThunk(
     'user/updateGenres',
     async (genres) => {
-        await fetch(`/userGenres`, {
+        await fetch(`/user/genres`, {
             method: "PUT",
             mode: "cors",
             credentials: "include",

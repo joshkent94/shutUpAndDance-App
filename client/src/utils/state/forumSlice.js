@@ -7,7 +7,7 @@ export const createThread = createAsyncThunk(
             title: title,
             comment: comment
         };
-        const response = await fetch('/thread', {
+        const response = await fetch('/threads/thread', {
             method: "POST",
             mode: "cors",
             credentials: "include",
@@ -44,7 +44,7 @@ export const searchThreads = createAsyncThunk(
 export const getThread = createAsyncThunk(
     'forum/getThread',
     async (threadId) => {
-        const response = await fetch(`/thread/${threadId}`, {
+        const response = await fetch(`/threads/thread/${threadId}`, {
             mode: "cors",
             credentials: "include"
         });
@@ -62,7 +62,7 @@ export const getThread = createAsyncThunk(
 export const getComments = createAsyncThunk(
     'forum/getComments',
     async (threadId) => {
-        const response = await fetch(`/comments/${threadId}`, {
+        const response = await fetch(`/threads/comments/${threadId}`, {
             mode: "cors",
             credentials: "include"
         });

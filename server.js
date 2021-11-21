@@ -10,13 +10,9 @@ const { pool, isProduction } = require('./server/connectionConfig');
 const { signUp } = require('./server/queries/signUp');
 const { requestLogin } = require('./server/queries/requestLogin');
 const { requestLogout } = require('./server/queries/requestLogout');
-const { updateGenres } = require('./server/queries/updateGenres');
 const { getGenres } = require('./server/queries/getGenres');
-const { updateUserDetails } = require('./server/queries/updateUserDetails');
-const { newThread } = require('./server/queries/newThread');
-const { getThreads } = require('./server/queries/getThreads');
-const { getThread } = require('./server/queries/getThread');
-const { getComments } = require('./server/queries/getComments');
+const { userRouter } = require('./server/routes/userRoutes');
+const { threadsRouter } = require('./server/routes/threadsRouter');
 require('dotenv').config();
 
 // middleware
@@ -54,15 +50,11 @@ if (isProduction) {
 };
 
 // routes
+app.use('/user', userRouter);
+app.use('/threads', threadsRouter);
 app.post('/signup', signUp);
 app.post('/authenticate', requestLogin);
-app.put('/user', updateUserDetails);
 app.get('/genres', getGenres);
-app.put('/userGenres', updateGenres);
-app.get('/threads/:searchTerm', getThreads);
-app.get('/thread/:threadId', getThread);
-app.post('/thread', newThread);
-app.get('/comments/:threadId', getComments);
 app.get('/logout', requestLogout);
 
 // catch all route
