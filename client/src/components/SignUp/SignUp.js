@@ -1,10 +1,10 @@
-import './Register.css';
+import './SignUp.css';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { submitRegistration } from '../../utils/state/userSlice';
 import { useHistory } from 'react-router';
 
-export default function Register() {
+export default function SignUp() {
     const dispatch = useDispatch();
     const history = useHistory();
     const [firstName, setFirstName] = useState(null);
@@ -55,7 +55,6 @@ export default function Register() {
 
     return (
         <div id="reg">
-            <div className="overlay"></div>
             <form id="reg-form" onSubmit={handleRegRequest}>
                 <input type="text" placeholder="Enter your first name" className="form-control reg-element" onChange={updateFirstName} required />
                 <input type="text" placeholder="Enter your last name" className="form-control reg-element" onChange={updateLastName} required />
@@ -63,7 +62,7 @@ export default function Register() {
                 <input type="password" placeholder="Enter your password" className="form-control reg-element" onChange={updatePassword} required />
                 <input type="password" placeholder="Validate your password" className="form-control reg-element" onChange={updateValidatedPassword} required />
                 <button id="reg-button" type="submit" className="btn btn-outline-light">
-                    Register
+                    Sign Up
                 </button>
             </form>
             <button id="login-link" className="btn btn-outline-light reg-element" onClick={handleLoginRedirect}>Already have an account? Click here to log in.</button>

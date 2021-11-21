@@ -4,6 +4,12 @@
 .pnp.js
 client/node_modules
 
+#production
+client/build
+
+#connection
+server/httpsConfig.js
+
 # misc
 .DS_Store
 .env.local

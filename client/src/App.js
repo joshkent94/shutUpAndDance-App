@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectEmail, selectFirstName, selectGenres, selectLastName } from "./utils/state/userSlice";
 import { getAccessToken, getAvailableGenres, getSuggestions, selectAccessToken } from "./utils/state/suggestionsSlice";
-import Register from "./components/Register/Register";
+import SignUp from "./components/SignUp/SignUp";
 import Login from "./components/Login/Login";
 import Navbar from "./components/Navbar/Navbar";
 import Dashboard from "./components/Dashboard/Dashboard";
@@ -87,8 +87,8 @@ export default function App() {
       {!userFirstName && <Redirect to="/login" />}
 
       <Switch>
-        <Route path="/register">
-          <Register />
+        <Route path="/signup">
+          <SignUp />
         </Route>
 
         <Route path="/login">

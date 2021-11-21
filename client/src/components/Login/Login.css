@@ -5,8 +5,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: url("../../assets/login-background.jpeg") center no-repeat;
-  background-size: cover;
 }
 
 #login-form {

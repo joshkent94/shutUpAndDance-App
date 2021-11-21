@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import './Login.css';
 import { useDispatch } from 'react-redux';
 import { requestLogin } from '../../utils/state/userSlice';
 import { useHistory } from 'react-router';
+import './Login.css';
 
 export default function Login() {
     const dispatch = useDispatch();
@@ -28,13 +28,12 @@ export default function Login() {
         }));
     };
 
-    const handleRegRedirect = () => {
-        history.push('/register');
+    const handleSignUpRedirect = () => {
+        history.push('/signup');
     };
 
     return (
         <div id="login">
-            <div className="overlay"></div>
             <form id="login-form" onSubmit={handleLoginSubmit}>
                 <input type="email" placeholder="Enter your email address" className="form-control login-element" onChange={updateEmail} required />
                 <input type="password" placeholder="Enter your password" className="form-control login-element" onChange={updatePassword} required />
@@ -42,7 +41,7 @@ export default function Login() {
                     Log In
                 </button>
             </form>
-            <button onClick={handleRegRedirect} id="reg-link" className="btn btn-outline-light login-element">Don't have an account? Click here to sign up.</button>
+            <button onClick={handleSignUpRedirect} id="reg-link" className="btn btn-outline-light login-element">Don't have an account? Click here to sign up.</button>
         </div>
     );
 };
