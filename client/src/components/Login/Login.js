@@ -30,7 +30,7 @@ export default function Login() {
         <div id="login">
             <form id="login-form" onSubmit={handleLoginSubmit}>
                 <input type="email" placeholder="Enter your email address" className="form-control login-element" onChange={updateEmail} required />
-                <input type="password" placeholder="Enter your password" className="form-control login-element" onChange={updatePassword} required />
+                <input type="password" placeholder="Enter your password" className="form-control login-element" onChange={updatePassword} required autoComplete="new-password" />
                 <button id="login-button" type="submit" className="btn btn-outline-light login-element">
                     Log In
                 </button>

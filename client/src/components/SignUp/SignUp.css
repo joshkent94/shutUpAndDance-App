@@ -36,15 +36,11 @@
 
 #sign-up-button {
   width: 40%;
-  color: var(--primary-colour);
+  color: var(--secondary-colour);
+  background: var(--primary-colour);
   font-weight: 700;
   margin: 3em;
   border-color: var(--primary-colour);
-}
-
-#sign-up-button:hover {
-  background: var(--primary-colour);
-  color: var(--secondary-colour);
 }
 
 #sign-up-button:focus {

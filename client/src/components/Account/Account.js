@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { showMessage } from '../../utils/helperFunctions/showMessage';
 import { selectEmail, selectFirstName, selectLastName, updateUserDetails } from '../../utils/state/userSlice';
+import PasswordCriteria from '../PasswordCriteria/PasswordCriteria';
 import './Account.css';
 
 export default function Account() {
+    const dispatch = useDispatch();
     const firstName = useSelector(selectFirstName);
     const lastName = useSelector(selectLastName);
     const email = useSelector(selectEmail);
@@ -13,7 +15,10 @@ export default function Account() {
     const [newEmail, setNewEmail] = useState(email);
     const [newPassword, setNewPassword] = useState('');
     const [confirmedPassword, setConfirmedPassword] = useState('');
-    const dispatch = useDispatch();
+    const [lengthBool, setLengthBool] = useState(false);
+    const [casingBool, setCasingBool] = useState(false);
+    const [numberBool, setNumberBool] = useState(false);
+    const [specialBool, setSpecialBool] = useState(false);
 
     const handleFirstNameChange = e => {
         e.preventDefault();
@@ -42,16 +47,20 @@ export default function Account() {
 
     const handleDetailsSave = e => {
         e.preventDefault();
-        if (newPassword === confirmedPassword) {
-            const details = {
-                firstName: newFirstName,
-                lastName: newLastName,
-                email: newEmail,
-                password: newPassword
+        if (lengthBool && casingBool && numberBool && specialBool) {
+            if (newPassword === confirmedPassword) {
+                const details = {
+                    firstName: newFirstName,
+                    lastName: newLastName,
+                    email: newEmail,
+                    password: newPassword
+                };
+                dispatch(updateUserDetails(details));
+            } else {
+                showMessage(`Passwords don't match.`);
             };
-            dispatch(updateUserDetails(details));
         } else {
-            showMessage(`Passwords don't match.`);
+            showMessage("Password must meet criteria");
         };
     };
 
@@ -74,13 +83,14 @@ export default function Account() {
                         <label htmlFor="email">Email Address:</label>
                         <input className="account-input form-control" type="email" value={newEmail} id="email" onChange={handleEmailChange} required></input>
                     </div>
+                    {newPassword && <PasswordCriteria password={newPassword} setLengthBool={setLengthBool} setCasingBool={setCasingBool} setNumberBool={setNumberBool} setSpecialBool={setSpecialBool} />}
                     <div className="account-form-element">
                         <label htmlFor="password">New Password:</label>
-                        <input className="account-input form-control" type="password" id="password" onChange={handlePasswordChange}></input>
+                        <input className="account-input form-control" type="password" id="password" onChange={handlePasswordChange} autoComplete="new-password" placeholder="Optional"></input>
                     </div>
                     <div className="account-form-element">
                         <label htmlFor="confirmed-password">Confirm Password:</label>
-                        <input className="account-input form-control" type="password" id="confirmed-password" onChange={handleConfirmedPasswordChange}></input>
+                        <input className="account-input form-control" type="password" id="confirmed-password" onChange={handleConfirmedPasswordChange} placeholder="Optional"></input>
                     </div>
 
                     <button className="account-submit btn" type="submit">
