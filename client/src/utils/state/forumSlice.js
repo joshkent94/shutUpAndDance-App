@@ -73,6 +73,25 @@ export const getComments = createAsyncThunk(
     }
 );
 
+export const addComment = createAsyncThunk(
+    'forum/addComment',
+    async ({threadId, comment}) => {
+        const data = {
+            comment
+        };
+        await fetch(`/comments/${threadId}`, {
+            method: "POST",
+            mode: "cors",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+        return;
+    }
+);
+
 const forumSlice = createSlice({
     name: 'forum',
     initialState: {
@@ -92,6 +111,9 @@ const forumSlice = createSlice({
         },
         [getComments.fulfilled]: (state, action) => {
             state.comments = action.payload;
+        },
+        [addComment.fulfilled]: (state, action) => {
+            return;
         }
     }
 });

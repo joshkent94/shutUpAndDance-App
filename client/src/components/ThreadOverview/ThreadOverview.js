@@ -13,7 +13,7 @@ export default function ThreadOverview(props) {
                 <div className="thread-info">
                     <div className="thread-info-left">
                         <p className="thread-sub-info">Created by {thread.first_name} {thread.last_name}</p>
-                        <p className="thread-sub-info">Likes: {thread.likes}</p>
+                        <p className="thread-sub-info">Likes: {thread.likes.length}</p>
                     </div>
                     <p className="thread-initial-comment">
                         {thread.initial_comment}

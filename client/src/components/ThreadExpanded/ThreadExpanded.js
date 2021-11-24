@@ -26,7 +26,7 @@ export default function ThreadExpanded() {
                 {threadInfo.title}
                 {threadInfo.initial_comment}
                 {`${threadInfo.first_name} ${threadInfo.last_name}`}
-                {threadInfo.likes}
+                {threadInfo.likes.length}
             </div>
             <div>
                 {comments.map(comment => {

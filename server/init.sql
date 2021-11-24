@@ -32,7 +32,7 @@ CREATE TABLE threads (
   creator_user_id uuid NOT NULL REFERENCES users,
   title VARCHAR(255) NOT NULL,
   initial_comment TEXT NOT NULL,
-  likes INTEGER NOT NULL
+  likes uuid ARRAY NOT NULL DEFAULT '{}'
 );
 
 CREATE TABLE comments (
