@@ -1,7 +1,9 @@
 CREATE EXTENSION citext;
 
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 CREATE TABLE users (
-  id SERIAL PRIMARY KEY,
+  id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
   first_name VARCHAR(255) NOT NULL,
   last_name VARCHAR(255) NOT NULL,
   email citext UNIQUE,
@@ -10,7 +12,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE genres (
-  user_id INTEGER NOT NULL REFERENCES users ON DELETE CASCADE,
+  user_id uuid NOT NULL REFERENCES users ON DELETE CASCADE,
   genres VARCHAR(255) ARRAY
 );
 
@@ -25,11 +27,9 @@ ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFE
 
 CREATE INDEX "IDX_session_expire" ON "session" ("expire");
 
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-
 CREATE TABLE threads (
   id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
-  creator_user_id INTEGER NOT NULL REFERENCES users,
+  creator_user_id uuid NOT NULL REFERENCES users,
   title VARCHAR(255) NOT NULL,
   initial_comment TEXT NOT NULL,
   likes INTEGER NOT NULL
@@ -39,5 +39,5 @@ CREATE TABLE comments (
   id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
   thread_id uuid NOT NULL REFERENCES threads,
   comment TEXT NOT NULL,
-  user_id INTEGER NOT NULL REFERENCES users
+  user_id uuid NOT NULL REFERENCES users
 );

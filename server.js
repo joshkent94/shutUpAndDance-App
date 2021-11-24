@@ -13,6 +13,7 @@ const { requestLogout } = require('./server/queries/requestLogout');
 const { getGenres } = require('./server/queries/getGenres');
 const { userRouter } = require('./server/routes/userRoutes');
 const { threadsRouter } = require('./server/routes/threadsRouter');
+const { commentsRouter } = require('./server/routes/commentsRouter');
 require('dotenv').config();
 
 // middleware
@@ -52,6 +53,7 @@ if (isProduction) {
 // routes
 app.use('/user', userRouter);
 app.use('/threads', threadsRouter);
+app.use('/comments', commentsRouter);
 app.post('/signup', signUp);
 app.post('/authenticate', requestLogin);
 app.get('/genres', getGenres);

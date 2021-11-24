@@ -62,7 +62,7 @@ export const getThread = createAsyncThunk(
 export const getComments = createAsyncThunk(
     'forum/getComments',
     async (threadId) => {
-        const response = await fetch(`/threads/comments/${threadId}`, {
+        const response = await fetch(`/comments/${threadId}`, {
             mode: "cors",
             credentials: "include"
         });
