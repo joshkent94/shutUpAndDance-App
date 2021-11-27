@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import { selectFirstName } from '../../utils/state/userSlice';
-import { searchThreads, selectThreads } from '../../utils/state/forumSlice';
+import { getMostLikedThreads, searchThreads, selectThreads } from '../../utils/state/forumSlice';
 import ThreadOverview from '../ThreadOverview/ThreadOverview';
 import './Forum.css';
 
@@ -19,10 +19,15 @@ export default function Forum() {
     };
 
     // search for threads whenever search term is updated
+    // or get most liked threads if search term is blank
     useEffect(() => {
-        dispatch(searchThreads({
-            searchTerm: searchTerm
-        }));
+        if (!searchTerm) {
+            dispatch(getMostLikedThreads());
+        } else {
+            dispatch(searchThreads({
+                searchTerm: searchTerm
+            }));
+        };
     }, [searchTerm, dispatch]);
 
     // prevent form submit from reloading the page

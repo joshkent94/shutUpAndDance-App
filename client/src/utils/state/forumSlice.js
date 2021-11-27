@@ -107,6 +107,21 @@ export const likeThreadToggle = createAsyncThunk(
     }
 );
 
+export const getMostLikedThreads = createAsyncThunk(
+    'forum/getMostLikedThreads',
+    async () => {
+        const response = await fetch('/threads/mostLiked', {
+            method: "GET",
+            mode: "cors",
+            credentials: "include" 
+        });
+        if (response.ok) {
+            const jsonResponse = await response.json();
+            return jsonResponse;
+        };
+    }
+);
+
 const forumSlice = createSlice({
     name: 'forum',
     initialState: {
@@ -139,6 +154,9 @@ const forumSlice = createSlice({
         },
         [likeThreadToggle.fulfilled]: (state, action) => {
             state.threadInfo.likes = action.payload;
+        },
+        [getMostLikedThreads.fulfilled]: (state, action) => {
+            state.threadOverviews = action.payload;
         }
     }
 });
