@@ -26,7 +26,10 @@ export const submitSignUp = createAsyncThunk(
             const jsonResponse = await response.json();
             showMessage(jsonResponse.message);
             if (response.ok) {
-                return data;
+                return {
+                    ...data,
+                    id: jsonResponse.id
+                };
             };
         };
     }
@@ -51,6 +54,7 @@ export const requestLogin = createAsyncThunk(
         const jsonResponse = await response.json();
         if (response.ok) {
             return {
+                id: jsonResponse.id,
                 firstName: jsonResponse.firstName,
                 lastName: jsonResponse.lastName,
                 email: jsonResponse.email,
@@ -115,6 +119,7 @@ export const updateGenres = createAsyncThunk(
 const userSlice = createSlice({
     name: 'user',
     initialState: {
+        id: '',
         firstName: '',
         lastName: '',
         email: '',
@@ -139,6 +144,7 @@ const userSlice = createSlice({
     extraReducers: {
         [submitSignUp.fulfilled]: (state, action) => {
             if (action.payload) {
+                state.id = action.payload.id;
                 state.firstName = action.payload.firstName;
                 state.lastName = action.payload.lastName;
                 state.email = action.payload.email;
@@ -146,6 +152,7 @@ const userSlice = createSlice({
         },
         [requestLogin.fulfilled]: (state, action) => {
             if (action.payload) {
+                state.id = action.payload.id;
                 state.firstName = action.payload.firstName;
                 state.lastName = action.payload.lastName;
                 state.email = action.payload.email;
@@ -153,6 +160,7 @@ const userSlice = createSlice({
             };
         },
         [logout.fulfilled]: (state, action) => {
+            state.id = '';
             state.firstName = '';
             state.lastName = '';
             state.email = '';
@@ -171,6 +179,7 @@ const userSlice = createSlice({
     }
 });
 
+export const selectUserId = state => state.user.id;
 export const selectFirstName = state => state.user.firstName;
 export const selectLastName = state => state.user.lastName;
 export const selectEmail = state => state.user.email;

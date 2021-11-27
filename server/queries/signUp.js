@@ -29,7 +29,10 @@ const signUp = (req, res) => {
                             [data.rows[0].id, []])
                             .then((data) => {
                                 session.userId = data.rows[0].user_id;
-                                res.status(201).send({message: `Account created successfully.`});
+                                res.status(201).send({
+                                    message: `Account created successfully.`,
+                                    id: data.rows[0].user_id
+                                });
                             });
                     });
             };

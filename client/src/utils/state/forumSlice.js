@@ -92,11 +92,33 @@ export const addComment = createAsyncThunk(
     }
 );
 
+export const likeThreadToggle = createAsyncThunk(
+    'forum/likeThreadToggle',
+    async ({ threadId }) => {
+        const response = await fetch(`/threads/thread/${threadId}`, {
+            method: "PUT",
+            mode: "cors",
+            credentials: "include"
+        });
+        if (response.ok) {
+            const jsonResponse = await response.json();
+            return jsonResponse;
+        };
+    }
+);
+
 const forumSlice = createSlice({
     name: 'forum',
     initialState: {
         threadOverviews: [],
-        threadInfo: {},
+        threadInfo: {
+            id: "",
+            title: "",
+            initial_comment: "",
+            likes: [],
+            first_name: "",
+            last_name: ""
+        },
         comments: []
     },
     extraReducers: {
@@ -114,6 +136,9 @@ const forumSlice = createSlice({
         },
         [addComment.fulfilled]: (state, action) => {
             return;
+        },
+        [likeThreadToggle.fulfilled]: (state, action) => {
+            state.threadInfo.likes = action.payload;
         }
     }
 });
