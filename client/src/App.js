@@ -41,7 +41,7 @@ export default function App() {
           id: userEmail,
           email: userEmail,
           full_name: `${userFirstName} ${userLastName}`,
-          return_url: 'https://shutupanddance.online/dashboard'
+          return_url: 'https://shutupanddance.io/dashboard'
         },
         account: {
           id: userEmail,
