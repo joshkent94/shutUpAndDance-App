@@ -20,7 +20,7 @@ require('dotenv').config();
 app.set('trust proxy', true);
 app.use(
   cors({
-    origin: ["https://localhost:3000", "https://shutupanddance.io"],
+    origin: ["https://localhost:3000", "https://shutupanddance.online"],
     credentials: true,
     optionsSuccessStatus: 204,
   }),
