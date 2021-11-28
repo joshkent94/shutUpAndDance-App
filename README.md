@@ -1,4 +1,4 @@
-# Shut Up And Dance
+# Shut Up And Dance App
 
 > Search and discuss music by genre
 
