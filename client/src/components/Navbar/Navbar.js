@@ -71,20 +71,20 @@ export default function Navbar() {
             <nav id="sidebar">
                 <ul id="nav-list">
                     <li className="icon-element">
-                        <NavLink to="/login">
+                        <NavLink to="/">
                             <img src={logo} alt="logo" id="logo" />
                         </NavLink>
                     </li>
                 </ul>
             
-                <button className="nav-option bottom-nav pre-login-button" onClick={handleSignUpRedirect}>
-                    <i className="bi bi-person-plus-fill nav-icon"></i>
-                    <p className="nav-title">Sign Up</p>
-                </button>
-            
                 <button className="nav-option bottom-nav pre-login-button" onClick={handleLoginRedirect}>
                     <i className="bi bi-box-arrow-right nav-icon"></i>
                     <p className="nav-title">Log In</p>
+                </button>
+            
+                <button className="nav-option bottom-nav pre-login-button" onClick={handleSignUpRedirect}>
+                    <i className="bi bi-person-plus-fill nav-icon"></i>
+                    <p className="nav-title">Sign Up</p>
                 </button>
             </nav>
     };

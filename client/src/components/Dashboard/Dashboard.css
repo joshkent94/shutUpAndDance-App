@@ -1,3 +1,7 @@
 #dashboard {
   width: 100%;
 }
+
+.dashboard-widget {
+  width: 50%;
+}

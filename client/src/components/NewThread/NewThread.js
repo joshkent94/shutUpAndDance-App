@@ -61,7 +61,7 @@ export default function NewThread() {
                         Cancel
                     </button>
                     <button className="account-submit btn" id="add-thread" type="submit">
-                        Add Thread
+                        Create Thread
                     </button>
                 </div>
             </form>

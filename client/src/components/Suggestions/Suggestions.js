@@ -1,21 +1,17 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Suggestion from "../Suggestion/Suggestion";
 import GenreDropdown from '../GenreDropdown/GenreDropdown';
 import { selectFirstName, selectGenres } from "../../utils/state/userSlice";
-import { getAvailableGenres, getSuggestions, selectAccessToken, selectAvailableGenres, selectSuggestions } from "../../utils/state/suggestionsSlice";
-import crowd from '../../assets/signed-in-background.jpeg';
+import { getAvailableGenres, getSuggestions, selectAccessToken, selectAvailableGenres } from "../../utils/state/suggestionsSlice";
+import SongSuggestions from "../SongSuggestions/SongSuggestions";
 import './Suggestions.css';
 
 export default function Suggestions() {
-    const suggestions = useSelector(selectSuggestions);
     const availableGenres = useSelector(selectAvailableGenres);
     const firstName = useSelector(selectFirstName);
     const accessToken = useSelector(selectAccessToken);
     const genres = useSelector(selectGenres);
     const dispatch = useDispatch();
-    const firstRenderOne = useRef(true);
-    const firstRenderTwo = useRef(true);
 
     // get genre list from Spotify
     useEffect(() => {
@@ -25,61 +21,14 @@ export default function Suggestions() {
             }));
         };
     }, [dispatch, accessToken, availableGenres]);
-  
-    // get song suggestions from Spotify if suggestions are blank
-    // or the user's selected genres change
-    useEffect(() => {
-        if (firstRenderOne.current) {
-            firstRenderOne.current = false;
-            return;
-        }
+
+    const handleRedoClick = () => {
         if (accessToken !== '') {
             dispatch(getSuggestions({
                 accessToken: accessToken,
                 genres: genres
             }));
         };
-    }, [genres, accessToken, dispatch]);
-    useEffect(() => {
-        if (firstRenderTwo.current) {
-            firstRenderTwo.current = false;
-            if (suggestions.length === 0 && firstName) {
-                dispatch(getSuggestions({
-                    accessToken: accessToken,
-                    genres: genres
-                }));
-            };
-        };
-    });
-
-    const handleRedoClick = () => {
-        dispatch(getSuggestions({
-            accessToken: accessToken,
-            genres: genres
-        }));
-    }
-
-    let content;
-    if (suggestions.length === 0) {
-        content =
-            <div className="suggestions-content">
-                <h5 className="sub-heading">Please select at least one genre to see suggestions.</h5>
-            </div>;
-    } else {
-        content =
-            <div className="suggestions-content">
-                <div id="suggestions-left">
-                    {suggestions.map(track => {
-                        return <Suggestion key={track.id} track={track} />
-                    })}
-                </div>
-                <div id="suggestions-right">
-                <img src={crowd} alt='crowd' id="suggestions-image" />
-                <button className="btn account-submit" id="re-do" onClick={handleRedoClick}>
-                    Get Suggestions
-                </button>
-                </div>
-            </div>;
     };
 
     return (
@@ -88,7 +37,10 @@ export default function Suggestions() {
                 <h3>{firstName}'s Suggestions</h3>
                 <GenreDropdown />
             </div>
-            {content}
+            <button className="btn account-submit" id="re-do" onClick={handleRedoClick}>
+                Get Suggestions
+            </button>
+            <SongSuggestions />
         </div>
     );
 };

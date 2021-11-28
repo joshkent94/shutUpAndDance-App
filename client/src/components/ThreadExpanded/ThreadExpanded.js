@@ -3,6 +3,7 @@ import { selectFirstName, selectUserId } from "../../utils/state/userSlice";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { addComment, getComments, getThread, likeThreadToggle, selectComments, selectThreadInfo } from "../../utils/state/forumSlice";
+import './ThreadExpanded.css';
 
 export default function ThreadExpanded() {
     const dispatch = useDispatch();
@@ -26,9 +27,9 @@ export default function ThreadExpanded() {
 
     let likeIcon;
     if (threadInfo.likes.includes(userId)) {
-        likeIcon = <button onClick={likeToggle}><i className="bi bi-hand-thumbs-up-fill"></i></button>
+        likeIcon = <button className="like-icon" onClick={likeToggle}><i className="bi bi-hand-thumbs-up-fill"></i></button>
     } else {
-        likeIcon = <button onClick={likeToggle}><i className="bi bi-hand-thumbs-up"></i></button>
+        likeIcon = <button className="like-icon" onClick={likeToggle}><i className="bi bi-hand-thumbs-up"></i></button>
     }
 
     const handleCommentChange = e => {
@@ -55,16 +56,20 @@ export default function ThreadExpanded() {
                 <h3>{firstName}'s Forum</h3>
             </div>
 
-            <div>
-                {threadInfo.title}
-                {threadInfo.initial_comment}
-                {`${threadInfo.first_name} ${threadInfo.last_name}`}
-                {likeIcon}
-                {threadInfo.likes.length}
+            <div id="thread-heading">
+                <div id="thread-info">
+                    <h4>{threadInfo.title}</h4>
+                    {threadInfo.initial_comment}
+                    <p className="posted-by">Posted by {threadInfo.first_name} {threadInfo.last_name}</p>
+                </div>
+                <div id="like-info">
+                    {likeIcon}
+                    {threadInfo.likes.length}
+                </div>
             </div>
             <form onSubmit={postComment}>
-                <input type="text" value={newComment} onChange={handleCommentChange}></input>
-                <button type="submit">Post Comment</button>
+                <textarea className="account-input form-control thread-input" id="thread-comment" placeholder="What's on your mind..." onChange={handleCommentChange} required></textarea>
+                <button type="submit" id="submit-comment"><i className="bi bi-send"></i></button>
             </form>
             <div>
                 {comments.map(comment => {

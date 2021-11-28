@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectEmail, selectFirstName, selectLastName } from "./utils/state/userSlice";
 import { getAccessToken } from "./utils/state/suggestionsSlice";
+import LandingPage from "./components/LandingPage/LandingPage";
 import SignUp from "./components/SignUp/SignUp";
 import Login from "./components/Login/Login";
 import Navbar from "./components/Navbar/Navbar";
@@ -40,7 +41,7 @@ export default function App() {
           id: userEmail,
           email: userEmail,
           full_name: `${userFirstName} ${userLastName}`,
-          return_url: 'https://shut-up-and-dance.herokuapp.com/dashboard'
+          return_url: 'https://shutupanddance.io/dashboard'
         },
         account: {
           id: userEmail,
@@ -63,9 +64,14 @@ export default function App() {
     <Router>
 
       {userFirstName && <Redirect to="/dashboard" />}
-      {!userFirstName && <Redirect to="/login" />}
+      {!userFirstName && <Redirect to="/" />}
 
       <Switch>
+        <Route path="/" exact>
+          <Navbar />
+          <LandingPage />
+        </Route>
+
         <Route path="/signup">
           <Navbar />
           <SignUp />

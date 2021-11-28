@@ -87,7 +87,9 @@ const suggestionsSlice = createSlice({
             state.availableGenres = action.payload;
         },
         [getSuggestions.fulfilled]: (state, action) => {
-            state.suggestions = action.payload;
+            if (action.payload) {
+                state.suggestions = action.payload;
+            };
         }
     }
 });

@@ -134,7 +134,8 @@ const forumSlice = createSlice({
             first_name: "",
             last_name: ""
         },
-        comments: []
+        comments: [],
+        mostLiked: []
     },
     extraReducers: {
         [createThread.fulfilled]: (state, action) => {
@@ -156,7 +157,7 @@ const forumSlice = createSlice({
             state.threadInfo.likes = action.payload;
         },
         [getMostLikedThreads.fulfilled]: (state, action) => {
-            state.threadOverviews = action.payload;
+            state.mostLiked = action.payload;
         }
     }
 });
@@ -164,5 +165,6 @@ const forumSlice = createSlice({
 export const selectThreads = state => state.forum.threadOverviews;
 export const selectThreadInfo = state => state.forum.threadInfo;
 export const selectComments = state => state.forum.comments;
+export const selectMostLiked = state => state.forum.mostLiked;
 const forumReducer = forumSlice.reducer;
 export default forumReducer;

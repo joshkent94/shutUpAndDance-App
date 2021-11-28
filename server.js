@@ -20,7 +20,7 @@ require('dotenv').config();
 app.set('trust proxy', true);
 app.use(
   cors({
-    origin: ["https://localhost:3000", "https://shut-up-and-dance.herokuapp.com"],
+    origin: ["https://localhost:3000", "https://shutupanddance.io"],
     credentials: true,
     optionsSuccessStatus: 204,
   }),
