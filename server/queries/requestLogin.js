@@ -17,7 +17,7 @@ const requestLogin = (req, res) => {
         [cleanEmail])
         .then(data => {
             if (data.rows.length === 0) {
-                res.status(401).send({ message: 'Email address in incorrect.' });
+                res.status(401).send({ message: 'Email address in incorrect' });
             } else {
                 salt = data.rows[0].salt;
                 hashedPassword = data.rows[0].password;
@@ -26,7 +26,7 @@ const requestLogin = (req, res) => {
                         throw err;
                     };
                     if (!match) {
-                        res.status(401).send({ message: 'Password is incorrect.' });
+                        res.status(401).send({ message: 'Password is incorrect' });
                     };
                 });
             };

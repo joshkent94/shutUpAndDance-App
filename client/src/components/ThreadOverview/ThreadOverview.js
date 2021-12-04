@@ -1,5 +1,5 @@
 import './ThreadOverview.css';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function ThreadOverview(props) {
     const thread = props.thread;

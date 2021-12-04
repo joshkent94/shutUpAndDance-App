@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { requestLogin } from '../../utils/state/userSlice';
 import Logo from '../../assets/inverted-logo.png';
 import './Login.css';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function Login() {
     const dispatch = useDispatch();
@@ -40,11 +40,11 @@ export default function Login() {
             <div id="pre-login-main">
                 <h2>Log In</h2>
                 <form id="login-form" onSubmit={handleLoginSubmit}>
-                    <label>
+                    <label className="form-element">
                         Email
                         <input name="email" type="email" placeholder="josh@example.com" className="form-control login-element" onChange={updateEmail} required />
                     </label>
-                    <label>
+                    <label className="form-element">
                         Password
                         <input name="password" type="password" className="form-control login-element" onChange={updatePassword} required />
                     </label>
@@ -52,7 +52,7 @@ export default function Login() {
                         Log In
                     </button>
                 </form>
-                <p id="pre-login-prompt">Don't have an account? <Link to="/signup">Sign up</Link></p>
+                <p className="pre-login-prompt">Don't have an account? <Link to="/signup">Sign up</Link></p>
             </div>
         </div>
     );

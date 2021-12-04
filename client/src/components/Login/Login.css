@@ -46,10 +46,13 @@
   font-weight: 600;
 }
 
+.form-element {
+  margin-bottom: 2rem;
+}
+
 .login-element {
   width: 400px;
   margin-top: 1rem;
-  margin-bottom: 2rem;
   color: var(--primary-colour);
   background: transparent;
 }
@@ -71,17 +74,18 @@
   margin-bottom: 3rem;
 }
 
-#pre-login-prompt {
+.pre-login-prompt {
   font-size: 0.9rem;
   color: var(--third-colour);
+  font-weight: 400 !important;
 }
 
-#pre-login-prompt > a {
+.pre-login-prompt > a {
   text-decoration: none;
   color: var(--primary-colour);
 }
 
-#pre-login-prompt > a:hover {
+.pre-login-prompt > a:hover {
   text-decoration: underline;
 }
 

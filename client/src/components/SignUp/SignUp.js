@@ -1,11 +1,11 @@
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { submitSignUp } from '../../utils/state/userSlice';
-import PasswordCriteria from '../PasswordCriteria/PasswordCriteria';
-import { showMessage } from '../../utils/helperFunctions/showMessage';
 import './SignUp.css';
 import Logo from '../../assets/inverted-logo.png';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { passwordCheck } from '../../utils/helperFunctions/passwordCheck';
+import { showMessage } from '../../utils/helperFunctions/showMessage';
 
 export default function SignUp() {
     const dispatch = useDispatch();
@@ -14,10 +14,6 @@ export default function SignUp() {
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
     const [validatedPassword, setValidatedPassword] = useState(null);
-    const [lengthBool, setLengthBool] = useState(false);
-    const [casingBool, setCasingBool] = useState(false);
-    const [numberBool, setNumberBool] = useState(false);
-    const [specialBool, setSpecialBool] = useState(false);
 
     const updateFirstName = e => {
         e.preventDefault();
@@ -46,7 +42,7 @@ export default function SignUp() {
 
     const handleSignUpRequest = async (e) => {
         e.preventDefault();
-        if (lengthBool && casingBool && numberBool && specialBool) {
+        if (passwordCheck(password)) {
             dispatch(submitSignUp({
                 firstName,
                 lastName,
@@ -55,7 +51,7 @@ export default function SignUp() {
                 validatedPassword
             }));
         } else {
-            showMessage("Password must meet criteria");
+            showMessage('Password must meet criteria');
         };
     };
 
@@ -71,24 +67,24 @@ export default function SignUp() {
             <div id="pre-login-main">
                 <h2>Sign Up</h2>
                 <form id="sign-up-form" onSubmit={handleSignUpRequest}>
-                    <label>
+                    <label className="form-element">
                         First Name
                         <input name="first name" type="text" placeholder="Josh" className="form-control sign-up-element" onChange={updateFirstName} required />
                     </label>
-                    <label>
+                    <label className="form-element">
                         Last Name
                         <input name="last name" type="text" placeholder="Kent" className="form-control sign-up-element" onChange={updateLastName} required />
                     </label>
-                    <label>
+                    <label className="form-element">
                         Email
                         <input name="email" type="email" placeholder="josh@example.com" className="form-control sign-up-element" onChange={updateEmail} required />
                     </label>
-                    <label>
+                    <label className="form-element">
                         Password
-                        {password && <PasswordCriteria password={password} setLengthBool={setLengthBool} setCasingBool={setCasingBool} setNumberBool={setNumberBool} setSpecialBool={setSpecialBool} />}
                         <input name="password" type="password" className="form-control sign-up-element" onChange={updatePassword} required autoComplete="new-password" />
+                        <p className="pre-login-prompt">1 upper, 1 lower, 1 special char, 1 number, min 8 chars</p>
                     </label>
-                    <label>
+                    <label className="form-element">
                         Retype Password
                         <input name="retype password" type="password" className="form-control sign-up-element" onChange={updateValidatedPassword} required />
                     </label>
@@ -96,7 +92,7 @@ export default function SignUp() {
                         Sign Up
                     </button>
                 </form>
-                <p id="pre-login-prompt">Already have an account? <Link to="/login">Log in</Link></p>
+                <p className="pre-login-prompt">Already have an account? <Link to="/login">Log in</Link></p>
             </div>
         </div>
     );

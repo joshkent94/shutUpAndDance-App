@@ -14,7 +14,7 @@ const signUp = (req, res) => {
         [cleanEmail])
         .then(data => {
             if (data.rows.length > 0) {
-                res.status(404).send({ message: `Email address already in use.` });
+                res.status(404).send({ message: `Email address already in use` });
             } else {
                 const salt = bcrypt.genSaltSync(10);
                 const hashedPassword = bcrypt.hashSync(cleanPassword, salt);
@@ -30,7 +30,7 @@ const signUp = (req, res) => {
                             .then((data) => {
                                 session.userId = data.rows[0].user_id;
                                 res.status(201).send({
-                                    message: `Account created successfully.`,
+                                    message: `Account created successfully`,
                                     id: data.rows[0].user_id
                                 });
                             });

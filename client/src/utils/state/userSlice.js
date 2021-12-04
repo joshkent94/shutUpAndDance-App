@@ -5,7 +5,7 @@ export const submitSignUp = createAsyncThunk(
     'user/submitSignUp',
     async ({ firstName, lastName, email, password, validatedPassword }) => {
         if (password !== validatedPassword) {
-            showMessage(`Passwords don't match.`);
+            showMessage(`Passwords don't match`);
             return;
         } else {
             const data = {
@@ -93,10 +93,10 @@ export const updateUserDetails = createAsyncThunk(
             }
         });
         if (response.ok) {
-            showMessage(`User details updated.`);
+            showMessage(`User details updated`);
             return details;
         } else {
-            showMessage(`User details not updated.`);
+            showMessage(`User details not updated`);
         };
     }
 );

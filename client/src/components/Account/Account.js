@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { passwordCheck } from '../../utils/helperFunctions/passwordCheck';
 import { showMessage } from '../../utils/helperFunctions/showMessage';
 import { selectEmail, selectFirstName, selectLastName, updateUserDetails } from '../../utils/state/userSlice';
-import PasswordCriteria from '../PasswordCriteria/PasswordCriteria';
 import './Account.css';
 
 export default function Account() {
@@ -15,10 +15,6 @@ export default function Account() {
     const [newEmail, setNewEmail] = useState(email);
     const [newPassword, setNewPassword] = useState('');
     const [confirmedPassword, setConfirmedPassword] = useState('');
-    const [lengthBool, setLengthBool] = useState(false);
-    const [casingBool, setCasingBool] = useState(false);
-    const [numberBool, setNumberBool] = useState(false);
-    const [specialBool, setSpecialBool] = useState(false);
 
     const handleFirstNameChange = e => {
         e.preventDefault();
@@ -47,7 +43,7 @@ export default function Account() {
 
     const handleDetailsSave = e => {
         e.preventDefault();
-        if (lengthBool && casingBool && numberBool && specialBool) {
+        if(passwordCheck(newPassword)) {
             if (newPassword === confirmedPassword) {
                 const details = {
                     firstName: newFirstName,
@@ -57,7 +53,7 @@ export default function Account() {
                 };
                 dispatch(updateUserDetails(details));
             } else {
-                showMessage(`Passwords don't match.`);
+                showMessage("Passwords don't match");
             };
         } else {
             showMessage("Password must meet criteria");
@@ -83,7 +79,6 @@ export default function Account() {
                         <label htmlFor="email">Email Address:</label>
                         <input className="account-input form-control" type="email" value={newEmail} id="email" onChange={handleEmailChange} required></input>
                     </div>
-                    {newPassword && <PasswordCriteria password={newPassword} setLengthBool={setLengthBool} setCasingBool={setCasingBool} setNumberBool={setNumberBool} setSpecialBool={setSpecialBool} />}
                     <div className="account-form-element">
                         <label htmlFor="password">New Password:</label>
                         <input className="account-input form-control" type="password" id="password" onChange={handlePasswordChange} autoComplete="new-password" placeholder="Optional"></input>

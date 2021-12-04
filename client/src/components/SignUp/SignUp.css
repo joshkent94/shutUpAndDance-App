@@ -14,7 +14,6 @@
 .sign-up-element {
   width: 400px;
   margin-top: 1rem;
-  margin-bottom: 2rem;
   color: var(--primary-colour);
   background: transparent;
 }
@@ -28,6 +27,11 @@
   caret-color: var(--primary-colour);
   color: var(--primary-colour);
   background: transparent;
+}
+
+.form-element > p {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
 }
 
 #sign-up-button {
