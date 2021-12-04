@@ -2,29 +2,60 @@
   width: 100%;
   height: 100vh;
   display: flex;
+}
+
+#pre-login-branding {
+  width: 25%;
+  background: url("../../assets/rapper-cropped.jpg") no-repeat scroll center;
+  background-size: cover;
+  color: var(--secondary-colour);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+#pre-login-branding > img {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-bottom: 10rem;
+}
+
+#pre-login-wording {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+#pre-login-main {
+  width: 75%;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
+#pre-login-main > h2 {
+  margin-bottom: 2.5rem;
+  font-weight: 600;
+}
+
 #login-form {
-  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-weight: 600;
 }
 
 .login-element {
-  width: 350px;
-  padding: 0.3em;
-  margin: 1em;
+  width: 400px;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
   color: var(--primary-colour);
   background: transparent;
 }
 
 .login-element::placeholder {
-  color: var(--primary-colour);
-  font-weight: 700;
+  color: var(--third-colour);
 }
 
 .login-element:focus {
@@ -35,16 +66,23 @@
 }
 
 #login-button {
-  width: 40%;
-  color: var(--secondary-colour);
-  background: var(--primary-colour);
-  font-weight: 700;
-  margin: 3em;
-  border-color: var(--primary-colour);
+  width: 10rem;
+  margin-top: 1rem;
+  margin-bottom: 3rem;
 }
 
-#login-button:focus {
-  box-shadow: none;
+#pre-login-prompt {
+  font-size: 0.9rem;
+  color: var(--third-colour);
+}
+
+#pre-login-prompt > a {
+  text-decoration: none;
+  color: var(--primary-colour);
+}
+
+#pre-login-prompt > a:hover {
+  text-decoration: underline;
 }
 
 input:-webkit-autofill,

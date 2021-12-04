@@ -9,7 +9,6 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectEmail, selectFirstName, selectLastName } from "./utils/state/userSlice";
 import { getAccessToken } from "./utils/state/suggestionsSlice";
-import LandingPage from "./components/LandingPage/LandingPage";
 import SignUp from "./components/SignUp/SignUp";
 import Login from "./components/Login/Login";
 import Navbar from "./components/Navbar/Navbar";
@@ -64,21 +63,14 @@ export default function App() {
     <Router>
 
       {userFirstName && <Redirect to="/dashboard" />}
-      {!userFirstName && <Redirect to="/" />}
+      {!userFirstName && <Redirect to="/login" />}
 
       <Switch>
-        <Route path="/" exact>
-          <Navbar />
-          <LandingPage />
-        </Route>
-
         <Route path="/signup">
-          <Navbar />
           <SignUp />
         </Route>
 
         <Route path="/login">
-          <Navbar />
           <Login />
         </Route>
       

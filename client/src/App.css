@@ -5,8 +5,7 @@
 }
 
 body {
-  font-family: "Klee One", cursive;
-  font-weight: 900 !important;
+  font-family: "Quicksand", sans-serif;
 }
 
 #root {
@@ -18,9 +17,10 @@ body {
 }
 
 :root {
-  --primary-colour: #353935;
+  --primary-colour: black;
   --secondary-colour: white;
-  --tertiary-colour: #dadada;
+  --third-colour: lightgray;
+  --fourth-colour: #3e5d22;
 }
 
 #message {
@@ -29,8 +29,8 @@ body {
   right: 50px;
   color: var(--secondary-colour);
   background-color: var(--primary-colour);
-  padding: 0.5em 1em;
-  border-radius: 1em;
+  padding: 0.5rem 1.5rem;
+  border-radius: 1rem;
 }
 
 #message-inverted {
@@ -39,8 +39,59 @@ body {
   right: 50px;
   color: var(--primary-colour);
   background-color: var(--secondary-colour);
-  padding: 0.5em 1em;
-  border-radius: 1em;
+  padding: 0.5rem 1.5rem;
+  border-radius: 1rem;
+}
+
+.coolBeans {
+  border: 2px solid currentColor;
+  border-radius: 3rem;
+  color: var(--secondary-colour);
+  background-color: var(--primary-colour);
+  overflow: hidden;
+  padding: 1rem 2rem;
+  position: relative;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.2s transform ease-in-out;
+  will-change: transform;
+  z-index: 0;
+}
+
+.coolBeans::after {
+  background-color: var(--secondary-colour);
+  border-radius: 3rem;
+  content: "";
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(-100%, 0) rotate(10deg);
+  transform-origin: top left;
+  transition: 0.2s transform ease-out;
+  will-change: transform;
+  z-index: -1;
+}
+
+.coolBeans:hover::after {
+  transform: translate(0, 0);
+}
+
+.coolBeans:hover {
+  border: 2px solid transparent;
+  color: var(--primary-colour);
+  transform: scale(1.05);
+  will-change: transform;
+}
+
+.coolBeans > a {
+  color: var(--secondary-colour);
+}
+
+.coolBeans:hover > a {
+  color: var(--primary-colour);
 }
 
 .heading {

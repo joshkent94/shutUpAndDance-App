@@ -4,6 +4,8 @@ import { submitSignUp } from '../../utils/state/userSlice';
 import PasswordCriteria from '../PasswordCriteria/PasswordCriteria';
 import { showMessage } from '../../utils/helperFunctions/showMessage';
 import './SignUp.css';
+import Logo from '../../assets/inverted-logo.png';
+import {Link} from 'react-router-dom';
 
 export default function SignUp() {
     const dispatch = useDispatch();
@@ -59,17 +61,43 @@ export default function SignUp() {
 
     return (
         <div id="sign-up">
-            <form id="sign-up-form" onSubmit={handleSignUpRequest}>
-                <input name="first name" type="text" placeholder="First name" className="form-control sign-up-element" onChange={updateFirstName} required />
-                <input name="last name" type="text" placeholder="Last name" className="form-control sign-up-element" onChange={updateLastName} required />
-                <input name="email" type="email" placeholder="Email address" className="form-control sign-up-element" onChange={updateEmail} required />
-                {password && <PasswordCriteria password={password} setLengthBool={setLengthBool} setCasingBool={setCasingBool} setNumberBool={setNumberBool} setSpecialBool={setSpecialBool} />}
-                <input name="password" type="password" placeholder="Password" className="form-control sign-up-element" onChange={updatePassword} required autoComplete="new-password" />
-                <input name="retype password" type="password" placeholder="Retype password" className="form-control sign-up-element" onChange={updateValidatedPassword} required />
-                <button id="sign-up-button" type="submit" className="btn btn-outline-light">
-                    Sign Up
-                </button>
-            </form>
+            <div id="pre-login-branding">
+                <img src={Logo} alt="logo" />
+                <div id="pre-login-wording">
+                    <h1>Shut Up And Dance</h1>
+                    <h4>For the love of music</h4>
+                </div>
+            </div>
+            <div id="pre-login-main">
+                <h2>Sign Up</h2>
+                <form id="sign-up-form" onSubmit={handleSignUpRequest}>
+                    <label>
+                        First Name
+                        <input name="first name" type="text" placeholder="Josh" className="form-control sign-up-element" onChange={updateFirstName} required />
+                    </label>
+                    <label>
+                        Last Name
+                        <input name="last name" type="text" placeholder="Kent" className="form-control sign-up-element" onChange={updateLastName} required />
+                    </label>
+                    <label>
+                        Email
+                        <input name="email" type="email" placeholder="josh@example.com" className="form-control sign-up-element" onChange={updateEmail} required />
+                    </label>
+                    <label>
+                        Password
+                        {password && <PasswordCriteria password={password} setLengthBool={setLengthBool} setCasingBool={setCasingBool} setNumberBool={setNumberBool} setSpecialBool={setSpecialBool} />}
+                        <input name="password" type="password" className="form-control sign-up-element" onChange={updatePassword} required autoComplete="new-password" />
+                    </label>
+                    <label>
+                        Retype Password
+                        <input name="retype password" type="password" className="form-control sign-up-element" onChange={updateValidatedPassword} required />
+                    </label>
+                    <button id="sign-up-button" type="submit" className="coolBeans">
+                        Sign Up
+                    </button>
+                </form>
+                <p id="pre-login-prompt">Already have an account? <Link to="/login">Log in</Link></p>
+            </div>
         </div>
     );
 };

@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { requestLogin } from '../../utils/state/userSlice';
+import Logo from '../../assets/inverted-logo.png';
 import './Login.css';
+import {Link} from 'react-router-dom';
 
 export default function Login() {
     const dispatch = useDispatch();
@@ -28,13 +30,30 @@ export default function Login() {
 
     return (
         <div id="login">
-            <form id="login-form" onSubmit={handleLoginSubmit}>
-                <input type="email" placeholder="Enter your email address" className="form-control login-element" onChange={updateEmail} required />
-                <input type="password" placeholder="Enter your password" className="form-control login-element" onChange={updatePassword} required autoComplete="new-password" />
-                <button id="login-button" type="submit" className="btn btn-outline-light login-element">
-                    Log In
-                </button>
-            </form>
+            <div id="pre-login-branding">
+                <img src={Logo} alt="logo" />
+                <div id="pre-login-wording">
+                    <h1>Shut Up And Dance</h1>
+                    <h4>For the love of music</h4>
+                </div>
+            </div>
+            <div id="pre-login-main">
+                <h2>Log In</h2>
+                <form id="login-form" onSubmit={handleLoginSubmit}>
+                    <label>
+                        Email
+                        <input name="email" type="email" placeholder="josh@example.com" className="form-control login-element" onChange={updateEmail} required />
+                    </label>
+                    <label>
+                        Password
+                        <input name="password" type="password" className="form-control login-element" onChange={updatePassword} required />
+                    </label>
+                    <button id="login-button" type="submit" className="coolBeans">
+                        Log In
+                    </button>
+                </form>
+                <p id="pre-login-prompt">Don't have an account? <Link to="/signup">Sign up</Link></p>
+            </div>
         </div>
     );
 };
