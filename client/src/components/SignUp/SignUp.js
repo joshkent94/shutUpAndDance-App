@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { submitSignUp } from '../../utils/state/userSlice';
 import './SignUp.css';
 import Logo from '../../assets/inverted-logo.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { passwordCheck } from '../../utils/helperFunctions/passwordCheck';
 import { showMessage } from '../../utils/helperFunctions/showMessage';
 
@@ -14,6 +14,7 @@ export default function SignUp() {
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
     const [validatedPassword, setValidatedPassword] = useState(null);
+    const navigate = useNavigate();
 
     const updateFirstName = e => {
         e.preventDefault();
@@ -49,7 +50,13 @@ export default function SignUp() {
                     lastName,
                     email,
                     password
-                }));
+                }))
+                    .unwrap()
+                    .then(() => {
+                        if (document.cookie) {
+                            navigate("/dashboard");
+                        };
+                    });
             } else {
                 showMessage('Password must meet criteria');
             };

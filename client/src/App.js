@@ -1,9 +1,7 @@
 import {
   BrowserRouter as Router,
   Route,
-  Redirect,
-  Switch,
-  useRouteMatch
+  Routes
 } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,6 +16,7 @@ import Account from "./components/Account/Account";
 import NewThread from "./components/NewThread/NewThread";
 import ThreadExpanded from "./components/ThreadExpanded/ThreadExpanded";
 import Forum from "./components/Forum/Forum";
+import AuthCheck from "./components/AuthCheck/AuthCheck";
 import './App.css';
 
 export default function App() {
@@ -33,7 +32,7 @@ export default function App() {
 
   // initialise Pendo if logged in
   useEffect(() => {
-    if (userEmail !== '') {
+    if (document.cookie) {
       window.pendo.initialize({
         disableCookies: true,
         visitor: {
@@ -54,65 +53,86 @@ export default function App() {
 
   // get Spotify access token if logged in
   useEffect(() => {
-    if (userEmail !== '') {
+    if (document.cookie) {
       dispatch(getAccessToken());
     };
   }, [userEmail, dispatch]);
 
   return (
     <Router>
+      <Routes>
+        <Route path="/signup"
+          element={
+            <SignUp />
+          }
+        />
 
-      {userFirstName && <Redirect to="/dashboard" />}
-      {!userFirstName && <Redirect to="/login" />}
+        <Route path="/login"
+          element={
+            <Login />
+          }
+        />
 
-      <Switch>
-        <Route path="/signup">
-          <SignUp />
-        </Route>
+        <Route path="/dashboard"
+          element={
+            <AuthCheck>
+              <Navbar />
+              <Dashboard />
+            </AuthCheck>
+          }
+        />
 
-        <Route path="/login">
-          <Login />
-        </Route>
-      
-        <Route path="/dashboard">
-          <Navbar />
-          <Dashboard />
-        </Route>
-      
-        <Route path="/suggestions">
-          <Navbar />
-          <Suggestions />
-        </Route>
-      
-        <Route path="/forum">
-          <Navbar />
-          <ForumRoutes />
-        </Route>
-      
-        <Route path="/account">
-          <Navbar />
-          <Account />
-        </Route>
-      </Switch>
+        <Route path="/suggestions"
+          element={
+            <AuthCheck>
+              <Navbar />
+              <Suggestions />
+            </AuthCheck>
+          }
+        />
 
+        <Route path="/forum/*"
+          element={
+            <AuthCheck>
+              <Navbar />
+              <ForumRoutes />
+            </AuthCheck>
+          }
+        />
+
+        <Route path="/account"
+          element={
+            <AuthCheck>
+              <Navbar />
+              <Account />
+            </AuthCheck>
+          }
+        />
+      </Routes>
     </Router>
   );
 };
 
 function ForumRoutes() {
-  const match = useRouteMatch();
-  
   return (
-    <Switch>
-      <Route path={`${match.path}/new`}>
-        <NewThread />
-      </Route>
-      <Route path={`${match.path}/:threadId`}>
-        <ThreadExpanded />
-      </Route>
-      <Route path={`${match.path}`}>
-        <Forum />
-      </Route>
-    </Switch>
+    <Routes>
+      <Route path="new"
+        element={
+          <NewThread />
+        }
+      />
+      
+      <Route path=":threadId"
+        element={
+          <ThreadExpanded />
+        }
+      />
+      
+      <Route path=""
+        element={
+          <Forum />
+        }
+      />
+    </Routes>
   );
 };

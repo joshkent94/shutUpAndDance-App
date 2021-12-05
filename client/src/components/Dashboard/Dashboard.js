@@ -15,7 +15,7 @@ export default function Dashboard() {
         if (mostLiked.length === 0) {
             dispatch(getMostLikedThreads());
         };
-    });
+    }, [dispatch, mostLiked.length]);
 
     return (
         <div id="dashboard">

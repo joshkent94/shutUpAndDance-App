@@ -3,12 +3,14 @@ import { useDispatch } from 'react-redux';
 import { requestLogin } from '../../utils/state/userSlice';
 import Logo from '../../assets/inverted-logo.png';
 import './Login.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 export default function Login() {
     const dispatch = useDispatch();
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
+    const navigate = useNavigate();
+    const { state } = useLocation();
 
     const updateEmail = e => {
         e.preventDefault();
@@ -25,7 +27,13 @@ export default function Login() {
         dispatch(requestLogin({
             email: email,
             password: password
-        }));
+        }))
+            .unwrap()
+            .then(() => {
+                if (document.cookie) {
+                    navigate(state.path || "/dashboard");
+                };
+            });
     };
 
     return (
