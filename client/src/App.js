@@ -1,7 +1,8 @@
 import {
   BrowserRouter as Router,
   Route,
-  Routes
+  Routes,
+  Navigate
 } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -61,6 +62,12 @@ export default function App() {
   return (
     <Router>
       <Routes>
+        <Route path="*"
+          element={
+            <Navigate to="/dashboard" replace />
+          }
+        />
+
         <Route path="/signup"
           element={
             <SignUp />

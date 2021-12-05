@@ -31,7 +31,11 @@ export default function Login() {
             .unwrap()
             .then(() => {
                 if (document.cookie) {
-                    navigate(state.path || "/dashboard");
+                    if (state) {
+                        navigate(state.path || "/dashboard");
+                    } else {
+                        navigate("/dashboard");
+                    };
                 };
             });
     };
