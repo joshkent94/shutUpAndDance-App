@@ -1,8 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useRef } from 'react';
-import { selectSuggestions, getSuggestions, selectAccessToken } from "../../utils/state/suggestionsSlice";
+import { selectSuggestions, getSuggestions, selectAccessToken } from "../../../utils/state/suggestionsSlice";
 import Suggestion from "../Suggestion/Suggestion";
-import { selectFirstName, selectGenres } from "../../utils/state/userSlice";
+import { selectFirstName, selectGenres } from "../../../utils/state/userSlice";
 
 export default function SongSuggestions() {
     const dispatch = useDispatch();

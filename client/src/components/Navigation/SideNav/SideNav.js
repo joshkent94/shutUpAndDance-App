@@ -1,10 +1,10 @@
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { resetSuggestionsDetails } from '../../utils/state/suggestionsSlice';
-import { logout } from '../../utils/state/userSlice';
-import logo from '../../assets/inverted-logo.png';
-import './Navbar.css';
-import { resetForumDetails } from '../../utils/state/forumSlice';
+import { resetSuggestionsDetails } from '../../../utils/state/suggestionsSlice';
+import { logout } from '../../../utils/state/userSlice';
+import logo from '../../../assets/inverted-logo.png';
+import './SideNav.css';
+import { resetForumDetails } from '../../../utils/state/forumSlice';
 
 export default function Navbar() {
     const dispatch = useDispatch();

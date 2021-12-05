@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { requestLogin } from '../../utils/state/userSlice';
-import Logo from '../../assets/inverted-logo.png';
-import './Login.css';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { requestLogin } from '../../../utils/state/userSlice';
+import Logo from '../../../assets/inverted-logo.png';
+import './Login.css';
 
 export default function Login() {
     const dispatch = useDispatch();

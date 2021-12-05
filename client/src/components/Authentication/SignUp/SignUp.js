@@ -1,11 +1,11 @@
-import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { submitSignUp } from '../../utils/state/userSlice';
-import './SignUp.css';
-import Logo from '../../assets/inverted-logo.png';
+import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { passwordCheck } from '../../utils/helperFunctions/passwordCheck';
-import { showMessage } from '../../utils/helperFunctions/showMessage';
+import { submitSignUp } from '../../../utils/state/userSlice';
+import { passwordCheck } from '../../../utils/helperFunctions/passwordCheck';
+import { showMessage } from '../../../utils/helperFunctions/showMessage';
+import Logo from '../../../assets/inverted-logo.png';
+import './SignUp.css';
 
 export default function SignUp() {
     const dispatch = useDispatch();
@@ -41,7 +41,7 @@ export default function SignUp() {
         setValidatedPassword(e.target.value);
     };
 
-    const handleSignUpRequest = async (e) => {
+    const handleSignUpRequest = e => {
         e.preventDefault();
         if (password === validatedPassword) {
             if (passwordCheck(password)) {

@@ -93,16 +93,3 @@ body {
 .coolBeans:hover > a {
   color: var(--primary-colour);
 }
-
-.heading {
-  padding: 3em 10em;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: var(--tertiary-colour);
-  min-height: 12vh;
-  max-height: 12vh;
-  width: 100%;
-  position: sticky;
-  top: 0;
-}

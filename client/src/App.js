@@ -8,16 +8,16 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectEmail, selectFirstName, selectLastName } from "./utils/state/userSlice";
 import { getAccessToken } from "./utils/state/suggestionsSlice";
-import SignUp from "./components/SignUp/SignUp";
-import Login from "./components/Login/Login";
-import Navbar from "./components/Navbar/Navbar";
+import SignUp from "./components/Authentication/SignUp/SignUp";
+import Login from "./components/Authentication/Login/Login";
+import SideNav from "./components/Navigation/SideNav/SideNav";
 import Dashboard from "./components/Dashboard/Dashboard";
-import Suggestions from "./components/Suggestions/Suggestions";
+import Suggestions from "./components/SuggestionsFeature/Suggestions/Suggestions";
 import Account from "./components/Account/Account";
-import NewThread from "./components/NewThread/NewThread";
-import ThreadExpanded from "./components/ThreadExpanded/ThreadExpanded";
-import Forum from "./components/Forum/Forum";
-import AuthCheck from "./components/AuthCheck/AuthCheck";
+import NewThread from "./components/ForumFeature/NewThread/NewThread";
+import ThreadExpanded from "./components/ForumFeature/ThreadExpanded/ThreadExpanded";
+import Forum from "./components/ForumFeature/Forum/Forum";
+import AuthCheck from "./components/Authentication/AuthCheck/AuthCheck";
 import './App.css';
 
 export default function App() {
@@ -83,7 +83,7 @@ export default function App() {
         <Route path="/dashboard"
           element={
             <AuthCheck>
-              <Navbar />
+              <SideNav />
               <Dashboard />
             </AuthCheck>
           }
@@ -92,7 +92,7 @@ export default function App() {
         <Route path="/suggestions"
           element={
             <AuthCheck>
-              <Navbar />
+              <SideNav />
               <Suggestions />
             </AuthCheck>
           }
@@ -101,7 +101,7 @@ export default function App() {
         <Route path="/forum/*"
           element={
             <AuthCheck>
-              <Navbar />
+              <SideNav />
               <ForumRoutes />
             </AuthCheck>
           }
@@ -110,7 +110,7 @@ export default function App() {
         <Route path="/account"
           element={
             <AuthCheck>
-              <Navbar />
+              <SideNav />
               <Account />
             </AuthCheck>
           }

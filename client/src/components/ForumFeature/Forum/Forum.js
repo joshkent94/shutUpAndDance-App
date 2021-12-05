@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
-import { selectFirstName } from '../../utils/state/userSlice';
-import { getMostLikedThreads, searchThreads, selectMostLiked, selectThreads } from '../../utils/state/forumSlice';
+import { selectFirstName } from '../../../utils/state/userSlice';
+import { getMostLikedThreads, searchThreads, selectMostLiked, selectThreads } from '../../../utils/state/forumSlice';
 import ThreadOverview from '../ThreadOverview/ThreadOverview';
 import './Forum.css';
 

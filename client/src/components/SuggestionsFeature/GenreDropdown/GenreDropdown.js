@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
 import GenreOption from '../GenreOption/GenreOption';
-import { hideCheckboxes, showCheckboxes } from '../../utils/helperFunctions/toggleCheckboxes';
-import { selectAvailableGenres } from '../../utils/state/suggestionsSlice';
-import { selectGenres, updateGenres } from '../../utils/state/userSlice';
+import { hideCheckboxes, showCheckboxes } from '../../../utils/helperFunctions/toggleCheckboxes';
+import { selectAvailableGenres } from '../../../utils/state/suggestionsSlice';
+import { selectGenres, updateGenres } from '../../../utils/state/userSlice';
 import './GenreDropdown.css';
 
 export default function GenreDropdown() {

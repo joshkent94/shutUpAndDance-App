@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import GenreDropdown from '../GenreDropdown/GenreDropdown';
-import { selectFirstName, selectGenres } from "../../utils/state/userSlice";
-import { getAvailableGenres, getSuggestions, selectAccessToken, selectAvailableGenres } from "../../utils/state/suggestionsSlice";
+import { selectFirstName, selectGenres } from "../../../utils/state/userSlice";
+import { getAvailableGenres, getSuggestions, selectAccessToken, selectAvailableGenres } from "../../../utils/state/suggestionsSlice";
 import SongSuggestions from "../SongSuggestions/SongSuggestions";
 import './Suggestions.css';
 

@@ -6,7 +6,7 @@
 
 #pre-login-branding {
   width: 25%;
-  background: url("../../assets/rapper-cropped.jpg") no-repeat scroll center;
+  background: url("../../../assets/rapper-cropped.jpg") no-repeat scroll center;
   background-size: cover;
   color: var(--secondary-colour);
   display: flex;

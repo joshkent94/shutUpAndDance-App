@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { createThread } from '../../utils/state/forumSlice';
-import { selectFirstName } from '../../utils/state/userSlice';
-import { showMessage } from "../../utils/helperFunctions/showMessage";
+import { createThread } from '../../../utils/state/forumSlice';
+import { selectFirstName } from '../../../utils/state/userSlice';
+import { showMessage } from "../../../utils/helperFunctions/showMessage";
 import './NewThread.css';
 
 export default function NewThread() {

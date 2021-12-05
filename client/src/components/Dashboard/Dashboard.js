@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMostLikedThreads, selectMostLiked } from '../../utils/state/forumSlice';
 import { selectFirstName } from '../../utils/state/userSlice';
-import SongSuggestions from '../SongSuggestions/SongSuggestions';
-import ThreadOverview from '../ThreadOverview/ThreadOverview';
+import SongSuggestions from '../SuggestionsFeature/SongSuggestions/SongSuggestions';
+import ThreadOverview from '../ForumFeature/ThreadOverview/ThreadOverview';
 import './Dashboard.css';
 
 export default function Dashboard() {

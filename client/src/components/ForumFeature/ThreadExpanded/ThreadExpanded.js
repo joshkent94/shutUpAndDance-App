@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { selectFirstName, selectUserId } from "../../utils/state/userSlice";
+import { selectFirstName, selectUserId } from "../../../utils/state/userSlice";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { addComment, getComments, getThread, likeThreadToggle, selectComments, selectThreadInfo } from "../../utils/state/forumSlice";
+import { addComment, getComments, getThread, likeThreadToggle, selectComments, selectThreadInfo } from "../../../utils/state/forumSlice";
 import './ThreadExpanded.css';
 
 export default function ThreadExpanded() {

@@ -5,10 +5,10 @@ export const submitSignUp = createAsyncThunk(
     'user/submitSignUp',
     async ({ firstName, lastName, email, password }) => {
         const data = {
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            password: password
+            firstName,
+            lastName,
+            email,
+            password
         };
         const response = await fetch(`/signup`, {
             method: "POST",
@@ -34,8 +34,8 @@ export const requestLogin = createAsyncThunk(
     'user/requestLogin',
     async ({ email, password }) => {
         const data = {
-            email: email,
-            password: password
+            email,
+            password
         };
         const response = await fetch(`/authenticate`, {
             method: "POST",
