@@ -42,16 +42,19 @@ export default function SignUp() {
 
     const handleSignUpRequest = async (e) => {
         e.preventDefault();
-        if (passwordCheck(password)) {
-            dispatch(submitSignUp({
-                firstName,
-                lastName,
-                email,
-                password,
-                validatedPassword
-            }));
+        if (password === validatedPassword) {
+            if (passwordCheck(password)) {
+                dispatch(submitSignUp({
+                    firstName,
+                    lastName,
+                    email,
+                    password
+                }));
+            } else {
+                showMessage('Password must meet criteria');
+            };
         } else {
-            showMessage('Password must meet criteria');
+            showMessage(`Passwords don't match`);
         };
     };
 

@@ -3,33 +3,28 @@ import { showMessage } from "../helperFunctions/showMessage";
 
 export const submitSignUp = createAsyncThunk(
     'user/submitSignUp',
-    async ({ firstName, lastName, email, password, validatedPassword }) => {
-        if (password !== validatedPassword) {
-            showMessage(`Passwords don't match`);
-            return;
-        } else {
-            const data = {
-                firstName: firstName,
-                lastName: lastName,
-                email: email,
-                password: password
-            };
-            const response = await fetch(`/signup`, {
-                method: "POST",
-                mode: "cors",
-                credentials: 'include',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-            });
-            const jsonResponse = await response.json();
-            showMessage(jsonResponse.message);
-            if (response.ok) {
-                return {
-                    ...data,
-                    id: jsonResponse.id
-                };
+    async ({ firstName, lastName, email, password }) => {
+        const data = {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: password
+        };
+        const response = await fetch(`/signup`, {
+            method: "POST",
+            mode: "cors",
+            credentials: 'include',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+        const jsonResponse = await response.json();
+        showMessage(jsonResponse.message);
+        if (response.ok) {
+            return {
+                ...data,
+                id: jsonResponse.id
             };
         };
     }
