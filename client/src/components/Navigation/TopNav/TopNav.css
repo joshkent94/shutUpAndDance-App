@@ -1,0 +1,89 @@
+#top-nav {
+  width: 100vw;
+  display: flex;
+}
+
+#side-nav-toggle {
+  height: 2.3rem;
+}
+
+.navbar > .container {
+  margin: 0;
+  padding: 0 1rem !important;
+  max-width: unset;
+}
+
+.top-nav-icon {
+  font-size: 1.5rem;
+  text-align: center;
+  line-height: 0.5rem;
+}
+
+.navbar-brand {
+  margin: 0;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+}
+
+.nav-item:hover {
+  cursor: pointer;
+  color: var(--fourth-colour);
+}
+
+.nav-item:first-of-type {
+  padding: 0 1rem;
+  border-right: 1px solid var(--third-colour);
+}
+
+.nav-item > p {
+  padding-left: 0.5rem;
+  margin: 0;
+}
+
+#account-button {
+  border: none;
+  background: none;
+  padding: 0;
+  color: var(--primary-colour);
+}
+
+#account-button:hover {
+  color: var(--fourth-colour);
+}
+
+.dropdown-item:hover {
+  background-color: var(--third-colour);
+}
+
+@media all and (min-width: 992px) {
+  .navbar .dropdown-menu-end {
+    right: 0;
+    left: auto;
+  }
+
+  .navbar .nav-item .dropdown-menu {
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    margin-top: 0.5rem;
+  }
+
+  .navbar .dropdown-menu.fade-down {
+    top: 80%;
+    transform: rotateX(-75deg);
+    transform-origin: 0% 0%;
+  }
+
+  .navbar .nav-item:hover .dropdown-menu {
+    transition: 0.3s;
+    opacity: 1;
+    visibility: visible;
+    top: 100%;
+    transform: rotateX(0deg);
+  }
+}

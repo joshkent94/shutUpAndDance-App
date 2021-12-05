@@ -10,7 +10,6 @@ import { selectEmail, selectFirstName, selectLastName } from "./utils/state/user
 import { getAccessToken } from "./utils/state/suggestionsSlice";
 import SignUp from "./components/Authentication/SignUp/SignUp";
 import Login from "./components/Authentication/Login/Login";
-import SideNav from "./components/Navigation/SideNav/SideNav";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Suggestions from "./components/SuggestionsFeature/Suggestions/Suggestions";
 import Account from "./components/Account/Account";
@@ -18,6 +17,7 @@ import NewThread from "./components/ForumFeature/NewThread/NewThread";
 import ThreadExpanded from "./components/ForumFeature/ThreadExpanded/ThreadExpanded";
 import Forum from "./components/ForumFeature/Forum/Forum";
 import AuthCheck from "./components/Authentication/AuthCheck/AuthCheck";
+import TopNav from "./components/Navigation/TopNav/TopNav";
 import './App.css';
 
 export default function App() {
@@ -83,7 +83,7 @@ export default function App() {
         <Route path="/dashboard"
           element={
             <AuthCheck>
-              <SideNav />
+              <TopNav />
               <Dashboard />
             </AuthCheck>
           }
@@ -92,7 +92,7 @@ export default function App() {
         <Route path="/suggestions"
           element={
             <AuthCheck>
-              <SideNav />
+              <TopNav />
               <Suggestions />
             </AuthCheck>
           }
@@ -101,7 +101,7 @@ export default function App() {
         <Route path="/forum/*"
           element={
             <AuthCheck>
-              <SideNav />
+              <TopNav />
               <ForumRoutes />
             </AuthCheck>
           }
@@ -110,7 +110,7 @@ export default function App() {
         <Route path="/account"
           element={
             <AuthCheck>
-              <SideNav />
+              <TopNav />
               <Account />
             </AuthCheck>
           }
