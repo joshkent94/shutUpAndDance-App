@@ -1,14 +1,12 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMostLikedThreads, selectMostLiked } from '../../utils/state/forumSlice';
-import { selectFirstName } from '../../utils/state/userSlice';
 import SongSuggestions from '../SuggestionsFeature/SongSuggestions/SongSuggestions';
 import ThreadOverview from '../ForumFeature/ThreadOverview/ThreadOverview';
 import './Dashboard.css';
 
 export default function Dashboard() {
     const dispatch = useDispatch();
-    const firstName = useSelector(selectFirstName);
     const mostLiked = useSelector(selectMostLiked);
 
     useEffect(() => {
@@ -18,10 +16,7 @@ export default function Dashboard() {
     }, [dispatch, mostLiked.length]);
 
     return (
-        <div id="dashboard">
-            <div className="heading">
-                <h3>{firstName}'s Dashboard</h3>
-            </div>
+        <div id="dashboard" className='main'>
             <div className="content">
                 <div className="dashboard-widget">
                     <h4>We suggest you listen to:</h4>

@@ -52,13 +52,10 @@ export default function Forum() {
     };
 
     return (
-        <div id="forum">
-            <div className="heading">
-                <h3>{firstName}'s Forum</h3>
-                <form onSubmit={handleFormSubmit}>
-                    <input className="form-control" id="search" type="search" placeholder="Search threads..." onChange={handleSearchTermChange}></input>
-                </form>
-            </div>
+        <div id="forum" className='main'>
+            <form onSubmit={handleFormSubmit}>
+                <input className="form-control" id="search" type="search" placeholder="Search threads..." onChange={handleSearchTermChange}></input>
+            </form>
 
             <button className="account-submit btn" id="new-thread-button">
                 <Link to="/forum/new">Create Thread</Link>

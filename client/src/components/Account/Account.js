@@ -61,10 +61,7 @@ export default function Account() {
     };
 
     return (
-        <div id="account">
-            <div className="heading">
-                <h3>{firstName}'s Account</h3>
-            </div>
+        <div id="account" className='main'>
             <div className="account-content">
                 <form id="account-form" onSubmit={handleDetailsSave}>
                     <div className="account-form-element">

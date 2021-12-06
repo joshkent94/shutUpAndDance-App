@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { selectFirstName, selectUserId } from "../../../utils/state/userSlice";
+import { selectUserId } from "../../../utils/state/userSlice";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { addComment, getComments, getThread, likeThreadToggle, selectComments, selectThreadInfo } from "../../../utils/state/forumSlice";
@@ -8,7 +8,6 @@ import './ThreadExpanded.css';
 export default function ThreadExpanded() {
     const dispatch = useDispatch();
     const userId = useSelector(selectUserId);
-    const firstName = useSelector(selectFirstName);
     const threadInfo = useSelector(selectThreadInfo);
     const comments = useSelector(selectComments);
     const { threadId } = useParams();
@@ -51,11 +50,7 @@ export default function ThreadExpanded() {
     };
 
     return (
-        <div id="forum">
-            <div className="heading">
-                <h3>{firstName}'s Forum</h3>
-            </div>
-
+        <div id="forum" className='main'>
             <div id="thread-heading">
                 <div id="thread-info">
                     <h4>{threadInfo.title}</h4>

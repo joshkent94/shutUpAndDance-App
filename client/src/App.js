@@ -61,6 +61,8 @@ export default function App() {
 
   return (
     <Router>
+      <TopNav />
+
       <Routes>
         <Route path="*"
           element={
@@ -83,7 +85,6 @@ export default function App() {
         <Route path="/dashboard"
           element={
             <AuthCheck>
-              <TopNav />
               <Dashboard />
             </AuthCheck>
           }
@@ -92,7 +93,6 @@ export default function App() {
         <Route path="/suggestions"
           element={
             <AuthCheck>
-              <TopNav />
               <Suggestions />
             </AuthCheck>
           }
@@ -101,7 +101,6 @@ export default function App() {
         <Route path="/forum/*"
           element={
             <AuthCheck>
-              <TopNav />
               <ForumRoutes />
             </AuthCheck>
           }
@@ -110,7 +109,6 @@ export default function App() {
         <Route path="/account"
           element={
             <AuthCheck>
-              <TopNav />
               <Account />
             </AuthCheck>
           }

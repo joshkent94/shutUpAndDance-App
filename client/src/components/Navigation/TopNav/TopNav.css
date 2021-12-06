@@ -1,15 +1,22 @@
 #top-nav {
   width: 100vw;
   display: flex;
+  z-index: 2000;
+  background: var(--secondary-colour);
+  border-bottom: 1px solid var(--fifth-colour);
 }
 
 #side-nav-toggle {
   height: 2.3rem;
 }
 
+#side-nav-toggle {
+  cursor: pointer;
+}
+
 .navbar > .container {
   margin: 0;
-  padding: 0 1rem !important;
+  padding: 0 1.3rem !important;
   max-width: unset;
 }
 
@@ -34,7 +41,7 @@
   color: var(--fourth-colour);
 }
 
-.nav-item:first-of-type {
+#help {
   padding: 0 1rem;
   border-right: 1px solid var(--third-colour);
 }
@@ -55,8 +62,13 @@
   color: var(--fourth-colour);
 }
 
+.dropdown-item {
+  color: var(--primary-colour);
+}
+
 .dropdown-item:hover {
-  background-color: var(--third-colour);
+  background-color: var(--fifth-colour);
+  color: var(--primary-colour);
 }
 
 @media all and (min-width: 992px) {
