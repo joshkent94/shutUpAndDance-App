@@ -12,6 +12,7 @@ body,
 
 body {
   font-family: "Quicksand", sans-serif;
+  font-weight: 600;
 }
 
 #root {
@@ -54,6 +55,7 @@ body {
   width: 100%;
   transition: width 0.3s ease-in-out;
   padding: 4.925rem 1rem 1rem 1rem;
+  background-color: var(--fifth-colour);
 }
 
 .side-nav-active {

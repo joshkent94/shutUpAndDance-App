@@ -4,3 +4,92 @@
   border: none;
   background: var(--fifth-colour);
 }
+
+.offcanvas-header {
+  padding: 1rem 0rem;
+  margin: 0 1.5rem;
+  border-bottom: 1px solid var(--third-colour);
+}
+
+.offcanvas-title {
+  font-weight: 600;
+}
+
+.offcanvas-body {
+  padding: 1rem 1.5rem;
+}
+
+#side-nav {
+  flex-direction: column;
+}
+
+#side-nav > .nav-item {
+  padding: 0.2rem 0;
+  cursor: unset;
+}
+
+.nav-link {
+  color: var(--primary-colour);
+  padding: 0.5rem 0;
+}
+
+.nav-link:hover {
+  color: var(--fourth-colour);
+}
+
+.accordion-item,
+.accordion-button {
+  background: unset;
+  width: fit-content;
+}
+
+.accordion-button {
+  padding: 0.5rem 0;
+  color: var(--primary-colour);
+  font-weight: 600;
+}
+
+.accordion-button:focus {
+  border: unset;
+  box-shadow: unset;
+}
+
+.accordion-button:hover {
+  color: var(--fourth-colour) !important;
+}
+
+.accordion-button:not(.collapsed) {
+  color: var(--primary-colour);
+  background: unset;
+  box-shadow: unset;
+}
+
+.accordion-button::after {
+  all: unset;
+}
+
+.accordion-button:not(.collapsed)::after {
+  all: unset;
+}
+
+.accordion-button > p {
+  margin: 0;
+  padding-right: 0.5rem;
+}
+
+.accordion-button > .bi-caret-down-fill {
+  font-size: 0.7rem;
+  transition: transform 0.3s linear;
+}
+
+.accordion-button > .bi-caret-down-fill::before {
+  vertical-align: -0.16rem;
+}
+
+.accordion-body {
+  padding: 0.5rem 1.25rem;
+}
+
+.rotate {
+  transform: rotate(180deg);
+}

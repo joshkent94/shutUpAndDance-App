@@ -18,6 +18,7 @@ import ThreadExpanded from "./components/ForumFeature/ThreadExpanded/ThreadExpan
 import Forum from "./components/ForumFeature/Forum/Forum";
 import AuthCheck from "./components/Authentication/AuthCheck/AuthCheck";
 import TopNav from "./components/Navigation/TopNav/TopNav";
+import Gigs from './components/GigsFeature/Gigs';
 import './App.css';
 
 export default function App() {
@@ -97,6 +98,17 @@ export default function App() {
               <TopNav />
               <div className="main">
                 <Suggestions />
+              </div>
+            </AuthCheck>
+          }
+        />
+
+        <Route path="/gigs"
+          element={
+            <AuthCheck>
+              <TopNav />
+              <div className="main">
+                <Gigs />
               </div>
             </AuthCheck>
           }
