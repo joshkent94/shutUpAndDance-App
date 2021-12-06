@@ -52,7 +52,7 @@ export default function Forum() {
     };
 
     return (
-        <div id="forum" className='main'>
+        <div id="forum">
             <form onSubmit={handleFormSubmit}>
                 <input className="form-control" id="search" type="search" placeholder="Search threads..." onChange={handleSearchTermChange}></input>
             </form>

@@ -50,7 +50,7 @@ export default function ThreadExpanded() {
     };
 
     return (
-        <div id="forum" className='main'>
+        <div id="forum">
             <div id="thread-heading">
                 <div id="thread-info">
                     <h4>{threadInfo.title}</h4>

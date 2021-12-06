@@ -4,6 +4,12 @@
   box-sizing: border-box;
 }
 
+html,
+body,
+#root {
+  width: 100vw;
+}
+
 body {
   font-family: "Quicksand", sans-serif;
 }
@@ -12,7 +18,6 @@ body {
   display: flex;
   justify-content: flex-end;
   min-height: 100vh;
-  width: 100vw;
   align-items: stretch;
   flex: 1;
 }
@@ -27,7 +32,7 @@ body {
 
 #message {
   position: absolute;
-  top: 4vh;
+  bottom: 50px;
   right: 50px;
   color: var(--secondary-colour);
   background-color: var(--primary-colour);
@@ -37,7 +42,7 @@ body {
 
 #message-inverted {
   position: absolute;
-  top: 50px;
+  bottom: 50px;
   right: 50px;
   color: var(--primary-colour);
   background-color: var(--secondary-colour);
@@ -46,12 +51,13 @@ body {
 }
 
 .main {
+  width: 100%;
   transition: width 0.3s ease-in-out;
-  margin-top: 4.5rem;
+  padding: 4.925rem 1rem 1rem 1rem;
 }
 
 .side-nav-active {
-  width: 85% !important;
+  width: 85vw !important;
 }
 
 .coolBeans {

@@ -61,7 +61,7 @@ export default function Account() {
     };
 
     return (
-        <div id="account" className='main'>
+        <div id="account">
             <div className="account-content">
                 <form id="account-form" onSubmit={handleDetailsSave}>
                     <div className="account-form-element">

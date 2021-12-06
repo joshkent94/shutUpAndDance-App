@@ -42,7 +42,7 @@ export default function NewThread() {
     };
 
     return (
-        <div id="forum" className='main'>
+        <div id="forum">
             <form onSubmit={handleNewThread} id="new-thread">
                 <div className="account-form-element thread-block">
                     <input className="account-input form-control thread-input" type="text" id="thread-title" placeholder="Title..." onChange={handleTitleChange} />

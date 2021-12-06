@@ -17,7 +17,9 @@ export default function TopNav() {
     useEffect(() => {
         setShow(false);
         const currentPage = document.getElementsByClassName('main')[0];
-        currentPage.classList.remove('side-nav-active');
+        if (currentPage) {
+            currentPage.classList.remove('side-nav-active');
+        };
     }, [location]);
 
     const toggleShow = () => {

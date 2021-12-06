@@ -31,7 +31,7 @@ export default function Suggestions() {
     };
 
     return (
-        <div id="suggestions" className='main'>
+        <div id="suggestions">
             <GenreDropdown />
             <button className="btn account-submit" id="re-do" onClick={handleRedoClick}>
                 Get Suggestions

@@ -16,13 +16,13 @@ export default function Dashboard() {
     }, [dispatch, mostLiked.length]);
 
     return (
-        <div id="dashboard" className='main'>
+        <div id="dashboard">
             <div className="content">
-                <div className="dashboard-widget">
+                <div>
                     <h4>We suggest you listen to:</h4>
                     <SongSuggestions />
                 </div>
-                <div className="dashboard-widget">
+                <div>
                     <h4>Most liked threads are:</h4>
                     {mostLiked.map(thread => {
                         return <ThreadOverview key={thread.id} thread={thread} />

@@ -61,8 +61,6 @@ export default function App() {
 
   return (
     <Router>
-      <TopNav />
-
       <Routes>
         <Route path="*"
           element={
@@ -85,7 +83,10 @@ export default function App() {
         <Route path="/dashboard"
           element={
             <AuthCheck>
-              <Dashboard />
+              <TopNav />
+              <div className="main">
+                <Dashboard />
+              </div>
             </AuthCheck>
           }
         />
@@ -93,7 +94,10 @@ export default function App() {
         <Route path="/suggestions"
           element={
             <AuthCheck>
-              <Suggestions />
+              <TopNav />
+              <div className="main">
+                <Suggestions />
+              </div>
             </AuthCheck>
           }
         />
@@ -101,7 +105,10 @@ export default function App() {
         <Route path="/forum/*"
           element={
             <AuthCheck>
-              <ForumRoutes />
+              <TopNav />
+              <div className="main">
+                <ForumRoutes />
+              </div>
             </AuthCheck>
           }
         />
@@ -109,7 +116,10 @@ export default function App() {
         <Route path="/account"
           element={
             <AuthCheck>
-              <Account />
+              <TopNav />
+              <div className="main">
+                <Account />
+              </div>
             </AuthCheck>
           }
         />
