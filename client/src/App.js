@@ -77,7 +77,9 @@ export default function App() {
 
         <Route path="/login"
           element={
-            <Login />
+            <AuthCheck>
+              <Login />
+            </AuthCheck>
           }
         />
 
