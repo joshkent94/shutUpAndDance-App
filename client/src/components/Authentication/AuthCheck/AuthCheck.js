@@ -2,6 +2,7 @@ import { Navigate, useLocation } from "react-router-dom";
 
 export default function AuthCheck({ children }) {
     const location = useLocation();
+    console.log(location.pathname);
 
     let content;
     if (location.pathname === '/login') {
