@@ -43,7 +43,28 @@ export default function Account() {
 
     const handleDetailsSave = e => {
         e.preventDefault();
-        if(passwordCheck(newPassword)) {
+        if (newPassword !== '') {
+            if (passwordCheck(newPassword)) {
+                if (newPassword === confirmedPassword) {
+                    const details = {
+                        firstName: newFirstName,
+                        lastName: newLastName,
+                        email: newEmail,
+                        password: newPassword
+                    };
+                    dispatch(updateUserDetails(details))
+                        .unwrap()
+                        .then(() => {
+                            document.getElementById("password-input").value = '';
+                            document.getElementById("confirm-password-input").value = '';
+                        });
+                } else {
+                    showMessage("Passwords don't match");
+                };
+            } else {
+                showMessage("Password must meet criteria");
+            };
+        } else {
             if (newPassword === confirmedPassword) {
                 const details = {
                     firstName: newFirstName,
@@ -55,40 +76,49 @@ export default function Account() {
             } else {
                 showMessage("Passwords don't match");
             };
-        } else {
-            showMessage("Password must meet criteria");
-        };
+        }
     };
 
     return (
-        <div id="account">
-            <div className="account-content">
-                <form id="account-form" onSubmit={handleDetailsSave}>
-                    <div className="account-form-element">
-                        <label htmlFor="first-name">First Name:</label>
-                        <input className="account-input form-control" type="text" value={newFirstName} id="first-name" onChange={handleFirstNameChange} required></input>
-                    </div>
-                    <div className="account-form-element">
-                        <label htmlFor="last-name">Last Name:</label>
-                        <input className="account-input form-control" type="text" value={newLastName} id="last-name" onChange={handleLastNameChange} required></input>
-                    </div>
-                    <div className="account-form-element">
-                        <label htmlFor="email">Email Address:</label>
-                        <input className="account-input form-control" type="email" value={newEmail} id="email" onChange={handleEmailChange} required></input>
-                    </div>
-                    <div className="account-form-element">
-                        <label htmlFor="password">New Password:</label>
-                        <input className="account-input form-control" type="password" id="password" onChange={handlePasswordChange} autoComplete="new-password" placeholder="Optional"></input>
-                    </div>
-                    <div className="account-form-element">
-                        <label htmlFor="confirmed-password">Confirm Password:</label>
-                        <input className="account-input form-control" type="password" id="confirmed-password" onChange={handleConfirmedPasswordChange} placeholder="Optional"></input>
-                    </div>
+        <div className="page">
+            <div className="page-header">
+                <h5 className="page-header-h5">
+                    My Account
+                </h5>
+            </div>
+            <div className="page-content">
+                <div id="account-page" className="content-container">
+                    <h6 id="account-form-heading">
+                        Amend your account details below:
+                    </h6>
+                    <form id="account-form" onSubmit={handleDetailsSave}>
+                        <label className="form-element">
+                            First Name
+                            <input name="first name" type="text" value={newFirstName} className="form-control sign-up-element" onChange={handleFirstNameChange} required />
+                        </label>
+                        <label className="form-element">
+                            Last Name
+                            <input name="last name" type="text" value={newLastName} className="form-control sign-up-element" onChange={handleLastNameChange} required />
+                        </label>
+                        <label className="form-element">
+                            Email
+                            <input name="email" type="email" value={newEmail} className="form-control sign-up-element" onChange={handleEmailChange} required />
+                        </label>
+                        <label className="form-element">
+                            Reset Password
+                            <input name="password" type="password" id="password-input" className="form-control sign-up-element" placeholder="Optional" onChange={handlePasswordChange} autoComplete="new-password" />
+                            <p className="pre-login-prompt">1 upper, 1 lower, 1 special char, 1 number, min 8 chars</p>
+                        </label>
+                        <label className="form-element">
+                            Confirm New Password
+                            <input name="retype password" type="password" id="confirm-password-input" className="form-control sign-up-element" placeholder="Optional" onChange={handleConfirmedPasswordChange} />
+                        </label>
 
-                    <button className="account-submit btn" type="submit">
-                        Save
-                    </button>
-                </form>
+                        <button id="save-details-button" className="coolBeans" type="submit">
+                            Save
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     );

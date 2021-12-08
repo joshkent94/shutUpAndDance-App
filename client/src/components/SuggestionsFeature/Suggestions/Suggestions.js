@@ -31,12 +31,19 @@ export default function Suggestions() {
     };
 
     return (
-        <div id="suggestions">
-            <GenreDropdown />
-            <button className="btn account-submit" id="re-do" onClick={handleRedoClick}>
-                Get Suggestions
-            </button>
-            <SongSuggestions />
+        <div className="page">
+            <div className="page-header">
+                <h5 className="page-header-h5">
+                    Suggestions
+                </h5>
+                <GenreDropdown />
+            </div>
+            <div className="page-content">
+                <button className="btn account-submit" id="re-do" onClick={handleRedoClick}>
+                    Get Suggestions
+                </button>
+                <SongSuggestions />
+            </div>
         </div>
     );
 };

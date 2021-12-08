@@ -38,9 +38,9 @@ export default function GenreDropdown() {
     }, [dispatch, selectedGenres]);
 
     return (
-        <form id="search" onFocus={showCheckboxes} onBlur={hideCheckboxes}>
-            <div className="multiselect">
-                <input className="form-control" type="search" placeholder="Select genres... (max 5)" onChange={handleSearch}></input>
+        <form onFocus={showCheckboxes} onBlur={hideCheckboxes}>
+            <div id="multiselect">
+                <input className="form-control" id="genre-input" type="search" placeholder="Select genres... (max 5)" onChange={handleSearch}></input>
                 <div id="genres">
                     <div id="selected-genres">
                         <p className="dropdown-heading">Selected Genres</p>

@@ -17,7 +17,7 @@ export default function Dashboard() {
 
     return (
         <div id="dashboard">
-            <div className="content">
+            <div>
                 <div>
                     <h4>We suggest you listen to:</h4>
                     <SongSuggestions />

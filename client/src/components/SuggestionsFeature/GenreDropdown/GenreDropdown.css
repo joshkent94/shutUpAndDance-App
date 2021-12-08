@@ -1,4 +1,4 @@
-.multiselect {
+#multiselect {
   width: 250px;
 }
 
@@ -6,11 +6,12 @@
   display: none;
   position: absolute;
   width: inherit;
-  border: 1px var(--tertiary-colour) solid;
+  border: 1px solid var(--tertiary-colour);
   background-color: var(--secondary-colour);
   max-height: 300px;
   overflow-y: scroll;
   border-radius: 0.25rem;
+  z-index: 1000;
 }
 
 .dropdown-heading {

@@ -41,7 +41,7 @@ export const getSuggestions = createAsyncThunk(
             return [];
         } else {
             const queryString = genres.join();
-            const response = await fetch(`https://api.spotify.com/v1/recommendations?limit=5&seed_genres=${queryString}`, {
+            const response = await fetch(`https://api.spotify.com/v1/recommendations?limit=10&seed_genres=${queryString}`, {
                 headers: {
                     'Authorization': 'Bearer ' + accessToken
                 }

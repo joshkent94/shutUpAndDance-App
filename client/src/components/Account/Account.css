@@ -1,15 +1,7 @@
-#account {
-  width: 100%;
-  min-height: 100vh;
+#account-page {
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
-}
-
-.account-content {
-  margin: 2em;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   flex-grow: 1;
 }
 
@@ -17,56 +9,17 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 100%;
   align-items: center;
   flex-grow: 1;
 }
 
-.form-control:focus {
-  border-color: var(--primary-colour);
-  box-shadow: none;
+#account-form-heading {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin: 1.5rem 2rem 0.5rem 2rem;
 }
 
-.account-form-element {
-  display: flex;
-  margin: 1.5em;
-  width: 500px;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.account-input {
-  width: 300px;
-}
-
-.account-submit {
-  margin: 3em;
-  width: 150px;
-  color: var(--secondary-colour);
-  background-color: var(--primary-colour);
-}
-
-.account-submit:hover {
-  color: var(--secondary-colour);
-}
-
-.account-submit:focus {
-  box-shadow: none;
-}
-
-.account-input:-webkit-autofill,
-.account-input:-webkit-autofill:hover {
-  border: 1px solid var(--primary-colour);
-  -webkit-text-fill-color: var(--primary-colour);
-  -webkit-box-shadow: 0 0 0px 1000px inset;
-  box-shadow: var(--primary-colour);
-  transition: background-color 5000s ease-in-out 0s;
-}
-
-.account-input:-webkit-autofill:focus {
-  border: 1px solid var(--primary-colour);
-  -webkit-text-fill-color: var(--primary-colour);
-  -webkit-box-shadow: 0 0 0px 1000px inset;
-  box-shadow: var(--primary-colour);
-  transition: background-color 5000s ease-in-out 0s;
+#save-details-button {
+  margin-top: 0.5rem;
+  width: 10rem;
 }
