@@ -11,7 +11,7 @@
 }
 
 .form-control:focus {
-  border-color: var(--primary-colour);
+  border-color: var(--primary-colour) !important;
   box-shadow: none;
 }
 

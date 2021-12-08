@@ -2,26 +2,41 @@
   width: 250px;
 }
 
+#genre-input {
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--third-colour);
+  color: var(--primary-colour);
+}
+
+#genre-input::placeholder {
+  color: var(--third-colour);
+}
+
 #genres {
   display: none;
   position: absolute;
   width: inherit;
-  border: 1px solid var(--tertiary-colour);
+  border: 1px solid var(--third-colour);
   background-color: var(--secondary-colour);
   max-height: 300px;
   overflow-y: scroll;
   border-radius: 0.25rem;
   z-index: 1000;
+  font-weight: 400;
+  padding: 0.6rem;
 }
 
 .dropdown-heading {
-  font-weight: 900;
-  margin-bottom: 0.3em;
-  text-indent: 0.3em;
-  text-decoration: underline;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  text-indent: 0.3rem;
 }
 
 #selected-genres {
-  margin-bottom: 10px;
-  width: inherit;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--third-colour);
+}
+
+#genre-options {
+  padding-top: 0.5rem;
 }

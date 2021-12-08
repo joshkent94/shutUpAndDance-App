@@ -1,19 +1,38 @@
 .genre-label {
-  height: 1.8em;
+  height: 1.8rem;
   display: flex;
   align-items: center;
 }
 
 .genre-label:hover {
   cursor: pointer;
-  background: var(--primary-colour);
-  color: var(--secondary-colour);
+  background: var(--fifth-colour);
+  color: var(----primary-colour);
 }
 
 .genre-checkbox {
-  margin: 0 1em;
+  margin: 0 1rem 0 0.8rem;
   box-sizing: border-box;
-  height: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid var(--third-colour);
+  padding: 7px;
+  border-radius: 3px;
+  display: inline-block;
+  position: relative;
+}
+
+.genre-checkbox:checked {
+  background-color: var(--secondary-colour);
+}
+
+.genre-checkbox:checked:after {
+  content: "\2714";
+  font-size: 13px;
+  position: absolute;
+  top: -2px;
+  left: 1px;
+  color: var(--primary-colour);
 }
 
 .genre-checkbox:hover {
@@ -22,6 +41,5 @@
 
 .genre {
   margin: 0;
-  height: 100%;
   text-transform: capitalize;
 }
