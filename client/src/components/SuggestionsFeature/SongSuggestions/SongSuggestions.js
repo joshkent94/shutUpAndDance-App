@@ -27,12 +27,12 @@ export default function SongSuggestions() {
     let content;
     if (suggestions.length === 0) {
         content =
-            <div className="suggestions-content">
+            <div className="content-container">
                 <h5 className="sub-heading">Please select at least one genre to see suggestions.</h5>
             </div>;
     } else {
         content =
-            <div className="suggestions-content">
+            <div className="content-container">
                 {suggestions.map(track => {
                     return <Suggestion key={track.id} track={track} />
                 })}
