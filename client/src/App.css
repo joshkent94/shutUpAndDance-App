@@ -148,3 +148,20 @@ body {
 .coolBeans:hover > a {
   color: var(--primary-colour);
 }
+
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+  height: 16px;
+  width: 16px;
+  background-image: url("./assets/x-circle-fill.svg");
+}
+
+input[type="search"]:focus::-webkit-search-cancel-button {
+  opacity: 1;
+}
+
+input[type="search"]::-webkit-search-cancel-button:hover {
+  cursor: pointer;
+}

@@ -1,5 +1,5 @@
 #multiselect {
-  width: 250px;
+  width: 314px;
 }
 
 #genre-input {
@@ -39,4 +39,21 @@
 
 #genre-options {
   padding-top: 0.5rem;
+}
+
+#search-button {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  background-color: var(--secondary-colour);
+  border-color: var(--third-colour);
+  color: var(--primary-colour);
+  z-index: unset;
+}
+
+#search-button:hover {
+  color: unset;
+}
+
+#search-button:focus {
+  box-shadow: none;
 }

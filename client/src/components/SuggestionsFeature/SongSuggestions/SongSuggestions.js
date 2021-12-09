@@ -2,35 +2,20 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useRef } from 'react';
 import { selectSuggestions, getSuggestions, selectAccessToken } from "../../../utils/state/suggestionsSlice";
 import Suggestion from "../Suggestion/Suggestion";
-import { selectFirstName, selectGenres } from "../../../utils/state/userSlice";
+import { selectGenres } from "../../../utils/state/userSlice";
 
 export default function SongSuggestions() {
     const dispatch = useDispatch();
-    const firstName = useSelector(selectFirstName);
     const suggestions = useSelector(selectSuggestions);
     const accessToken = useSelector(selectAccessToken);
     const genres = useSelector(selectGenres);
-    const firstRenderOne = useRef(true);
-    const firstRenderTwo = useRef(true);
+    const firstRender = useRef(true);
 
-    // get song suggestions from Spotify if suggestions are blank
-    // or the user's selected genres change
+    // get song suggestions from Spotify on initial page load
     useEffect(() => {
-        if (firstRenderOne.current) {
-            firstRenderOne.current = false;
-            return;
-        }
-        if (accessToken !== '') {
-            dispatch(getSuggestions({
-                accessToken: accessToken,
-                genres: genres
-            }));
-        };
-    }, [genres, accessToken, dispatch]);
-    useEffect(() => {
-        if (firstRenderTwo.current) {
-            firstRenderTwo.current = false;
-            if (suggestions.length === 0 && firstName && accessToken !== '') {
+        if (firstRender.current) {
+            firstRender.current = false;
+            if (suggestions.length === 0 && document.cookie && accessToken !== '') {
                 dispatch(getSuggestions({
                     accessToken: accessToken,
                     genres: genres

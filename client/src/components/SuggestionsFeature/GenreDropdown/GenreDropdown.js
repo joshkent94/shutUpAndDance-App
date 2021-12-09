@@ -2,21 +2,35 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
 import GenreOption from '../GenreOption/GenreOption';
 import { hideCheckboxes, showCheckboxes } from '../../../utils/helperFunctions/toggleCheckboxes';
-import { selectAvailableGenres } from '../../../utils/state/suggestionsSlice';
+import { getSuggestions, selectAccessToken, selectAvailableGenres } from '../../../utils/state/suggestionsSlice';
 import { selectGenres, updateGenres } from '../../../utils/state/userSlice';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import './GenreDropdown.css';
 
 export default function GenreDropdown() {
     const dispatch = useDispatch();
     const genreOptions = useSelector(selectAvailableGenres);
     const selectedGenres = useSelector(selectGenres);
+    const accessToken = useSelector(selectAccessToken);
+    const genres = useSelector(selectGenres);
     const [searchTerm, setSearchTerm] = useState('');
     const sortedGenres = selectedGenres.slice().sort();
     const firstRender = useRef(true);
 
-    const handleSearch = e => {
+    const handleSearchTermChange = e => {
         e.preventDefault();
         setSearchTerm(e.target.value);
+    };
+
+    const handleSuggestionSearch = e => {
+        e.preventDefault();
+        if (document.cookie && accessToken !== '') {
+            dispatch(getSuggestions({
+                accessToken: accessToken,
+                genres: genres
+            }));
+        };
     };
 
     const filteredSortedGenres = sortedGenres.filter(genre => {
@@ -38,9 +52,16 @@ export default function GenreDropdown() {
     }, [dispatch, selectedGenres]);
 
     return (
-        <form onFocus={showCheckboxes} onBlur={hideCheckboxes}>
+        <form>
             <div id="multiselect">
-                <input className="form-control" id="genre-input" type="search" placeholder="Select genres... (max 5)" onChange={handleSearch}></input>
+                <div className="input-group">
+                    <input className="form-control" id="genre-input" type="search" placeholder={`Select genres (5 max, ${selectedGenres.length} chosen)`} aria-label="search genres" onChange={handleSearchTermChange} onFocus={showCheckboxes} onBlur={hideCheckboxes}></input>
+                    <div className="input-group-append">
+                        <button className="btn btn-outline-secondary" id="search-button" type="button" onClick={handleSuggestionSearch}>
+                            <FontAwesomeIcon icon={faSearch} />
+                        </button>
+                    </div>
+                </div>
                 <div id="genres">
                     <div id="selected-genres">
                         <p className="dropdown-heading">Selected Genres</p>
