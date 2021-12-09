@@ -20,6 +20,7 @@ import AuthCheck from "./components/Authentication/AuthCheck/AuthCheck";
 import TopNav from "./components/Navigation/TopNav/TopNav";
 import Gigs from './components/GigsFeature/Gigs';
 import './App.css';
+import ScreenSizePrompt from "./components/ScreenSizePrompt/ScreenSizePrompt";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -60,85 +61,94 @@ export default function App() {
     };
   }, [userEmail, dispatch]);
 
+  // display a prompt to user if screen size is too small
+  let content;
+  if (window.innerWidth < 992) {
+    content = <ScreenSizePrompt />;
+  } else {
+    content =
+      <Router>
+        <Routes>
+          <Route path="*"
+            element={
+              <Navigate to="/dashboard" replace />
+            }
+          />
+
+          <Route path="/signup"
+            element={
+              <SignUp />
+            }
+          />
+
+          <Route path="/login"
+            element={
+              <AuthCheck>
+                <Login />
+              </AuthCheck>
+            }
+          />
+
+          <Route path="/dashboard"
+            element={
+              <AuthCheck>
+                <TopNav />
+                <div className="main">
+                  <Dashboard />
+                </div>
+              </AuthCheck>
+            }
+          />
+
+          <Route path="/suggestions"
+            element={
+              <AuthCheck>
+                <TopNav />
+                <div className="main">
+                  <Suggestions />
+                </div>
+              </AuthCheck>
+            }
+          />
+
+          <Route path="/gigs"
+            element={
+              <AuthCheck>
+                <TopNav />
+                <div className="main">
+                  <Gigs />
+                </div>
+              </AuthCheck>
+            }
+          />
+
+          <Route path="/forum/*"
+            element={
+              <AuthCheck>
+                <TopNav />
+                <div className="main">
+                  <ForumRoutes />
+                </div>
+              </AuthCheck>
+            }
+          />
+
+          <Route path="/account"
+            element={
+              <AuthCheck>
+                <TopNav />
+                <div className="main">
+                  <Account />
+                </div>
+              </AuthCheck>
+            }
+          />
+        </Routes>
+      </Router>
+  };
+
   return (
-    <Router>
-      <Routes>
-        <Route path="*"
-          element={
-            <Navigate to="/dashboard" replace />
-          }
-        />
-
-        <Route path="/signup"
-          element={
-            <SignUp />
-          }
-        />
-
-        <Route path="/login"
-          element={
-            <AuthCheck>
-              <Login />
-            </AuthCheck>
-          }
-        />
-
-        <Route path="/dashboard"
-          element={
-            <AuthCheck>
-              <TopNav />
-              <div className="main">
-                <Dashboard />
-              </div>
-            </AuthCheck>
-          }
-        />
-
-        <Route path="/suggestions"
-          element={
-            <AuthCheck>
-              <TopNav />
-              <div className="main">
-                <Suggestions />
-              </div>
-            </AuthCheck>
-          }
-        />
-
-        <Route path="/gigs"
-          element={
-            <AuthCheck>
-              <TopNav />
-              <div className="main">
-                <Gigs />
-              </div>
-            </AuthCheck>
-          }
-        />
-
-        <Route path="/forum/*"
-          element={
-            <AuthCheck>
-              <TopNav />
-              <div className="main">
-                <ForumRoutes />
-              </div>
-            </AuthCheck>
-          }
-        />
-
-        <Route path="/account"
-          element={
-            <AuthCheck>
-              <TopNav />
-              <div className="main">
-                <Account />
-              </div>
-            </AuthCheck>
-          }
-        />
-      </Routes>
-    </Router>
+    content
   );
 };
 

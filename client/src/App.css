@@ -94,6 +94,11 @@ body {
   padding: 0.5rem;
 }
 
+.sub-heading {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
 .side-nav-active {
   width: 85vw !important;
 }

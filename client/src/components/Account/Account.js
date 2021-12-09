@@ -76,7 +76,7 @@ export default function Account() {
             } else {
                 showMessage("Passwords don't match");
             };
-        }
+        };
     };
 
     return (
@@ -88,7 +88,7 @@ export default function Account() {
             </div>
             <div className="page-content">
                 <div id="account-page" className="content-container">
-                    <h6 id="account-form-heading">
+                    <h6 id="account-form-heading" className="sub-heading">
                         Amend your account details below:
                     </h6>
                     <form id="account-form" onSubmit={handleDetailsSave}>
