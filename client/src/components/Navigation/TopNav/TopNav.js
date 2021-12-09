@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../../../assets/logo.png';
 import { resetForumDetails } from '../../../utils/state/forumSlice';
 import { resetSuggestionsDetails } from '../../../utils/state/suggestionsSlice';
-import { logout } from '../../../utils/state/userSlice';
+import { logout, selectEmail, selectFirstName, selectLastName } from '../../../utils/state/userSlice';
 import SideNav from '../SideNav/SideNav';
 import './TopNav.css';
 
@@ -13,6 +13,9 @@ export default function TopNav() {
     const dispatch = useDispatch();
     const [show, setShow] = useState(false);
     let location = useLocation();
+    const firstName = useSelector(selectFirstName);
+    const lastName = useSelector(selectLastName);
+    const email = useSelector(selectEmail);
 
     useEffect(() => {
         setShow(false);
@@ -52,6 +55,10 @@ export default function TopNav() {
                             <i className="bi bi-question-circle-fill top-nav-icon"></i>
                             <p>Help</p>
                         </Nav.Item>
+                        <div id="user-details">
+                            <p id="user-name">{firstName} {lastName}</p>
+                            <p id="user-email">{email}</p>
+                        </div>
                         <Nav.Item className="dropdown">
                             <button className="nav-link dropdown-toggle top" data-bs-toggle="dropdown" id="account-button">
                                 <i className="bi bi-person-fill top-nav-icon"></i>

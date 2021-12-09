@@ -51,6 +51,20 @@
   margin: 0;
 }
 
+#user-details {
+  padding-left: 1rem;
+}
+
+#user-details > p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.3rem;
+}
+
+#user-email {
+  color: var(--third-colour);
+}
+
 #account-button {
   border: none;
   background: none;
