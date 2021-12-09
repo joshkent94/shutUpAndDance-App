@@ -4,7 +4,7 @@ import {
   Routes,
   Navigate
 } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectEmail, selectFirstName, selectLastName } from "./utils/state/userSlice";
 import { getAccessToken } from "./utils/state/suggestionsSlice";
@@ -27,6 +27,7 @@ export default function App() {
   const userEmail = useSelector(selectEmail);
   const userFirstName = useSelector(selectFirstName);
   const userLastName = useSelector(selectLastName);
+  const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
 
   // redirect to https if try to access via http
   if (window.location.protocol !== 'https:') {
@@ -61,9 +62,18 @@ export default function App() {
     };
   }, [userEmail, dispatch]);
 
+  // add event listener to set state of app whenever screen size changes
+  useEffect(() => {
+    const handleResize = () => {
+      setViewportWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+  });
+
   // display a prompt to user if screen size is too small
   let content;
-  if (window.innerWidth < 992) {
+  if (viewportWidth < 992) {
     content = <ScreenSizePrompt />;
   } else {
     content =
