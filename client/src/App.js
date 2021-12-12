@@ -4,7 +4,7 @@ import {
   Routes,
   Navigate
 } from "react-router-dom";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectEmail, selectFirstName, selectLastName } from "./utils/state/userSlice";
 import { getAccessToken } from "./utils/state/suggestionsSlice";
@@ -19,8 +19,9 @@ import Forum from "./components/ForumFeature/Forum/Forum";
 import AuthCheck from "./components/Authentication/AuthCheck/AuthCheck";
 import TopNav from "./components/Navigation/TopNav/TopNav";
 import Gigs from './components/GigsFeature/Gigs';
-import './App.css';
 import ScreenSizePrompt from "./components/ScreenSizePrompt/ScreenSizePrompt";
+import './App.css';
+import Footer from "./components/Footer/Footer";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -67,7 +68,6 @@ export default function App() {
     const handleResize = () => {
       setViewportWidth(window.innerWidth);
     };
-
     window.addEventListener('resize', handleResize);
   });
 
@@ -105,6 +105,7 @@ export default function App() {
                 <TopNav />
                 <div className="main">
                   <Dashboard />
+                  <Footer />
                 </div>
               </AuthCheck>
             }
@@ -116,6 +117,7 @@ export default function App() {
                 <TopNav />
                 <div className="main">
                   <Suggestions />
+                  <Footer />
                 </div>
               </AuthCheck>
             }
@@ -127,6 +129,7 @@ export default function App() {
                 <TopNav />
                 <div className="main">
                   <Gigs />
+                  <Footer />
                 </div>
               </AuthCheck>
             }
@@ -138,6 +141,7 @@ export default function App() {
                 <TopNav />
                 <div className="main">
                   <ForumRoutes />
+                  <Footer />
                 </div>
               </AuthCheck>
             }
@@ -149,6 +153,7 @@ export default function App() {
                 <TopNav />
                 <div className="main">
                   <Account />
+                  <Footer />
                 </div>
               </AuthCheck>
             }

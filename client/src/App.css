@@ -57,13 +57,14 @@ body {
   transition: width 0.3s ease-in-out;
   padding: 3.925rem 0 0 0;
   background-color: var(--fifth-colour);
+  display: flex;
+  flex-direction: column;
 }
 
 .page {
   padding: 1rem 2rem;
   display: flex;
   flex-direction: column;
-  min-height: 100%;
 }
 
 .page-header {

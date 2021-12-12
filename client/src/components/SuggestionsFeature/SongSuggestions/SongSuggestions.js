@@ -39,7 +39,7 @@ export default function SongSuggestions() {
     };
 
     return (
-        <div className="content-container" id="suggestions-page">
+        <div id="suggestions-page">
             {content}
         </div>
     );

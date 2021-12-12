@@ -1,49 +1,51 @@
 .track {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  width: 75%;
-  padding: 1em;
-  margin: 1em;
-  background-color: var(--primary-colour);
-  min-height: 15%;
-  max-height: 15%;
-  border-radius: 1em;
-  color: var(--secondary-colour);
+  margin-bottom: 0.7rem;
+  height: 140px;
+  width: 100%;
+  color: var(--primary-colour);
+}
+
+.track:last-of-type {
+  margin: 0;
+}
+
+.album-image-container {
+  border-right: 1px solid var(--third-colour);
+  padding-right: 0.8rem;
 }
 
 .track-image {
-  width: 100px;
+  height: 120px;
+  border-radius: 50%;
 }
 
 .track-details {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
   justify-content: center;
-  width: 100%;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  padding-left: 0.8rem;
 }
 
 .track-info {
-  max-width: 80%;
   margin: 0;
 }
 
 .track-title {
-  font-size: 1.3em;
-  font-weight: 900;
-  text-align: end;
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding-bottom: 0.2rem;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
 .sub-info {
-  max-width: 80%;
-  text-align: end;
+  font-weight: 400;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
