@@ -1,0 +1,8 @@
+#search {
+  width: 320px;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  border-color: var(--primary-colour) !important;
+}

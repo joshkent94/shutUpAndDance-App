@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { createThread } from '../../../utils/state/forumSlice';
-import { showMessage } from "../../../utils/helperFunctions/showMessage";
 import './NewThread.css';
 
 export default function NewThread() {
@@ -23,42 +22,44 @@ export default function NewThread() {
 
     const handleNewThread = e => {
         e.preventDefault();
-        if (title === '' || comment === '') {
-            showMessage(`Please make sure you enter a title and a comment.`)
-        } else {
-            dispatch(createThread({
-                title: title,
-                comment: comment
-            }))
-                .unwrap()
-                .then(thread => {
-                    navigate(`../${thread.id}`);
-                });
-        };
-    };
-
-    const handleCancel = () => {
-        navigate("..");
+        dispatch(createThread({
+            title: title,
+            comment: comment
+        }))
+            .unwrap()
+            .then(thread => {
+                navigate(`../browse/${thread.id}`);
+            });
     };
 
     return (
-        <div id="forum">
-            <form onSubmit={handleNewThread} id="new-thread">
-                <div className="account-form-element thread-block">
-                    <input className="account-input form-control thread-input" type="text" id="thread-title" placeholder="Title..." onChange={handleTitleChange} />
+        <div className="page">
+            <div className="page-header">
+                <h5 className="page-header-h5">
+                    Create New Thread
+                </h5>
+            </div>
+            <div className="page-content">
+                <div id="new-thread-page" className='content-container'>
+                    <h6 id="new-thread-heading" className="sub-heading">
+                        Share your passion for music by creating a new thread:
+                    </h6>
+                    <form id="new-thread-form" onSubmit={handleNewThread}>
+                        <label className="form-element">
+                            Title
+                            <input className="form-control sign-up-element new-thread-element" type="text" id="thread-title" placeholder="Title" onChange={handleTitleChange} required />
+                        </label>
+                        <label className="form-element">
+                            Comment
+                            <textarea className="form-control sign-up-element new-thread-element" id="thread-comment" placeholder="What's on your mind..." onChange={handleCommentChange} required />
+                        </label>
+
+                        <button className="coolBeans" id="create-thread-button" type="submit">
+                            Create Thread
+                        </button>
+                    </form>
                 </div>
-                <div className="account-form-element thread-block">
-                    <textarea className="account-input form-control thread-input" id="thread-comment" placeholder="What's on your mind..." onChange={handleCommentChange} />
-                </div>
-                <div>
-                    <button className="account-submit btn" id="cancel" onClick={handleCancel}>
-                        Cancel
-                    </button>
-                    <button className="account-submit btn" id="add-thread" type="submit">
-                        Create Thread
-                    </button>
-                </div>
-            </form>
+            </div>
         </div>
     );
 };

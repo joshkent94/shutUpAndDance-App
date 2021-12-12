@@ -1,26 +1,32 @@
-#new-thread {
+#new-thread-page {
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  flex-grow: 1;
+}
+
+#new-thread-form {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   flex-grow: 1;
-  width: 100%;
+  margin-top: 1.5rem;
 }
 
-.thread-block {
-  width: 60% !important;
-}
-
-.thread-input {
-  flex-grow: 1;
+#new-thread-heading {
+  margin: 1.5rem 2rem 0.5rem 2rem;
 }
 
 #thread-comment {
-  height: 10em;
+  height: 300px;
 }
 
-#cancel {
-  background-color: var(--secondary-colour);
-  border-color: var(--primary-colour);
-  color: var(--primary-colour);
+#create-thread-button {
+  margin: 0.5rem 0 1.5rem 0;
+  width: 12rem;
+}
+
+.new-thread-element {
+  width: 800px;
 }

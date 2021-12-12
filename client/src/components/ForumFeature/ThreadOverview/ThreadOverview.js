@@ -6,7 +6,7 @@ export default function ThreadOverview(props) {
 
     return (
         <div className="thread animate__animated animate__fadeIn">
-            <Link to={`forum/${thread.id}`}>
+            <Link to={`${thread.id}`}>
                 <div className="thread-title">
                     <p>{thread.title}</p>
                 </div>

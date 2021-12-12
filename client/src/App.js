@@ -15,7 +15,7 @@ import Suggestions from "./components/SuggestionsFeature/Suggestions/Suggestions
 import Account from "./components/Account/Account";
 import NewThread from "./components/ForumFeature/NewThread/NewThread";
 import ThreadExpanded from "./components/ForumFeature/ThreadExpanded/ThreadExpanded";
-import Forum from "./components/ForumFeature/Forum/Forum";
+import BrowseThreads from "./components/ForumFeature/BrowseThreads/BrowseThreads";
 import AuthCheck from "./components/Authentication/AuthCheck/AuthCheck";
 import TopNav from "./components/Navigation/TopNav/TopNav";
 import Gigs from './components/GigsFeature/Gigs';
@@ -176,15 +176,15 @@ function ForumRoutes() {
         }
       />
       
-      <Route path=":threadId"
+      <Route path="browse/:threadId"
         element={
           <ThreadExpanded />
         }
       />
       
-      <Route path=""
+      <Route path="browse"
         element={
-          <Forum />
+          <BrowseThreads />
         }
       />
     </Routes>

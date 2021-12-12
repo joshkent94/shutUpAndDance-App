@@ -44,7 +44,7 @@ export default function SideNav({ show }) {
                                     <NavLink to="/forum/new" className="nav-link">
                                         Create New Thread
                                     </NavLink>
-                                    <NavLink to="/forum" className="nav-link">
+                                    <NavLink to="/forum/browse" className="nav-link">
                                         Browse Threads
                                     </NavLink>
                                 </Accordion.Body>
