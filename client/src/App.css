@@ -12,7 +12,6 @@ body,
 
 body {
   font-family: "Quicksand", sans-serif;
-  font-weight: 600;
 }
 
 #root {
@@ -171,4 +170,8 @@ input[type="search"]:focus::-webkit-search-cancel-button {
 
 input[type="search"]::-webkit-search-cancel-button:hover {
   cursor: pointer;
+}
+
+label {
+  font-weight: 600;
 }

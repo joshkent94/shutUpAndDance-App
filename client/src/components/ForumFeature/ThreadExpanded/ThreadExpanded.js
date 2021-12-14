@@ -20,16 +20,17 @@ export default function ThreadExpanded() {
 
     const likeToggle = () => {
         dispatch(likeThreadToggle({
-            threadId
+            threadId,
+            method: 'threadInfo'
         }));
     };
 
     let likeIcon;
     if (threadInfo.likes.includes(userId)) {
-        likeIcon = <button className="like-icon" onClick={likeToggle}><i className="bi bi-hand-thumbs-up-fill"></i></button>
+        likeIcon = <button className="like-icon" onClick={likeToggle}><i className="bi bi-hand-thumbs-up-fill"></i></button>;
     } else {
-        likeIcon = <button className="like-icon" onClick={likeToggle}><i className="bi bi-hand-thumbs-up"></i></button>
-    }
+        likeIcon = <button className="like-icon" onClick={likeToggle}><i className="bi bi-hand-thumbs-up"></i></button>;
+    };
 
     const handleCommentChange = e => {
         e.preventDefault();

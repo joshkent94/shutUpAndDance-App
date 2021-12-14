@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMostLikedThreads, searchThreads, selectMostLiked, selectThreads } from '../../../utils/state/forumSlice';
+import { getMostLikedThreads, resetForumDetails, searchThreads, selectMostLiked, selectThreads } from '../../../utils/state/forumSlice';
 import ThreadOverview from '../ThreadOverview/ThreadOverview';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -22,6 +22,7 @@ export default function BrowseThreads() {
     // search for threads whenever search term is updated
     useEffect(() => {
         if (!searchTerm && document.cookie) {
+            dispatch(resetForumDetails());
             dispatch(getMostLikedThreads());
         };
         if (searchTerm) {
@@ -46,7 +47,7 @@ export default function BrowseThreads() {
         <div className="page">
             <div className="page-header">
                 <h5 className="page-header-h5">
-                    Browse Threads
+                    Forum {'>'} Browse Threads
                 </h5>
                 <div id="search" className="input-group">
                     <input className="form-control" type="search" aria-label="search threads" placeholder="Search" onChange={handleSearchTermChange}></input>
@@ -59,7 +60,9 @@ export default function BrowseThreads() {
             </div>
         
             <div className="page-content">
-                {content}
+                <div id="browse-threads-page">
+                    {content}
+                </div>
             </div>
         </div>
     );

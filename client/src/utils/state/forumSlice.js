@@ -94,7 +94,7 @@ export const addComment = createAsyncThunk(
 
 export const likeThreadToggle = createAsyncThunk(
     'forum/likeThreadToggle',
-    async ({ threadId }) => {
+    async ({ threadId, method }) => {
         const response = await fetch(`/threads/thread/${threadId}`, {
             method: "PUT",
             mode: "cors",
@@ -102,7 +102,11 @@ export const likeThreadToggle = createAsyncThunk(
         });
         if (response.ok) {
             const jsonResponse = await response.json();
-            return jsonResponse;
+            return {
+                jsonResponse,
+                method,
+                threadId
+            };
         };
     }
 );
@@ -169,7 +173,15 @@ const forumSlice = createSlice({
             return;
         },
         [likeThreadToggle.fulfilled]: (state, action) => {
-            state.threadInfo.likes = action.payload;
+            if (action.payload.method === 'threadOverviews') {
+                const index = state.threadOverviews.findIndex(({ id }) => id === action.payload.threadId);
+                state.threadOverviews[index].likes = action.payload.jsonResponse;
+            } else if (action.payload.method === 'mostLiked') {
+                const index = state.mostLiked.findIndex(({ id }) => id === action.payload.threadId);
+                state.mostLiked[index].likes = action.payload.jsonResponse;
+            } else {
+                state.threadInfo.likes = action.payload.jsonResponse;
+            };
         },
         [getMostLikedThreads.fulfilled]: (state, action) => {
             state.mostLiked = action.payload;

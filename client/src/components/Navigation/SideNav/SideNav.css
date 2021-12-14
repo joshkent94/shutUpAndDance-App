@@ -27,6 +27,7 @@
 #side-nav > .nav-item {
   padding: 0.2rem 0;
   cursor: unset;
+  font-weight: 600;
 }
 
 .nav-link {

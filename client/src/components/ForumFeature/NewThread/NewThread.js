@@ -36,7 +36,7 @@ export default function NewThread() {
         <div className="page">
             <div className="page-header">
                 <h5 className="page-header-h5">
-                    Create New Thread
+                    Forum {'>'} Create New Thread
                 </h5>
             </div>
             <div className="page-content">
