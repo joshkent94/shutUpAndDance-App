@@ -1,7 +1,7 @@
 import './ThreadOverview.css';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { faBookOpen } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { likeThreadToggle, selectThreads } from "../../../utils/state/forumSlice";
 import { selectUserId } from '../../../utils/state/userSlice';
@@ -41,13 +41,11 @@ export default function ThreadOverview(props) {
                 <p className='thread-initial-comment'>{thread.initial_comment}</p>
             </div>
             <div className="thread-container thread-sub-info">
-                <p>Created by: {thread.first_name} {thread.last_name}</p>
+                <p><span className='thread-label'>Created by:</span> {thread.first_name} {thread.last_name}</p>
+                <p><span className='thread-label'>Likes:</span> {thread.likes.length}</p>
                 <div className='icon-section'>
-                    <div className='like-info'>
-                        <p>{likeIcon}</p>
-                        <p>{thread.likes.length}</p>
-                    </div>
-                    <Link to={`${thread.id}`}><FontAwesomeIcon icon={faEye} className='browse-threads-icon' /></Link>
+                    {likeIcon}
+                    <Link to={`${thread.id}`}><FontAwesomeIcon icon={faBookOpen} className='browse-threads-icon' /></Link>
                 </div>
             </div>
         </div>

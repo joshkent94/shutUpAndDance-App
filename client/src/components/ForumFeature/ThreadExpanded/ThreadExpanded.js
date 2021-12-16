@@ -1,9 +1,13 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserId } from "../../../utils/state/userSlice";
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { addComment, getComments, getThread, likeThreadToggle, selectComments, selectThreadInfo } from "../../../utils/state/forumSlice";
+import Comment from "../Comment/Comment";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import './ThreadExpanded.css';
+import { showMessage } from "../../../utils/helperFunctions/showMessage";
 
 export default function ThreadExpanded() {
     const dispatch = useDispatch();
@@ -13,11 +17,13 @@ export default function ThreadExpanded() {
     const { threadId } = useParams();
     const [newComment, setNewComment] = useState('');
 
+    // get all the details for the thread on page load
     useEffect(() => {
         dispatch(getThread(threadId));
         dispatch(getComments(threadId));
     }, [threadId, dispatch]);
 
+    // toggle between like and not like
     const likeToggle = () => {
         dispatch(likeThreadToggle({
             threadId,
@@ -25,57 +31,69 @@ export default function ThreadExpanded() {
         }));
     };
 
-    let likeIcon;
-    if (threadInfo.likes.includes(userId)) {
-        likeIcon = <button className="like-icon" onClick={likeToggle}><i className="bi bi-hand-thumbs-up-fill"></i></button>;
-    } else {
-        likeIcon = <button className="like-icon" onClick={likeToggle}><i className="bi bi-hand-thumbs-up"></i></button>;
-    };
-
     const handleCommentChange = e => {
         e.preventDefault();
         setNewComment(e.target.value);
     };
 
+    // send new comment to the back end
+    // then fetch all the latest comments and reload UI
     const postComment = e => {
         e.preventDefault();
-        dispatch(addComment({
-            threadId,
-            comment: newComment
-        }))
-            .unwrap()
-            .then(() => {
-                setNewComment('');
-                dispatch(getComments(threadId));
-            });
+        if (newComment !== '') {
+            dispatch(addComment({
+                threadId,
+                comment: newComment
+            }))
+                .unwrap()
+                .then(() => {
+                    setNewComment('');
+                    dispatch(getComments(threadId));
+                });
+        } else {
+            showMessage('Comment can not be blank');
+        };
+    };
+
+    let likeIcon;
+    if (threadInfo.likes.includes(userId)) {
+        likeIcon = <button className="browse-threads-icon" onClick={likeToggle}><i className="bi bi-hand-thumbs-up-fill"></i></button>;
+    } else {
+        likeIcon = <button className="browse-threads-icon" onClick={likeToggle}><i className="bi bi-hand-thumbs-up"></i></button>;
     };
 
     return (
-        <div id="forum">
-            <div id="thread-heading">
-                <div id="thread-info">
-                    <h4>{threadInfo.title}</h4>
-                    {threadInfo.initial_comment}
-                    <p className="posted-by">Posted by {threadInfo.first_name} {threadInfo.last_name}</p>
-                </div>
-                <div id="like-info">
-                    {likeIcon}
-                    {threadInfo.likes.length}
-                </div>
+        <div className="page">
+            <div className="page-header">
+                <h5 className="page-header-h5">
+                    Forum {'>'} Browse Threads {'>'} Thread
+                </h5>
             </div>
-            <form onSubmit={postComment}>
-                <textarea className="account-input form-control thread-input" id="thread-comment" placeholder="What's on your mind..." onChange={handleCommentChange} required></textarea>
-                <button type="submit" id="submit-comment"><i className="bi bi-send"></i></button>
-            </form>
-            <div>
-                {comments.map(comment => {
-                    return (
-                        <div key={comment.id}>
-                            {comment.comment}
-                            {`${comment.first_name} ${comment.last_name}`}
+            <div className="page-content">
+                <div id="thread-expanded-page">
+                    <div id="thread-heading" className="content-container">
+                        <div id="thread-heading-text" className="thread-container">
+                            <p id='thread-title-text'>{threadInfo.title}</p>
+                            <p>{threadInfo.initialComment}</p>
                         </div>
-                    );
-                })}
+                        <div className="thread-container">
+                            <p><span className="thread-label">Created by:</span> {threadInfo.firstName} {threadInfo.lastName}</p>
+                            <p><span className='thread-label'>Likes:</span> {threadInfo.likes.length}</p>
+                            <div className='icon-section'>
+                                {likeIcon}
+                            </div>
+                        </div>
+                    </div>
+                    <div id="add-new-comment" className="input-group">
+                        <textarea id="add-new-comment-textarea" className="form-control" placeholder="Add a comment..." onChange={handleCommentChange} value={newComment} rows={2} />
+                        <div className="input-group-append">
+                            <button className="btn btn-outline-secondary" type="submit" id="submit-comment" onClick={postComment}>
+                                <FontAwesomeIcon icon={faPaperPlane} />
+                            </button>
+                        </div>
+                    </div>
+                    {comments.map(comment => <Comment key={comment.id} comment={comment} />)}
+                </div>
             </div>
         </div>
     );

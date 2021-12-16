@@ -52,7 +52,11 @@ export const getThread = createAsyncThunk(
             const jsonResponse = await response.json();
             const thread = {
                 id: threadId,
-                ...jsonResponse
+                title: jsonResponse.title,
+                initialComment: jsonResponse.initial_comment,
+                likes: jsonResponse.likes,
+                firstName: jsonResponse.first_name,
+                lastName: jsonResponse.last_name
             };
             return thread;
         };
@@ -133,10 +137,10 @@ const forumSlice = createSlice({
         threadInfo: {
             id: "",
             title: "",
-            initial_comment: "",
+            initialComment: "",
             likes: [],
-            first_name: "",
-            last_name: ""
+            firstName: "",
+            lastName: ""
         },
         comments: [],
         mostLiked: []
@@ -147,10 +151,10 @@ const forumSlice = createSlice({
             state.threadInfo = {
                 id: "",
                 title: "",
-                initial_comment: "",
+                initialComment: "",
                 likes: [],
-                first_name: "",
-                last_name: ""
+                firstName: "",
+                lastName: ""
             };
             state.comments = [];
             state.mostLiked = [];
