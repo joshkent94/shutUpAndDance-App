@@ -1,7 +1,25 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { likeCommentToggle } from '../../../utils/state/forumSlice';
+import { selectUserId } from '../../../utils/state/userSlice';
 import './Comment.css';
 
 export default function Comment({ comment }) {
-    // let likeIcon;
+    const userId = useSelector(selectUserId);
+    const dispatch = useDispatch();
+
+    // toggle between like and dislike
+    const likeToggle = () => {
+        dispatch(likeCommentToggle({
+            commentId: comment.id
+        }));
+    };
+
+    let likeIcon;
+    if (comment.likes.includes(userId)) {
+        likeIcon = <button className="browse-threads-icon" onClick={likeToggle}><i className="bi bi-hand-thumbs-up-fill"></i></button>;
+    } else {
+        likeIcon = <button className="browse-threads-icon" onClick={likeToggle}><i className="bi bi-hand-thumbs-up"></i></button>;
+    };
     
     const commentDate = new Date(comment.timestamp);
     
@@ -13,10 +31,10 @@ export default function Comment({ comment }) {
             <div className="thread-container">
                 <p><span className="thread-label">Commented by:</span> {comment.firstName} {comment.lastName}</p>
                 <p><span className='thread-label'>Commented on:</span> {commentDate.toLocaleString('default', { month: 'short' })} {commentDate.getUTCDate()} {commentDate.getUTCFullYear()}</p>
-                {/* <p><span className='thread-label'>Likes:</span> {threadInfo.likes.length}</p> */}
-                {/* <div className='icon-section'>
+                <p><span className='thread-label'>Likes:</span> {comment.likes.length}</p>
+                <div className='icon-section'>
                     {likeIcon}
-                </div> */}
+                </div>
             </div>
         </div>
     );

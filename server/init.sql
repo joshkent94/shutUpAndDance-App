@@ -38,8 +38,9 @@ CREATE TABLE threads (
 
 CREATE TABLE comments (
   id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
+  user_id uuid NOT NULL REFERENCES users ON DELETE CASCADE,
   thread_id uuid NOT NULL REFERENCES threads ON DELETE CASCADE,
   date_time TIMESTAMP NOT NULL DEFAULT now(),
   comment TEXT NOT NULL,
-  user_id uuid NOT NULL REFERENCES users ON DELETE CASCADE
+  likes uuid ARRAY NOT NULL DEFAULT '{}'
 );

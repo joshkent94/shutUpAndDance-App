@@ -3,7 +3,7 @@
   align-items: center;
   color: var(--primary-colour);
   margin-bottom: 0.7rem;
-  height: 140px;
+  height: 150px;
   width: 100%;
 }
 
@@ -26,6 +26,8 @@
 .thread-container:last-of-type {
   width: 20%;
   justify-content: center;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .thread-container p {

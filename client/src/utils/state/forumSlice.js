@@ -86,50 +86,6 @@ export const getThread = createAsyncThunk(
     }
 );
 
-export const getComments = createAsyncThunk(
-    'forum/getComments',
-    async (threadId) => {
-        const response = await fetch(`/comments/${threadId}`, {
-            mode: "cors",
-            credentials: "include"
-        });
-        if (response.ok) {
-            const jsonResponse = await response.json();
-            let returnArray = [];
-            for (let i = 0; i < jsonResponse.length; i++) {
-                const commentObj = {
-                    id: jsonResponse[i].id,
-                    timestamp: jsonResponse[i].date_time,
-                    comment: jsonResponse[i].comment,
-                    firstName: jsonResponse[i].first_name,
-                    lastName: jsonResponse[i].last_name
-                };
-                returnArray.push(commentObj);
-            };
-            return returnArray;
-        };
-    }
-);
-
-export const addComment = createAsyncThunk(
-    'forum/addComment',
-    async ({threadId, comment}) => {
-        const data = {
-            comment
-        };
-        await fetch(`/comments/${threadId}`, {
-            method: "POST",
-            mode: "cors",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        });
-        return;
-    }
-);
-
 export const likeThreadToggle = createAsyncThunk(
     'forum/likeThreadToggle',
     async ({ threadId, method }) => {
@@ -177,6 +133,69 @@ export const getMostLikedThreads = createAsyncThunk(
     }
 );
 
+export const getComments = createAsyncThunk(
+    'forum/getComments',
+    async (threadId) => {
+        const response = await fetch(`/comments/${threadId}`, {
+            mode: "cors",
+            credentials: "include"
+        });
+        if (response.ok) {
+            const jsonResponse = await response.json();
+            let returnArray = [];
+            for (let i = 0; i < jsonResponse.length; i++) {
+                const commentObj = {
+                    id: jsonResponse[i].id,
+                    timestamp: jsonResponse[i].date_time,
+                    comment: jsonResponse[i].comment,
+                    likes: jsonResponse[i].likes,
+                    firstName: jsonResponse[i].first_name,
+                    lastName: jsonResponse[i].last_name
+                };
+                returnArray.push(commentObj);
+            };
+            return returnArray;
+        };
+    }
+);
+
+export const addComment = createAsyncThunk(
+    'forum/addComment',
+    async ({threadId, comment}) => {
+        const data = {
+            comment
+        };
+        await fetch(`/comments/${threadId}`, {
+            method: "POST",
+            mode: "cors",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+        return;
+    }
+);
+
+export const likeCommentToggle = createAsyncThunk(
+    'forum/likeCommentToggle',
+    async ({ commentId }) => {
+        const response = await fetch(`/comments/${commentId}`, {
+            method: "PUT",
+            mode: "cors",
+            credentials: "include"
+        });
+        if (response.ok) {
+            const jsonResponse = await response.json();
+            return {
+                jsonResponse,
+                commentId
+            };
+        };
+    }
+);
+
 const forumSlice = createSlice({
     name: 'forum',
     initialState: {
@@ -219,12 +238,6 @@ const forumSlice = createSlice({
         [getThread.fulfilled]: (state, action) => {
             state.threadInfo = action.payload;
         },
-        [getComments.fulfilled]: (state, action) => {
-            state.comments = action.payload;
-        },
-        [addComment.fulfilled]: (state, action) => {
-            return;
-        },
         [likeThreadToggle.fulfilled]: (state, action) => {
             if (action.payload.method === 'threadOverviews') {
                 const index = state.threadOverviews.findIndex(({ id }) => id === action.payload.threadId);
@@ -238,6 +251,16 @@ const forumSlice = createSlice({
         },
         [getMostLikedThreads.fulfilled]: (state, action) => {
             state.mostLiked = action.payload;
+        },
+        [getComments.fulfilled]: (state, action) => {
+            state.comments = action.payload;
+        },
+        [addComment.fulfilled]: (state, action) => {
+            return;
+        },
+        [likeCommentToggle.fulfilled]: (state, action) => {
+            const index = state.comments.findIndex(({ id }) => id === action.payload.commentId);
+            state.comments[index].likes = action.payload.jsonResponse;
         }
     }
 });
