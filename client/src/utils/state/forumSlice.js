@@ -18,7 +18,16 @@ export const createThread = createAsyncThunk(
         });
         if (response.ok) {
             const jsonResponse = await response.json();
-            return jsonResponse;
+            const thread = {
+                id: jsonResponse.id,
+                timestamp: jsonResponse.date_time,
+                title: jsonResponse.title,
+                initialComment: jsonResponse.initial_comment,
+                likes: jsonResponse.likes,
+                firstName: jsonResponse.first_name,
+                lastName: jsonResponse.last_name
+            };
+            return thread;
         };
     }
 );
@@ -33,7 +42,20 @@ export const searchThreads = createAsyncThunk(
             });
             if (response.ok) {
                 const jsonResponse = await response.json();
-                return jsonResponse;
+                let returnArray = [];
+                for (let i = 0; i < jsonResponse.length; i++) {
+                    const threadObj = {
+                        id: jsonResponse[i].id,
+                        timestamp: jsonResponse[i].date_time,
+                        title: jsonResponse[i].title,
+                        initialComment: jsonResponse[i].initial_comment,
+                        likes: jsonResponse[i].likes,
+                        firstName: jsonResponse[i].first_name,
+                        lastName: jsonResponse[i].last_name
+                    };
+                    returnArray.push(threadObj);
+                };
+                return returnArray;
             };
         } else {
             return [];
@@ -52,6 +74,7 @@ export const getThread = createAsyncThunk(
             const jsonResponse = await response.json();
             const thread = {
                 id: threadId,
+                timestamp: jsonResponse.date_time,
                 title: jsonResponse.title,
                 initialComment: jsonResponse.initial_comment,
                 likes: jsonResponse.likes,
@@ -72,7 +95,18 @@ export const getComments = createAsyncThunk(
         });
         if (response.ok) {
             const jsonResponse = await response.json();
-            return jsonResponse;
+            let returnArray = [];
+            for (let i = 0; i < jsonResponse.length; i++) {
+                const commentObj = {
+                    id: jsonResponse[i].id,
+                    timestamp: jsonResponse[i].date_time,
+                    comment: jsonResponse[i].comment,
+                    firstName: jsonResponse[i].first_name,
+                    lastName: jsonResponse[i].last_name
+                };
+                returnArray.push(commentObj);
+            };
+            return returnArray;
         };
     }
 );
@@ -121,11 +155,24 @@ export const getMostLikedThreads = createAsyncThunk(
         const response = await fetch('/threads/mostLiked', {
             method: "GET",
             mode: "cors",
-            credentials: "include" 
+            credentials: "include"
         });
         if (response.ok) {
             const jsonResponse = await response.json();
-            return jsonResponse;
+            let returnArray = [];
+            for (let i = 0; i < jsonResponse.length; i++) {
+                const threadObj = {
+                    id: jsonResponse[i].id,
+                    timestamp: jsonResponse[i].date_time,
+                    title: jsonResponse[i].title,
+                    initialComment: jsonResponse[i].initial_comment,
+                    likes: jsonResponse[i].likes,
+                    firstName: jsonResponse[i].first_name,
+                    lastName: jsonResponse[i].last_name
+                };
+                returnArray.push(threadObj);
+            };
+            return returnArray;
         };
     }
 );
@@ -136,6 +183,7 @@ const forumSlice = createSlice({
         threadOverviews: [],
         threadInfo: {
             id: "",
+            timestamp: '',
             title: "",
             initialComment: "",
             likes: [],
@@ -150,6 +198,7 @@ const forumSlice = createSlice({
             state.threadOverviews = [];
             state.threadInfo = {
                 id: "",
+                timestamp: '',
                 title: "",
                 initialComment: "",
                 likes: [],

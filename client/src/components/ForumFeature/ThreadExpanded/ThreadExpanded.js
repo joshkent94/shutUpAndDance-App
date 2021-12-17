@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserId } from "../../../utils/state/userSlice";
 import { addComment, getComments, getThread, likeThreadToggle, selectComments, selectThreadInfo } from "../../../utils/state/forumSlice";
@@ -55,6 +55,7 @@ export default function ThreadExpanded() {
         };
     };
 
+    // display correct like icon based on current redux state
     let likeIcon;
     if (threadInfo.likes.includes(userId)) {
         likeIcon = <button className="browse-threads-icon" onClick={likeToggle}><i className="bi bi-hand-thumbs-up-fill"></i></button>;
@@ -62,29 +63,33 @@ export default function ThreadExpanded() {
         likeIcon = <button className="browse-threads-icon" onClick={likeToggle}><i className="bi bi-hand-thumbs-up"></i></button>;
     };
 
+    // convert thread timestamp to new date object
+    const threadDate = new Date(threadInfo.timestamp);
+
     return (
         <div className="page">
             <div className="page-header">
                 <h5 className="page-header-h5">
-                    Forum {'>'} Browse Threads {'>'} Thread
+                    Forum {'>'} <Link to="../browse">Browse Threads</Link> {'>'} Thread
                 </h5>
             </div>
             <div className="page-content">
                 <div id="thread-expanded-page">
-                    <div id="thread-heading" className="content-container">
+                    <div id="thread-heading" className="content-container animate__animated animate__fadeIn">
                         <div id="thread-heading-text" className="thread-container">
                             <p id='thread-title-text'>{threadInfo.title}</p>
                             <p>{threadInfo.initialComment}</p>
                         </div>
                         <div className="thread-container">
                             <p><span className="thread-label">Created by:</span> {threadInfo.firstName} {threadInfo.lastName}</p>
+                            <p><span className='thread-label'>Created on:</span> {threadDate.toLocaleString('default', { month: 'short' })} {threadDate.getUTCDate()} {threadDate.getUTCFullYear()}</p>
                             <p><span className='thread-label'>Likes:</span> {threadInfo.likes.length}</p>
                             <div className='icon-section'>
                                 {likeIcon}
                             </div>
                         </div>
                     </div>
-                    <div id="add-new-comment" className="input-group">
+                    <div id="add-new-comment" className="input-group animate__animated animate__fadeIn">
                         <textarea id="add-new-comment-textarea" className="form-control" placeholder="Add a comment..." onChange={handleCommentChange} value={newComment} rows={2} />
                         <div className="input-group-append">
                             <button className="btn btn-outline-secondary" type="submit" id="submit-comment" onClick={postComment}>
@@ -92,7 +97,7 @@ export default function ThreadExpanded() {
                             </button>
                         </div>
                     </div>
-                    {comments.map(comment => <Comment key={comment.id} comment={comment} />)}
+                    {comments.slice().reverse().map(comment => <Comment key={comment.id} comment={comment} />)}
                 </div>
             </div>
         </div>

@@ -9,7 +9,7 @@ const newThread = (req, res) => {
                 RETURNING *`,
         [req.session.userId, cleanTitle, cleanComment])
         .then((data) => {
-            pool.query(`SELECT threads.id, threads.title, threads.initial_comment, threads.likes, users.first_name, users.last_name
+            pool.query(`SELECT threads.id, threads.date_time, threads.title, threads.initial_comment, threads.likes, users.first_name, users.last_name
                 FROM threads INNER JOIN users ON (threads.creator_user_id = users.id)
                 WHERE threads.id = ($1)`,
                 [data.rows[0].id])

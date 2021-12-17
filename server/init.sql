@@ -29,7 +29,8 @@ CREATE INDEX "IDX_session_expire" ON "session" ("expire");
 
 CREATE TABLE threads (
   id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
-  creator_user_id uuid NOT NULL REFERENCES users,
+  creator_user_id uuid NOT NULL REFERENCES users ON DELETE CASCADE,
+  date_time TIMESTAMP NOT NULL DEFAULT now(),
   title VARCHAR(255) NOT NULL,
   initial_comment TEXT NOT NULL,
   likes uuid ARRAY NOT NULL DEFAULT '{}'
@@ -37,7 +38,8 @@ CREATE TABLE threads (
 
 CREATE TABLE comments (
   id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
-  thread_id uuid NOT NULL REFERENCES threads,
+  thread_id uuid NOT NULL REFERENCES threads ON DELETE CASCADE,
+  date_time TIMESTAMP NOT NULL DEFAULT now(),
   comment TEXT NOT NULL,
-  user_id uuid NOT NULL REFERENCES users
+  user_id uuid NOT NULL REFERENCES users ON DELETE CASCADE
 );

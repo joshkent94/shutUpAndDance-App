@@ -82,6 +82,15 @@ body {
   margin: 0;
 }
 
+.page-header-h5 a {
+  text-decoration: none;
+  color: var(--primary-colour);
+}
+
+.page-header-h5 a:hover {
+  color: var(--fourth-colour);
+}
+
 .page-content {
   flex-grow: 1;
   display: flex;
