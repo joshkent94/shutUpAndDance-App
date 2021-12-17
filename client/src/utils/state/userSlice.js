@@ -111,6 +111,21 @@ export const updateGenres = createAsyncThunk(
     }
 );
 
+export const updateWidgets = createAsyncThunk(
+    'user/updateWidgets',
+    async (widgets) => {
+        await fetch(`/user/widgets`, {
+            method: "PUT",
+            mode: "cors",
+            credentials: "include",
+            body: JSON.stringify(widgets),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+    }
+);
+
 const userSlice = createSlice({
     name: 'user',
     initialState: {
@@ -118,7 +133,8 @@ const userSlice = createSlice({
         firstName: '',
         lastName: '',
         email: '',
-        genres: []
+        genres: [],
+        widgets: []
     },
     reducers: {
         setGenres: (state, action) => {
@@ -132,6 +148,20 @@ const userSlice = createSlice({
                 return {
                     ...state,
                     genres: newGenres
+                };
+            };
+        },
+        setWidgetSelection: (state, action) => {
+            if (state.widgets.indexOf(action.payload) === -1 & state.widgets.length < 4) {
+                return {
+                    ...state,
+                    widgets: [...state.widgets, action.payload]
+                };
+            } else {
+                const newWidgets = state.widgets.filter(widget => widget !== action.payload);
+                return {
+                    ...state,
+                    widgets: newWidgets
                 };
             };
         }
@@ -170,6 +200,9 @@ const userSlice = createSlice({
         },
         [updateGenres.fulfilled]: (state, action) => {
             return;
+        },
+        [updateWidgets.fulfilled]: (state, action) => {
+            return;
         }
     }
 });
@@ -179,6 +212,7 @@ export const selectFirstName = state => state.user.firstName;
 export const selectLastName = state => state.user.lastName;
 export const selectEmail = state => state.user.email;
 export const selectGenres = state => state.user.genres;
-export const { setGenres } = userSlice.actions;
+export const selectWidgets = state => state.user.widgets;
+export const { setGenres, setWidgetSelection } = userSlice.actions;
 const userReducer = userSlice.reducer;
 export default userReducer;

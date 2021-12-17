@@ -16,6 +16,11 @@ CREATE TABLE genres (
   genres VARCHAR(255) ARRAY
 );
 
+CREATE TABLE widgets (
+  user_id uuid NOT NULL REFERENCES users ON DELETE CASCADE,
+  widgets VARCHAR(255) ARRAY
+);
+
 CREATE TABLE "session" (
   "sid" varchar NOT NULL COLLATE "default",
 	"sess" json NOT NULL,

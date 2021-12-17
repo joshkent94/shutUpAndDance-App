@@ -13,9 +13,7 @@ export default function GenreDropdown() {
     const genreOptions = useSelector(selectAvailableGenres);
     const selectedGenres = useSelector(selectGenres);
     const accessToken = useSelector(selectAccessToken);
-    const genres = useSelector(selectGenres);
     const [searchTerm, setSearchTerm] = useState('');
-    const sortedGenres = selectedGenres.slice().sort();
     const firstRender = useRef(true);
 
     const handleSearchTermChange = e => {
@@ -23,24 +21,28 @@ export default function GenreDropdown() {
         setSearchTerm(e.target.value);
     };
 
+    // get suggestions from Spotify
     const handleSuggestionSearch = e => {
         e.preventDefault();
         if (document.cookie && accessToken !== '') {
             dispatch(getSuggestions({
                 accessToken: accessToken,
-                genres: genres
+                genres: selectedGenres
             }));
         };
     };
 
-    const filteredSortedGenres = sortedGenres.filter(genre => {
+    // calculate selected genres filtered by search term and in alphabetical order
+    const filteredSortedGenres = selectedGenres.slice().sort().filter(genre => {
         return genre.includes(searchTerm.toLowerCase())
     });
-    
+
+    // calculate available genres filtered by search term and in alphabetical order
     const filteredGenres = genreOptions.filter(genre => {
         return genre.includes(searchTerm.toLowerCase())
     });
 
+    // update genres in db whenever selected genres change
     useEffect(() => {
         if (document.cookie) {
             if (firstRender.current) {

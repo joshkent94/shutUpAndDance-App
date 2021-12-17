@@ -10,7 +10,7 @@ import { selectEmail, selectFirstName, selectLastName } from "./utils/state/user
 import { getAccessToken } from "./utils/state/suggestionsSlice";
 import SignUp from "./components/Authentication/SignUp/SignUp";
 import Login from "./components/Authentication/Login/Login";
-import Dashboard from "./components/Dashboard/Dashboard";
+import Dashboard from "./components/DashboardFeature/Dashboard/Dashboard";
 import Suggestions from "./components/SuggestionsFeature/Suggestions/Suggestions";
 import Account from "./components/Account/Account";
 import NewThread from "./components/ForumFeature/NewThread/NewThread";
@@ -20,8 +20,8 @@ import AuthCheck from "./components/Authentication/AuthCheck/AuthCheck";
 import TopNav from "./components/Navigation/TopNav/TopNav";
 import Gigs from './components/GigsFeature/Gigs';
 import ScreenSizePrompt from "./components/ScreenSizePrompt/ScreenSizePrompt";
-import './App.css';
 import Footer from "./components/Footer/Footer";
+import './App.css';
 
 export default function App() {
   const dispatch = useDispatch();
