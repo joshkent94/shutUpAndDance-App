@@ -6,14 +6,6 @@
   border-bottom: 1px solid var(--third-colour);
 }
 
-#side-nav-toggle {
-  height: 2.3rem;
-}
-
-#side-nav-toggle {
-  cursor: pointer;
-}
-
 .navbar > .container {
   margin: 0;
   padding: 0 1.3rem !important;
@@ -28,6 +20,37 @@
 
 .navbar-brand {
   margin: 0;
+  position: relative;
+}
+
+#logo-icon {
+  height: 2.3rem;
+  cursor: pointer;
+  -webkit-transition: opacity 0.3s ease-in-out;
+  -moz-transition: opacity 0.3s ease-in-out;
+  -o-transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.hide-logo {
+  opacity: 0 !important;
+}
+
+#side-nav-toggle {
+  height: 2rem;
+  cursor: pointer;
+  position: absolute;
+  left: 4px;
+  top: 8px;
+  opacity: 0;
+  -webkit-transition: opacity 0.3s ease-in-out;
+  -moz-transition: opacity 0.3s ease-in-out;
+  -o-transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.show-menu-icon {
+  opacity: 1 !important;
 }
 
 .nav-item {

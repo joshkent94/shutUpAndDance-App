@@ -3,6 +3,7 @@ import { Container, Nav, Navbar } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../../../assets/logo.png';
+import menuIcon from '../../../assets/bars-solid.svg';
 import { resetForumDetails } from '../../../utils/state/forumSlice';
 import { resetSuggestionsDetails } from '../../../utils/state/suggestionsSlice';
 import { logout, selectEmail, selectFirstName, selectLastName } from '../../../utils/state/userSlice';
@@ -16,6 +17,19 @@ export default function TopNav() {
     const firstName = useSelector(selectFirstName);
     const lastName = useSelector(selectLastName);
     const email = useSelector(selectEmail);
+
+
+    // show burger menu icon on hover
+    const showMenu = () => {
+        document.getElementById("logo-icon").classList.add("hide-logo");
+        document.getElementById("side-nav-toggle").classList.add("show-menu-icon");
+    };
+
+    // show logo again when mouse leaves
+    const showLogo = () => {
+        document.getElementById("logo-icon").classList.remove("hide-logo");
+        document.getElementById("side-nav-toggle").classList.remove("show-menu-icon");
+    };
 
     // toggle sidebar off whenever URL changes
     useEffect(() => {
@@ -42,8 +56,9 @@ export default function TopNav() {
         <React.Fragment>
             <Navbar collapseOnSelect expand="lg" id="top-nav" className="fixed-top">
                 <Container>
-                    <Navbar.Brand onClick={toggleShow}>
-                        <img src={logo} alt="logo-side-nav-toggle" id="side-nav-toggle" />
+                    <Navbar.Brand onClick={toggleShow} onMouseEnter={showMenu} onMouseLeave={showLogo}>
+                        <img src={logo} alt="logo" id="logo-icon" />
+                        <img src={menuIcon} alt="side-nav-toggle" id="side-nav-toggle" />
                     </Navbar.Brand>
                     <Nav>
                         <Nav.Item id="help">

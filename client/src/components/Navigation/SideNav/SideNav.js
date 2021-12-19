@@ -6,7 +6,9 @@ export default function SideNav({ show }) {
     const handleRotate = e => {
         e.preventDefault();
         const arrow = e.target.tagName === "I" ? e.target : e.target.parentNode.childNodes[1];
-        arrow.classList.toggle('rotate');
+        if (arrow) {
+            arrow.classList.toggle('rotate');
+        };
     };
 
     return (

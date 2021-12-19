@@ -39,7 +39,17 @@ export default function WidgetDropdown({add, remove, selectedWidgets}) {
     return (
         <form>
             <div id="multiselect">
-                <input className="form-control" id="genre-input" type="search" placeholder={`Select widgets (4 max, ${selectedWidgets.length} chosen)`} aria-label="select widgets" onChange={handleSearchTermChange} onFocus={showCheckboxes} onBlur={hideCheckboxes}></input>
+                <input
+                    className="form-control"
+                    id="genre-input"
+                    type="search"
+                    placeholder={`Select widgets (4 max, ${selectedWidgets.length} chosen)`}
+                    aria-label="select widgets"
+                    onChange={handleSearchTermChange}
+                    onFocus={showCheckboxes}
+                    onBlur={hideCheckboxes}
+                    autoComplete="off"
+                />
                 <div id="genres">
                     <div id="selected-genres">
                         <p className="dropdown-heading">Selected Widgets</p>

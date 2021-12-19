@@ -57,7 +57,16 @@ export default function GenreDropdown() {
         <form>
             <div id="multiselect">
                 <div className="input-group">
-                    <input className="form-control" id="genre-input" type="search" placeholder={`Select genres (5 max, ${selectedGenres.length} chosen)`} aria-label="search genres" onChange={handleSearchTermChange} onFocus={showCheckboxes} onBlur={hideCheckboxes}></input>
+                    <input
+                        className="form-control"
+                        id="genre-input" type="search"
+                        placeholder={`Select genres (5 max, ${selectedGenres.length} chosen)`}
+                        aria-label="search genres"
+                        onChange={handleSearchTermChange}
+                        onFocus={showCheckboxes}
+                        onBlur={hideCheckboxes}
+                        autoComplete="off"
+                    />
                     <div className="input-group-append">
                         <button className="btn btn-outline-secondary" id="search-button" type="button" onClick={handleSuggestionSearch}>
                             <FontAwesomeIcon icon={faSearch} />

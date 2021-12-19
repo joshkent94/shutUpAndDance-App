@@ -50,7 +50,14 @@ export default function BrowseThreads() {
                     Forum {'>'} Browse Threads
                 </h5>
                 <div id="search" className="input-group">
-                    <input className="form-control" type="search" aria-label="search threads" placeholder="Search" onChange={handleSearchTermChange}></input>
+                    <input
+                        className="form-control"
+                        type="search"
+                        aria-label="search threads"
+                        placeholder="Search"
+                        onChange={handleSearchTermChange}
+                        autoComplete="off"
+                    />
                     <div className="input-group-append">
                         <button className="btn btn-outline-secondary" id="search-button" type="button">
                             <FontAwesomeIcon icon={faSearch} />
