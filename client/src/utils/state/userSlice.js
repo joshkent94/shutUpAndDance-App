@@ -167,7 +167,6 @@ const userSlice = createSlice({
             };
         },
         setWidgetOrder: (state, action) => {
-            console.log(action.payload);
             state.widgets = action.payload;
         }
     },
