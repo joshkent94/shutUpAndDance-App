@@ -1,7 +1,7 @@
 export default function MyThreadsWidget() {
     return (
-        <div className="content-container">
-            <div>
+        <div>
+            <div className="content-container widget animate__animated animate__fadeIn">
                 My Threads
             </div>
         </div>

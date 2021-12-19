@@ -1,17 +1,21 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import WidgetDropdown from '../WidgetDropdown/WidgetDropdown';
 import { displayWidget, widgetArray } from "../../../utils/helperFunctions/widgetHelper";
-import { selectWidgets } from '../../../utils/state/userSlice';
+import { selectWidgets, setWidgetOrder } from '../../../utils/state/userSlice';
 import { MuuriComponent } from 'muuri-react';
 import './Dashboard.css';
 
 export default function Dashboard() {
     const selectedWidgets = useSelector(selectWidgets);
     const [items, setItems] = useState(selectedWidgets);
+    const dispatch = useDispatch();
 
-    // functions passed down to widget selector to add/remove widgets state
-    const add = widget => setItems(items.concat(widget));
+    // functions passed down to widget selector to add/remove widgets from state
+    const add = widget => {
+        const widgetArray = [widget];
+        setItems(widgetArray.concat(items));
+    };
     const remove = widget => setItems(items.filter(item => item !== widget));
 
     // show widgets using muuri component based on widget selection or a prompt if none are selected
@@ -29,14 +33,23 @@ export default function Dashboard() {
             };
         };
         const children = items.map(widget => displayWidget(widget));
-        const showPlaceholder = item => item.getElement().cloneNode(true);
+        const showPlaceholder = item => item.getElement().cloneNode(false);
+        const sendItemOrder = item => {
+            const grid = item.getGrid();
+            const items = grid.getItems();
+            const orderedWidgets = items.map(item => item.getKey());
+            dispatch(setWidgetOrder(orderedWidgets));
+        };
         content =
-            <MuuriComponent key={items}
+            <MuuriComponent
+                key={items}
+                instantLayout
                 dragEnabled
                 dragPlaceholder={{
                     enabled: true,
                     createElement: showPlaceholder
-                }}>
+                }}
+                onDragEnd={sendItemOrder}>
                 {children}
             </MuuriComponent>
     };

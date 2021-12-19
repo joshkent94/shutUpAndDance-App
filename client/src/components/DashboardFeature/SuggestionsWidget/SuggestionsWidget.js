@@ -1,7 +1,7 @@
 export default function SuggestionsWidget() {
     return (
-        <div className="content-container">
-            <div>
+        <div>
+            <div className="content-container widget animate__animated animate__fadeIn">
                 Suggestions
             </div>
         </div>

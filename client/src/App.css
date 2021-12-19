@@ -53,7 +53,6 @@ body {
 .main {
   width: 100%;
   min-height: 100vh;
-  transition: width 0.3s ease-in-out;
   padding: 3.925rem 0 0 0;
   background-color: var(--fifth-colour);
   display: flex;
@@ -108,10 +107,6 @@ body {
   font-weight: 600;
   font-size: 1.1rem;
   margin: auto;
-}
-
-.side-nav-active {
-  width: 85vw !important;
 }
 
 .coolBeans {

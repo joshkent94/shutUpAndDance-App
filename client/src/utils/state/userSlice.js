@@ -156,7 +156,7 @@ const userSlice = createSlice({
             if (state.widgets.indexOf(action.payload) === -1 & state.widgets.length < 4) {
                 return {
                     ...state,
-                    widgets: [...state.widgets, action.payload]
+                    widgets: [action.payload, ...state.widgets]
                 };
             } else {
                 const newWidgets = state.widgets.filter(widget => widget !== action.payload);
@@ -165,6 +165,10 @@ const userSlice = createSlice({
                     widgets: newWidgets
                 };
             };
+        },
+        setWidgetOrder: (state, action) => {
+            console.log(action.payload);
+            state.widgets = action.payload;
         }
     },
     extraReducers: {
@@ -216,6 +220,6 @@ export const selectLastName = state => state.user.lastName;
 export const selectEmail = state => state.user.email;
 export const selectGenres = state => state.user.genres;
 export const selectWidgets = state => state.user.widgets;
-export const { setGenres, setWidgetSelection } = userSlice.actions;
+export const { setGenres, setWidgetSelection, setWidgetOrder } = userSlice.actions;
 const userReducer = userSlice.reducer;
 export default userReducer;

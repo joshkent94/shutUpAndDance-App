@@ -3,6 +3,7 @@
   width: 15vw;
   border: none;
   background: var(--fifth-colour);
+  border: 1px solid var(--third-colour);
 }
 
 .offcanvas-header {

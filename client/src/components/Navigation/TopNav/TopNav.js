@@ -17,22 +17,17 @@ export default function TopNav() {
     const lastName = useSelector(selectLastName);
     const email = useSelector(selectEmail);
 
+    // toggle sidebar off whenever URL changes
     useEffect(() => {
         setShow(false);
-        const currentPage = document.getElementsByClassName('main')[0];
-        if (currentPage) {
-            currentPage.classList.remove('side-nav-active');
-        };
     }, [location]);
 
+    // toggle the sidebar on/off
     const toggleShow = () => {
-        const currentPage = document.getElementsByClassName('main')[0];
         if (show) {
             setShow(false);
-            currentPage.classList.remove('side-nav-active');
         } else {
             setShow(true);
-            currentPage.classList.add('side-nav-active');
         };
     };
 
