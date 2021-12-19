@@ -35,8 +35,12 @@ const requestLogin = (req, res) => {
         .then(data => {
             if (data.rows[0]) {
                 pool.query(`SELECT *
-                        FROM users INNER JOIN genres ON (users.id = genres.user_id)
-                        WHERE users.id = ($1)`,
+                            FROM users
+                            INNER JOIN genres
+                            ON (users.id = genres.user_id)
+                            INNER JOIN widgets
+                            ON (users.id = widgets.user_id)
+                            WHERE users.id = ($1)`,
                     [data.rows[0].id])
                     .then(data => {
                         session.userId = data.rows[0].id;
@@ -45,7 +49,8 @@ const requestLogin = (req, res) => {
                             firstName: data.rows[0].first_name,
                             lastName: data.rows[0].last_name,
                             email: data.rows[0].email,
-                            genres: data.rows[0].genres
+                            genres: data.rows[0].genres,
+                            widgets: data.rows[0].widgets
                         });
                     });
             };

@@ -1,14 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { widgetArray } from "../../../utils/helperFunctions/widgetArray";
+import { useDispatch } from "react-redux";
+import { widgetArray } from "../../../utils/helperFunctions/widgetHelper";
 import { hideCheckboxes, showCheckboxes } from '../../../utils/helperFunctions/toggleCheckboxes';
 import WidgetOption from "../WidgetOption/WidgetOption";
-import { selectWidgets, updateWidgets } from "../../../utils/state/userSlice";
+import { updateWidgets } from "../../../utils/state/userSlice";
 
-export default function WidgetDropdown() {
+export default function WidgetDropdown({add, remove, selectedWidgets}) {
     const dispatch = useDispatch();
     const [searchTerm, setSearchTerm] = useState('');
-    const selectedWidgetsNames = useSelector(selectWidgets);
     const firstRender = useRef(true);
 
     const handleSearchTermChange = e => {
@@ -16,19 +15,13 @@ export default function WidgetDropdown() {
         setSearchTerm(e.target.value);
     };
 
-    // get names of widgets from helper function
-    let widgetArrayNames = [];
-    for (let i = 0; i < widgetArray.length; i++) {
-        widgetArrayNames.push(widgetArray[i].name);
-    };
-
     // calculate selected widgets filtered by search term and in alphabetical order
-    const filteredSortedWidgets = selectedWidgetsNames.slice().sort().filter(widget => {
+    const filteredSortedWidgets = selectedWidgets.slice().sort().filter(widget => {
         return widget.toLowerCase().includes(searchTerm.toLowerCase());
     });
     
     // calculate available widgets filtered by search term and in alphabetical order
-    const filteredWidgets = widgetArrayNames.slice().sort().filter(widget => {
+    const filteredWidgets = widgetArray.slice().sort().filter(widget => {
         return widget.toLowerCase().includes(searchTerm.toLowerCase());
     });
 
@@ -39,25 +32,25 @@ export default function WidgetDropdown() {
                 firstRender.current = false;
                 return;
             }
-            dispatch(updateWidgets(selectedWidgetsNames));
+            dispatch(updateWidgets(selectedWidgets));
         };
-    }, [dispatch, selectedWidgetsNames]);
+    }, [dispatch, selectedWidgets]);
 
     return (
         <form>
             <div id="multiselect">
-                <input className="form-control" id="genre-input" type="search" placeholder={`Select widgets (4 max, ${selectedWidgetsNames.length} chosen)`} aria-label="select widgets" onChange={handleSearchTermChange} onFocus={showCheckboxes} onBlur={hideCheckboxes}></input>
+                <input className="form-control" id="genre-input" type="search" placeholder={`Select widgets (4 max, ${selectedWidgets.length} chosen)`} aria-label="select widgets" onChange={handleSearchTermChange} onFocus={showCheckboxes} onBlur={hideCheckboxes}></input>
                 <div id="genres">
                     <div id="selected-genres">
                         <p className="dropdown-heading">Selected Widgets</p>
                         {filteredSortedWidgets.map(widget => {
-                            return <WidgetOption key={widget} widget={widget} />
+                            return <WidgetOption key={widget} widget={widget} add={add} remove={remove} selectedWidgets={selectedWidgets} />
                         })}
                     </div>
                     <div id="genre-options">
                         <p className="dropdown-heading">Widget Options</p>
                         {filteredWidgets.map(widget => {
-                            return <WidgetOption key={widget} widget={widget} />
+                            return <WidgetOption key={widget} widget={widget} add={add} remove={remove} selectedWidgets={selectedWidgets} />
                         })}
                     </div>
                 </div>

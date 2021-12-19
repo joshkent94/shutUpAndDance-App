@@ -107,6 +107,7 @@ body {
 .sub-heading {
   font-weight: 600;
   font-size: 1.1rem;
+  margin: auto;
 }
 
 .side-nav-active {

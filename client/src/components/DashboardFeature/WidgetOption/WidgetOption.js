@@ -1,13 +1,16 @@
-import { useDispatch, useSelector } from "react-redux";
-import { selectWidgets, setWidgetSelection } from "../../../utils/state/userSlice";
+import { useDispatch } from "react-redux";
+import { setWidgetSelection } from "../../../utils/state/userSlice";
 
-export default function WidgetOption(props) {
-    const widget = props.widget;
+export default function WidgetOption({widget, add, remove, selectedWidgets}) {
     const dispatch = useDispatch();
-    const selectedWidgetsNames = useSelector(selectWidgets);
 
     const handleWidgetSelect = e => {
         dispatch(setWidgetSelection(e.target.value));
+        if (selectedWidgets.includes(widget)) {
+            remove(widget);
+        } else {
+            add(widget);
+        };
     };
 
     return (
@@ -18,7 +21,7 @@ export default function WidgetOption(props) {
                 id={widget}
                 value={widget}
                 onClick={handleWidgetSelect}
-                checked={selectedWidgetsNames.includes(widget)}
+                checked={selectedWidgets.includes(widget)}
                 readOnly />
             <p className="genre">{widget}</p>
         </label>

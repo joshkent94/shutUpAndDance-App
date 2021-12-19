@@ -28,11 +28,11 @@ export default function SideNav({ show }) {
                             Suggestions
                         </NavLink>
                     </Nav.Item>
-                    <Nav.Item>
+                    {/* <Nav.Item>
                         <NavLink to="/gigs" className="nav-link">
                             Gigs
                         </NavLink>
-                    </Nav.Item>
+                    </Nav.Item> */}
                     <Nav.Item>
                         <Accordion flush>
                             <Accordion.Item eventKey="0">

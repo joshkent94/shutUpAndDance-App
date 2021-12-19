@@ -53,7 +53,8 @@ export const requestLogin = createAsyncThunk(
                 firstName: jsonResponse.firstName,
                 lastName: jsonResponse.lastName,
                 email: jsonResponse.email,
-                genres: jsonResponse.genres
+                genres: jsonResponse.genres,
+                widgets: jsonResponse.widgets
             };
         } else {
             showMessage(jsonResponse.message);
@@ -182,6 +183,7 @@ const userSlice = createSlice({
                 state.lastName = action.payload.lastName;
                 state.email = action.payload.email;
                 state.genres = action.payload.genres;
+                state.widgets = action.payload.widgets;
             };
         },
         [logout.fulfilled]: (state, action) => {
@@ -190,6 +192,7 @@ const userSlice = createSlice({
             state.lastName = '';
             state.email = '';
             state.genres = [];
+            state.widgets = [];
         },
         [updateUserDetails.fulfilled]: (state, action) => {
             if (action.payload) {

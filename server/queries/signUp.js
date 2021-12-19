@@ -22,17 +22,23 @@ const signUp = (req, res) => {
                             VALUES ($1, $2, $3, $4, $5)
                             RETURNING id`,
                     [cleanFirstName, cleanLastName, cleanEmail, salt, hashedPassword])
-                    .then((data) => {
+                    .then(data => {
                         pool.query(`INSERT INTO genres
                                     VALUES ($1, $2)
                                     RETURNING user_id`,
                             [data.rows[0].id, []])
-                            .then((data) => {
-                                session.userId = data.rows[0].user_id;
-                                res.status(201).send({
-                                    message: `Account created successfully`,
-                                    id: data.rows[0].user_id
-                                });
+                            .then(data => {
+                                pool.query(`INSERT INTO widgets
+                                            VALUES ($1, $2)
+                                            RETURNING user_id`,
+                                    [data.rows[0].user_id, []])
+                                    .then(data => {
+                                        session.userId = data.rows[0].user_id;
+                                        res.status(201).send({
+                                            message: `Account created successfully`,
+                                            id: data.rows[0].user_id
+                                        });
+                                    });
                             });
                     });
             };

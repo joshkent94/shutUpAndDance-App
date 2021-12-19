@@ -1,7 +1,9 @@
 export default function MyThreadsWidget() {
     return (
-        <div>
-            My Threads
+        <div className="content-container">
+            <div>
+                My Threads
+            </div>
         </div>
     );
 };

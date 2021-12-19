@@ -1,7 +1,9 @@
 export default function SuggestionsWidget() {
     return (
-        <div>
-            Suggestions
+        <div className="content-container">
+            <div>
+                Suggestions
+            </div>
         </div>
     );
 };
