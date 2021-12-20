@@ -10,7 +10,7 @@ export default function MostLikedThreadsWidget() {
 
     // get most liked threads on load if state is empty
     useEffect(() => {
-        if (mostLiked.length === 0) {
+        if (mostLiked.length === 0 && document.cookie) {
             dispatch(getMostLikedThreads());
         };
     });

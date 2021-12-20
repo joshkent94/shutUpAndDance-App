@@ -47,9 +47,12 @@ export default function TopNav() {
 
     const handleLogout = e => {
         e.preventDefault();
-        dispatch(logout());
-        dispatch(resetSuggestionsDetails());
-        dispatch(resetForumDetails());
+        dispatch(logout())
+            .unwrap()
+            .then(() => {
+                dispatch(resetSuggestionsDetails());
+                dispatch(resetForumDetails());
+            });
     };
     
     return (
