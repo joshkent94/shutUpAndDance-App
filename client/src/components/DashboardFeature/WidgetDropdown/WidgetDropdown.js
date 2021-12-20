@@ -43,7 +43,7 @@ export default function WidgetDropdown({add, remove, selectedWidgets}) {
                     className="form-control"
                     id="genre-input"
                     type="search"
-                    placeholder={`Select widgets (4 max, ${selectedWidgets.length} chosen)`}
+                    placeholder={`Select widgets`}
                     aria-label="select widgets"
                     onChange={handleSearchTermChange}
                     onFocus={showCheckboxes}

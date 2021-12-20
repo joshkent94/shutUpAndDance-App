@@ -139,7 +139,7 @@ const userSlice = createSlice({
     },
     reducers: {
         setGenres: (state, action) => {
-            if (state.genres.indexOf(action.payload) === -1 & state.genres.length < 5) {
+            if (state.genres.indexOf(action.payload) === -1 && state.genres.length < 5) {
                 return {
                     ...state,
                     genres: [...state.genres, action.payload]
@@ -153,7 +153,7 @@ const userSlice = createSlice({
             };
         },
         setWidgetSelection: (state, action) => {
-            if (state.widgets.indexOf(action.payload) === -1 & state.widgets.length < 4) {
+            if (state.widgets.indexOf(action.payload) === -1) {
                 return {
                     ...state,
                     widgets: [action.payload, ...state.widgets]
