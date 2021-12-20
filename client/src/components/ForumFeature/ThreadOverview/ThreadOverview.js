@@ -51,7 +51,7 @@ export default function ThreadOverview(props) {
                 <p><span className='thread-label'>Likes:</span> {thread.likes.length}</p>
                 <div className='icon-section'>
                     {likeIcon}
-                    <Link to={`${thread.id}`}><FontAwesomeIcon icon={faBookOpen} className='browse-threads-icon' /></Link>
+                    <Link to={`/forum/browse/${threadId}`}><FontAwesomeIcon icon={faBookOpen} className='browse-threads-icon' /></Link>
                 </div>
             </div>
         </div>

@@ -4,8 +4,31 @@
 }
 
 .widget {
+  display: flex;
+  flex-direction: column;
   height: 100%;
   width: 100%;
+  overflow-y: scroll;
+  background-color: unset !important;
+}
+
+.widget > .sub-heading {
+  margin: unset;
+  margin-bottom: 0.5rem;
+}
+
+.widget-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.widget-content > .content-container {
+  margin-bottom: 0.5rem;
+}
+
+.widget-content > .content-container:last-of-type {
+  margin: 0;
 }
 
 .muuri {
