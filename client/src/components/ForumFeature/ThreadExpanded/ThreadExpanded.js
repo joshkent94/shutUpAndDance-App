@@ -6,8 +6,8 @@ import { addComment, getComments, getThread, likeThreadToggle, selectComments, s
 import Comment from "../Comment/Comment";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
-import './ThreadExpanded.css';
 import { showMessage } from "../../../utils/helperFunctions/showMessage";
+import './ThreadExpanded.css';
 
 export default function ThreadExpanded() {
     const dispatch = useDispatch();
@@ -70,7 +70,7 @@ export default function ThreadExpanded() {
         <div className="page">
             <div className="page-header">
                 <h5 className="page-header-h5">
-                    Forum {'>'} <Link to="../browse">Browse Threads</Link> {'>'} Thread
+                    <Link to="/forum">Forum</Link> {'>'} Thread
                 </h5>
             </div>
             <div className="page-content">

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookOpen } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { likeThreadToggle, selectThreads } from "../../../utils/state/forumSlice";
+import { getThreadsByUserId, likeThreadToggle, selectThreads } from "../../../utils/state/forumSlice";
 import { selectUserId } from '../../../utils/state/userSlice';
 
 export default function ThreadOverview(props) {
@@ -19,12 +19,20 @@ export default function ThreadOverview(props) {
             dispatch(likeThreadToggle({
                 threadId,
                 method: 'threadOverviews'
-            }));
+            }))
+                .unwrap()
+                .then(() => {
+                    dispatch(getThreadsByUserId());
+                });
         } else {
             dispatch(likeThreadToggle({
                 threadId,
                 method: 'mostLiked'
-            }));
+            }))
+                .unwrap()
+                .then(() => {
+                    dispatch(getThreadsByUserId());
+                });
         };
     };
 
@@ -51,7 +59,7 @@ export default function ThreadOverview(props) {
                 <p><span className='thread-label'>Likes:</span> {thread.likes.length}</p>
                 <div className='icon-section'>
                     {likeIcon}
-                    <Link to={`/forum/browse/${threadId}`}><FontAwesomeIcon icon={faBookOpen} className='browse-threads-icon' /></Link>
+                    <Link to={`/forum/${threadId}`}><FontAwesomeIcon icon={faBookOpen} className='browse-threads-icon' /></Link>
                 </div>
             </div>
         </div>

@@ -1,22 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMostLikedThreads, resetForumDetails, searchThreads, selectMostLiked, selectThreads } from '../../../utils/state/forumSlice';
 import ThreadOverview from '../ThreadOverview/ThreadOverview';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import './BrowseThreads.css';
 
-export default function BrowseThreads() {
+export default function BrowseThreads({ searchTerm }) {
     const dispatch = useDispatch();
-    const [searchTerm, setSearchTerm] = useState('');
     const threads = useSelector(selectThreads);
     const mostLiked = useSelector(selectMostLiked);
-
-    // update local search term state
-    const handleSearchTermChange = e => {
-        e.preventDefault();
-        setSearchTerm(e.target.value);
-    };
 
     // get most liked threads if search term is blank &
     // search for threads whenever search term is updated
@@ -44,33 +35,8 @@ export default function BrowseThreads() {
     };
 
     return (
-        <div className="page">
-            <div className="page-header">
-                <h5 className="page-header-h5">
-                    Forum {'>'} Browse Threads
-                </h5>
-                <div id="search" className="input-group">
-                    <input
-                        className="form-control"
-                        type="search"
-                        aria-label="search threads"
-                        placeholder="Search"
-                        onChange={handleSearchTermChange}
-                        autoComplete="off"
-                    />
-                    <div className="input-group-append">
-                        <button className="btn btn-outline-secondary" id="search-button" type="button">
-                            <FontAwesomeIcon icon={faSearch} />
-                        </button>
-                    </div>
-                </div>
-            </div>
-        
-            <div className="page-content">
-                <div id="browse-threads-page">
-                    {content}
-                </div>
-            </div>
+        <div id="browse-threads-page">
+            {content}
         </div>
     );
 };

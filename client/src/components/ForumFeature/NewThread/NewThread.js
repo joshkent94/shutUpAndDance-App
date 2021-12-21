@@ -28,38 +28,26 @@ export default function NewThread() {
         }))
             .unwrap()
             .then(thread => {
-                navigate(`../browse/${thread.id}`);
+                navigate(`${thread.id}`);
             });
     };
 
     return (
-        <div className="page">
-            <div className="page-header">
-                <h5 className="page-header-h5">
-                    Forum {'>'} Create New Thread
-                </h5>
-            </div>
-            <div className="page-content">
-                <div id="new-thread-page" className='content-container'>
-                    <h6 id="new-thread-heading" className="sub-heading">
-                        Share your passion for music by creating a new thread:
-                    </h6>
-                    <form id="new-thread-form" onSubmit={handleNewThread}>
-                        <label className="form-element">
-                            Title
-                            <input className="form-control sign-up-element new-thread-element" type="text" id="thread-title" placeholder="Title" onChange={handleTitleChange} required />
-                        </label>
-                        <label className="form-element">
-                            Comment
-                            <textarea className="form-control sign-up-element new-thread-element" id="thread-comment" placeholder="What's on your mind..." onChange={handleCommentChange} required />
-                        </label>
+        <div id="new-thread-page">
+            <form id="new-thread-form" className='content-container' onSubmit={handleNewThread}>
+                <label className="form-element">
+                    Title
+                    <input className="form-control sign-up-element new-thread-element" type="text" id="thread-title" placeholder="Title" onChange={handleTitleChange} required />
+                </label>
+                <label className="form-element">
+                    Comment
+                    <textarea className="form-control sign-up-element new-thread-element" id="thread-comment" placeholder="What's on your mind..." onChange={handleCommentChange} required />
+                </label>
 
-                        <button className="coolBeans" id="create-thread-button" type="submit">
-                            Create Thread
-                        </button>
-                    </form>
-                </div>
-            </div>
+                <button className="coolBeans" id="create-thread-button" type="submit">
+                    Create Thread
+                </button>
+            </form>
         </div>
     );
 };

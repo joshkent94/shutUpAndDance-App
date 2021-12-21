@@ -11,11 +11,10 @@ import { getAccessToken } from "./utils/state/suggestionsSlice";
 import SignUp from "./components/Authentication/SignUp/SignUp";
 import Login from "./components/Authentication/Login/Login";
 import Dashboard from "./components/DashboardFeature/Dashboard/Dashboard";
+import Forum from "./components/ForumFeature/Forum/Forum";
+import ThreadExpanded from "./components/ForumFeature/ThreadExpanded/ThreadExpanded";
 import Suggestions from "./components/SuggestionsFeature/Suggestions/Suggestions";
 import Account from "./components/Account/Account";
-import NewThread from "./components/ForumFeature/NewThread/NewThread";
-import ThreadExpanded from "./components/ForumFeature/ThreadExpanded/ThreadExpanded";
-import BrowseThreads from "./components/ForumFeature/BrowseThreads/BrowseThreads";
 import AuthCheck from "./components/Authentication/AuthCheck/AuthCheck";
 import TopNav from "./components/Navigation/TopNav/TopNav";
 import Gigs from './components/GigsFeature/Gigs';
@@ -79,19 +78,22 @@ export default function App() {
     content =
       <Router>
         <Routes>
-          <Route path="*"
+          <Route
+            path="*"
             element={
               <Navigate to="/dashboard" replace />
             }
           />
 
-          <Route path="/signup"
+          <Route
+            path="/signup"
             element={
               <SignUp />
             }
           />
 
-          <Route path="/login"
+          <Route
+            path="/login"
             element={
               <AuthCheck>
                 <Login />
@@ -99,7 +101,8 @@ export default function App() {
             }
           />
 
-          <Route path="/dashboard"
+          <Route
+            path="/dashboard"
             element={
               <AuthCheck>
                 <TopNav />
@@ -111,7 +114,8 @@ export default function App() {
             }
           />
 
-          <Route path="/suggestions"
+          <Route
+            path="/suggestions"
             element={
               <AuthCheck>
                 <TopNav />
@@ -123,7 +127,8 @@ export default function App() {
             }
           />
 
-          <Route path="/gigs"
+          <Route
+            path="/gigs"
             element={
               <AuthCheck>
                 <TopNav />
@@ -135,7 +140,8 @@ export default function App() {
             }
           />
 
-          <Route path="/forum/*"
+          <Route
+            path="/forum/*"
             element={
               <AuthCheck>
                 <TopNav />
@@ -147,7 +153,8 @@ export default function App() {
             }
           />
 
-          <Route path="/account"
+          <Route
+            path="/account"
             element={
               <AuthCheck>
                 <TopNav />
@@ -170,23 +177,19 @@ export default function App() {
 function ForumRoutes() {
   return (
     <Routes>
-      <Route path="new"
+      <Route
+        path=""
         element={
-          <NewThread />
+          <Forum />
         }
       />
-      
-      <Route path="browse/:threadId"
+
+      <Route
+        path="/:threadId"
         element={
           <ThreadExpanded />
         }
       />
-      
-      <Route path="browse"
-        element={
-          <BrowseThreads />
-        }
-      />
     </Routes>
   );
-};
+}
