@@ -40,7 +40,9 @@ Node is required to work on this app. Clone the repo and run npm install in both
 Features ready:
 
 - Register for an account, login and have sessions persist.
+- Create a custom dashboard by selecting and positioning widgets.
 - Select favourite music genres and receive song suggestions based on your choices.
+- Create, like and comment on threads.
 - Amend and save account details.
 
 ## Status

@@ -41,6 +41,8 @@ export default function Account() {
         setConfirmedPassword(e.target.value);
     };
 
+    // save user's details, display relevant on-screen message
+    // and clear password fields if necessary
     const handleDetailsSave = e => {
         e.preventDefault();
         if (newPassword !== '') {
