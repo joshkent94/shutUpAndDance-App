@@ -86,6 +86,33 @@ export const getThread = createAsyncThunk(
     }
 );
 
+export const getThreadsByUserId = createAsyncThunk(
+    'forum/getThreadsByUserId',
+    async () => {
+        const response = await fetch('/threads/user', {
+            mode: "cors",
+            credentials: "include"
+        });
+        if (response.ok) {
+            const jsonResponse = await response.json();
+            let returnArray = [];
+            for (let i = 0; i < jsonResponse.length; i++) {
+                const threadObj = {
+                    id: jsonResponse[i].id,
+                    timestamp: jsonResponse[i].date_time,
+                    title: jsonResponse[i].title,
+                    initialComment: jsonResponse[i].initial_comment,
+                    likes: jsonResponse[i].likes,
+                    firstName: jsonResponse[i].first_name,
+                    lastName: jsonResponse[i].last_name
+                };
+                returnArray.push(threadObj);
+            };
+            return returnArray;
+        };
+    }
+);
+
 export const likeThreadToggle = createAsyncThunk(
     'forum/likeThreadToggle',
     async ({ threadId, method }) => {
@@ -199,6 +226,7 @@ export const likeCommentToggle = createAsyncThunk(
 const forumSlice = createSlice({
     name: 'forum',
     initialState: {
+        userThreads: [],
         threadOverviews: [],
         threadInfo: {
             id: "",
@@ -214,6 +242,7 @@ const forumSlice = createSlice({
     },
     reducers: {
         resetForumDetails: (state, action) => {
+            state.userThreads = [];
             state.threadOverviews = [];
             state.threadInfo = {
                 id: "",
@@ -237,6 +266,9 @@ const forumSlice = createSlice({
         },
         [getThread.fulfilled]: (state, action) => {
             state.threadInfo = action.payload;
+        },
+        [getThreadsByUserId.fulfilled]: (state, action) => {
+            state.userThreads = action.payload;
         },
         [likeThreadToggle.fulfilled]: (state, action) => {
             if (action.payload.method === 'threadOverviews') {
@@ -265,6 +297,7 @@ const forumSlice = createSlice({
     }
 });
 
+export const selectUserThreads = state => state.forum.userThreads;
 export const selectThreads = state => state.forum.threadOverviews;
 export const selectThreadInfo = state => state.forum.threadInfo;
 export const selectComments = state => state.forum.comments;
