@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMostLikedThreads, resetForumDetails, searchThreads, selectMostLiked, selectThreads } from '../../../utils/state/forumSlice';
+import { getMostLikedThreads, searchThreads, selectMostLiked, selectThreads } from '../../../utils/state/forumSlice';
 import ThreadOverview from '../ThreadOverview/ThreadOverview';
 import './BrowseThreads.css';
 
@@ -13,7 +13,6 @@ export default function BrowseThreads({ searchTerm }) {
     // search for threads whenever search term is updated
     useEffect(() => {
         if (!searchTerm && document.cookie) {
-            dispatch(resetForumDetails());
             dispatch(getMostLikedThreads());
         };
         if (searchTerm) {
@@ -24,7 +23,7 @@ export default function BrowseThreads({ searchTerm }) {
     }, [dispatch, searchTerm]);
 
     let content;
-    if (threads.length === 0 && !searchTerm) {
+    if (!searchTerm) {
         content = mostLiked.map(thread => {
             return <ThreadOverview key={thread.id} thread={thread} />
         });

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { createThread } from '../../../utils/state/forumSlice';
+import { createThread, getThreadsByUserId } from '../../../utils/state/forumSlice';
 import './NewThread.css';
 
 export default function NewThread() {
@@ -20,6 +20,8 @@ export default function NewThread() {
         setComment(e.target.value);
     };
 
+    // create thread, then update user's threads in state
+    // and navigate to the newly created thread
     const handleNewThread = e => {
         e.preventDefault();
         dispatch(createThread({
@@ -28,13 +30,14 @@ export default function NewThread() {
         }))
             .unwrap()
             .then(thread => {
+                dispatch(getThreadsByUserId());
                 navigate(`${thread.id}`);
             });
     };
 
     return (
         <div id="new-thread-page">
-            <form id="new-thread-form" className='content-container' onSubmit={handleNewThread}>
+            <form id="new-thread-form" className='content-container animate__animated animate__fadeIn' onSubmit={handleNewThread}>
                 <label className="form-element">
                     Title
                     <input className="form-control sign-up-element new-thread-element" type="text" id="thread-title" placeholder="Title" onChange={handleTitleChange} required />

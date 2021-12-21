@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookOpen } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { getThreadsByUserId, likeThreadToggle, selectThreads } from "../../../utils/state/forumSlice";
+import { getMostLikedThreads, getThreadsByUserId, likeThreadToggle, selectThreads } from "../../../utils/state/forumSlice";
 import { selectUserId } from '../../../utils/state/userSlice';
 
 export default function ThreadOverview(props) {
@@ -23,6 +23,7 @@ export default function ThreadOverview(props) {
                 .unwrap()
                 .then(() => {
                     dispatch(getThreadsByUserId());
+                    dispatch(getMostLikedThreads());
                 });
         } else {
             dispatch(likeThreadToggle({
@@ -32,6 +33,7 @@ export default function ThreadOverview(props) {
                 .unwrap()
                 .then(() => {
                     dispatch(getThreadsByUserId());
+                    dispatch(getMostLikedThreads());
                 });
         };
     };
