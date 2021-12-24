@@ -265,7 +265,9 @@ const forumSlice = createSlice({
             state.threadOverviews = action.payload;
         },
         [getThread.fulfilled]: (state, action) => {
-            state.threadInfo = action.payload;
+            if (action.payload) {
+                state.threadInfo = action.payload;
+            };
         },
         [getThreadsByUserId.fulfilled]: (state, action) => {
             state.userThreads = action.payload;
@@ -285,7 +287,9 @@ const forumSlice = createSlice({
             state.mostLiked = action.payload;
         },
         [getComments.fulfilled]: (state, action) => {
-            state.comments = action.payload;
+            if (action.payload) {
+                state.comments = action.payload;   
+            };
         },
         [addComment.fulfilled]: (state, action) => {
             return;
