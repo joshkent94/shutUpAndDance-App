@@ -9,11 +9,7 @@ const getComments = (req, res) => {
                 WHERE comments.thread_id = ($1)`,
             [threadId])
             .then(data => {
-                if (data.rows[0]) {
-                    res.status(200).send(data.rows[0]);;
-                } else {
-                    res.status(404).send();
-                };
+                res.status(200).send(data.rows);
             });
     } else {
         res.status(404).send();
