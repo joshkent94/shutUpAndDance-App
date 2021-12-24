@@ -1,4 +1,4 @@
-const { pool } = require('../connectionConfig');
+const { pool } = require('../../connectionConfig');
 const sanitizeHtml = require('sanitize-html');
 
 const addComment = (req, res) => {

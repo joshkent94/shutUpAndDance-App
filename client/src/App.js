@@ -5,9 +5,8 @@ import {
   Navigate
 } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectEmail, selectFirstName, selectLastName } from "./utils/state/userSlice";
-import { getAccessToken } from "./utils/state/suggestionsSlice";
 import SignUp from "./components/Authentication/SignUp/SignUp";
 import Login from "./components/Authentication/Login/Login";
 import Dashboard from "./components/DashboardFeature/Dashboard/Dashboard";
@@ -20,10 +19,10 @@ import TopNav from "./components/Navigation/TopNav/TopNav";
 import Gigs from './components/GigsFeature/Gigs';
 import ScreenSizePrompt from "./components/ScreenSizePrompt/ScreenSizePrompt";
 import Footer from "./components/Footer/Footer";
+import SpotifyAuthentication from "./components/Authentication/SpotifyAuthentication/SpotifyAuthentication";
 import './App.css';
 
 export default function App() {
-  const dispatch = useDispatch();
   const userEmail = useSelector(selectEmail);
   const userFirstName = useSelector(selectFirstName);
   const userLastName = useSelector(selectLastName);
@@ -55,13 +54,6 @@ export default function App() {
     };
   }, [userEmail, userFirstName, userLastName]);
 
-  // get Spotify access token if logged in
-  useEffect(() => {
-    if (document.cookie) {
-      dispatch(getAccessToken());
-    };
-  }, [userEmail, dispatch]);
-
   // add event listener to set state of app whenever screen size changes
   useEffect(() => {
     const handleResize = () => {
@@ -81,7 +73,7 @@ export default function App() {
           <Route
             path="*"
             element={
-              <Navigate to="/dashboard" replace />
+              <Navigate to="/dashboard" />
             }
           />
 
@@ -98,6 +90,13 @@ export default function App() {
               <AuthCheck>
                 <Login />
               </AuthCheck>
+            }
+          />
+
+          <Route
+            path="/spotify"
+            element={
+              <SpotifyAuthentication />
             }
           />
 

@@ -1,11 +1,11 @@
 const express = require('express');
 const threadsRouter = express.Router();
-const { getThread } = require('../queries/getThread');
-const { getThreads } = require('../queries/getThreads');
-const { getMostLikedThreads } = require('../queries/getMostLikedThreads');
-const { likeThreadToggle } = require('../queries/likeThread');
-const { newThread } = require('../queries/newThread');
-const { getThreadsByUserId } = require('../queries/getThreadsByUserId');
+const { getThread } = require('../queries/threads/getThread');
+const { getThreads } = require('../queries/threads/getThreads');
+const { getMostLikedThreads } = require('../queries/threads/getMostLikedThreads');
+const { likeThreadToggle } = require('../queries/threads/likeThread');
+const { newThread } = require('../queries/threads/newThread');
+const { getThreadsByUserId } = require('../queries/threads/getThreadsByUserId');
 
 threadsRouter.get('/mostLiked', getMostLikedThreads);
 threadsRouter.get('/user', getThreadsByUserId);

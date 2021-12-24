@@ -11,7 +11,7 @@ export default function AuthCheck({ children }) {
                     to="/dashboard"
                     replace
                 />
-                : children;
+                : children
     } else {
         content =
             document.cookie
@@ -19,7 +19,6 @@ export default function AuthCheck({ children }) {
                 : <Navigate
                     to="/login"
                     replace
-                    state={{ path: location.pathname }}
                 />;
     };
 

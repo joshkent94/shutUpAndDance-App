@@ -1,4 +1,4 @@
-const { pool } = require('../connectionConfig');
+const { pool } = require('../../connectionConfig');
 
 const getGenres = (req, res) => {
     if (req.session.userId) {

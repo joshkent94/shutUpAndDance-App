@@ -1,8 +1,8 @@
 const express = require('express');
 const commentsRouter = express.Router();
-const { getComments } = require('../queries/getComments');
-const { addComment } = require('../queries/addComment');
-const { likeCommentToggle } = require('../queries/likeComment');
+const { getComments } = require('../queries/comments/getComments');
+const { addComment } = require('../queries/comments/addComment');
+const { likeCommentToggle } = require('../queries/comments/likeComment');
 
 commentsRouter.get('/:threadId', getComments);
 commentsRouter.post('/:threadId', addComment);

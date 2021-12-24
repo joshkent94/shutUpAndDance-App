@@ -1,4 +1,4 @@
-const { pool } = require('../connectionConfig');
+const { pool } = require('../../connectionConfig');
 
 const getComments = (req, res) => {
     const threadId = req.params.threadId;

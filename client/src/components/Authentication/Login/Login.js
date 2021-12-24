@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { requestLogin } from '../../../utils/state/userSlice';
+import { spotifyRedirect } from '../../../utils/helperFunctions/spotifyRedirect';
 import Logo from '../../../assets/inverted-logo.png';
 import './Login.css';
 
@@ -9,8 +10,6 @@ export default function Login() {
     const dispatch = useDispatch();
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
-    const navigate = useNavigate();
-    const { state } = useLocation();
 
     const updateEmail = e => {
         e.preventDefault();
@@ -22,6 +21,7 @@ export default function Login() {
         setPassword(e.target.value);
     };
 
+    // log user into app then make them go through Spotify auth
     const handleLoginSubmit = e => {
         e.preventDefault();
         dispatch(requestLogin({
@@ -30,13 +30,7 @@ export default function Login() {
         }))
             .unwrap()
             .then(() => {
-                if (document.cookie) {
-                    if (state) {
-                        navigate(state.path || "/dashboard");
-                    } else {
-                        navigate("/dashboard");
-                    };
-                };
+                spotifyRedirect();
             });
     };
 

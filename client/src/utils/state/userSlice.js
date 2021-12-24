@@ -10,7 +10,7 @@ export const submitSignUp = createAsyncThunk(
             email,
             password
         };
-        const response = await fetch(`/signup`, {
+        const response = await fetch(`/user/signup`, {
             method: "POST",
             mode: "cors",
             credentials: 'include',
@@ -37,10 +37,9 @@ export const requestLogin = createAsyncThunk(
             email,
             password
         };
-        const response = await fetch(`/authenticate`, {
+        const response = await fetch(`/user/authenticate`, {
             method: "POST",
             mode: "cors",
-            credentials: 'include',
             headers: {
                 "Content-Type": "application/json"
             },
@@ -65,7 +64,7 @@ export const requestLogin = createAsyncThunk(
 export const logout = createAsyncThunk(
     'user/logout',
     async () => {
-        const response = await fetch(`/logout`, {
+        const response = await fetch(`/user/logout`, {
             method: "GET",
             credentials: 'include',
             mode: "cors"

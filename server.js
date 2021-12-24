@@ -7,10 +7,6 @@ const path = require('path');
 const https = require('https');
 const pgSession = require('connect-pg-simple')(session);
 const { pool, isProduction } = require('./server/connectionConfig');
-const { signUp } = require('./server/queries/signUp');
-const { requestLogin } = require('./server/queries/requestLogin');
-const { requestLogout } = require('./server/queries/requestLogout');
-const { getGenres } = require('./server/queries/getGenres');
 const { userRouter } = require('./server/routes/userRoutes');
 const { threadsRouter } = require('./server/routes/threadsRouter');
 const { commentsRouter } = require('./server/routes/commentsRouter');
@@ -23,7 +19,7 @@ app.use(
     origin: ["https://localhost:3000", "https://app.shutupanddance.io"],
     credentials: true,
     optionsSuccessStatus: 204,
-  }),
+  })
 );
 app.use(express.json());
 app.use(
@@ -54,10 +50,6 @@ if (isProduction) {
 app.use('/user', userRouter);
 app.use('/threads', threadsRouter);
 app.use('/comments', commentsRouter);
-app.post('/signup', signUp);
-app.post('/authenticate', requestLogin);
-app.get('/genres', getGenres);
-app.get('/logout', requestLogout);
 
 // catch all route
 app.get('*', (req, res) => {

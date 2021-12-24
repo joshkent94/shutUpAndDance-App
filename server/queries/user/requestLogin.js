@@ -1,4 +1,4 @@
-const { pool } = require('../connectionConfig');
+const { pool } = require('../../connectionConfig');
 const bcrypt = require('bcryptjs');
 const sanitizeHtml = require('sanitize-html');
 
