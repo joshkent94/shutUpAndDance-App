@@ -21,7 +21,7 @@ export default function Login() {
         setPassword(e.target.value);
     };
 
-    // log user into app then make them go through Spotify auth
+    // log user into app and authenticate with Spotify
     const handleLoginSubmit = e => {
         e.preventDefault();
         dispatch(requestLogin({
@@ -29,8 +29,10 @@ export default function Login() {
             password: password
         }))
             .unwrap()
-            .then(() => {
-                spotifyRedirect();
+            .then(data => {
+                if (data) {
+                    spotifyRedirect();
+                };
             });
     };
 

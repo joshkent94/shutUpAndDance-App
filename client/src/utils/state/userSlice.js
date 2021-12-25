@@ -1,14 +1,16 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { showMessage } from "../helperFunctions/showMessage";
+import { hashFunction } from "../helperFunctions/hashFunction";
 
 export const submitSignUp = createAsyncThunk(
     'user/submitSignUp',
     async ({ firstName, lastName, email, password }) => {
+        const hashedPassword = hashFunction(password);
         const data = {
             firstName,
             lastName,
             email,
-            password
+            password: hashedPassword
         };
         const response = await fetch(`/user/signup`, {
             method: "POST",
@@ -33,9 +35,10 @@ export const submitSignUp = createAsyncThunk(
 export const requestLogin = createAsyncThunk(
     'user/requestLogin',
     async ({ email, password }) => {
+        const hashedPassword = hashFunction(password);
         const data = {
             email,
-            password
+            password: hashedPassword
         };
         const response = await fetch(`/user/authenticate`, {
             method: "POST",

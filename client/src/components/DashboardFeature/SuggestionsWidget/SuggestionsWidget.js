@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getSuggestions, selectAccessToken, selectSuggestions } from "../../../utils/state/suggestionsSlice";
 import Suggestion from "../../SuggestionsFeature/Suggestion/Suggestion";
 import { selectGenres } from "../../../utils/state/userSlice";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import './SuggestionsWidget.css';
@@ -12,6 +12,7 @@ export default function SuggestionsWidget() {
     const suggestions = useSelector(selectSuggestions);
     const selectedGenres = useSelector(selectGenres);
     const accessToken = useSelector(selectAccessToken);
+    const firstRender = useRef(true);
 
     // get suggestions from Spotify
     const handleSuggestionSearch = e => {
@@ -26,7 +27,8 @@ export default function SuggestionsWidget() {
 
     // get song suggestions from Spotify on initial page load
     useEffect(() => {
-        if (suggestions.length === 0 && document.cookie && accessToken !== '') {
+        if (suggestions.length === 0 && document.cookie && accessToken !== '' && firstRender.current) {
+            firstRender.current = false;
             dispatch(getSuggestions({
                 accessToken: accessToken,
                 genres: selectedGenres

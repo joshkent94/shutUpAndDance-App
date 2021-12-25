@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { hashFunction } from '../../utils/helperFunctions/hashFunction';
 import { passwordCheck } from '../../utils/helperFunctions/passwordCheck';
 import { showMessage } from '../../utils/helperFunctions/showMessage';
 import { selectEmail, selectFirstName, selectLastName, updateUserDetails } from '../../utils/state/userSlice';
@@ -48,11 +49,12 @@ export default function Account() {
         if (newPassword !== '') {
             if (passwordCheck(newPassword)) {
                 if (newPassword === confirmedPassword) {
+                    const hashedPassword = hashFunction(newPassword);
                     const details = {
                         firstName: newFirstName,
                         lastName: newLastName,
                         email: newEmail,
-                        password: newPassword
+                        password: hashedPassword
                     };
                     dispatch(updateUserDetails(details))
                         .unwrap()

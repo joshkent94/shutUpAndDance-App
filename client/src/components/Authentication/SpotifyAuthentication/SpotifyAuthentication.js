@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { Navigate, useSearchParams } from "react-router-dom";
+import { showMessage } from "../../../utils/helperFunctions/showMessage";
 import { resetForumDetails } from "../../../utils/state/forumSlice";
 import { getAccessToken, resetSuggestionsDetails } from '../../../utils/state/suggestionsSlice';
 import { logout } from "../../../utils/state/userSlice";
@@ -28,6 +29,7 @@ export default function SpotifyAuthentication() {
                 dispatch(resetSuggestionsDetails());
                 dispatch(resetForumDetails());
             });
+        showMessage(`Must allow access to Spotify to continue`);
     };
 
     return content;

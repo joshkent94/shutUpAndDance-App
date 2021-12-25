@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { submitSignUp } from '../../../utils/state/userSlice';
 import { passwordCheck } from '../../../utils/helperFunctions/passwordCheck';
 import { showMessage } from '../../../utils/helperFunctions/showMessage';
+import { spotifyRedirect } from '../../../utils/helperFunctions/spotifyRedirect';
 import Logo from '../../../assets/inverted-logo.png';
 import './SignUp.css';
 
@@ -14,7 +15,6 @@ export default function SignUp() {
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
     const [validatedPassword, setValidatedPassword] = useState(null);
-    const navigate = useNavigate();
 
     const updateFirstName = e => {
         e.preventDefault();
@@ -41,22 +41,20 @@ export default function SignUp() {
         setValidatedPassword(e.target.value);
     };
 
-    const handleSignUpRequest = e => {
+    // sign up and redirect to authenticate with Spotify if successful
+    const handleSignUpRequest = async e => {
         e.preventDefault();
         if (password === validatedPassword) {
             if (passwordCheck(password)) {
-                dispatch(submitSignUp({
+                const signedUp = await dispatch(submitSignUp({
                     firstName,
                     lastName,
                     email,
                     password
-                }))
-                    .unwrap()
-                    .then(() => {
-                        if (document.cookie) {
-                            navigate("/dashboard");
-                        };
-                    });
+                })).unwrap();
+                if (signedUp) {
+                    spotifyRedirect();
+                };
             } else {
                 showMessage('Password must meet criteria');
             };
