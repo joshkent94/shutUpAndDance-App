@@ -22,11 +22,6 @@ export default function SideNav({ show }) {
                             Suggestions
                         </NavLink>
                     </Nav.Item>
-                    {/* <Nav.Item>
-                        <NavLink to="/gigs" className="nav-link">
-                            Gigs
-                        </NavLink>
-                    </Nav.Item> */}
                     <Nav.Item>
                         <NavLink to="/forum" className="nav-link">
                             Forum

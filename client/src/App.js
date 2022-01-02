@@ -16,7 +16,6 @@ import Suggestions from "./components/SuggestionsFeature/Suggestions/Suggestions
 import Account from "./components/Account/Account";
 import AuthCheck from "./components/Authentication/AuthCheck/AuthCheck";
 import TopNav from "./components/Navigation/TopNav/TopNav";
-import Gigs from './components/GigsFeature/Gigs';
 import ScreenSizePrompt from "./components/ScreenSizePrompt/ScreenSizePrompt";
 import Footer from "./components/Footer/Footer";
 import SpotifyAuthentication from "./components/Authentication/SpotifyAuthentication/SpotifyAuthentication";
@@ -120,19 +119,6 @@ export default function App() {
                 <TopNav />
                 <div className="main">
                   <Suggestions />
-                  <Footer />
-                </div>
-              </AuthCheck>
-            }
-          />
-
-          <Route
-            path="/gigs"
-            element={
-              <AuthCheck>
-                <TopNav />
-                <div className="main">
-                  <Gigs />
                   <Footer />
                 </div>
               </AuthCheck>
