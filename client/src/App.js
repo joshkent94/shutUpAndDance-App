@@ -41,7 +41,7 @@ export default function App() {
           id: userEmail,
           email: userEmail,
           full_name: `${userFirstName} ${userLastName}`,
-          return_url: 'https://shutupanddance.io/dashboard'
+          return_url: 'https://app.shutupanddance.io/dashboard'
         },
         account: {
           id: userEmail,
@@ -79,7 +79,9 @@ export default function App() {
           <Route
             path="/signup"
             element={
-              <SignUp />
+              <AuthCheck>
+                <SignUp />
+              </AuthCheck>
             }
           />
 

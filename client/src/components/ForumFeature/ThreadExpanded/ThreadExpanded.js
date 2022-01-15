@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserId } from "../../../utils/state/userSlice";
-import { addComment, getComments, getThread, likeThreadToggle, selectComments, selectThreadInfo } from "../../../utils/state/forumSlice";
+import { addComment, getComments, getThread, likeThreadToggle, selectThreadInfo } from "../../../utils/state/forumSlice";
 import Comment from "../Comment/Comment";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
@@ -13,7 +13,7 @@ export default function ThreadExpanded() {
     const dispatch = useDispatch();
     const userId = useSelector(selectUserId);
     const threadInfo = useSelector(selectThreadInfo);
-    const comments = useSelector(selectComments);
+    const comments = threadInfo.comments;
     const { threadId } = useParams();
     const [newComment, setNewComment] = useState('');
 

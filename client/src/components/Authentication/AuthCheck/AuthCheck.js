@@ -8,7 +8,7 @@ export default function AuthCheck({ children }) {
 
     let content;
     let loggedIn = document.cookie && accessToken;
-    if (location.pathname === '/login') {
+    if (location.pathname === '/login' || location.pathname === '/signup') {
         content =
             loggedIn
                 ? <Navigate

@@ -12,6 +12,8 @@ export default function SpotifyAuthentication() {
     const state = searchParams.get('state');
     let content = null;
 
+    // if user authenticates with Spotify, get an access token and log in
+    // else completely log out and return to log in page with message
     if (state === process.env.REACT_APP_SPOTIFY_STATE && code) {
         dispatch(getAccessToken(code));
         content =

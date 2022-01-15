@@ -183,12 +183,14 @@ const userSlice = createSlice({
         },
         [requestLogin.fulfilled]: (state, action) => {
             if (action.payload) {
-                state.id = action.payload.id;
-                state.firstName = action.payload.firstName;
-                state.lastName = action.payload.lastName;
-                state.email = action.payload.email;
-                state.genres = action.payload.genres;
-                state.widgets = action.payload.widgets;
+                if (action.payload.id) {
+                    state.id = action.payload.id;
+                    state.firstName = action.payload.firstName;
+                    state.lastName = action.payload.lastName;
+                    state.email = action.payload.email;
+                    state.genres = action.payload.genres;
+                    state.widgets = action.payload.widgets;
+                };
             };
         },
         [logout.fulfilled]: (state, action) => {

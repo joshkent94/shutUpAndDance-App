@@ -23,6 +23,7 @@ export const createThread = createAsyncThunk(
                 timestamp: jsonResponse.date_time,
                 title: jsonResponse.title,
                 initialComment: jsonResponse.initial_comment,
+                comments: [],
                 likes: jsonResponse.likes,
                 firstName: jsonResponse.first_name,
                 lastName: jsonResponse.last_name
@@ -77,6 +78,7 @@ export const getThread = createAsyncThunk(
                 timestamp: jsonResponse.date_time,
                 title: jsonResponse.title,
                 initialComment: jsonResponse.initial_comment,
+                comments: [],
                 likes: jsonResponse.likes,
                 firstName: jsonResponse.first_name,
                 lastName: jsonResponse.last_name
@@ -226,35 +228,35 @@ export const likeCommentToggle = createAsyncThunk(
 const forumSlice = createSlice({
     name: 'forum',
     initialState: {
-        userThreads: [],
         threadOverviews: [],
+        userThreads: [],
+        mostLiked: [],
         threadInfo: {
             id: "",
             timestamp: '',
             title: "",
             initialComment: "",
+            comments: [],
             likes: [],
             firstName: "",
             lastName: ""
-        },
-        comments: [],
-        mostLiked: []
+        }
     },
     reducers: {
         resetForumDetails: (state, action) => {
-            state.userThreads = [];
             state.threadOverviews = [];
+            state.userThreads = [];
+            state.mostLiked = [];
             state.threadInfo = {
                 id: "",
                 timestamp: '',
                 title: "",
                 initialComment: "",
+                comments: [],
                 likes: [],
                 firstName: "",
                 lastName: ""
             };
-            state.comments = [];
-            state.mostLiked = [];
         }
     },
     extraReducers: {
@@ -288,24 +290,23 @@ const forumSlice = createSlice({
         },
         [getComments.fulfilled]: (state, action) => {
             if (action.payload) {
-                state.comments = action.payload;   
+                state.threadInfo.comments = action.payload;   
             };
         },
         [addComment.fulfilled]: (state, action) => {
             return;
         },
         [likeCommentToggle.fulfilled]: (state, action) => {
-            const index = state.comments.findIndex(({ id }) => id === action.payload.commentId);
-            state.comments[index].likes = action.payload.jsonResponse;
+            const index = state.threadInfo.comments.findIndex(({ id }) => id === action.payload.commentId);
+            state.threadInfo.comments[index].likes = action.payload.jsonResponse;
         }
     }
 });
 
-export const selectUserThreads = state => state.forum.userThreads;
 export const selectThreads = state => state.forum.threadOverviews;
-export const selectThreadInfo = state => state.forum.threadInfo;
-export const selectComments = state => state.forum.comments;
+export const selectUserThreads = state => state.forum.userThreads;
 export const selectMostLiked = state => state.forum.mostLiked;
+export const selectThreadInfo = state => state.forum.threadInfo;
 export const { resetForumDetails } = forumSlice.actions;
 const forumReducer = forumSlice.reducer;
 export default forumReducer;
