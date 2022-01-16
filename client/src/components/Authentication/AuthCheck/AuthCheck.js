@@ -23,6 +23,7 @@ export default function AuthCheck({ children }) {
                 : <Navigate
                     to="/login"
                     replace
+                    state={location.pathname}
                 />;
     };
 

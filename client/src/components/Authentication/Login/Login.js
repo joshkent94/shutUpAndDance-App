@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { requestLogin } from '../../../utils/state/userSlice';
 import { spotifyRedirect } from '../../../utils/helperFunctions/spotifyRedirect';
 import Logo from '../../../assets/inverted-logo.png';
@@ -8,6 +8,7 @@ import './Login.css';
 
 export default function Login() {
     const dispatch = useDispatch();
+    const location = useLocation();
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
 
@@ -31,7 +32,7 @@ export default function Login() {
             .unwrap()
             .then(data => {
                 if (data) {
-                    spotifyRedirect();
+                    spotifyRedirect(location.state);
                 };
             });
     };
