@@ -51,6 +51,7 @@ export const searchThreads = createAsyncThunk(
                         title: jsonResponse[i].title,
                         initialComment: jsonResponse[i].initial_comment,
                         likes: jsonResponse[i].likes,
+                        numberOfComments: jsonResponse[i].number_of_comments,
                         firstName: jsonResponse[i].first_name,
                         lastName: jsonResponse[i].last_name
                     };
@@ -105,6 +106,7 @@ export const getThreadsByUserId = createAsyncThunk(
                     title: jsonResponse[i].title,
                     initialComment: jsonResponse[i].initial_comment,
                     likes: jsonResponse[i].likes,
+                    numberOfComments: jsonResponse[i].number_of_comments,
                     firstName: jsonResponse[i].first_name,
                     lastName: jsonResponse[i].last_name
                 };
@@ -152,6 +154,7 @@ export const getMostLikedThreads = createAsyncThunk(
                     title: jsonResponse[i].title,
                     initialComment: jsonResponse[i].initial_comment,
                     likes: jsonResponse[i].likes,
+                    numberOfComments: jsonResponse[i].number_of_comments,
                     firstName: jsonResponse[i].first_name,
                     lastName: jsonResponse[i].last_name
                 };

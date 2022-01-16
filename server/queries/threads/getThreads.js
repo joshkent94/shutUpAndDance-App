@@ -3,8 +3,19 @@ const sanitizeHtml = require('sanitize-html');
 
 const getThreads = (req, res) => {
     const cleanSearch = sanitizeHtml(req.params.searchTerm).toLowerCase();
-    pool.query(`SELECT threads.id, threads.date_time, threads.title, threads.initial_comment, threads.likes, users.first_name, users.last_name
-                FROM threads INNER JOIN users ON (threads.creator_user_id = users.id)
+    pool.query(`SELECT threads.id, threads.date_time, threads.title, threads.initial_comment, threads.likes, t1.first_name, t1.last_name, COALESCE(t2.number_of_comments, 0) AS number_of_comments
+                FROM threads
+                LEFT JOIN (
+                    SELECT id, first_name, last_name
+                    FROM users
+                ) t1
+                ON (threads.creator_user_id = t1.id)
+                LEFT JOIN (
+                    SELECT thread_id, COUNT(comment) AS number_of_comments
+                    FROM comments
+                    GROUP BY thread_id
+                ) t2
+                ON (threads.id = t2.thread_id)
                 WHERE POSITION(($1) IN lower(title)) <> 0
                 ORDER BY array_length(threads.likes, 1) DESC NULLS LAST`,
         [cleanSearch])

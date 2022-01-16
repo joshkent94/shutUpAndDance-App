@@ -59,6 +59,7 @@ export default function ThreadOverview(props) {
                 <p><span className='thread-label'>Created by:</span> {thread.firstName} {thread.lastName}</p>
                 <p><span className='thread-label'>Created on:</span> {threadDate.toLocaleString('default', { month: 'short' })} {threadDate.getUTCDate()} {threadDate.getUTCFullYear()}</p>
                 <p><span className='thread-label'>Likes:</span> {thread.likes.length}</p>
+                <p><span className='thread-label'>Comments:</span> {thread.numberOfComments}</p>
                 <div className='icon-section'>
                     {likeIcon}
                     <Link to={`/forum/${threadId}`}><FontAwesomeIcon icon={faBookOpen} className='browse-threads-icon' /></Link>

@@ -84,6 +84,7 @@ export default function ThreadExpanded() {
                             <p><span className="thread-label">Created by:</span> {threadInfo.firstName} {threadInfo.lastName}</p>
                             <p><span className='thread-label'>Created on:</span> {threadDate.toLocaleString('default', { month: 'short' })} {threadDate.getUTCDate()} {threadDate.getUTCFullYear()}</p>
                             <p><span className='thread-label'>Likes:</span> {threadInfo.likes.length}</p>
+                            <p><span className='thread-label'>Comments:</span> {comments.length}</p>
                             <div className='icon-section'>
                                 {likeIcon}
                             </div>
