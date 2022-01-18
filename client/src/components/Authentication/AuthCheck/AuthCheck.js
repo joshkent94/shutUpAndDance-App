@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
-import { selectAccessToken } from "../../../utils/state/suggestionsSlice";
+import { selectAccessToken } from "../../../utils/state/spotifySlice";
 
 export default function AuthCheck({ children }) {
     const location = useLocation();

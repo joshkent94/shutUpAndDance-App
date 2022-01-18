@@ -12,7 +12,7 @@ import {
 import storage from 'redux-persist/lib/storage';
 import { combineReducers } from 'redux';
 import userReducer from './userSlice';
-import suggestionsReducer from './suggestionsSlice';
+import spotifyReducer from './spotifySlice';
 import forumReducer from './forumSlice';
 
 const persistConfig = {
@@ -22,7 +22,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   user: userReducer,
-  suggestions: suggestionsReducer,
+  spotify: spotifyReducer,
   forum: forumReducer
 });
 

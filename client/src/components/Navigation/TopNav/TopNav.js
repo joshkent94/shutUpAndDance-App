@@ -5,7 +5,7 @@ import { Link, useLocation } from 'react-router-dom';
 import logo from '../../../assets/logo.png';
 import menuIcon from '../../../assets/bars-solid.svg';
 import { resetForumDetails } from '../../../utils/state/forumSlice';
-import { resetSuggestionsDetails } from '../../../utils/state/suggestionsSlice';
+import { resetSpotifyDetails } from '../../../utils/state/spotifySlice';
 import { logout, selectEmail, selectFirstName, selectLastName } from '../../../utils/state/userSlice';
 import SideNav from '../SideNav/SideNav';
 import './TopNav.css';
@@ -50,7 +50,7 @@ export default function TopNav() {
         dispatch(logout())
             .unwrap()
             .then(() => {
-                dispatch(resetSuggestionsDetails());
+                dispatch(resetSpotifyDetails());
                 dispatch(resetForumDetails());
             });
     };

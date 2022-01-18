@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const getAccessToken = createAsyncThunk(
-    'suggestions/getAccessToken',
+    'spotify/getAccessToken',
     async (code) => {
         const dataToSend = {
             grant_type: "authorization_code",
@@ -30,7 +30,7 @@ export const getAccessToken = createAsyncThunk(
 );
 
 export const getAvailableGenres = createAsyncThunk(
-    'suggestions/getAvailableGenres',
+    'spotify/getAvailableGenres',
     async ({ accessToken }) => {
         const response = await fetch(`https://api.spotify.com/v1/recommendations/available-genre-seeds`, {
             headers: {
@@ -45,7 +45,7 @@ export const getAvailableGenres = createAsyncThunk(
 );
 
 export const getSuggestions = createAsyncThunk(
-    'suggestions/getSuggestions',
+    'spotify/getSuggestions',
     async ({ accessToken, genres }) => {
         if (genres.length === 0) {
             return [];
@@ -75,22 +75,53 @@ export const getSuggestions = createAsyncThunk(
     }
 );
 
-const suggestionsSlice = createSlice({
-    name: 'suggestions',
+export const getPlayingSong = createAsyncThunk(
+    'spotify/getPlayingSong',
+    async (accessToken) => {
+        const response = await fetch(`https://api.spotify.com/v1/me/player/currently-playing`, {
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            }
+        });
+        if (response.ok) {
+            if (response.status === 200) {
+                const jsonResponse = await response.json();
+                const trackInfo = {
+                    'id': jsonResponse.item.id,
+                    'name': jsonResponse.item.name,
+                    'artist': jsonResponse.item.artists[0].name,
+                    'album': jsonResponse.item.album.name,
+                    'uri': jsonResponse.item.uri,
+                    'images': jsonResponse.item.album.images
+                };
+                return trackInfo;
+            } else {
+                return {};
+            };
+        } else {
+            return {};
+        };
+    }
+);
+
+const spotifySlice = createSlice({
+    name: 'spotify',
     initialState: {
         accessToken: '',
         expiresIn: '',
         refreshToken: '',
         availableGenres: [],
-        suggestions: []
+        suggestions: [],
+        currentlyPlaying: {}
     },
     reducers: {
-        resetSuggestionsDetails: (state, action) => {
+        resetSpotifyDetails: (state, action) => {
             state.accessToken = '';
             state.expiresIn = '';
             state.refreshToken = '';
             state.availableGenres = [];
             state.suggestions = [];
+            state.currentlyPlaying = {};
         }
     },
     extraReducers: {
@@ -108,15 +139,21 @@ const suggestionsSlice = createSlice({
             if (action.payload) {
                 state.suggestions = action.payload;
             };
+        },
+        [getPlayingSong.fulfilled]: (state, action) => {
+            if (action.payload) {
+                state.currentlyPlaying = action.payload;
+            };
         }
     }
 });
 
-export const selectAccessToken = state => state.suggestions.accessToken;
-export const selectExpiresIn = state => state.suggestions.expiresIn;
-export const selectRefreshToken = state => state.suggestions.refreshToken;
-export const selectAvailableGenres = state => state.suggestions.availableGenres;
-export const selectSuggestions = state => state.suggestions.suggestions;
-export const { resetSuggestionsDetails } = suggestionsSlice.actions;
-const suggestionsReducer = suggestionsSlice.reducer;
-export default suggestionsReducer;
+export const selectAccessToken = state => state.spotify.accessToken;
+export const selectExpiresIn = state => state.spotify.expiresIn;
+export const selectRefreshToken = state => state.spotify.refreshToken;
+export const selectAvailableGenres = state => state.spotify.availableGenres;
+export const selectSuggestions = state => state.spotify.suggestions;
+export const selectCurrentlyPlaying = state => state.spotify.currentlyPlaying;
+export const { resetSpotifyDetails } = spotifySlice.actions;
+const spotifyReducer = spotifySlice.reducer;
+export default spotifyReducer;

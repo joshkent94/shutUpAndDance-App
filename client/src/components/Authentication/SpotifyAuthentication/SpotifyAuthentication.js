@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { showMessage } from "../../../utils/helperFunctions/showMessage";
 import { resetForumDetails } from "../../../utils/state/forumSlice";
-import { getAccessToken, resetSuggestionsDetails } from '../../../utils/state/suggestionsSlice';
+import { getAccessToken, resetSpotifyDetails } from '../../../utils/state/spotifySlice';
 import { logout } from "../../../utils/state/userSlice";
 
 export default function SpotifyAuthentication() {
@@ -28,7 +28,7 @@ export default function SpotifyAuthentication() {
             dispatch(logout())
                 .unwrap()
                 .then(() => {
-                    dispatch(resetSuggestionsDetails());
+                    dispatch(resetSpotifyDetails());
                     dispatch(resetForumDetails());
                 });
             showMessage(`Must allow access to Spotify to continue`);

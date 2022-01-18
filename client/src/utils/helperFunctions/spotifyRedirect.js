@@ -3,7 +3,7 @@ export const spotifyRedirect = (location) => {
         client_id: process.env.REACT_APP_SPOTIFY_CLIENT_ID,
         response_type: 'code',
         redirect_uri: process.env.NODE_ENV === 'production' ? `https://app.shutupanddance.io/spotify` : `https://localhost:3000/spotify`,
-        scope: 'user-read-private',
+        scope: 'user-read-playback-state',
         state: [process.env.REACT_APP_SPOTIFY_STATE, location || '/'],
         show_dialog: true
     };

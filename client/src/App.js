@@ -19,6 +19,7 @@ import TopNav from "./components/Navigation/TopNav/TopNav";
 import ScreenSizePrompt from "./components/ScreenSizePrompt/ScreenSizePrompt";
 import Footer from "./components/Footer/Footer";
 import SpotifyAuthentication from "./components/Authentication/SpotifyAuthentication/SpotifyAuthentication";
+import MusicPlayer from "./components/MusicPlayer/MusicPlayer";
 import './App.css';
 
 export default function App() {
@@ -108,6 +109,7 @@ export default function App() {
                 <TopNav />
                 <div className="main">
                   <Dashboard />
+                  <MusicPlayer />
                   <Footer />
                 </div>
               </AuthCheck>
@@ -121,6 +123,7 @@ export default function App() {
                 <TopNav />
                 <div className="main">
                   <Suggestions />
+                  <MusicPlayer />
                   <Footer />
                 </div>
               </AuthCheck>
@@ -134,6 +137,7 @@ export default function App() {
                 <TopNav />
                 <div className="main">
                   <ForumRoutes />
+                  <MusicPlayer />
                   <Footer />
                 </div>
               </AuthCheck>
@@ -147,6 +151,7 @@ export default function App() {
                 <TopNav />
                 <div className="main">
                   <Account />
+                  <MusicPlayer />
                   <Footer />
                 </div>
               </AuthCheck>

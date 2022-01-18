@@ -105,8 +105,8 @@
 }
 
 .dropdown-item:hover {
-  background-color: var(--fifth-colour);
-  color: var(--primary-colour);
+  background-color: var(--secondary-colour);
+  color: var(--fourth-colour);
 }
 
 @media all and (min-width: 992px) {

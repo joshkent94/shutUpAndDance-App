@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
 import GenreOption from '../GenreOption/GenreOption';
 import { hideCheckboxes, showCheckboxes } from '../../../utils/helperFunctions/toggleCheckboxes';
-import { getSuggestions, selectAccessToken, selectAvailableGenres } from '../../../utils/state/suggestionsSlice';
+import { getSuggestions, selectAccessToken, selectAvailableGenres } from '../../../utils/state/spotifySlice';
 import { selectGenres, updateGenres } from '../../../utils/state/userSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
