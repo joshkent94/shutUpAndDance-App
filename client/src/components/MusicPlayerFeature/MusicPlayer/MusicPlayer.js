@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Offcanvas } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle } from '@fortawesome/free-regular-svg-icons';
-import spotifyLogo from '../../assets/Spotify_Logo_RGB_Green.png';
-import { getPlayingSong, selectAccessToken, selectCurrentlyPlaying } from '../../utils/state/spotifySlice';
+import spotifyLogo from '../../../assets/Spotify_Logo_RGB_Green.png';
+import { getPlayingSong, selectAccessToken, selectCurrentlyPlaying } from '../../../utils/state/spotifySlice';
 import useSWR from 'swr';
 import './MusicPlayer.css';
+import SongDetails from '../SongDetails/SongDetails';
 
 export default function MusicPlayer() {
     const dispatch = useDispatch();
@@ -46,19 +47,7 @@ export default function MusicPlayer() {
     if (currentlyPlaying.name) {
         content =
             <Offcanvas.Body className='player-body'>
-                <div className='player-details'>
-                    <div className='player-image-container'>
-                        <img src={currentlyPlaying.images[0].url} alt={currentlyPlaying.name} className='player-image' />
-                    </div>
-                    <div className='player-info-container'>
-                        <p className='player-track-name'>
-                            {currentlyPlaying.name}
-                        </p>
-                        <p className='player-track-info'>
-                            {currentlyPlaying.artist} || {currentlyPlaying.album}
-                        </p>
-                    </div>
-                </div>
+                <SongDetails currentlyPlaying={currentlyPlaying} key={currentlyPlaying.id} />
                 <div className='player-controls'>
                     Player controls
                 </div>

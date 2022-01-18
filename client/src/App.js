@@ -19,7 +19,7 @@ import TopNav from "./components/Navigation/TopNav/TopNav";
 import ScreenSizePrompt from "./components/ScreenSizePrompt/ScreenSizePrompt";
 import Footer from "./components/Footer/Footer";
 import SpotifyAuthentication from "./components/Authentication/SpotifyAuthentication/SpotifyAuthentication";
-import MusicPlayer from "./components/MusicPlayer/MusicPlayer";
+import MusicPlayer from "./components/MusicPlayerFeature/MusicPlayer/MusicPlayer";
 import './App.css';
 
 export default function App() {

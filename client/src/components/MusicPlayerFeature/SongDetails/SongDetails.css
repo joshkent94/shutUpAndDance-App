@@ -1,0 +1,46 @@
+.player-details {
+  height: 65%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.player-image-container {
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 0.5rem;
+}
+
+.player-image {
+  width: 80%;
+  border-radius: 50%;
+}
+
+.player-info-container {
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.player-info-container p {
+  margin: 0;
+  font-size: 0.95rem;
+  width: 95%;
+}
+
+.player-track-name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.player-track-info {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
