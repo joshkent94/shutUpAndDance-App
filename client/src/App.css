@@ -32,22 +32,24 @@ body {
 
 #message {
   position: absolute;
-  bottom: 50px;
+  top: 50px;
   right: 50px;
   color: var(--secondary-colour);
   background-color: var(--primary-colour);
   padding: 0.5rem 1.5rem;
   border-radius: 1rem;
+  z-index: 10000;
 }
 
 #message-inverted {
   position: absolute;
-  bottom: 50px;
+  top: 50px;
   right: 50px;
   color: var(--primary-colour);
   background-color: var(--secondary-colour);
   padding: 0.5rem 1.5rem;
   border-radius: 1rem;
+  z-index: 10000;
 }
 
 .main {
