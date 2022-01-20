@@ -4,21 +4,25 @@ import { Offcanvas } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle } from '@fortawesome/free-regular-svg-icons';
 import spotifyLogo from '../../../assets/Spotify_Logo_RGB_Green.png';
-import { getPlayingSong, selectAccessToken, selectCurrentlyPlaying } from '../../../utils/state/spotifySlice';
+import { getPlayingSong, selectAccessToken, selectCurrentlyPlaying, selectRefreshToken } from '../../../utils/state/spotifySlice';
+import SongDetails from '../SongDetails/SongDetails';
 import useSWR from 'swr';
 import './MusicPlayer.css';
-import SongDetails from '../SongDetails/SongDetails';
 
 export default function MusicPlayer() {
     const dispatch = useDispatch();
     const accessToken = useSelector(selectAccessToken);
+    const refreshToken = useSelector(selectRefreshToken);
     const currentlyPlaying = useSelector(selectCurrentlyPlaying);
     const [show, setShow] = useState(false);
 
     // poll for currently playing song every 5 seconds if music player is showing
     useSWR(
-        show ? accessToken : null,
-        accessToken => dispatch(getPlayingSong(accessToken)),
+        show ? refreshToken : null,
+        () => dispatch(getPlayingSong({
+            accessToken,
+            refreshToken
+        })),
         {
             refreshInterval: 5000,
             revalidateOnFocus: false

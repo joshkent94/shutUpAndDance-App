@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
 import GenreOption from '../GenreOption/GenreOption';
 import { hideCheckboxes, showCheckboxes } from '../../../utils/helperFunctions/toggleCheckboxes';
-import { getSuggestions, selectAccessToken, selectAvailableGenres } from '../../../utils/state/spotifySlice';
+import { getSuggestions, selectAccessToken, selectAvailableGenres, selectRefreshToken } from '../../../utils/state/spotifySlice';
 import { selectGenres, updateGenres } from '../../../utils/state/userSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -13,6 +13,7 @@ export default function GenreDropdown() {
     const genreOptions = useSelector(selectAvailableGenres);
     const selectedGenres = useSelector(selectGenres);
     const accessToken = useSelector(selectAccessToken);
+    const refreshToken = useSelector(selectRefreshToken);
     const [searchTerm, setSearchTerm] = useState('');
     const firstRender = useRef(true);
 
@@ -26,7 +27,8 @@ export default function GenreDropdown() {
         e.preventDefault();
         if (document.cookie && accessToken !== '') {
             dispatch(getSuggestions({
-                accessToken: accessToken,
+                accessToken,
+                refreshToken,
                 genres: selectedGenres
             }));
         };

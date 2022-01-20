@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import GenreDropdown from '../GenreDropdown/GenreDropdown';
-import { getAvailableGenres, getSuggestions, selectAccessToken, selectAvailableGenres, selectSuggestions } from "../../../utils/state/spotifySlice";
+import { getAvailableGenres, getSuggestions, selectAccessToken, selectAvailableGenres, selectRefreshToken, selectSuggestions } from "../../../utils/state/spotifySlice";
 import { selectGenres } from "../../../utils/state/userSlice";
 import Suggestion from "../Suggestion/Suggestion";
 import './Suggestions.css';
@@ -9,28 +9,27 @@ import './Suggestions.css';
 export default function Suggestions() {
     const availableGenres = useSelector(selectAvailableGenres);
     const accessToken = useSelector(selectAccessToken);
+    const refreshToken = useSelector(selectRefreshToken);
     const suggestions = useSelector(selectSuggestions);
     const genres = useSelector(selectGenres);
     const dispatch = useDispatch();
     const firstRender = useRef(true);
 
-    // get genre list from Spotify
-    useEffect(() => {
-        if (accessToken !== '' && availableGenres.length === 0) {
-            dispatch(getAvailableGenres({
-                accessToken: accessToken
-            }));
-        };
-    }, [dispatch, accessToken, availableGenres]);
-
-    // get song suggestions from Spotify on initial page load
+    // get genre list and song suggestions from Spotify on initial page load
     useEffect(() => {
         if (firstRender.current) {
             firstRender.current = false;
+            if (accessToken !== '' && availableGenres.length === 0) {
+                dispatch(getAvailableGenres({
+                    accessToken,
+                    refreshToken
+                }));
+            };
             if (suggestions.length === 0 && document.cookie && accessToken !== '') {
                 dispatch(getSuggestions({
-                    accessToken: accessToken,
-                    genres: genres
+                    accessToken,
+                    refreshToken,
+                    genres
                 }));
             };
         };

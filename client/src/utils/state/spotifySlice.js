@@ -29,78 +29,120 @@ export const getAccessToken = createAsyncThunk(
     }
 );
 
+export const refreshAccessToken = createAsyncThunk(
+    'spotify/refreshAccessToken',
+    async (refreshToken) => {
+        const dataToSend = {
+            grant_type: "refresh_token",
+            refresh_token: refreshToken
+        };
+        const queryString = new URLSearchParams(dataToSend).toString();
+        const authString = btoa(`${process.env.REACT_APP_SPOTIFY_CLIENT_ID}:${process.env.REACT_APP_SPOTIFY_CLIENT_SECRET}`);
+        const response = await fetch(`https://accounts.spotify.com/api/token`, {
+            method: "POST",
+            headers: {
+                "Authorization": `Basic ${authString}`,
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: queryString
+        });
+        if (response.ok) {
+            const jsonResponse = await response.json();
+            return {
+                accessToken: jsonResponse.access_token,
+                expiresIn: jsonResponse.expires_in
+            };
+        };
+    }
+);
+
 export const getAvailableGenres = createAsyncThunk(
     'spotify/getAvailableGenres',
-    async ({ accessToken }) => {
-        const response = await fetch(`https://api.spotify.com/v1/recommendations/available-genre-seeds`, {
+    async ({ accessToken, refreshToken }, thunkAPI) => {
+        let response = await fetch(`https://api.spotify.com/v1/recommendations/available-genre-seeds`, {
             headers: {
                 'Authorization': 'Bearer ' + accessToken
             }
         });
-        if (response.ok) {
-            const jsonResponse = await response.json();
-            return jsonResponse.genres;
+        if (!response.ok) {
+            const newToken = await thunkAPI.dispatch(refreshAccessToken(refreshToken)).unwrap();
+            response = await fetch(`https://api.spotify.com/v1/recommendations/available-genre-seeds`, {
+                headers: {
+                    'Authorization': 'Bearer ' + newToken.accessToken
+                }
+            });
         };
+        const jsonResponse = await response.json();
+        return jsonResponse.genres;
     }
 );
 
 export const getSuggestions = createAsyncThunk(
     'spotify/getSuggestions',
-    async ({ accessToken, genres }) => {
+    async ({ accessToken, refreshToken, genres }, thunkAPI) => {
         if (genres.length === 0) {
             return [];
         } else {
             const queryString = genres.join();
-            const response = await fetch(`https://api.spotify.com/v1/recommendations?limit=10&seed_genres=${queryString}`, {
+            let response = await fetch(`https://api.spotify.com/v1/recommendations?limit=10&seed_genres=${queryString}`, {
                 headers: {
                     'Authorization': 'Bearer ' + accessToken
                 }
             });
-            if (response.ok) {
-                const jsonResponse = await response.json();
-                let tracks = jsonResponse.tracks.map(track => {
-                    let trackInfo = {
-                        'id': track.id,
-                        'name': track.name,
-                        'artist': track.artists[0].name,
-                        'album': track.album.name,
-                        'uri': track.uri,
-                        'images': track.album.images
-                    };
-                    return trackInfo;
+            if (!response.ok) {
+                const newToken = await thunkAPI.dispatch(refreshAccessToken(refreshToken)).unwrap();
+                response = await fetch(`https://api.spotify.com/v1/recommendations?limit=10&seed_genres=${queryString}`, {
+                    headers: {
+                        'Authorization': 'Bearer ' + newToken.accessToken
+                    }
                 });
-                return tracks;
             };
+            const jsonResponse = await response.json();
+            let tracks = jsonResponse.tracks.map(track => {
+                let trackInfo = {
+                    'id': track.id,
+                    'name': track.name,
+                    'artist': track.artists[0].name,
+                    'album': track.album.name,
+                    'uri': track.uri,
+                    'images': track.album.images
+                };
+                return trackInfo;
+            });
+            return tracks;
         };
     }
 );
 
 export const getPlayingSong = createAsyncThunk(
     'spotify/getPlayingSong',
-    async (accessToken) => {
-        const response = await fetch(`https://api.spotify.com/v1/me/player/currently-playing`, {
+    async ({ accessToken, refreshToken }, thunkAPI) => {
+        let response = await fetch(`https://api.spotify.com/v1/me/player/currently-playing`, {
             headers: {
                 'Authorization': 'Bearer ' + accessToken
             }
         });
-        if (response.ok) {
-            if (response.status === 200) {
-                const jsonResponse = await response.json();
-                const trackInfo = {
-                    'id': jsonResponse.item.id,
-                    'name': jsonResponse.item.name,
-                    'artist': jsonResponse.item.artists[0].name,
-                    'album': jsonResponse.item.album.name,
-                    'uri': jsonResponse.item.uri,
-                    'images': jsonResponse.item.album.images
-                };
-                return trackInfo;
-            } else {
-                return {};
-            };
-        } else {
-            return {};
+        if (!response.ok) {
+            const newToken = await thunkAPI.dispatch(refreshAccessToken(refreshToken)).unwrap();
+            response = await fetch(`https://api.spotify.com/v1/me/player/currently-playing`, {
+                headers: {
+                    'Authorization': 'Bearer ' + newToken.accessToken
+                }
+            });
         };
+        if (response.status === 200) {
+            const jsonResponse = await response.json();
+            const trackInfo = {
+                'id': jsonResponse.item.id,
+                'name': jsonResponse.item.name,
+                'artist': jsonResponse.item.artists[0].name,
+                'album': jsonResponse.item.album.name,
+                'uri': jsonResponse.item.uri,
+                'images': jsonResponse.item.album.images
+            };
+            return trackInfo;
+        };
+        return {};
     }
 );
 
@@ -108,7 +150,6 @@ const spotifySlice = createSlice({
     name: 'spotify',
     initialState: {
         accessToken: '',
-        expiresIn: '',
         refreshToken: '',
         availableGenres: [],
         suggestions: [],
@@ -117,7 +158,6 @@ const spotifySlice = createSlice({
     reducers: {
         resetSpotifyDetails: (state, action) => {
             state.accessToken = '';
-            state.expiresIn = '';
             state.refreshToken = '';
             state.availableGenres = [];
             state.suggestions = [];
@@ -128,12 +168,18 @@ const spotifySlice = createSlice({
         [getAccessToken.fulfilled]: (state, action) => {
             if (action.payload) {
                 state.accessToken = action.payload.accessToken;
-                state.expiresIn = action.payload.expiresIn;
                 state.refreshToken = action.payload.refreshToken;
             };
         },
+        [refreshAccessToken.fulfilled]: (state, action) => {
+            if (action.payload && document.cookie) {
+                state.accessToken = action.payload.accessToken;
+            };
+        },
         [getAvailableGenres.fulfilled]: (state, action) => {
-            state.availableGenres = action.payload;
+            if (action.payload) {
+                state.availableGenres = action.payload;
+            };
         },
         [getSuggestions.fulfilled]: (state, action) => {
             if (action.payload) {
@@ -149,7 +195,6 @@ const spotifySlice = createSlice({
 });
 
 export const selectAccessToken = state => state.spotify.accessToken;
-export const selectExpiresIn = state => state.spotify.expiresIn;
 export const selectRefreshToken = state => state.spotify.refreshToken;
 export const selectAvailableGenres = state => state.spotify.availableGenres;
 export const selectSuggestions = state => state.spotify.suggestions;

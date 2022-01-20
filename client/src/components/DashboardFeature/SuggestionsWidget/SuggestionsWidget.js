@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getSuggestions, selectAccessToken, selectSuggestions } from "../../../utils/state/spotifySlice";
+import { getSuggestions, selectAccessToken, selectRefreshToken, selectSuggestions } from "../../../utils/state/spotifySlice";
 import Suggestion from "../../SuggestionsFeature/Suggestion/Suggestion";
 import { selectGenres } from "../../../utils/state/userSlice";
 import { useEffect, useRef } from "react";
@@ -12,6 +12,7 @@ export default function SuggestionsWidget() {
     const suggestions = useSelector(selectSuggestions);
     const selectedGenres = useSelector(selectGenres);
     const accessToken = useSelector(selectAccessToken);
+    const refreshToken = useSelector(selectRefreshToken);
     const firstRender = useRef(true);
 
     // get suggestions from Spotify
@@ -19,7 +20,8 @@ export default function SuggestionsWidget() {
         e.preventDefault();
         if (document.cookie && accessToken !== '') {
             dispatch(getSuggestions({
-                accessToken: accessToken,
+                accessToken,
+                refreshToken,
                 genres: selectedGenres
             }));
         };
@@ -30,11 +32,12 @@ export default function SuggestionsWidget() {
         if (suggestions.length === 0 && document.cookie && accessToken !== '' && firstRender.current) {
             firstRender.current = false;
             dispatch(getSuggestions({
-                accessToken: accessToken,
+                accessToken,
+                refreshToken,
                 genres: selectedGenres
             }));
         };
-    }, [accessToken, dispatch, selectedGenres, suggestions]);
+    });
 
     let content;
     if (suggestions.length === 0) {
