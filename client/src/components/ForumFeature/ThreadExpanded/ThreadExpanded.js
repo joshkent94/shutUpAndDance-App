@@ -19,8 +19,11 @@ export default function ThreadExpanded() {
 
     // get all the details for the thread on page load
     useEffect(() => {
-        dispatch(getThread(threadId));
-        dispatch(getComments(threadId));
+        dispatch(getThread(threadId))
+            .unwrap()
+            .then(() => {
+                dispatch(getComments(threadId));
+            });
     }, [threadId, dispatch]);
 
     // toggle between like and not like
