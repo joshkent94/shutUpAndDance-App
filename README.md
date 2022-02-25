@@ -25,6 +25,7 @@ A project to test out my PERN stack developer skills.
 - HTML
 - CSS
 - Javascript
+- Typescript
 - React
 - Redux
 - Express
