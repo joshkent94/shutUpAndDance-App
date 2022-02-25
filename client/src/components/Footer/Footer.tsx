@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faCopyright, faHeart } from '@fortawesome/free-solid-svg-icons';
-import './Footer.less';
+import './Footer.scss';
 
 export default function Footer() {
     const faCopyrightProp = faCopyright as IconProp;
