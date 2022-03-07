@@ -6,6 +6,7 @@ import { faTimesCircle } from '@fortawesome/free-regular-svg-icons';
 import spotifyLogo from '../../../assets/Spotify_Logo_RGB_Green.png';
 import { getPlayingSong, selectAccessToken, selectCurrentlyPlaying, selectRefreshToken } from '../../../utils/state/spotifySlice';
 import SongDetails from '../SongDetails/SongDetails';
+import PlayerControls from '../PlayerControls/PlayerControls';
 import useSWR from 'swr';
 import './MusicPlayer.css';
 
@@ -24,7 +25,7 @@ export default function MusicPlayer() {
             refreshToken
         })),
         {
-            refreshInterval: 5000,
+            refreshInterval: 1000,
             revalidateOnFocus: false
         }
     );
@@ -51,10 +52,8 @@ export default function MusicPlayer() {
     if (currentlyPlaying.name) {
         content =
             <Offcanvas.Body className='player-body'>
-                <SongDetails currentlyPlaying={currentlyPlaying} key={currentlyPlaying.id} />
-                <div className='player-controls'>
-                    Player controls
-                </div>
+                <SongDetails currentlyPlaying={currentlyPlaying} key={currentlyPlaying.id || 0} />
+                <PlayerControls currentlyPlaying={currentlyPlaying} key={currentlyPlaying.progress || 1} />
             </Offcanvas.Body>;
     } else {
         content =

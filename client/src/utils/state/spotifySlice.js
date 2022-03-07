@@ -117,14 +117,14 @@ export const getSuggestions = createAsyncThunk(
 export const getPlayingSong = createAsyncThunk(
     'spotify/getPlayingSong',
     async ({ accessToken, refreshToken }, thunkAPI) => {
-        let response = await fetch(`https://api.spotify.com/v1/me/player/currently-playing`, {
+        let response = await fetch(`https://api.spotify.com/v1/me/player`, {
             headers: {
                 'Authorization': 'Bearer ' + accessToken
             }
         });
         if (!response.ok) {
             const newToken = await thunkAPI.dispatch(refreshAccessToken(refreshToken)).unwrap();
-            response = await fetch(`https://api.spotify.com/v1/me/player/currently-playing`, {
+            response = await fetch(`https://api.spotify.com/v1/me/player`, {
                 headers: {
                     'Authorization': 'Bearer ' + newToken.accessToken
                 }
@@ -133,16 +133,143 @@ export const getPlayingSong = createAsyncThunk(
         if (response.status === 200) {
             const jsonResponse = await response.json();
             const trackInfo = {
+                'device': jsonResponse.device,
                 'id': jsonResponse.item.id,
                 'name': jsonResponse.item.name,
                 'artist': jsonResponse.item.artists[0].name,
                 'album': jsonResponse.item.album.name,
                 'uri': jsonResponse.item.uri,
-                'images': jsonResponse.item.album.images
+                'images': jsonResponse.item.album.images,
+                'isPlaying': jsonResponse.is_playing,
+                'duration': Math.round(jsonResponse.item.duration_ms / 1000),
+                'progress': Math.round(jsonResponse.progress_ms / 1000)
             };
             return trackInfo;
         };
         return {};
+    }
+);
+
+export const changeSongPosition = createAsyncThunk(
+    'spotify/changeSongPosition',
+    async ({ position, deviceId, accessToken, refreshToken }, thunkAPI) => {
+        let response = await fetch(`https://api.spotify.com/v1/me/player/seek?position_ms=${position * 1000}&device_id=${deviceId}`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': 'Bearer ' + accessToken,
+                'Content-Type': 'application/json'
+            }
+        });
+        if (!response.ok) {
+            const newToken = await thunkAPI.dispatch(refreshAccessToken(refreshToken)).unwrap();
+            response = await fetch(`https://api.spotify.com/v1/me/player/seek?position_ms=${position * 1000}&device_id=${deviceId}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': 'Bearer ' + newToken.accessToken,
+                    'Content-Type': 'application/json'
+                }
+            });
+        };
+        if (response.status === 204) {
+            return position;
+        };
+        return {};
+    }
+);
+
+export const togglePlay = createAsyncThunk(
+    'spotify/togglePlay',
+    async ({ paused, deviceId, accessToken, refreshToken }, thunkAPI) => {
+        if (!paused) {
+            let response = await fetch(`https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': 'Bearer ' + accessToken,
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (!response.ok) {
+                const newToken = await thunkAPI.dispatch(refreshAccessToken(refreshToken)).unwrap();
+                response = await fetch(`https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': 'Bearer ' + newToken.accessToken,
+                        'Content-Type': 'application/json'
+                    }
+                });
+            };
+            if (response.status === 204) {
+                return !paused;
+            };
+        } else {
+            let response = await fetch(`https://api.spotify.com/v1/me/player/pause?device_id=${deviceId}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': 'Bearer ' + accessToken,
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (!response.ok) {
+                const newToken = await thunkAPI.dispatch(refreshAccessToken(refreshToken)).unwrap();
+                response = await fetch(`https://api.spotify.com/v1/me/player/pause?device_id=${deviceId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': 'Bearer ' + newToken.accessToken,
+                        'Content-Type': 'application/json'
+                    }
+                });
+            };
+            if (response.status === 204) {
+                return !paused;
+            };
+        };
+        return {};
+    }
+);
+
+export const playPreviousSong = createAsyncThunk(
+    'spotify/playPreviousSong',
+    async ({ deviceId, accessToken, refreshToken }, thunkAPI) => {
+        let response = await fetch(`https://api.spotify.com/v1/me/player/previous?device_id=${deviceId}`, {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + accessToken,
+                'Content-Type': 'application/json'
+            }
+        });
+        if (!response.ok) {
+            const newToken = await thunkAPI.dispatch(refreshAccessToken(refreshToken)).unwrap();
+            response = await fetch(`https://api.spotify.com/v1/me/player/previous?device_id=${deviceId}`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + newToken.accessToken,
+                    'Content-Type': 'application/json'
+                }
+            });
+        };
+    }
+);
+
+export const playNextSong = createAsyncThunk(
+    'spotify/playNextSong',
+    async ({ deviceId, accessToken, refreshToken }, thunkAPI) => {
+        let response = await fetch(`https://api.spotify.com/v1/me/player/next?device_id=${deviceId}`, {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + accessToken,
+                'Content-Type': 'application/json'
+            }
+        });
+        if (!response.ok) {
+            const newToken = await thunkAPI.dispatch(refreshAccessToken(refreshToken)).unwrap();
+            response = await fetch(`https://api.spotify.com/v1/me/player/next?device_id=${deviceId}`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + newToken.accessToken,
+                    'Content-Type': 'application/json'
+                }
+            });
+        };
     }
 );
 
@@ -190,6 +317,22 @@ const spotifySlice = createSlice({
             if (action.payload) {
                 state.currentlyPlaying = action.payload;
             };
+        },
+        [changeSongPosition.fulfilled]: (state, action) => {
+            if (action.payload) {
+                state.currentlyPlaying.progress = action.payload;
+            };
+        },
+        [togglePlay.fulfilled]: (state, action) => {
+            if (action.payload) {
+                state.currentlyPlaying.isPlaying = action.payload;
+            };
+        },
+        [playPreviousSong.fulfilled]: (state, action) => {
+            return;
+        },
+        [playNextSong.fulfilled]: (state, action) => {
+            return;
         }
     }
 });

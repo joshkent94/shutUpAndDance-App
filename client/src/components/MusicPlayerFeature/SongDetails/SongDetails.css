@@ -1,5 +1,5 @@
 .player-details {
-  height: 65%;
+  height: 60%;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -14,7 +14,7 @@
 }
 
 .player-image {
-  width: 80%;
+  width: 75%;
   border-radius: 50%;
 }
 
