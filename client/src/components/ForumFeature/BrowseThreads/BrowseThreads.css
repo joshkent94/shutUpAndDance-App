@@ -1,12 +1,12 @@
 #browse-threads-page {
-  padding-top: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
+	padding-top: 1rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 100%;
 }
 
 .form-control:focus {
-  box-shadow: none;
-  border-color: var(--primary-colour) !important;
+	box-shadow: none;
+	border-color: var(--primary-colour) !important;
 }
