@@ -51,3 +51,22 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
+.actions-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: 2rem;
+  flex-grow: 1;
+}
+
+.action-button {
+  background: none;
+  border: none;
+  font-size: 1.7rem;
+  cursor: pointer;
+  color: var(--primary-colour);
+  width: unset !important;
+  vertical-align: middle;
+  margin-left: 2rem;
+}

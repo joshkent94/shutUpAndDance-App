@@ -1,6 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeSongPosition, playNextSong, playPreviousSong, selectAccessToken, selectRefreshToken, togglePlay } from '../../../utils/state/spotifySlice';
+import {
+    changeSongPosition,
+    playNextSong,
+    playPreviousSong,
+    selectAccessToken,
+    selectRefreshToken,
+    togglePlay
+} from '../../../utils/state/spotifySlice';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
@@ -21,7 +28,7 @@ export default function PlayerControls({ currentlyPlaying }) {
     const [paused, setPaused] = useState(!currentlyPlaying.isPlaying);
 
     // convert times from seconds to a time format
-    const formatTime = value => {
+    const formatTime = (value) => {
         const minute = Math.floor(value / 60);
         const secondLeft = value - minute * 60;
         return `${minute}:${secondLeft <= 9 ? `0${secondLeft}` : secondLeft}`;
@@ -29,21 +36,23 @@ export default function PlayerControls({ currentlyPlaying }) {
 
     // set song position in component state and dispatch action to Spotify
     const setSongPosition = (e, value) => {
-        dispatch(changeSongPosition({
-            position: value,
-            deviceId: currentlyPlaying.device.id,
-            accessToken,
-            refreshToken
-        }));
+        dispatch(
+            changeSongPosition({
+                position: value,
+                deviceId: currentlyPlaying.device.id,
+                accessToken,
+                refreshToken
+            })
+        );
         setPosition(value);
     };
 
-    // set an interval to update the song position every second
+    // set an interval to update the song position every half second
     useEffect(() => {
         const intervalId = setInterval(() => {
             if (!paused) {
                 setPosition(position + 1);
-            };
+            }
         }, 1000);
 
         return () => clearInterval(intervalId);
@@ -51,31 +60,37 @@ export default function PlayerControls({ currentlyPlaying }) {
 
     // set pause state and send call to Spotify
     const togglePlayState = () => {
-        dispatch(togglePlay({
-            paused: !paused,
-            deviceId: currentlyPlaying.device.id,
-            accessToken,
-            refreshToken
-        }))
+        dispatch(
+            togglePlay({
+                paused: paused,
+                deviceId: currentlyPlaying.device.id,
+                accessToken,
+                refreshToken
+            })
+        );
         setPaused(!paused);
     };
 
     // send previous call to Spotify
     const playPrevious = () => {
-        dispatch(playPreviousSong({
-            deviceId: currentlyPlaying.device.id,
-            accessToken,
-            refreshToken
-        }));
+        dispatch(
+            playPreviousSong({
+                deviceId: currentlyPlaying.device.id,
+                accessToken,
+                refreshToken
+            })
+        );
     };
 
     // send next call to Spotify
     const playNext = () => {
-        dispatch(playNextSong({
-            deviceId: currentlyPlaying.device.id,
-            accessToken,
-            refreshToken
-        }));
+        dispatch(
+            playNextSong({
+                deviceId: currentlyPlaying.device.id,
+                accessToken,
+                refreshToken
+            })
+        );
     };
 
     return (
@@ -90,37 +105,25 @@ export default function PlayerControls({ currentlyPlaying }) {
                 onChange={setSongPosition}
                 className="duration-slider"
             />
-            <Box className='slider-times'>
-                <Typography className='slider-time'>{formatTime(position)}</Typography>
-                <Typography className='slider-time'>-{formatTime(duration - position)}</Typography>
+            <Box className="slider-times">
+                <Typography className="slider-time">{formatTime(position)}</Typography>
+                <Typography className="slider-time">-{formatTime(duration - position)}</Typography>
             </Box>
-            <Box className='player-buttons'>
-                <IconButton
-                    aria-label="previous song"
-                    onClick={playPrevious}
-                >
-                    <FastRewindRounded style={{ fontSize: 28 }} htmlColor='white' />
+            <Box className="player-buttons">
+                <IconButton aria-label="previous song" onClick={playPrevious}>
+                    <FastRewindRounded style={{ fontSize: 28 }} htmlColor="white" />
                 </IconButton>
-                <IconButton
-                    aria-label={paused ? 'play' : 'pause'}
-                    onClick={togglePlayState}
-                >
+                <IconButton aria-label={paused ? 'play' : 'pause'} onClick={togglePlayState}>
                     {paused ? (
-                        <PlayArrowRounded
-                            style={{ fontSize: 28 }}
-                            htmlColor='white'
-                        />
+                        <PlayArrowRounded style={{ fontSize: 28 }} htmlColor="white" />
                     ) : (
-                        <PauseRounded style={{ fontSize: 28 }} htmlColor='white' />
+                        <PauseRounded style={{ fontSize: 28 }} htmlColor="white" />
                     )}
                 </IconButton>
-                <IconButton
-                    aria-label="next song"
-                    onClick={playNext}
-                >
-                    <FastForwardRounded style={{ fontSize: 28 }} htmlColor='white' />
+                <IconButton aria-label="next song" onClick={playNext}>
+                    <FastForwardRounded style={{ fontSize: 28 }} htmlColor="white" />
                 </IconButton>
             </Box>
         </Box>
     );
-};
+}
