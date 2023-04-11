@@ -8,8 +8,7 @@ import {
     togglePlay
 } from '../../../utils/state/spotifySlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlay, faHeart, faPause } from '@fortawesome/free-solid-svg-icons';
-import { faHeart as faHeartRegular } from '@fortawesome/free-regular-svg-icons';
+import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons';
 import './Suggestion.css';
 
 export default function Suggestion({ track }) {
@@ -18,9 +17,8 @@ export default function Suggestion({ track }) {
     const refreshToken = useSelector(selectRefreshToken);
     const currentlyPlaying = useSelector(selectCurrentlyPlaying);
     const [paused] = useState(!(track.uri === currentlyPlaying.uri && currentlyPlaying.isPlaying));
-    const [isLiked] = useState(false);
 
-    // set pause state and send call to Spotify
+    // toggle play and update currently playing
     const togglePlayState = () => {
         dispatch(
             togglePlay({
@@ -59,21 +57,6 @@ export default function Suggestion({ track }) {
         }
     }
 
-    let likeButton;
-    if (isLiked) {
-        likeButton = (
-            <button className="action-button" onClick={togglePlayState}>
-                <FontAwesomeIcon icon={faHeart} />
-            </button>
-        );
-    } else {
-        likeButton = (
-            <button className="action-button" onClick={togglePlayState}>
-                <FontAwesomeIcon icon={faHeartRegular} />
-            </button>
-        );
-    }
-
     return (
         <div className="content-container track animate__animated animate__fadeIn">
             <div className="album-image-container">
@@ -85,10 +68,7 @@ export default function Suggestion({ track }) {
                     {track.artist} || {track.album}
                 </p>
             </div>
-            <div className="actions-container">
-                {playButton}
-                {likeButton}
-            </div>
+            <div className="actions-container">{playButton}</div>
         </div>
     );
 }

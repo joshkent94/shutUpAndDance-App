@@ -105,7 +105,7 @@ export const getSuggestions = createAsyncThunk(
                 );
             }
             const jsonResponse = await response.json();
-            let tracks = jsonResponse.tracks.map((track) => {
+            const tracks = jsonResponse.tracks.map((track) => {
                 let trackInfo = {
                     id: track.id,
                     name: track.name,
