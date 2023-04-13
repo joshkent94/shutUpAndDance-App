@@ -13,7 +13,7 @@ import {
 import SongDetails from '../SongDetails/SongDetails';
 import PlayerControls from '../PlayerControls/PlayerControls';
 import useSWR from 'swr';
-import './MusicPlayer.css';
+import './MusicPlayer.scss';
 
 export default function MusicPlayer() {
     const dispatch = useDispatch();

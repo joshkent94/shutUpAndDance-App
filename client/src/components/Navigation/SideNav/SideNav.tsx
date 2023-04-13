@@ -1,6 +1,6 @@
 import { Nav, Offcanvas } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
-import './SideNav.css';
+import './SideNav.scss';
 
 export default function SideNav({ show }) {
     return (

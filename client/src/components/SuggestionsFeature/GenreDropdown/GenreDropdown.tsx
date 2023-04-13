@@ -11,7 +11,7 @@ import {
 import { selectGenres, updateGenres } from '../../../utils/state/userSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import './GenreDropdown.css';
+import './GenreDropdown.scss';
 
 export default function GenreDropdown() {
     const dispatch = useDispatch();

@@ -14,7 +14,7 @@ import {
 import { selectGenres } from '../../../utils/state/userSlice';
 import Suggestion from '../Suggestion/Suggestion';
 import useSWR from 'swr';
-import './Suggestions.css';
+import './Suggestions.scss';
 
 export default function Suggestions() {
     const dispatch = useDispatch();

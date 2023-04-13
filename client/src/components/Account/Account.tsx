@@ -4,7 +4,7 @@ import { hashFunction } from '../../utils/helperFunctions/hashFunction';
 import { passwordCheck } from '../../utils/helperFunctions/passwordCheck';
 import { showMessage } from '../../utils/helperFunctions/showMessage';
 import { selectEmail, selectFirstName, selectLastName, updateUserDetails } from '../../utils/state/userSlice';
-import './Account.css';
+import './Account.scss';
 
 export default function Account() {
     const dispatch = useDispatch();

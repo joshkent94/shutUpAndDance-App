@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { requestLogin } from '../../../utils/state/userSlice';
 import { spotifyRedirect } from '../../../utils/helperFunctions/spotifyRedirect';
 import Logo from '../../../assets/inverted-logo.png';
-import './Login.css';
+import './Login.scss';
 
 export default function Login() {
     const dispatch = useDispatch();

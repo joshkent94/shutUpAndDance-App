@@ -6,7 +6,7 @@ import { passwordCheck } from '../../../utils/helperFunctions/passwordCheck';
 import { showMessage } from '../../../utils/helperFunctions/showMessage';
 import { spotifyRedirect } from '../../../utils/helperFunctions/spotifyRedirect';
 import Logo from '../../../assets/inverted-logo.png';
-import './SignUp.css';
+import './SignUp.scss';
 
 export default function SignUp() {
     const dispatch = useDispatch();

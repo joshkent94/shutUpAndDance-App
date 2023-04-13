@@ -16,7 +16,7 @@ import PauseRounded from '@material-ui/icons/PauseRounded';
 import PlayArrowRounded from '@material-ui/icons/PlayArrowRounded';
 import FastForwardRounded from '@material-ui/icons/FastForwardRounded';
 import FastRewindRounded from '@material-ui/icons/FastRewindRounded';
-import './PlayerControls.css';
+import './PlayerControls.scss';
 
 // React component built using Material UI library
 export default function PlayerControls({ currentlyPlaying }) {

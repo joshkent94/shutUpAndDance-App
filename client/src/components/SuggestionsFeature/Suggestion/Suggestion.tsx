@@ -9,7 +9,7 @@ import {
 } from '../../../utils/state/spotifySlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons';
-import './Suggestion.css';
+import './Suggestion.scss';
 
 export default function Suggestion({ track }) {
     const dispatch = useDispatch();

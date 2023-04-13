@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { likeCommentToggle } from '../../../utils/state/forumSlice';
 import { selectUserId } from '../../../utils/state/userSlice';
-import './Comment.css';
+import './Comment.scss';
 
 export default function Comment({ comment }) {
     const userId = useSelector(selectUserId);

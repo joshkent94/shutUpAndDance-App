@@ -4,7 +4,7 @@ import WidgetDropdown from '../WidgetDropdown/WidgetDropdown';
 import { displayWidget, widgetArray } from "../../../utils/helperFunctions/widgetHelper";
 import { selectWidgets, setWidgetOrder } from '../../../utils/state/userSlice';
 import { MuuriComponent } from 'muuri-react';
-import './Dashboard.css';
+import './Dashboard.scss';
 
 export default function Dashboard() {
     const selectedWidgets = useSelector(selectWidgets);

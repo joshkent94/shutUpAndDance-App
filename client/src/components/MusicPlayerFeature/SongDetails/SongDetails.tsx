@@ -1,4 +1,4 @@
-import './SongDetails.css';
+import './SongDetails.scss';
 
 export default function SongDetails({ currentlyPlaying }) {
     return (

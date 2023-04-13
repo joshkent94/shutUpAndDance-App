@@ -8,7 +8,7 @@ import { resetForumDetails } from '../../../utils/state/forumSlice';
 import { resetSpotifyDetails } from '../../../utils/state/spotifySlice';
 import { logout, selectEmail, selectFirstName, selectLastName } from '../../../utils/state/userSlice';
 import SideNav from '../SideNav/SideNav';
-import './TopNav.css';
+import './TopNav.scss';
 
 export default function TopNav() {
     const dispatch = useDispatch();

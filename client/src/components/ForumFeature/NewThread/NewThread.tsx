@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { createThread, getThreadsByUserId } from '../../../utils/state/forumSlice';
-import './NewThread.css';
+import './NewThread.scss';
 
 export default function NewThread() {
     const dispatch = useDispatch();

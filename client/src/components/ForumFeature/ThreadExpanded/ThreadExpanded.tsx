@@ -7,7 +7,7 @@ import Comment from "../Comment/Comment";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { showMessage } from "../../../utils/helperFunctions/showMessage";
-import './ThreadExpanded.css';
+import './ThreadExpanded.scss';
 
 export default function ThreadExpanded() {
     const dispatch = useDispatch();

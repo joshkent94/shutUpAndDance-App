@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMostLikedThreads, selectMostLiked } from "../../../utils/state/forumSlice";
 import ThreadOverview from "../../ForumFeature/ThreadOverview/ThreadOverview";
-import './MostLikedThreadsWidget.css';
+import './MostLikedThreadsWidget.scss';
 
 export default function MostLikedThreadsWidget() {
     const dispatch = useDispatch();

@@ -13,7 +13,7 @@ import { useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import useSWR from 'swr';
-import './SuggestionsWidget.css';
+import './SuggestionsWidget.scss';
 
 export default function SuggestionsWidget() {
     const dispatch = useDispatch();

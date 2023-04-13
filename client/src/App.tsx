@@ -20,7 +20,13 @@ import ScreenSizePrompt from "./components/ScreenSizePrompt/ScreenSizePrompt";
 import Footer from "./components/Footer/Footer";
 import SpotifyAuthentication from "./components/Authentication/SpotifyAuthentication/SpotifyAuthentication";
 import MusicPlayer from "./components/MusicPlayerFeature/MusicPlayer/MusicPlayer";
-import './App.css';
+import './App.scss';
+
+declare global {
+  interface Window {
+    pendo: any;
+  }
+}
 
 export default function App() {
   const userEmail = useSelector(selectEmail);

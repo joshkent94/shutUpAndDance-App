@@ -1,10 +1,10 @@
-import './ThreadOverview.css';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookOpen } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMostLikedThreads, getThreadsByUserId, likeThreadToggle, selectThreads } from "../../../utils/state/forumSlice";
 import { selectUserId } from '../../../utils/state/userSlice';
+import './ThreadOverview.scss';
 
 export default function ThreadOverview(props) {
     const thread = props.thread;

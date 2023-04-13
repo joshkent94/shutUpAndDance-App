@@ -1,7 +1,7 @@
 import Logo from '../../assets/logo.png';
-import './ScreenSizePrompt.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import './ScreenSizePrompt.scss';
 
 export default function ScreenSizePrompt() {
     return (

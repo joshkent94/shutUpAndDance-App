@@ -26,6 +26,9 @@
         "swr": "^1.1.2",
         "typescript": "^4.5.5"
     },
+    "devDependencies": {
+        "sass": "^1.62.0"
+    },
     "scripts": {
         "start": "react-scripts --openssl-legacy-provider start",
         "build": "react-scripts build",

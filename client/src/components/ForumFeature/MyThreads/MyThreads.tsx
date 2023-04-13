@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getThreadsByUserId, selectUserThreads } from "../../../utils/state/forumSlice";
 import ThreadOverview from "../ThreadOverview/ThreadOverview";
-import './MyThreads.css';
+import './MyThreads.scss';
 
 export default function MyThreads({ searchTerm }) {
     const dispatch = useDispatch();

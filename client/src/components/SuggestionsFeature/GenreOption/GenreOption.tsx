@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { selectGenres, setGenres } from "../../../utils/state/userSlice";
-import './GenreOption.css';
+import './GenreOption.scss';
 
 export default function GenreOption(props) {
     const dispatch = useDispatch();

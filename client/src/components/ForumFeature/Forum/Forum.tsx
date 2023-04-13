@@ -5,7 +5,7 @@ import NewThread from "../NewThread/NewThread";
 import MyThreads from "../MyThreads/MyThreads";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import './Forum.css';
+import './Forum.scss';
 
 export default function Forum() {
     const [searchTerm, setSearchTerm] = useState('');
