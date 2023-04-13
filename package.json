@@ -23,7 +23,8 @@
     "knex": "^0.95.11",
     "nodemon": "^2.0.12",
     "pg": "^8.7.1",
-    "sanitize-html": "^2.5.1"
+    "sanitize-html": "^2.5.1",
+    "typescript": "^5.0.4"
   },
   "author": "Josh Kent",
   "license": "ISC"
