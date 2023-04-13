@@ -1,4 +1,4 @@
-const { pool } = require('../../connectionConfig');
+import { pool } from '../../connectionConfig';
 
 const getThread = (req, res) => {
     const threadId = req.params.threadId;
@@ -20,4 +20,4 @@ const getThread = (req, res) => {
     };
 };
 
-module.exports = { getThread };
+export { getThread };

@@ -1,4 +1,4 @@
-const { pool } = require('../../connectionConfig');
+import { pool } from '../../connectionConfig';
 
 const likeThreadToggle = (req, res) => {
     const threadId = req.params.threadId;
@@ -31,4 +31,4 @@ const likeThreadToggle = (req, res) => {
         });
 };
 
-module.exports = { likeThreadToggle };
+export { likeThreadToggle };

@@ -1,5 +1,5 @@
-const { pool } = require('../../connectionConfig');
-const sanitizeHtml = require('sanitize-html');
+import { pool } from '../../connectionConfig';
+import sanitizeHtml from 'sanitize-html';
 
 const getThreads = (req, res) => {
     const cleanSearch = sanitizeHtml(req.params.searchTerm).toLowerCase();
@@ -24,4 +24,4 @@ const getThreads = (req, res) => {
         });
 };
 
-module.exports = { getThreads };
+export { getThreads };

@@ -1,19 +1,20 @@
 {
     "compilerOptions": {
         "target": "es2016",
-        "module": "esnext",
+        "module": "commonjs",
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
         "strict": true,
-        "skipLibCheck": true,
-        "lib": ["esnext"],
         "allowJs": true,
         "allowSyntheticDefaultImports": true,
         "noFallthroughCasesInSwitch": true,
         "moduleResolution": "node",
         "resolveJsonModule": true,
         "isolatedModules": true,
-        "noEmit": true,
+        "rootDir": "./",
+        "skipLibCheck": true,
+        "outDir": "./dist",
+        "noImplicitAny": false
     },
-    "include": ["./server/"]
+    "include": ["./server/", "./server.ts"]
 }

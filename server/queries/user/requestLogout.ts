@@ -5,4 +5,4 @@ const requestLogout = (req, res) => {
     });
 };
 
-module.exports = { requestLogout };
+export { requestLogout };

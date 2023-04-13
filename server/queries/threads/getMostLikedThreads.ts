@@ -1,4 +1,4 @@
-const { pool } = require('../../connectionConfig');
+import { pool } from '../../connectionConfig';
 
 const getMostLikedThreads = (req, res) => {
     pool.query(`SELECT threads.id, threads.date_time, threads.title, threads.initial_comment, threads.likes, t1.first_name, t1.last_name, COALESCE(t2.number_of_comments, 0) AS number_of_comments
@@ -21,4 +21,4 @@ const getMostLikedThreads = (req, res) => {
         });
 };
 
-module.exports = { getMostLikedThreads };
+export { getMostLikedThreads };

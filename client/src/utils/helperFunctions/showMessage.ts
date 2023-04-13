@@ -5,12 +5,12 @@ export const showMessage = message => {
     messageBox.classList.add("animate__fadeIn");
     const toDisplay = document.createTextNode(message);
     messageBox.appendChild(toDisplay);
-    document.getElementById('root').appendChild(messageBox);
+    document.getElementById('root')?.appendChild(messageBox);
     setTimeout(() => {
         messageBox.classList.add("animate__fadeOut");
     }, 3000);
     setTimeout(() => {
-        document.getElementById('root').removeChild(messageBox);
+        document.getElementById('root')?.removeChild(messageBox);
     }, 5000);
 };
 
@@ -21,11 +21,11 @@ export const showInvertedMessage = message => {
     messageBox.classList.add("animate__fadeIn");
     const toDisplay = document.createTextNode(message);
     messageBox.appendChild(toDisplay);
-    document.getElementById('root').appendChild(messageBox);
+    document.getElementById('root')?.appendChild(messageBox);
     setTimeout(() => {
         messageBox.classList.add("animate__fadeOut");
     }, 3000);
     setTimeout(() => {
-        document.getElementById('root').removeChild(messageBox);
+        document.getElementById('root')?.removeChild(messageBox);
     }, 5000);
 };

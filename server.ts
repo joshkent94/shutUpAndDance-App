@@ -1,50 +1,53 @@
-const express = require('express');
+import express from 'express';
+import cors from 'cors';
+import session from 'express-session';
+import path from 'path';
+import https from 'https';
+import { pool, isProduction } from './server/connectionConfig';
+import { userRouter } from './server/routes/userRoutes';
+import { threadsRouter } from './server/routes/threadsRouter';
+import { commentsRouter } from './server/routes/commentsRouter';
+require('dotenv').config();
+
+const pgSession = require('connect-pg-simple')(session);
 const app = express();
 const port = process.env.PORT || 3002;
-const cors = require('cors');
-const session = require('express-session');
-const path = require('path');
-const https = require('https');
-const pgSession = require('connect-pg-simple')(session);
-const { pool, isProduction } = require('./server/connectionConfig');
-const { userRouter } = require('./server/routes/userRoutes');
-const { threadsRouter } = require('./server/routes/threadsRouter');
-const { commentsRouter } = require('./server/routes/commentsRouter');
-require('dotenv').config();
 
 // middleware
 app.set('trust proxy', true);
 app.use(
-  cors({
-    origin: ["https://localhost:3000", "https://app.shutupanddance.io"],
-    credentials: true,
-    optionsSuccessStatus: 204,
-  })
+    cors({
+        origin: ['https://localhost:3000', 'https://app.shutupanddance.io'],
+        credentials: true,
+        optionsSuccessStatus: 204
+    })
 );
 app.use(express.json());
 app.use(
     express.urlencoded({
-        extended: true,
+        extended: true
     })
 );
-app.use(session({
-    store: new pgSession({
-        pool: pool
-    }),
-    secret: process.env.SESSION_SECRET,
-    saveUninitialized: false,
-    resave: false,
-    name: 'shut-up-and-dance',
-    cookie: {
-        sameSite: 'none',
-        secure: true,
-        httpOnly: false,
-        maxAge: 86400000
-    }
-}));
+app.use(
+    session({
+        store: new pgSession({
+            pool: pool
+        }),
+        secret: process.env.SESSION_SECRET,
+        saveUninitialized: false,
+        resave: false,
+        name: 'shut-up-and-dance',
+        cookie: {
+            sameSite: 'none',
+            secure: true,
+            httpOnly: false,
+            maxAge: 86400000
+        }
+    })
+);
 if (isProduction) {
-    app.use(express.static(path.join(__dirname, "client/build")));
-};
+    app.use(express.static(path.join(__dirname, 'client/build')));
+}
 
 // routes
 app.use('/user', userRouter);
@@ -53,7 +56,7 @@ app.use('/comments', commentsRouter);
 
 // catch all route
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, "client/build/index.html"));
+    res.sendFile(path.join(__dirname, 'client/build/index.html'));
 });
 
 // force https server in dev
@@ -67,4 +70,4 @@ if (isProduction) {
     httpsServer.listen(port, () => {
         console.log(`HTTPS app is running on port ${port}.`);
     });
-};
+}

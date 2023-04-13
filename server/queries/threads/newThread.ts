@@ -1,5 +1,5 @@
-const { pool } = require('../../connectionConfig');
-const sanitizeHtml = require('sanitize-html');
+import { pool } from '../../connectionConfig';
+import sanitizeHtml from 'sanitize-html';
 
 const newThread = (req, res) => {
     const cleanTitle = sanitizeHtml(req.body.title);
@@ -19,4 +19,4 @@ const newThread = (req, res) => {
         });
 };
 
-module.exports = { newThread };
+export { newThread };

@@ -1,4 +1,4 @@
-const { pool } = require('../../connectionConfig');
+import { pool } from '../../connectionConfig';
 
 const updateWidgets = (req, res) => {
     if (req.session.userId) {
@@ -29,4 +29,4 @@ const updateWidgets = (req, res) => {
     };
 };
 
-module.exports = { updateWidgets };
+export { updateWidgets };

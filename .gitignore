@@ -6,6 +6,7 @@
 /client/node_modules
 
 #production
+dist
 client/build
 
 #connection

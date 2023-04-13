@@ -1,5 +1,5 @@
-const { pool } = require('../../connectionConfig');
-const sanitizeHtml = require('sanitize-html');
+import { pool } from '../../connectionConfig';
+import sanitizeHtml from 'sanitize-html';
 
 const addComment = (req, res) => {
     const threadId = req.params.threadId;
@@ -12,4 +12,4 @@ const addComment = (req, res) => {
         });
 };
 
-module.exports = { addComment };
+export { addComment };

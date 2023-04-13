@@ -1,4 +1,4 @@
-const { pool } = require('../../connectionConfig');
+import { pool } from '../../connectionConfig';
 
 const updateGenres = (req, res) => {
     if (req.session.userId) {
@@ -29,4 +29,4 @@ const updateGenres = (req, res) => {
     };
 };
 
-module.exports = { updateGenres };
+export { updateGenres };

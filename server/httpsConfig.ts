@@ -1,4 +1,4 @@
-const fs = require('fs');
+import fs from 'fs';
 
 // https credentials config
 const privateKey = fs.readFileSync('/Users/josh.kent/key.pem', 'utf8');
@@ -8,4 +8,4 @@ const credentials = {
     cert: certificate
 };
 
-module.exports = { credentials };
+export { credentials };

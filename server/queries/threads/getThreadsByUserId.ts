@@ -1,4 +1,4 @@
-const { pool } = require('../../connectionConfig');
+import { pool } from '../../connectionConfig';
 
 const getThreadsByUserId = (req, res) => {
     const userId = req.session.userId;
@@ -23,4 +23,4 @@ const getThreadsByUserId = (req, res) => {
         });
 };
 
-module.exports = { getThreadsByUserId };
+export { getThreadsByUserId };

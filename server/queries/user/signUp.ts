@@ -1,6 +1,6 @@
-const { pool } = require('../../connectionConfig');
-const bcrypt = require('bcryptjs');
-const sanitizeHtml = require('sanitize-html');
+import { pool } from '../../connectionConfig';
+import bcrypt from 'bcryptjs';
+import sanitizeHtml from 'sanitize-html';
 
 const signUp = (req, res) => {
     const cleanFirstName = sanitizeHtml(req.body.firstName);
@@ -45,4 +45,4 @@ const signUp = (req, res) => {
         });
 };
 
-module.exports = { signUp };
+export { signUp };

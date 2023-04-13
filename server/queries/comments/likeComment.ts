@@ -1,4 +1,4 @@
-const { pool } = require('../../connectionConfig');
+import { pool } from '../../connectionConfig';
 
 const likeCommentToggle = (req, res) => {
     const commentId = req.params.commentId;
@@ -31,4 +31,4 @@ const likeCommentToggle = (req, res) => {
         });
 };
 
-module.exports = { likeCommentToggle };
+export { likeCommentToggle };

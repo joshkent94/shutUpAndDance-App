@@ -1,11 +1,12 @@
-const express = require('express');
+import express from 'express';
+import { getComments } from '../queries/comments/getComments';
+import { addComment } from '../queries/comments/addComment';
+import { likeCommentToggle } from '../queries/comments/likeComment';
+
 const commentsRouter = express.Router();
-const { getComments } = require('../queries/comments/getComments');
-const { addComment } = require('../queries/comments/addComment');
-const { likeCommentToggle } = require('../queries/comments/likeComment');
 
 commentsRouter.get('/:threadId', getComments);
 commentsRouter.post('/:threadId', addComment);
 commentsRouter.put('/:commentId', likeCommentToggle);
 
-module.exports = { commentsRouter };
+export { commentsRouter };

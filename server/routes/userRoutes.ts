@@ -1,12 +1,13 @@
-const express = require('express');
+import express from 'express';
+import { getGenres } from '../queries/user/getGenres';
+import { requestLogin } from '../queries/user/requestLogin';
+import { requestLogout } from '../queries/user/requestLogout';
+import { signUp } from '../queries/user/signUp';
+import { updateGenres } from '../queries/user/updateGenres';
+import { updateUserDetails } from '../queries/user/updateUserDetails';
+import { updateWidgets } from '../queries/user/updateWidgets';
+
 const userRouter = express.Router();
-const { getGenres } = require('../queries/user/getGenres');
-const { requestLogin } = require('../queries/user/requestLogin');
-const { requestLogout } = require('../queries/user/requestLogout');
-const { signUp } = require('../queries/user/signUp');
-const { updateGenres } = require('../queries/user/updateGenres');
-const { updateUserDetails } = require('../queries/user/updateUserDetails');
-const { updateWidgets } = require('../queries/user/updateWidgets');
 
 userRouter.post('/signup', signUp);
 userRouter.post('/authenticate', requestLogin);
@@ -16,4 +17,4 @@ userRouter.get('/genres', getGenres);
 userRouter.put('/genres', updateGenres);
 userRouter.put('/widgets', updateWidgets);
 
-module.exports = { userRouter };
+export { userRouter };

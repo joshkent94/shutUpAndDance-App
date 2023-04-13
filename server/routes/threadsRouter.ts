@@ -1,11 +1,12 @@
-const express = require('express');
+import express from 'express';
+import { getThread } from '../queries/threads/getThread';
+import { getThreads } from '../queries/threads/getThreads';
+import { getMostLikedThreads } from '../queries/threads/getMostLikedThreads';
+import { likeThreadToggle } from '../queries/threads/likeThread';
+import { newThread } from '../queries/threads/newThread';
+import { getThreadsByUserId } from '../queries/threads/getThreadsByUserId';
+
 const threadsRouter = express.Router();
-const { getThread } = require('../queries/threads/getThread');
-const { getThreads } = require('../queries/threads/getThreads');
-const { getMostLikedThreads } = require('../queries/threads/getMostLikedThreads');
-const { likeThreadToggle } = require('../queries/threads/likeThread');
-const { newThread } = require('../queries/threads/newThread');
-const { getThreadsByUserId } = require('../queries/threads/getThreadsByUserId');
 
 threadsRouter.get('/mostLiked', getMostLikedThreads);
 threadsRouter.get('/user', getThreadsByUserId);
@@ -14,4 +15,4 @@ threadsRouter.get('/thread/:threadId', getThread);
 threadsRouter.post('/thread', newThread);
 threadsRouter.put('/thread/:threadId', likeThreadToggle);
 
-module.exports = { threadsRouter };
+export { threadsRouter };

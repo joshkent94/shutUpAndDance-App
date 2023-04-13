@@ -11,9 +11,6 @@
         "@material-ui/icons": "^4.11.2",
         "@material-ui/styles": "^4.11.4",
         "@reduxjs/toolkit": "^1.6.1",
-        "@types/jest": "^27.4.1",
-        "@types/react": "^17.0.39",
-        "@types/react-dom": "^17.0.11",
         "muuri": "^0.9.5",
         "muuri-react": "^3.1.6",
         "react": "^16.13.0",
@@ -23,11 +20,14 @@
         "react-router-dom": "^6.0.2",
         "react-scripts": "4.0.3",
         "redux-persist": "^6.0.0",
-        "swr": "^1.1.2",
-        "typescript": "^4.5.5"
+        "swr": "^1.1.2"
     },
     "devDependencies": {
-        "sass": "^1.62.0"
+        "sass": "^1.62.0",
+        "@types/jest": "^27.4.1",
+        "@types/react": "^17.0.39",
+        "@types/react-dom": "^17.0.11",
+        "typescript": "^4.5.5"
     },
     "scripts": {
         "start": "react-scripts --openssl-legacy-provider start",
