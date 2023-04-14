@@ -4,11 +4,13 @@ import BrowseThreads from "../BrowseThreads/BrowseThreads";
 import NewThread from "../NewThread/NewThread";
 import MyThreads from "../MyThreads/MyThreads";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import './Forum.scss';
 
 export default function Forum() {
     const [searchTerm, setSearchTerm] = useState('');
+    const faSearchProp = faSearch as IconProp;
 
     // update local search term state
     const handleSearchTermChange = e => {
@@ -33,7 +35,7 @@ export default function Forum() {
                     />
                     <div className="input-group-append">
                         <button className="btn btn-outline-secondary" id="search-button" type="button">
-                            <FontAwesomeIcon icon={faSearch} />
+                            <FontAwesomeIcon icon={faSearchProp} />
                         </button>
                     </div>
                 </div>

@@ -9,7 +9,7 @@ export const getAccessToken = createAsyncThunk('spotify/getAccessToken', async (
                 ? 'https://app.shutupanddance.io/spotify'
                 : 'https://localhost:3000/spotify'
     };
-    const queryString = new URLSearchParams(dataToSend).toString();
+    const queryString = new URLSearchParams(dataToSend.toString());
     const authString = btoa(
         `${process.env.REACT_APP_SPOTIFY_CLIENT_ID}:${process.env.REACT_APP_SPOTIFY_CLIENT_SECRET}`
     );
@@ -36,7 +36,7 @@ export const refreshAccessToken = createAsyncThunk('spotify/refreshAccessToken',
         grant_type: 'refresh_token',
         refresh_token: refreshToken
     };
-    const queryString = new URLSearchParams(dataToSend).toString();
+    const queryString = new URLSearchParams(dataToSend.toString());
     const authString = btoa(
         `${process.env.REACT_APP_SPOTIFY_CLIENT_ID}:${process.env.REACT_APP_SPOTIFY_CLIENT_SECRET}`
     );
@@ -69,7 +69,7 @@ export const getAvailableGenres = createAsyncThunk(
             const newToken = await thunkAPI.dispatch(refreshAccessToken(refreshToken)).unwrap();
             response = await fetch(`https://api.spotify.com/v1/recommendations/available-genre-seeds`, {
                 headers: {
-                    Authorization: 'Bearer ' + newToken.accessToken
+                    Authorization: 'Bearer ' + newToken?.accessToken
                 }
             });
         }
@@ -99,7 +99,7 @@ export const getSuggestions = createAsyncThunk(
                     `https://api.spotify.com/v1/recommendations?limit=10&seed_genres=${queryString}`,
                     {
                         headers: {
-                            Authorization: 'Bearer ' + newToken.accessToken
+                            Authorization: 'Bearer ' + newToken?.accessToken
                         }
                     }
                 );
@@ -133,7 +133,7 @@ export const getPlayingSong = createAsyncThunk(
             const newToken = await thunkAPI.dispatch(refreshAccessToken(refreshToken)).unwrap();
             response = await fetch(`https://api.spotify.com/v1/me/player`, {
                 headers: {
-                    Authorization: 'Bearer ' + newToken.accessToken
+                    Authorization: 'Bearer ' + newToken?.accessToken
                 }
             });
         }
@@ -177,7 +177,7 @@ export const changeSongPosition = createAsyncThunk(
                 {
                     method: 'PUT',
                     headers: {
-                        'Authorization': 'Bearer ' + newToken.accessToken,
+                        'Authorization': 'Bearer ' + newToken?.accessToken,
                         'Content-Type': 'application/json'
                     }
                 }
@@ -207,7 +207,7 @@ export const togglePlay = createAsyncThunk(
                 response = await fetch(`https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`, {
                     method: 'PUT',
                     headers: {
-                        'Authorization': 'Bearer ' + newToken.accessToken,
+                        'Authorization': 'Bearer ' + newToken?.accessToken,
                         'Content-Type': 'application/json'
                     },
                     ...(uri && { body: JSON.stringify({ uris: [uri] }) })
@@ -229,7 +229,7 @@ export const togglePlay = createAsyncThunk(
                 response = await fetch(`https://api.spotify.com/v1/me/player/pause?device_id=${deviceId}`, {
                     method: 'PUT',
                     headers: {
-                        'Authorization': 'Bearer ' + newToken.accessToken,
+                        'Authorization': 'Bearer ' + newToken?.accessToken,
                         'Content-Type': 'application/json'
                     }
                 });
@@ -257,7 +257,7 @@ export const playPreviousSong = createAsyncThunk(
             response = await fetch(`https://api.spotify.com/v1/me/player/previous?device_id=${deviceId}`, {
                 method: 'POST',
                 headers: {
-                    'Authorization': 'Bearer ' + newToken.accessToken,
+                    'Authorization': 'Bearer ' + newToken?.accessToken,
                     'Content-Type': 'application/json'
                 }
             });
@@ -280,7 +280,7 @@ export const playNextSong = createAsyncThunk(
             response = await fetch(`https://api.spotify.com/v1/me/player/next?device_id=${deviceId}`, {
                 method: 'POST',
                 headers: {
-                    'Authorization': 'Bearer ' + newToken.accessToken,
+                    'Authorization': 'Bearer ' + newToken?.accessToken,
                     'Content-Type': 'application/json'
                 }
             });

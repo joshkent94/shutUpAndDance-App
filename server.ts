@@ -56,7 +56,7 @@ app.use('/comments', commentsRouter);
 
 // catch all route
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client/build/index.html'));
+    res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
 // force https server in dev

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Offcanvas } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faTimesCircle } from '@fortawesome/free-regular-svg-icons';
 import spotifyLogo from '../../../assets/Spotify_Logo_RGB_Green.png';
 import {
@@ -21,6 +22,7 @@ export default function MusicPlayer() {
     const refreshToken = useSelector(selectRefreshToken);
     const currentlyPlaying = useSelector(selectCurrentlyPlaying);
     const [show, setShow] = useState(false);
+    const faTimesCircleProp = faTimesCircle as IconProp;
 
     // poll for currently playing song every second if music player is showing
     useSWR(
@@ -79,7 +81,7 @@ export default function MusicPlayer() {
             </button>
             <Offcanvas show={show} scroll={true} backdrop={false} placement="end" className="music-player">
                 <button onClick={hidePlayer} className="close-player">
-                    <FontAwesomeIcon icon={faTimesCircle} size="lg" />
+                    <FontAwesomeIcon icon={faTimesCircleProp} size="lg" />
                 </button>
                 {content}
             </Offcanvas>

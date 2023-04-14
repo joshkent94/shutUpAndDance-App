@@ -10,6 +10,7 @@ import {
 } from '../../../utils/state/spotifySlice';
 import { selectGenres, updateGenres } from '../../../utils/state/userSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import './GenreDropdown.scss';
 
@@ -21,6 +22,7 @@ export default function GenreDropdown() {
     const refreshToken = useSelector(selectRefreshToken);
     const [searchTerm, setSearchTerm] = useState('');
     const firstRender = useRef(true);
+    const faSearchProp = faSearch as IconProp;
 
     const handleSearchTermChange = (e) => {
         e.preventDefault();
@@ -86,7 +88,7 @@ export default function GenreDropdown() {
                             id="search-button"
                             type="button"
                             onClick={handleSuggestionSearch}>
-                            <FontAwesomeIcon icon={faSearch} />
+                            <FontAwesomeIcon icon={faSearchProp} />
                         </button>
                     </div>
                 </div>

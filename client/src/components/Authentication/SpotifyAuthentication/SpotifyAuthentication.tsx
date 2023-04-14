@@ -10,7 +10,7 @@ export default function SpotifyAuthentication() {
     const dispatch = useDispatch();
     const [searchParams] = useSearchParams();
     const code = searchParams.get('code');
-    const state = searchParams.get('state');
+    const state = searchParams.get('state') || '';
     const [security, location] = state.split(',');
     const navigate = useNavigate();
 

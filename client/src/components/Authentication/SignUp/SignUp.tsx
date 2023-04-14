@@ -13,7 +13,7 @@ export default function SignUp() {
     const [firstName, setFirstName] = useState(null);
     const [lastName, setLastName] = useState(null);
     const [email, setEmail] = useState(null);
-    const [password, setPassword] = useState(null);
+    const [password, setPassword] = useState('');
     const [validatedPassword, setValidatedPassword] = useState(null);
 
     const updateFirstName = e => {

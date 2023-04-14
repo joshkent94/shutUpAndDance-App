@@ -21,14 +21,14 @@ export default function TopNav() {
 
     // show burger menu icon on hover
     const showMenu = () => {
-        document.getElementById("logo-icon").classList.add("hide-logo");
-        document.getElementById("side-nav-toggle").classList.add("show-menu-icon");
+        document.getElementById("logo-icon")?.classList.add("hide-logo");
+        document.getElementById("side-nav-toggle")?.classList.add("show-menu-icon");
     };
 
     // show logo again when mouse leaves
     const showLogo = () => {
-        document.getElementById("logo-icon").classList.remove("hide-logo");
-        document.getElementById("side-nav-toggle").classList.remove("show-menu-icon");
+        document.getElementById("logo-icon")?.classList.remove("hide-logo");
+        document.getElementById("side-nav-toggle")?.classList.remove("show-menu-icon");
     };
 
     // toggle sidebar off whenever URL changes

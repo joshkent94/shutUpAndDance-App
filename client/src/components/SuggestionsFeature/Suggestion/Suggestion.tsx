@@ -8,6 +8,7 @@ import {
     togglePlay
 } from '../../../utils/state/spotifySlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons';
 import './Suggestion.scss';
 
@@ -17,6 +18,8 @@ export default function Suggestion({ track }) {
     const refreshToken = useSelector(selectRefreshToken);
     const currentlyPlaying = useSelector(selectCurrentlyPlaying);
     const [paused] = useState(!(track.uri === currentlyPlaying.uri && currentlyPlaying.isPlaying));
+    const faPlayProp = faPlay as IconProp;
+    const faPauseProp = faPause as IconProp;
 
     // toggle play and update currently playing
     const togglePlayState = () => {
@@ -45,13 +48,13 @@ export default function Suggestion({ track }) {
         if (!paused) {
             playButton = (
                 <button className="action-button" onClick={togglePlayState}>
-                    <FontAwesomeIcon icon={faPause} />
+                    <FontAwesomeIcon icon={faPauseProp} />
                 </button>
             );
         } else {
             playButton = (
                 <button className="action-button" onClick={togglePlayState}>
-                    <FontAwesomeIcon icon={faPlay} />
+                    <FontAwesomeIcon icon={faPlayProp} />
                 </button>
             );
         }

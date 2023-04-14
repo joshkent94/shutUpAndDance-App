@@ -11,6 +11,7 @@ import Suggestion from '../../SuggestionsFeature/Suggestion/Suggestion';
 import { selectGenres } from '../../../utils/state/userSlice';
 import { useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import useSWR from 'swr';
 import './SuggestionsWidget.scss';
@@ -23,6 +24,7 @@ export default function SuggestionsWidget() {
     const refreshToken = useSelector(selectRefreshToken);
     const currentlyPlaying = useSelector(selectCurrentlyPlaying);
     const firstRender = useRef(true);
+    const faSearchProp = faSearch as IconProp;
 
     // poll for currently playing song every 5 seconds
     useSWR(
@@ -93,7 +95,7 @@ export default function SuggestionsWidget() {
                             id="search-button"
                             type="button"
                             onClick={handleSuggestionSearch}>
-                            <FontAwesomeIcon icon={faSearch} />
+                            <FontAwesomeIcon icon={faSearchProp} />
                         </button>
                     </div>
                 </div>

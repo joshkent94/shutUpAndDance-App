@@ -6,6 +6,7 @@ import { addComment, getComments, getThread, likeThreadToggle, selectThreadInfo 
 import Comment from "../Comment/Comment";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { showMessage } from "../../../utils/helperFunctions/showMessage";
 import './ThreadExpanded.scss';
 
@@ -16,6 +17,7 @@ export default function ThreadExpanded() {
     const comments = threadInfo.comments;
     const { threadId } = useParams();
     const [newComment, setNewComment] = useState('');
+    const faPaperPlaneProp = faPaperPlane as IconProp;
 
     // get all the details for the thread on page load
     useEffect(() => {
@@ -97,7 +99,7 @@ export default function ThreadExpanded() {
                         <textarea id="add-new-comment-textarea" className="form-control" placeholder="Add a comment..." onChange={handleCommentChange} value={newComment} rows={2} />
                         <div className="input-group-append">
                             <button className="btn btn-outline-secondary" type="submit" id="submit-comment" onClick={postComment}>
-                                <FontAwesomeIcon icon={faPaperPlane} />
+                                <FontAwesomeIcon icon={faPaperPlaneProp} />
                             </button>
                         </div>
                     </div>
