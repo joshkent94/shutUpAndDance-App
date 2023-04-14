@@ -4,7 +4,7 @@
     "description": "Search and discuss music by genre",
     "main": "server.js",
     "scripts": {
-        "start": "node dist/server.js",
+        "start": "npm run build && node dist/server.js",
         "build": "npx tsc",
         "dev": "concurrently \"tsc --watch\" \"nodemon -q dist/server.js\"",
         "heroku-postbuild": "cd client && npm install && npm run build"
