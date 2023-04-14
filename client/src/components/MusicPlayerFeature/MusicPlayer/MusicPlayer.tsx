@@ -42,7 +42,7 @@ export default function MusicPlayer() {
 
     // transition tab out and player in
     const showPlayer = () => {
-        document.getElementsByClassName('player-toggle')[0].style.right = '-50px';
+        (document.getElementsByClassName('player-toggle')[0] as HTMLElement).style.right = '-50px';
         setTimeout(() => {
             setShow(true);
         }, 200);
@@ -53,7 +53,7 @@ export default function MusicPlayer() {
         if (show) {
             setShow(false);
             setTimeout(() => {
-                document.getElementsByClassName('player-toggle')[0].style.right = '0px';
+                (document.getElementsByClassName('player-toggle')[0] as HTMLElement).style.right = '0px';
             }, 300);
         }
     };

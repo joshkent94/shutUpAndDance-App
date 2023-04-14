@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import WidgetDropdown from '../WidgetDropdown/WidgetDropdown';
-import { displayWidget, widgetArray } from "../../../utils/helperFunctions/widgetHelper";
+import { displayWidget } from "../../../utils/helperFunctions/widgetHelper";
 import { selectWidgets, setWidgetOrder } from '../../../utils/state/userSlice';
 import { MuuriComponent } from 'muuri-react';
 import './Dashboard.scss';
@@ -26,12 +26,6 @@ export default function Dashboard() {
                 Please select at least one widget for your dashboard.
             </h5>
     } else {
-        const selectedWidgets = [];
-        for (let i = 0; i < widgetArray.length; i++) {
-            if (items.includes(widgetArray[i].name)) {
-                selectedWidgets.push(widgetArray[i]);
-            };
-        };
         const children = items.map(widget => displayWidget(widget));
         const showPlaceholder = item => item.getElement().cloneNode(false);
         const sendItemOrder = item => {

@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { createThread, getThreadsByUserId } from '../../../utils/state/forumSlice';
+import { useAppDispatch } from '../../../utils/state/store';
 import './NewThread.scss';
 
 export default function NewThread() {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const [title, setTitle] = useState('');
     const [comment, setComment] = useState('');
     const navigate = useNavigate();
@@ -31,7 +31,7 @@ export default function NewThread() {
             .unwrap()
             .then(thread => {
                 dispatch(getThreadsByUserId());
-                navigate(`${thread.id}`);
+                navigate(`${thread?.id}`);
             });
     };
 

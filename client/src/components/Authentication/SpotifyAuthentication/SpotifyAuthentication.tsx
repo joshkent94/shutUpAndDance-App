@@ -1,13 +1,13 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { showMessage } from "../../../utils/helperFunctions/showMessage";
 import { resetForumDetails } from "../../../utils/state/forumSlice";
 import { getAccessToken, resetSpotifyDetails } from '../../../utils/state/spotifySlice';
 import { logout } from "../../../utils/state/userSlice";
+import { useAppDispatch } from "../../../utils/state/store";
 
 export default function SpotifyAuthentication() {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const [searchParams] = useSearchParams();
     const code = searchParams.get('code');
     const state = searchParams.get('state') || '';

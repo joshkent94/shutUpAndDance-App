@@ -1,17 +1,20 @@
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookOpen } from '@fortawesome/free-solid-svg-icons';
-import { useDispatch, useSelector } from 'react-redux';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { useSelector } from 'react-redux';
 import { getMostLikedThreads, getThreadsByUserId, likeThreadToggle, selectThreads } from "../../../utils/state/forumSlice";
 import { selectUserId } from '../../../utils/state/userSlice';
+import { useAppDispatch } from '../../../utils/state/store';
 import './ThreadOverview.scss';
 
 export default function ThreadOverview(props) {
     const thread = props.thread;
     const threadId = thread.id;
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const userId = useSelector(selectUserId);
     const threads = useSelector(selectThreads);
+    const faBookOpenProp = faBookOpen as IconProp;
 
     // toggle between like and dislike
     const likeToggle = () => {
@@ -62,7 +65,7 @@ export default function ThreadOverview(props) {
                 <p><span className='thread-label'>Comments:</span> {thread.numberOfComments}</p>
                 <div className='icon-section'>
                     {likeIcon}
-                    <Link to={`/forum/${threadId}`}><FontAwesomeIcon icon={faBookOpen} className='browse-threads-icon' /></Link>
+                    <Link to={`/forum/${threadId}`}><FontAwesomeIcon icon={faBookOpenProp} className='browse-threads-icon' /></Link>
                 </div>
             </div>
         </div>

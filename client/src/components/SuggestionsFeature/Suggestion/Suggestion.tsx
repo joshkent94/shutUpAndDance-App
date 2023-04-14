@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
     getPlayingSong,
     selectAccessToken,
@@ -10,10 +10,11 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons';
+import { useAppDispatch } from '../../../utils/state/store';
 import './Suggestion.scss';
 
 export default function Suggestion({ track }) {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const accessToken = useSelector(selectAccessToken);
     const refreshToken = useSelector(selectRefreshToken);
     const currentlyPlaying = useSelector(selectCurrentlyPlaying);

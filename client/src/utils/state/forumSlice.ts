@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const createThread = createAsyncThunk(
     'forum/createThread',
-    async ({ title, comment }) => {
+    async ({ title, comment }: {title: string, comment: string}) => {
         const data = {
             title: title,
             comment: comment
@@ -35,7 +35,7 @@ export const createThread = createAsyncThunk(
 
 export const searchThreads = createAsyncThunk(
     'forum/searchThreads',
-    async ({ searchTerm }) => {
+    async ({ searchTerm }: {searchTerm: string}) => {
         if (searchTerm) {
             const response = await fetch(`/threads/${searchTerm}`, {
                 mode: "cors",
@@ -43,7 +43,7 @@ export const searchThreads = createAsyncThunk(
             });
             if (response.ok) {
                 const jsonResponse = await response.json();
-                let returnArray = [];
+                let returnArray: any[] = [];
                 for (let i = 0; i < jsonResponse.length; i++) {
                     const threadObj = {
                         id: jsonResponse[i].id,
@@ -67,7 +67,7 @@ export const searchThreads = createAsyncThunk(
 
 export const getThread = createAsyncThunk(
     'forum/getThread',
-    async (threadId) => {
+    async (threadId: string) => {
         const response = await fetch(`/threads/thread/${threadId}`, {
             mode: "cors",
             credentials: "include"
@@ -98,7 +98,7 @@ export const getThreadsByUserId = createAsyncThunk(
         });
         if (response.ok) {
             const jsonResponse = await response.json();
-            let returnArray = [];
+            let returnArray: any[] = [];
             for (let i = 0; i < jsonResponse.length; i++) {
                 const threadObj = {
                     id: jsonResponse[i].id,
@@ -119,7 +119,7 @@ export const getThreadsByUserId = createAsyncThunk(
 
 export const likeThreadToggle = createAsyncThunk(
     'forum/likeThreadToggle',
-    async ({ threadId, method }) => {
+    async ({ threadId, method }: {threadId: string, method: string}) => {
         const response = await fetch(`/threads/thread/${threadId}`, {
             method: "PUT",
             mode: "cors",
@@ -146,7 +146,7 @@ export const getMostLikedThreads = createAsyncThunk(
         });
         if (response.ok) {
             const jsonResponse = await response.json();
-            let returnArray = [];
+            let returnArray: any[] = [];
             for (let i = 0; i < jsonResponse.length; i++) {
                 const threadObj = {
                     id: jsonResponse[i].id,
@@ -167,14 +167,14 @@ export const getMostLikedThreads = createAsyncThunk(
 
 export const getComments = createAsyncThunk(
     'forum/getComments',
-    async (threadId) => {
+    async (threadId: string) => {
         const response = await fetch(`/comments/${threadId}`, {
             mode: "cors",
             credentials: "include"
         });
         if (response.ok) {
             const jsonResponse = await response.json();
-            let returnArray = [];
+            let returnArray: any[] = [];
             for (let i = 0; i < jsonResponse.length; i++) {
                 const commentObj = {
                     id: jsonResponse[i].id,
@@ -193,7 +193,7 @@ export const getComments = createAsyncThunk(
 
 export const addComment = createAsyncThunk(
     'forum/addComment',
-    async ({threadId, comment}) => {
+    async ({threadId, comment}: {threadId: string, comment: string}) => {
         const data = {
             comment
         };
@@ -212,7 +212,7 @@ export const addComment = createAsyncThunk(
 
 export const likeCommentToggle = createAsyncThunk(
     'forum/likeCommentToggle',
-    async ({ commentId }) => {
+    async ({ commentId }: {commentId: string}) => {
         const response = await fetch(`/comments/${commentId}`, {
             method: "PUT",
             mode: "cors",
@@ -228,6 +228,22 @@ export const likeCommentToggle = createAsyncThunk(
     }
 );
 
+type ForumState = {
+    threadOverviews: any[];
+    userThreads: any[];
+    mostLiked: any[];
+    threadInfo: {
+        id: string;
+        timestamp: string;
+        title: string;
+        initialComment: string;
+        comments: any[];
+        likes: any[];
+        firstName: string;
+        lastName: string;
+    };
+};
+
 const forumSlice = createSlice({
     name: 'forum',
     initialState: {
@@ -235,74 +251,84 @@ const forumSlice = createSlice({
         userThreads: [],
         mostLiked: [],
         threadInfo: {
-            id: "",
+            id: '',
             timestamp: '',
-            title: "",
-            initialComment: "",
+            title: '',
+            initialComment: '',
             comments: [],
             likes: [],
-            firstName: "",
-            lastName: ""
+            firstName: '',
+            lastName: ''
         }
-    },
+    } as ForumState,
     reducers: {
-        resetForumDetails: (state, action) => {
+        resetForumDetails: (state) => {
             state.threadOverviews = [];
             state.userThreads = [];
             state.mostLiked = [];
             state.threadInfo = {
-                id: "",
+                id: '',
                 timestamp: '',
-                title: "",
-                initialComment: "",
+                title: '',
+                initialComment: '',
                 comments: [],
                 likes: [],
-                firstName: "",
-                lastName: ""
+                firstName: '',
+                lastName: ''
             };
         }
     },
-    extraReducers: {
-        [createThread.fulfilled]: (state, action) => {
-            state.threadInfo = action.payload;
-        },
-        [searchThreads.fulfilled]: (state, action) => {
-            state.threadOverviews = action.payload;
-        },
-        [getThread.fulfilled]: (state, action) => {
+    extraReducers: (builder) => {
+        builder.addCase(createThread.fulfilled, (state, action) => {
             if (action.payload) {
                 state.threadInfo = action.payload;
-            };
-        },
-        [getThreadsByUserId.fulfilled]: (state, action) => {
-            state.userThreads = action.payload;
-        },
-        [likeThreadToggle.fulfilled]: (state, action) => {
-            if (action.payload.method === 'threadOverviews') {
-                const index = state.threadOverviews.findIndex(({ id }) => id === action.payload.threadId);
-                state.threadOverviews[index].likes = action.payload.jsonResponse;
-            } else if (action.payload.method === 'mostLiked') {
-                const index = state.mostLiked.findIndex(({ id }) => id === action.payload.threadId);
-                state.mostLiked[index].likes = action.payload.jsonResponse;
-            } else {
-                state.threadInfo.likes = action.payload.jsonResponse;
-            };
-        },
-        [getMostLikedThreads.fulfilled]: (state, action) => {
-            state.mostLiked = action.payload;
-        },
-        [getComments.fulfilled]: (state, action) => {
+            }
+        });
+        builder.addCase(searchThreads.fulfilled, (state, action) => {
             if (action.payload) {
-                state.threadInfo.comments = action.payload;   
-            };
-        },
-        [addComment.fulfilled]: (state, action) => {
+                state.threadOverviews = action.payload;
+            }
+        });
+        builder.addCase(getThread.fulfilled, (state, action) => {
+            if (action.payload) {
+                state.threadInfo = action.payload;
+            }
+        });
+        builder.addCase(getThreadsByUserId.fulfilled, (state, action) => {
+            if (action.payload) {
+                state.userThreads = action.payload;
+            }
+        });
+        builder.addCase(likeThreadToggle.fulfilled, (state, action) => {
+            if (action.payload) {
+                if (action.payload.method === 'threadOverviews') {
+                    const index = state.threadOverviews.findIndex(({ id }) => id === action.payload?.threadId);
+                    state.threadOverviews[index].likes = action.payload.jsonResponse;
+                } else if (action.payload.method === 'mostLiked') {
+                    const index = state.mostLiked.findIndex(({ id }) => id === action.payload?.threadId);
+                    state.mostLiked[index].likes = action.payload.jsonResponse;
+                } else {
+                    state.threadInfo.likes = action.payload.jsonResponse;
+                }
+            }
+        });
+        builder.addCase(getMostLikedThreads.fulfilled, (state, action) => {
+            if (action.payload) {
+                state.mostLiked = action.payload;
+            }
+        });
+        builder.addCase(getComments.fulfilled, (state, action) => {
+            if (action.payload) {
+                state.threadInfo.comments = action.payload;
+            }
+        });
+        builder.addCase(addComment.fulfilled, (state, action) => {
             return;
-        },
-        [likeCommentToggle.fulfilled]: (state, action) => {
-            const index = state.threadInfo.comments.findIndex(({ id }) => id === action.payload.commentId);
-            state.threadInfo.comments[index].likes = action.payload.jsonResponse;
-        }
+        });
+        builder.addCase(likeCommentToggle.fulfilled, (state, action) => {
+            const index = state.threadInfo.comments.findIndex(({ id }) => id === action.payload?.commentId);
+            state.threadInfo.comments[index].likes = action.payload?.jsonResponse;
+        });
     }
 });
 

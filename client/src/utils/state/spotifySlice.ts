@@ -1,15 +1,15 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-export const getAccessToken = createAsyncThunk('spotify/getAccessToken', async (code) => {
-    const dataToSend = {
-        grant_type: 'authorization_code',
-        code,
-        redirect_uri:
+export const getAccessToken = createAsyncThunk('spotify/getAccessToken', async (code: string) => {
+    const dataToSend = [
+        ["grant_type", "authorization_code"],
+        ["code", code],
+        ["redirect_uri",
             process.env.NODE_ENV === 'production'
                 ? 'https://app.shutupanddance.io/spotify'
-                : 'https://localhost:3000/spotify'
-    };
-    const queryString = new URLSearchParams(dataToSend.toString());
+                : 'https://localhost:3000/spotify']
+    ];
+    const queryString = new URLSearchParams(dataToSend);
     const authString = btoa(
         `${process.env.REACT_APP_SPOTIFY_CLIENT_ID}:${process.env.REACT_APP_SPOTIFY_CLIENT_SECRET}`
     );
@@ -31,12 +31,12 @@ export const getAccessToken = createAsyncThunk('spotify/getAccessToken', async (
     }
 });
 
-export const refreshAccessToken = createAsyncThunk('spotify/refreshAccessToken', async (refreshToken) => {
-    const dataToSend = {
-        grant_type: 'refresh_token',
-        refresh_token: refreshToken
-    };
-    const queryString = new URLSearchParams(dataToSend.toString());
+export const refreshAccessToken = createAsyncThunk('spotify/refreshAccessToken', async (refreshToken: string) => {
+    const dataToSend = [
+        ["grant_type", "refresh_token"],
+        ["refresh_token", refreshToken]
+    ];
+    const queryString = new URLSearchParams(dataToSend);
     const authString = btoa(
         `${process.env.REACT_APP_SPOTIFY_CLIENT_ID}:${process.env.REACT_APP_SPOTIFY_CLIENT_SECRET}`
     );
@@ -59,7 +59,7 @@ export const refreshAccessToken = createAsyncThunk('spotify/refreshAccessToken',
 
 export const getAvailableGenres = createAsyncThunk(
     'spotify/getAvailableGenres',
-    async ({ accessToken, refreshToken }, thunkAPI) => {
+    async ({ accessToken, refreshToken }: { accessToken: string; refreshToken: string }, thunkAPI) => {
         let response = await fetch(`https://api.spotify.com/v1/recommendations/available-genre-seeds`, {
             headers: {
                 Authorization: 'Bearer ' + accessToken
@@ -74,13 +74,13 @@ export const getAvailableGenres = createAsyncThunk(
             });
         }
         const jsonResponse = await response.json();
-        return jsonResponse.genres;
+        return jsonResponse.genres as any[];
     }
 );
 
 export const getSuggestions = createAsyncThunk(
     'spotify/getSuggestions',
-    async ({ accessToken, refreshToken, genres }, thunkAPI) => {
+    async ({ accessToken, refreshToken, genres }: {accessToken: string, refreshToken: string, genres: any[]}, thunkAPI) => {
         if (genres.length === 0) {
             return [];
         } else {
@@ -123,7 +123,7 @@ export const getSuggestions = createAsyncThunk(
 
 export const getPlayingSong = createAsyncThunk(
     'spotify/getPlayingSong',
-    async ({ accessToken, refreshToken }, thunkAPI) => {
+    async ({ accessToken, refreshToken }: {accessToken: string, refreshToken: string}, thunkAPI) => {
         let response = await fetch(`https://api.spotify.com/v1/me/player`, {
             headers: {
                 Authorization: 'Bearer ' + accessToken
@@ -159,7 +159,7 @@ export const getPlayingSong = createAsyncThunk(
 
 export const changeSongPosition = createAsyncThunk(
     'spotify/changeSongPosition',
-    async ({ position, deviceId, accessToken, refreshToken }, thunkAPI) => {
+    async ({ position, deviceId, accessToken, refreshToken }: {position: number, deviceId: string, accessToken: string, refreshToken: string}, thunkAPI) => {
         let response = await fetch(
             `https://api.spotify.com/v1/me/player/seek?position_ms=${position * 1000}&device_id=${deviceId}`,
             {
@@ -192,7 +192,7 @@ export const changeSongPosition = createAsyncThunk(
 
 export const togglePlay = createAsyncThunk(
     'spotify/togglePlay',
-    async ({ paused, deviceId, accessToken, refreshToken, uri = null }, thunkAPI) => {
+    async ({ paused, deviceId, accessToken, refreshToken, uri }: {paused: boolean, deviceId: string, accessToken: string, refreshToken: string, uri?: string}, thunkAPI) => {
         if (paused) {
             let response = await fetch(`https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`, {
                 method: 'PUT',
@@ -244,7 +244,7 @@ export const togglePlay = createAsyncThunk(
 
 export const playPreviousSong = createAsyncThunk(
     'spotify/playPreviousSong',
-    async ({ deviceId, accessToken, refreshToken }, thunkAPI) => {
+    async ({ deviceId, accessToken, refreshToken }: {deviceId: string, accessToken: string, refreshToken: string}, thunkAPI) => {
         let response = await fetch(`https://api.spotify.com/v1/me/player/previous?device_id=${deviceId}`, {
             method: 'POST',
             headers: {
@@ -267,7 +267,7 @@ export const playPreviousSong = createAsyncThunk(
 
 export const playNextSong = createAsyncThunk(
     'spotify/playNextSong',
-    async ({ deviceId, accessToken, refreshToken }, thunkAPI) => {
+    async ({ deviceId, accessToken, refreshToken }: {deviceId: string, accessToken: string, refreshToken: string}, thunkAPI) => {
         let response = await fetch(`https://api.spotify.com/v1/me/player/next?device_id=${deviceId}`, {
             method: 'POST',
             headers: {
@@ -288,6 +288,14 @@ export const playNextSong = createAsyncThunk(
     }
 );
 
+type SpotifyState = {
+    accessToken: string;
+    refreshToken: string;
+    availableGenres: any[];
+    suggestions: any[];
+    currentlyPlaying: any;
+};
+
 const spotifySlice = createSlice({
     name: 'spotify',
     initialState: {
@@ -296,9 +304,9 @@ const spotifySlice = createSlice({
         availableGenres: [],
         suggestions: [],
         currentlyPlaying: {}
-    },
+    } as SpotifyState,
     reducers: {
-        resetSpotifyDetails: (state, action) => {
+        resetSpotifyDetails: (state) => {
             state.accessToken = '';
             state.refreshToken = '';
             state.availableGenres = [];
@@ -306,49 +314,49 @@ const spotifySlice = createSlice({
             state.currentlyPlaying = {};
         }
     },
-    extraReducers: {
-        [getAccessToken.fulfilled]: (state, action) => {
+    extraReducers: (builder) => {
+        builder.addCase(getAccessToken.fulfilled, (state, action) => {
             if (action.payload) {
                 state.accessToken = action.payload.accessToken;
                 state.refreshToken = action.payload.refreshToken;
             }
-        },
-        [refreshAccessToken.fulfilled]: (state, action) => {
+        });
+        builder.addCase(refreshAccessToken.fulfilled, (state, action) => {
             if (action.payload && document.cookie) {
                 state.accessToken = action.payload.accessToken;
             }
-        },
-        [getAvailableGenres.fulfilled]: (state, action) => {
+        });
+        builder.addCase(getAvailableGenres.fulfilled, (state, action) => {
             if (action.payload) {
                 state.availableGenres = action.payload;
             }
-        },
-        [getSuggestions.fulfilled]: (state, action) => {
+        });
+        builder.addCase(getSuggestions.fulfilled, (state, action) => {
             if (action.payload) {
                 state.suggestions = action.payload;
             }
-        },
-        [getPlayingSong.fulfilled]: (state, action) => {
+        });
+        builder.addCase(getPlayingSong.fulfilled, (state, action) => {
             if (action.payload) {
                 state.currentlyPlaying = action.payload;
             }
-        },
-        [changeSongPosition.fulfilled]: (state, action) => {
+        });
+        builder.addCase(changeSongPosition.fulfilled, (state, action) => {
             if (action.payload) {
                 state.currentlyPlaying.progress = action.payload;
             }
-        },
-        [togglePlay.fulfilled]: (state, action) => {
+        });
+        builder.addCase(togglePlay.fulfilled, (state, action) => {
             if (action.payload) {
                 state.currentlyPlaying.isPlaying = action.payload;
             }
-        },
-        [playPreviousSong.fulfilled]: (state, action) => {
+        });
+        builder.addCase(playPreviousSong.fulfilled, (state, action) => {
             return;
-        },
-        [playNextSong.fulfilled]: (state, action) => {
+        });
+        builder.addCase(playNextSong.fulfilled, (state, action) => {
             return;
-        }
+        });
     }
 });
 

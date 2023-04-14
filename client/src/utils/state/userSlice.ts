@@ -4,7 +4,7 @@ import { hashFunction } from "../helperFunctions/hashFunction";
 
 export const submitSignUp = createAsyncThunk(
     'user/submitSignUp',
-    async ({ firstName, lastName, email, password }) => {
+    async ({ firstName, lastName, email, password }: {firstName: string, lastName: string, email: string, password: string}) => {
         const hashedPassword = hashFunction(password);
         const data = {
             firstName,
@@ -34,7 +34,7 @@ export const submitSignUp = createAsyncThunk(
 
 export const requestLogin = createAsyncThunk(
     'user/requestLogin',
-    async ({ email, password }) => {
+    async ({ email, password }: {email: string, password: string}) => {
         const hashedPassword = hashFunction(password);
         const data = {
             email,
@@ -80,7 +80,7 @@ export const logout = createAsyncThunk(
 
 export const updateUserDetails = createAsyncThunk(
     'user/updateUserDetails',
-    async (details) => {
+    async (details: any) => {
         const response = await fetch(`/user`, {
             method: "PUT",
             mode: "cors",
@@ -101,7 +101,7 @@ export const updateUserDetails = createAsyncThunk(
 
 export const updateGenres = createAsyncThunk(
     'user/updateGenres',
-    async (genres) => {
+    async (genres: any[]) => {
         await fetch(`/user/genres`, {
             method: "PUT",
             mode: "cors",
@@ -116,7 +116,7 @@ export const updateGenres = createAsyncThunk(
 
 export const updateWidgets = createAsyncThunk(
     'user/updateWidgets',
-    async (widgets) => {
+    async (widgets: any[]) => {
         await fetch(`/user/widgets`, {
             method: "PUT",
             mode: "cors",
@@ -129,6 +129,15 @@ export const updateWidgets = createAsyncThunk(
     }
 );
 
+type UserState = {
+    id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    genres: any[];
+    widgets: any[];
+};
+
 const userSlice = createSlice({
     name: 'user',
     initialState: {
@@ -138,7 +147,7 @@ const userSlice = createSlice({
         email: '',
         genres: [],
         widgets: []
-    },
+    } as UserState,
     reducers: {
         setGenres: (state, action) => {
             if (state.genres.indexOf(action.payload) === -1 && state.genres.length < 5) {
@@ -172,16 +181,16 @@ const userSlice = createSlice({
             state.widgets = action.payload;
         }
     },
-    extraReducers: {
-        [submitSignUp.fulfilled]: (state, action) => {
+    extraReducers: (builder) => {
+        builder.addCase(submitSignUp.fulfilled, (state, action) => {
             if (action.payload) {
                 state.id = action.payload.id;
                 state.firstName = action.payload.firstName;
                 state.lastName = action.payload.lastName;
                 state.email = action.payload.email;
             };
-        },
-        [requestLogin.fulfilled]: (state, action) => {
+        });
+        builder.addCase(requestLogin.fulfilled, (state, action) => {
             if (action.payload) {
                 if (action.payload.id) {
                     state.id = action.payload.id;
@@ -192,28 +201,28 @@ const userSlice = createSlice({
                     state.widgets = action.payload.widgets;
                 };
             };
-        },
-        [logout.fulfilled]: (state, action) => {
+        });
+        builder.addCase(logout.fulfilled, (state, action) => {
             state.id = '';
             state.firstName = '';
             state.lastName = '';
             state.email = '';
             state.genres = [];
             state.widgets = [];
-        },
-        [updateUserDetails.fulfilled]: (state, action) => {
+        });
+        builder.addCase(updateUserDetails.fulfilled, (state, action) => {
             if (action.payload) {
                 state.firstName = action.payload.firstName;
                 state.lastName = action.payload.lastName;
                 state.email = action.payload.email;
             };
-        },
-        [updateGenres.fulfilled]: (state, action) => {
+        });
+        builder.addCase(updateGenres.fulfilled, (state, action) => {
             return;
-        },
-        [updateWidgets.fulfilled]: (state, action) => {
+        });
+        builder.addCase(updateWidgets.fulfilled, (state, action) => {
             return;
-        }
+        });
     }
 });
 

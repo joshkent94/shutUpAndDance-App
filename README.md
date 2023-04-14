@@ -23,7 +23,7 @@ A project to test out my PERN stack developer skills.
 ## Technologies
 
 - HTML
-- CSS
+- SASS
 - Javascript
 - Typescript
 - React

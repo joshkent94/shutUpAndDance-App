@@ -1,16 +1,16 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { requestLogin } from '../../../utils/state/userSlice';
 import { spotifyRedirect } from '../../../utils/helperFunctions/spotifyRedirect';
+import { useAppDispatch } from '../../../utils/state/store';
 import Logo from '../../../assets/inverted-logo.png';
 import './Login.scss';
 
 export default function Login() {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const location = useLocation();
-    const [email, setEmail] = useState(null);
-    const [password, setPassword] = useState(null);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     const updateEmail = e => {
         e.preventDefault();

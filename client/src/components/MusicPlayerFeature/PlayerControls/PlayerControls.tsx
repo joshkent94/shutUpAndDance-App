@@ -97,7 +97,6 @@ export default function PlayerControls({ currentlyPlaying }) {
         <Box className="player-controls">
             <Slider
                 aria-label="time-indicator"
-                size="small"
                 value={position}
                 min={0}
                 step={1}

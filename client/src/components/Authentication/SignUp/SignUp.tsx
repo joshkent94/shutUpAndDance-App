@@ -1,18 +1,18 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { submitSignUp } from '../../../utils/state/userSlice';
 import { passwordCheck } from '../../../utils/helperFunctions/passwordCheck';
 import { showMessage } from '../../../utils/helperFunctions/showMessage';
 import { spotifyRedirect } from '../../../utils/helperFunctions/spotifyRedirect';
+import { useAppDispatch } from '../../../utils/state/store';
 import Logo from '../../../assets/inverted-logo.png';
 import './SignUp.scss';
 
 export default function SignUp() {
-    const dispatch = useDispatch();
-    const [firstName, setFirstName] = useState(null);
-    const [lastName, setLastName] = useState(null);
-    const [email, setEmail] = useState(null);
+    const dispatch = useAppDispatch();
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [validatedPassword, setValidatedPassword] = useState(null);
 

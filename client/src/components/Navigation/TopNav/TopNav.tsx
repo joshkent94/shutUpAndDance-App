@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../../../assets/logo.png';
 import menuIcon from '../../../assets/bars-solid.svg';
@@ -8,10 +8,11 @@ import { resetForumDetails } from '../../../utils/state/forumSlice';
 import { resetSpotifyDetails } from '../../../utils/state/spotifySlice';
 import { logout, selectEmail, selectFirstName, selectLastName } from '../../../utils/state/userSlice';
 import SideNav from '../SideNav/SideNav';
+import { useAppDispatch } from '../../../utils/state/store';
 import './TopNav.scss';
 
 export default function TopNav() {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const [show, setShow] = useState(false);
     let location = useLocation();
     const firstName = useSelector(selectFirstName);
