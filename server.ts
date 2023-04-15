@@ -9,8 +9,7 @@ import { userRouter } from './server/routes/userRoutes'
 import { threadsRouter } from './server/routes/threadsRouter'
 import { commentsRouter } from './server/routes/commentsRouter'
 import { credentials } from './server/httpsConfig'
-import * as dotenv from 'dotenv'
-dotenv.config({ path: __dirname + '/../.env' })
+require('dotenv').config()
 
 const pgSession = connect(session)
 const app = express()
