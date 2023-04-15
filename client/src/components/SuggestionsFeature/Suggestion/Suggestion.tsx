@@ -1,26 +1,28 @@
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useState } from 'react'
+import { useSelector } from 'react-redux'
 import {
     getPlayingSong,
     selectAccessToken,
     selectCurrentlyPlaying,
     selectRefreshToken,
-    togglePlay
-} from '../../../utils/state/spotifySlice';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons';
-import { useAppDispatch } from '../../../utils/state/store';
-import './Suggestion.scss';
+    togglePlay,
+} from '../../../utils/state/spotifySlice'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { IconProp } from '@fortawesome/fontawesome-svg-core'
+import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons'
+import { useAppDispatch } from '../../../utils/state/store'
+import './Suggestion.scss'
 
 export default function Suggestion({ track }) {
-    const dispatch = useAppDispatch();
-    const accessToken = useSelector(selectAccessToken);
-    const refreshToken = useSelector(selectRefreshToken);
-    const currentlyPlaying = useSelector(selectCurrentlyPlaying);
-    const [paused] = useState(!(track.uri === currentlyPlaying.uri && currentlyPlaying.isPlaying));
-    const faPlayProp = faPlay as IconProp;
-    const faPauseProp = faPause as IconProp;
+    const dispatch = useAppDispatch()
+    const accessToken = useSelector(selectAccessToken)
+    const refreshToken = useSelector(selectRefreshToken)
+    const currentlyPlaying = useSelector(selectCurrentlyPlaying)
+    const [paused] = useState(
+        !(track.uri === currentlyPlaying.uri && currentlyPlaying.isPlaying)
+    )
+    const faPlayProp = faPlay as IconProp
+    const faPauseProp = faPause as IconProp
 
     // toggle play and update currently playing
     const togglePlayState = () => {
@@ -30,7 +32,7 @@ export default function Suggestion({ track }) {
                 deviceId: currentlyPlaying.device.id,
                 accessToken,
                 refreshToken,
-                uri: track.uri
+                uri: track.uri,
             })
         )
             .unwrap()
@@ -38,33 +40,37 @@ export default function Suggestion({ track }) {
                 dispatch(
                     getPlayingSong({
                         accessToken,
-                        refreshToken
+                        refreshToken,
                     })
-                );
-            });
-    };
+                )
+            })
+    }
 
-    let playButton;
+    let playButton
     if (currentlyPlaying.device) {
         if (!paused) {
             playButton = (
                 <button className="action-button" onClick={togglePlayState}>
                     <FontAwesomeIcon icon={faPauseProp} />
                 </button>
-            );
+            )
         } else {
             playButton = (
                 <button className="action-button" onClick={togglePlayState}>
                     <FontAwesomeIcon icon={faPlayProp} />
                 </button>
-            );
+            )
         }
     }
 
     return (
         <div className="content-container track animate__animated animate__fadeIn">
             <div className="album-image-container">
-                <img src={track.images[1].url} alt={track.name} className="track-image" />
+                <img
+                    src={track.images[1].url}
+                    alt={track.name}
+                    className="track-image"
+                />
             </div>
             <div className="track-details">
                 <p className="track-info track-title">{track.name}</p>
@@ -74,5 +80,5 @@ export default function Suggestion({ track }) {
             </div>
             <div className="actions-container">{playButton}</div>
         </div>
-    );
+    )
 }

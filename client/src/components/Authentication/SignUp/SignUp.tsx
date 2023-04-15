@@ -1,67 +1,69 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { submitSignUp } from '../../../utils/state/userSlice';
-import { passwordCheck } from '../../../utils/helperFunctions/passwordCheck';
-import { showMessage } from '../../../utils/helperFunctions/showMessage';
-import { spotifyRedirect } from '../../../utils/helperFunctions/spotifyRedirect';
-import { useAppDispatch } from '../../../utils/state/store';
-import Logo from '../../../assets/inverted-logo.png';
-import './SignUp.scss';
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { submitSignUp } from '../../../utils/state/userSlice'
+import { passwordCheck } from '../../../utils/helperFunctions/passwordCheck'
+import { showMessage } from '../../../utils/helperFunctions/showMessage'
+import { spotifyRedirect } from '../../../utils/helperFunctions/spotifyRedirect'
+import { useAppDispatch } from '../../../utils/state/store'
+import Logo from '../../../assets/inverted-logo.png'
+import './SignUp.scss'
 
 export default function SignUp() {
-    const dispatch = useAppDispatch();
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [validatedPassword, setValidatedPassword] = useState(null);
+    const dispatch = useAppDispatch()
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [validatedPassword, setValidatedPassword] = useState(null)
 
-    const updateFirstName = e => {
-        e.preventDefault();
-        setFirstName(e.target.value);
-    };
+    const updateFirstName = (e) => {
+        e.preventDefault()
+        setFirstName(e.target.value)
+    }
 
-    const updateLastName = e => {
-        e.preventDefault();
-        setLastName(e.target.value);
-    };
+    const updateLastName = (e) => {
+        e.preventDefault()
+        setLastName(e.target.value)
+    }
 
-    const updateEmail = e => {
-        e.preventDefault();
-        setEmail(e.target.value);
-    };
+    const updateEmail = (e) => {
+        e.preventDefault()
+        setEmail(e.target.value)
+    }
 
-    const updatePassword = e => {
-        e.preventDefault();
-        setPassword(e.target.value);
-    };
+    const updatePassword = (e) => {
+        e.preventDefault()
+        setPassword(e.target.value)
+    }
 
-    const updateValidatedPassword = e => {
-        e.preventDefault();
-        setValidatedPassword(e.target.value);
-    };
+    const updateValidatedPassword = (e) => {
+        e.preventDefault()
+        setValidatedPassword(e.target.value)
+    }
 
     // sign up and redirect to authenticate with Spotify if successful
-    const handleSignUpRequest = async e => {
-        e.preventDefault();
+    const handleSignUpRequest = async (e) => {
+        e.preventDefault()
         if (password === validatedPassword) {
             if (passwordCheck(password)) {
-                const signedUp = await dispatch(submitSignUp({
-                    firstName,
-                    lastName,
-                    email,
-                    password
-                })).unwrap();
+                const signedUp = await dispatch(
+                    submitSignUp({
+                        firstName,
+                        lastName,
+                        email,
+                        password,
+                    })
+                ).unwrap()
                 if (signedUp) {
-                    spotifyRedirect();
-                };
+                    spotifyRedirect()
+                }
             } else {
-                showMessage('Password must meet criteria');
-            };
+                showMessage('Password must meet criteria')
+            }
         } else {
-            showMessage(`Passwords don't match`);
-        };
-    };
+            showMessage(`Passwords don't match`)
+        }
+    }
 
     return (
         <div id="sign-up">
@@ -77,31 +79,74 @@ export default function SignUp() {
                 <form id="sign-up-form" onSubmit={handleSignUpRequest}>
                     <label className="form-element">
                         First Name
-                        <input name="first name" type="text" placeholder="Josh" className="form-control sign-up-element" onChange={updateFirstName} required />
+                        <input
+                            name="first name"
+                            type="text"
+                            placeholder="Josh"
+                            className="form-control sign-up-element"
+                            onChange={updateFirstName}
+                            required
+                        />
                     </label>
                     <label className="form-element">
                         Last Name
-                        <input name="last name" type="text" placeholder="Kent" className="form-control sign-up-element" onChange={updateLastName} required />
+                        <input
+                            name="last name"
+                            type="text"
+                            placeholder="Kent"
+                            className="form-control sign-up-element"
+                            onChange={updateLastName}
+                            required
+                        />
                     </label>
                     <label className="form-element">
                         Email
-                        <input name="email" type="email" placeholder="josh@example.com" className="form-control sign-up-element" onChange={updateEmail} required />
+                        <input
+                            name="email"
+                            type="email"
+                            placeholder="josh@example.com"
+                            className="form-control sign-up-element"
+                            onChange={updateEmail}
+                            required
+                        />
                     </label>
                     <label className="form-element">
                         Password
-                        <input name="password" type="password" className="form-control sign-up-element" onChange={updatePassword} required autoComplete="new-password" />
-                        <p className="pre-login-prompt">1 upper, 1 lower, 1 special char, 1 number, min 8 chars</p>
+                        <input
+                            name="password"
+                            type="password"
+                            className="form-control sign-up-element"
+                            onChange={updatePassword}
+                            required
+                            autoComplete="new-password"
+                        />
+                        <p className="pre-login-prompt">
+                            1 upper, 1 lower, 1 special char, 1 number, min 8
+                            chars
+                        </p>
                     </label>
                     <label className="form-element">
                         Retype Password
-                        <input name="retype password" type="password" className="form-control sign-up-element" onChange={updateValidatedPassword} required />
+                        <input
+                            name="retype password"
+                            type="password"
+                            className="form-control sign-up-element"
+                            onChange={updateValidatedPassword}
+                            required
+                        />
                     </label>
-                    <button id="sign-up-button" type="submit" className="coolBeans">
+                    <button
+                        id="sign-up-button"
+                        type="submit"
+                        className="coolBeans"
+                    >
                         Sign Up
                     </button>
                 </form>
-                <p className="pre-login-prompt">Already have an account? <Link to="/login">Log in</Link></p>
+                <p className="pre-login-prompt">
+                    Already have an account? <Link to="/login">Log in</Link>
+                </p>
             </div>
         </div>
-    );
-};
+    )
+}

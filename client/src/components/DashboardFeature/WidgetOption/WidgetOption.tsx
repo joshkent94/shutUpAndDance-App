@@ -1,17 +1,17 @@
-import { useDispatch } from "react-redux";
-import { setWidgetSelection } from "../../../utils/state/userSlice";
+import { useDispatch } from 'react-redux'
+import { setWidgetSelection } from '../../../utils/state/userSlice'
 
-export default function WidgetOption({widget, add, remove, selectedWidgets}) {
-    const dispatch = useDispatch();
+export default function WidgetOption({ widget, add, remove, selectedWidgets }) {
+    const dispatch = useDispatch()
 
-    const handleWidgetSelect = e => {
-        dispatch(setWidgetSelection(e.target.value));
+    const handleWidgetSelect = (e) => {
+        dispatch(setWidgetSelection(e.target.value))
         if (selectedWidgets.includes(widget)) {
-            remove(widget);
+            remove(widget)
         } else {
-            add(widget);
-        };
-    };
+            add(widget)
+        }
+    }
 
     return (
         <label htmlFor={widget} className="genre-label">
@@ -22,8 +22,9 @@ export default function WidgetOption({widget, add, remove, selectedWidgets}) {
                 value={widget}
                 onClick={handleWidgetSelect}
                 checked={selectedWidgets.includes(widget)}
-                readOnly />
+                readOnly
+            />
             <p className="genre">{widget}</p>
         </label>
-    );
-};
+    )
+}

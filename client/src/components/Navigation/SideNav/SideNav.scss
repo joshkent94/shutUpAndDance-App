@@ -1,41 +1,41 @@
 .offcanvas {
-  margin-top: 3.925rem;
-  width: 15vw;
-  border: none;
-  background: var(--fifth-colour);
-  border: 1px solid var(--third-colour);
+    margin-top: 3.925rem;
+    width: 15vw;
+    border: none;
+    background: var(--fifth-colour);
+    border: 1px solid var(--third-colour);
 }
 
 .offcanvas-header {
-  padding: 0 0 1rem 0;
-  margin: 1rem 1.5rem 0 1.5rem;
-  border-bottom: 1px solid var(--third-colour);
-  height: 50px;
+    padding: 0 0 1rem 0;
+    margin: 1rem 1.5rem 0 1.5rem;
+    border-bottom: 1px solid var(--third-colour);
+    height: 50px;
 }
 
 .offcanvas-title {
-  font-weight: 600;
+    font-weight: 600;
 }
 
 .offcanvas-body {
-  padding: 1rem 1.5rem;
+    padding: 1rem 1.5rem;
 }
 
 #side-nav {
-  flex-direction: column;
+    flex-direction: column;
 }
 
 #side-nav > .nav-item {
-  padding: 0.2rem 0;
-  cursor: unset;
-  font-weight: 600;
+    padding: 0.2rem 0;
+    cursor: unset;
+    font-weight: 600;
 }
 
 .nav-link {
-  color: var(--primary-colour);
-  padding: 0.5rem 0;
+    color: var(--primary-colour);
+    padding: 0.5rem 0;
 }
 
 .nav-link:hover {
-  color: var(--fourth-colour);
+    color: var(--fourth-colour);
 }

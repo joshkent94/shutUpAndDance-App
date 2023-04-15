@@ -1,24 +1,30 @@
-import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { selectUserId } from "../../../utils/state/userSlice";
-import { addComment, getComments, getThread, likeThreadToggle, selectThreadInfo } from "../../../utils/state/forumSlice";
-import Comment from "../Comment/Comment";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { showMessage } from "../../../utils/helperFunctions/showMessage";
-import { useAppDispatch } from '../../../utils/state/store';
-import './ThreadExpanded.scss';
+import { useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { selectUserId } from '../../../utils/state/userSlice'
+import {
+    addComment,
+    getComments,
+    getThread,
+    likeThreadToggle,
+    selectThreadInfo,
+} from '../../../utils/state/forumSlice'
+import Comment from '../Comment/Comment'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
+import { IconProp } from '@fortawesome/fontawesome-svg-core'
+import { showMessage } from '../../../utils/helperFunctions/showMessage'
+import { useAppDispatch } from '../../../utils/state/store'
+import './ThreadExpanded.scss'
 
 export default function ThreadExpanded() {
-    const dispatch = useAppDispatch();
-    const userId = useSelector(selectUserId);
-    const threadInfo = useSelector(selectThreadInfo);
-    const comments = threadInfo.comments;
-    const { threadId } = useParams();
-    const [newComment, setNewComment] = useState('');
-    const faPaperPlaneProp = faPaperPlane as IconProp;
+    const dispatch = useAppDispatch()
+    const userId = useSelector(selectUserId)
+    const threadInfo = useSelector(selectThreadInfo)
+    const comments = threadInfo.comments
+    const { threadId } = useParams()
+    const [newComment, setNewComment] = useState('')
+    const faPaperPlaneProp = faPaperPlane as IconProp
 
     // get all the details for the thread on page load
     useEffect(() => {
@@ -26,10 +32,10 @@ export default function ThreadExpanded() {
             dispatch(getThread(threadId))
                 .unwrap()
                 .then(() => {
-                    dispatch(getComments(threadId));
-                });
+                    dispatch(getComments(threadId))
+                })
         }
-    }, [threadId, dispatch]);
+    }, [threadId, dispatch])
 
     // toggle between like and not like
     const likeToggle = () => {
@@ -37,56 +43,56 @@ export default function ThreadExpanded() {
             dispatch(
                 likeThreadToggle({
                     threadId,
-                    method: 'threadInfo'
+                    method: 'threadInfo',
                 })
-            );
+            )
         }
-    };
+    }
 
     const handleCommentChange = (e) => {
-        e.preventDefault();
-        setNewComment(e.target.value);
-    };
+        e.preventDefault()
+        setNewComment(e.target.value)
+    }
 
     // send new comment to the back end
     // then fetch all the latest comments and reload UI
     const postComment = (e) => {
-        e.preventDefault();
+        e.preventDefault()
         if (newComment !== '' && threadId) {
             dispatch(
                 addComment({
                     threadId,
-                    comment: newComment
+                    comment: newComment,
                 })
             )
                 .unwrap()
                 .then(() => {
-                    setNewComment('');
-                    dispatch(getComments(threadId));
-                });
+                    setNewComment('')
+                    dispatch(getComments(threadId))
+                })
         } else {
-            showMessage('Comment can not be blank');
+            showMessage('Comment can not be blank')
         }
-    };
+    }
 
     // display correct like icon based on current redux state
-    let likeIcon;
+    let likeIcon
     if (threadInfo.likes.includes(userId)) {
         likeIcon = (
             <button className="browse-threads-icon" onClick={likeToggle}>
                 <i className="bi bi-hand-thumbs-up-fill"></i>
             </button>
-        );
+        )
     } else {
         likeIcon = (
             <button className="browse-threads-icon" onClick={likeToggle}>
                 <i className="bi bi-hand-thumbs-up"></i>
             </button>
-        );
+        )
     }
 
     // convert thread timestamp to new date object
-    const threadDate = new Date(threadInfo.timestamp);
+    const threadDate = new Date(threadInfo.timestamp)
 
     return (
         <div className="page">
@@ -97,31 +103,49 @@ export default function ThreadExpanded() {
             </div>
             <div className="page-content">
                 <div id="thread-expanded-page">
-                    <div id="thread-heading" className="content-container animate__animated animate__fadeIn">
-                        <div id="thread-heading-text" className="thread-container">
+                    <div
+                        id="thread-heading"
+                        className="content-container animate__animated animate__fadeIn"
+                    >
+                        <div
+                            id="thread-heading-text"
+                            className="thread-container"
+                        >
                             <p id="thread-title-text">{threadInfo.title}</p>
                             <p>{threadInfo.initialComment}</p>
                         </div>
                         <div className="thread-container">
                             <p>
-                                <span className="thread-label">Created by:</span> {threadInfo.firstName}{' '}
-                                {threadInfo.lastName}
+                                <span className="thread-label">
+                                    Created by:
+                                </span>{' '}
+                                {threadInfo.firstName} {threadInfo.lastName}
                             </p>
                             <p>
-                                <span className="thread-label">Created on:</span>{' '}
-                                {threadDate.toLocaleString('default', { month: 'short' })} {threadDate.getUTCDate()}{' '}
+                                <span className="thread-label">
+                                    Created on:
+                                </span>{' '}
+                                {threadDate.toLocaleString('default', {
+                                    month: 'short',
+                                })}{' '}
+                                {threadDate.getUTCDate()}{' '}
                                 {threadDate.getUTCFullYear()}
                             </p>
                             <p>
-                                <span className="thread-label">Likes:</span> {threadInfo.likes.length}
+                                <span className="thread-label">Likes:</span>{' '}
+                                {threadInfo.likes.length}
                             </p>
                             <p>
-                                <span className="thread-label">Comments:</span> {comments.length}
+                                <span className="thread-label">Comments:</span>{' '}
+                                {comments.length}
                             </p>
                             <div className="icon-section">{likeIcon}</div>
                         </div>
                     </div>
-                    <div id="add-new-comment" className="input-group animate__animated animate__fadeIn">
+                    <div
+                        id="add-new-comment"
+                        className="input-group animate__animated animate__fadeIn"
+                    >
                         <textarea
                             id="add-new-comment-textarea"
                             className="form-control"
@@ -135,7 +159,8 @@ export default function ThreadExpanded() {
                                 className="btn btn-outline-secondary"
                                 type="submit"
                                 id="submit-comment"
-                                onClick={postComment}>
+                                onClick={postComment}
+                            >
                                 <FontAwesomeIcon icon={faPaperPlaneProp} />
                             </button>
                         </div>
@@ -149,5 +174,5 @@ export default function ThreadExpanded() {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}

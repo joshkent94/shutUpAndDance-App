@@ -1,77 +1,85 @@
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { hashFunction } from '../../utils/helperFunctions/hashFunction';
-import { passwordCheck } from '../../utils/helperFunctions/passwordCheck';
-import { showMessage } from '../../utils/helperFunctions/showMessage';
-import { selectEmail, selectFirstName, selectLastName, updateUserDetails } from '../../utils/state/userSlice';
-import { useAppDispatch } from '../../utils/state/store';
-import './Account.scss';
+import { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { hashFunction } from '../../utils/helperFunctions/hashFunction'
+import { passwordCheck } from '../../utils/helperFunctions/passwordCheck'
+import { showMessage } from '../../utils/helperFunctions/showMessage'
+import {
+    selectEmail,
+    selectFirstName,
+    selectLastName,
+    updateUserDetails,
+} from '../../utils/state/userSlice'
+import { useAppDispatch } from '../../utils/state/store'
+import './Account.scss'
 
 export default function Account() {
-    const dispatch = useAppDispatch();
-    const firstName = useSelector(selectFirstName);
-    const lastName = useSelector(selectLastName);
-    const email = useSelector(selectEmail);
-    const [newFirstName, setNewFirstName] = useState(firstName);
-    const [newLastName, setNewLastName] = useState(lastName);
-    const [newEmail, setNewEmail] = useState(email);
-    const [newPassword, setNewPassword] = useState('');
-    const [confirmedPassword, setConfirmedPassword] = useState('');
+    const dispatch = useAppDispatch()
+    const firstName = useSelector(selectFirstName)
+    const lastName = useSelector(selectLastName)
+    const email = useSelector(selectEmail)
+    const [newFirstName, setNewFirstName] = useState(firstName)
+    const [newLastName, setNewLastName] = useState(lastName)
+    const [newEmail, setNewEmail] = useState(email)
+    const [newPassword, setNewPassword] = useState('')
+    const [confirmedPassword, setConfirmedPassword] = useState('')
 
     const handleFirstNameChange = (e) => {
-        e.preventDefault();
-        setNewFirstName(e.target.value);
-    };
+        e.preventDefault()
+        setNewFirstName(e.target.value)
+    }
 
     const handleLastNameChange = (e) => {
-        e.preventDefault();
-        setNewLastName(e.target.value);
-    };
+        e.preventDefault()
+        setNewLastName(e.target.value)
+    }
 
     const handleEmailChange = (e) => {
-        e.preventDefault();
-        setNewEmail(e.target.value);
-    };
+        e.preventDefault()
+        setNewEmail(e.target.value)
+    }
 
     const handlePasswordChange = (e) => {
-        e.preventDefault();
-        setNewPassword(e.target.value);
-    };
+        e.preventDefault()
+        setNewPassword(e.target.value)
+    }
 
     const handleConfirmedPasswordChange = (e) => {
-        e.preventDefault();
-        setConfirmedPassword(e.target.value);
-    };
+        e.preventDefault()
+        setConfirmedPassword(e.target.value)
+    }
 
     // save user's details, display relevant on-screen message
     // and clear password fields if necessary
     const handleDetailsSave = (e) => {
-        e.preventDefault();
+        e.preventDefault()
         if (newPassword !== '') {
             if (passwordCheck(newPassword)) {
                 if (newPassword === confirmedPassword) {
-                    const hashedPassword = hashFunction(newPassword);
+                    const hashedPassword = hashFunction(newPassword)
                     const details = {
                         firstName: newFirstName,
                         lastName: newLastName,
                         email: newEmail,
-                        password: hashedPassword
-                    };
+                        password: hashedPassword,
+                    }
                     dispatch(updateUserDetails(details))
                         .unwrap()
                         .then(() => {
-                            let passwordInput = document.getElementById('password-input') as HTMLInputElement;
-                            let confirmPasswordInput = document.getElementById(
-                                'confirm-password-input'
-                            ) as HTMLInputElement;
-                            passwordInput.value = '';
-                            confirmPasswordInput.value = '';
-                        });
+                            const passwordInput = document.getElementById(
+                                'password-input'
+                            ) as HTMLInputElement
+                            const confirmPasswordInput =
+                                document.getElementById(
+                                    'confirm-password-input'
+                                ) as HTMLInputElement
+                            passwordInput.value = ''
+                            confirmPasswordInput.value = ''
+                        })
                 } else {
-                    showMessage("Passwords don't match");
+                    showMessage("Passwords don't match")
                 }
             } else {
-                showMessage('Password must meet criteria');
+                showMessage('Password must meet criteria')
             }
         } else {
             if (newPassword === confirmedPassword) {
@@ -79,14 +87,14 @@ export default function Account() {
                     firstName: newFirstName,
                     lastName: newLastName,
                     email: newEmail,
-                    password: newPassword
-                };
-                dispatch(updateUserDetails(details));
+                    password: newPassword,
+                }
+                dispatch(updateUserDetails(details))
             } else {
-                showMessage("Passwords don't match");
+                showMessage("Passwords don't match")
             }
         }
-    };
+    }
 
     return (
         <div className="page">
@@ -140,7 +148,10 @@ export default function Account() {
                                 onChange={handlePasswordChange}
                                 autoComplete="new-password"
                             />
-                            <p className="pre-login-prompt">1 upper, 1 lower, 1 special char, 1 number, min 8 chars</p>
+                            <p className="pre-login-prompt">
+                                1 upper, 1 lower, 1 special char, 1 number, min
+                                8 chars
+                            </p>
                         </label>
                         <label className="form-element">
                             Confirm New Password
@@ -154,12 +165,16 @@ export default function Account() {
                             />
                         </label>
 
-                        <button id="save-details-button" className="coolBeans" type="submit">
+                        <button
+                            id="save-details-button"
+                            className="coolBeans"
+                            type="submit"
+                        >
                             Save
                         </button>
                     </form>
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}

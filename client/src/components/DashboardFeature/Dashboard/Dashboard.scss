@@ -1,55 +1,55 @@
 #dashboard-page {
-  display: flex;
-  min-height: 100%;
+    display: flex;
+    min-height: 100%;
 }
 
 .widget {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-  background-color: unset !important;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    background-color: unset !important;
 }
 
 .widget > .sub-heading {
-  margin: unset;
-  margin-bottom: 0.5rem;
+    margin: unset;
+    margin-bottom: 0.5rem;
 }
 
 .widget-content {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow-y: scroll;
 }
 
 .widget-content > .content-container {
-  margin-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .widget-content > .content-container:last-of-type {
-  margin: 0;
+    margin: 0;
 }
 
 .muuri {
-  min-height: fit-content !important;
-  width: 100%;
+    min-height: fit-content !important;
+    width: 100%;
 }
 
 .muuri-item {
-  min-width: calc((992px - 6rem) / 2);
-  width: calc((100% - 2rem) / 2);
-  height: 496px;
-  margin: 1rem 0.5rem 0 0.5rem;
+    min-width: calc((992px - 6rem) / 2);
+    width: calc((100% - 2rem) / 2);
+    height: 496px;
+    margin: 1rem 0.5rem 0 0.5rem;
 }
 
 .muuri-item-dragging {
-  border-color: var(--primary-colour) !important;
-  z-index: 2;
+    border-color: var(--primary-colour) !important;
+    z-index: 2;
 }
 
 .muuri-item-placeholder {
-  opacity: 0.9;
-  margin: 0;
-  border: 1px dashed var(--third-colour);
+    opacity: 0.9;
+    margin: 0;
+    border: 1px dashed var(--third-colour);
 }

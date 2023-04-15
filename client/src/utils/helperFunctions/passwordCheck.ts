@@ -5,6 +5,8 @@
  */
 
 export const passwordCheck = (password: string): boolean => {
-    const passwordReg = new RegExp("(?=^.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])");
-    return passwordReg.test(password);
-};
+    const passwordReg = new RegExp(
+        '(?=^.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])'
+    )
+    return passwordReg.test(password)
+}

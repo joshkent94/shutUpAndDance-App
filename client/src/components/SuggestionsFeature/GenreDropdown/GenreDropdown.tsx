@@ -1,71 +1,74 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useRef, useState } from 'react';
-import GenreOption from '../GenreOption/GenreOption';
-import { hideCheckboxes, showCheckboxes } from '../../../utils/helperFunctions/toggleCheckboxes';
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useRef, useState } from 'react'
+import GenreOption from '../GenreOption/GenreOption'
+import {
+    hideCheckboxes,
+    showCheckboxes,
+} from '../../../utils/helperFunctions/toggleCheckboxes'
 import {
     getSuggestions,
     selectAccessToken,
     selectAvailableGenres,
-    selectRefreshToken
-} from '../../../utils/state/spotifySlice';
-import { selectGenres, updateGenres } from '../../../utils/state/userSlice';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import './GenreDropdown.scss';
+    selectRefreshToken,
+} from '../../../utils/state/spotifySlice'
+import { selectGenres, updateGenres } from '../../../utils/state/userSlice'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { IconProp } from '@fortawesome/fontawesome-svg-core'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import './GenreDropdown.scss'
 
 export default function GenreDropdown() {
-    const dispatch = useDispatch();
-    const genreOptions = useSelector(selectAvailableGenres);
-    const selectedGenres = useSelector(selectGenres);
-    const accessToken = useSelector(selectAccessToken);
-    const refreshToken = useSelector(selectRefreshToken);
-    const [searchTerm, setSearchTerm] = useState('');
-    const firstRender = useRef(true);
-    const faSearchProp = faSearch as IconProp;
+    const dispatch = useDispatch()
+    const genreOptions = useSelector(selectAvailableGenres)
+    const selectedGenres = useSelector(selectGenres)
+    const accessToken = useSelector(selectAccessToken)
+    const refreshToken = useSelector(selectRefreshToken)
+    const [searchTerm, setSearchTerm] = useState('')
+    const firstRender = useRef(true)
+    const faSearchProp = faSearch as IconProp
 
     const handleSearchTermChange = (e) => {
-        e.preventDefault();
-        setSearchTerm(e.target.value);
-    };
+        e.preventDefault()
+        setSearchTerm(e.target.value)
+    }
 
     // get suggestions from Spotify
     const handleSuggestionSearch = (e) => {
-        e.preventDefault();
+        e.preventDefault()
         if (document.cookie && accessToken !== '') {
             dispatch(
                 getSuggestions({
                     accessToken,
                     refreshToken,
-                    genres: selectedGenres
+                    genres: selectedGenres,
                 })
-            );
+            )
         }
-    };
+    }
 
     // calculate selected genres filtered by search term and in alphabetical order
     const filteredSortedGenres = selectedGenres
         .slice()
         .sort()
         .filter((genre) => {
-            return genre.includes(searchTerm.toLowerCase());
-        });
+            return genre.includes(searchTerm.toLowerCase())
+        })
 
     // calculate available genres filtered by search term and in alphabetical order
     const filteredGenres = genreOptions.filter((genre) => {
-        return genre.includes(searchTerm.toLowerCase());
-    });
+        return genre.includes(searchTerm.toLowerCase())
+    })
 
     // update genres in db whenever selected genres change
     useEffect(() => {
         if (document.cookie) {
             if (firstRender.current) {
-                firstRender.current = false;
-                return;
+                firstRender.current = false
+                return
             }
-            dispatch(updateGenres(selectedGenres));
+            dispatch(updateGenres(selectedGenres))
         }
-    }, [dispatch, selectedGenres]);
+    }, [dispatch, selectedGenres])
 
     return (
         <form>
@@ -87,7 +90,8 @@ export default function GenreDropdown() {
                             className="btn btn-outline-secondary"
                             id="search-button"
                             type="button"
-                            onClick={handleSuggestionSearch}>
+                            onClick={handleSuggestionSearch}
+                        >
                             <FontAwesomeIcon icon={faSearchProp} />
                         </button>
                     </div>
@@ -96,17 +100,17 @@ export default function GenreDropdown() {
                     <div id="selected-genres">
                         <p className="dropdown-heading">Selected Genres</p>
                         {filteredSortedGenres.map((genre) => {
-                            return <GenreOption key={genre} genre={genre} />;
+                            return <GenreOption key={genre} genre={genre} />
                         })}
                     </div>
                     <div id="genre-options">
                         <p className="dropdown-heading">Genre Options</p>
                         {filteredGenres.map((genre) => {
-                            return <GenreOption key={genre} genre={genre} />;
+                            return <GenreOption key={genre} genre={genre} />
                         })}
                     </div>
                 </div>
             </div>
         </form>
-    );
+    )
 }

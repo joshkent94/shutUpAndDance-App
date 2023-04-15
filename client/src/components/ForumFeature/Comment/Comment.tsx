@@ -1,41 +1,59 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { likeCommentToggle } from '../../../utils/state/forumSlice';
-import { selectUserId } from '../../../utils/state/userSlice';
-import './Comment.scss';
+import { useDispatch, useSelector } from 'react-redux'
+import { likeCommentToggle } from '../../../utils/state/forumSlice'
+import { selectUserId } from '../../../utils/state/userSlice'
+import './Comment.scss'
 
 export default function Comment({ comment }) {
-    const userId = useSelector(selectUserId);
-    const dispatch = useDispatch();
+    const userId = useSelector(selectUserId)
+    const dispatch = useDispatch()
 
     // toggle between like and dislike
     const likeToggle = () => {
-        dispatch(likeCommentToggle({
-            commentId: comment.id
-        }));
-    };
+        dispatch(
+            likeCommentToggle({
+                commentId: comment.id,
+            })
+        )
+    }
 
-    let likeIcon;
+    let likeIcon
     if (comment.likes.includes(userId)) {
-        likeIcon = <button className="browse-threads-icon" onClick={likeToggle}><i className="bi bi-hand-thumbs-up-fill"></i></button>;
+        likeIcon = (
+            <button className="browse-threads-icon" onClick={likeToggle}>
+                <i className="bi bi-hand-thumbs-up-fill"></i>
+            </button>
+        )
     } else {
-        likeIcon = <button className="browse-threads-icon" onClick={likeToggle}><i className="bi bi-hand-thumbs-up"></i></button>;
-    };
-    
-    const commentDate = new Date(comment.timestamp);
-    
+        likeIcon = (
+            <button className="browse-threads-icon" onClick={likeToggle}>
+                <i className="bi bi-hand-thumbs-up"></i>
+            </button>
+        )
+    }
+
+    const commentDate = new Date(comment.timestamp)
+
     return (
         <div className="content-container comment animate__animated animate__fadeIn">
             <div className="thread-container comment-text">
                 <p>{comment.comment}</p>
             </div>
             <div className="thread-container">
-                <p><span className="thread-label">Commented by:</span> {comment.firstName} {comment.lastName}</p>
-                <p><span className='thread-label'>Commented on:</span> {commentDate.toLocaleString('default', { month: 'short' })} {commentDate.getUTCDate()} {commentDate.getUTCFullYear()}</p>
-                <p><span className='thread-label'>Likes:</span> {comment.likes.length}</p>
-                <div className='icon-section'>
-                    {likeIcon}
-                </div>
+                <p>
+                    <span className="thread-label">Commented by:</span>{' '}
+                    {comment.firstName} {comment.lastName}
+                </p>
+                <p>
+                    <span className="thread-label">Commented on:</span>{' '}
+                    {commentDate.toLocaleString('default', { month: 'short' })}{' '}
+                    {commentDate.getUTCDate()} {commentDate.getUTCFullYear()}
+                </p>
+                <p>
+                    <span className="thread-label">Likes:</span>{' '}
+                    {comment.likes.length}
+                </p>
+                <div className="icon-section">{likeIcon}</div>
             </div>
         </div>
-    );
-};
+    )
+}

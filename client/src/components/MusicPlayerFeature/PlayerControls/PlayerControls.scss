@@ -1,47 +1,47 @@
 .player-controls {
-  height: 40%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 0.3rem 0.5rem;
+    height: 40%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.3rem 0.5rem;
 }
 
 .duration-slider {
-  padding: 6px 0 !important;
-  color: var(--secondary-colour) !important;
+    padding: 6px 0 !important;
+    color: var(--secondary-colour) !important;
 }
 
 .slider-times {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .slider-time {
-  font-size: 0.75rem !important;
-  opacity: 0.7;
-  font-weight: 500;
-  letter-spacing: 0.2;
+    font-size: 0.75rem !important;
+    opacity: 0.7;
+    font-weight: 500;
+    letter-spacing: 0.2;
 }
 
 .player-buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: -0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -0.8rem;
 }
 
 .MuiIconButton-root {
-  padding: 0 0.5rem !important;
+    padding: 0 0.5rem !important;
 }
 
 .MuiSvgIcon-root:hover {
-  color: var(--fourth-colour) !important;
+    color: var(--fourth-colour) !important;
 }
 
 .MuiSlider-thumb:hover {
-  color: var(--fourth-colour) !important;
+    color: var(--fourth-colour) !important;
 }

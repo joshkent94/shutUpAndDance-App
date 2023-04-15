@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import GenreDropdown from '../GenreDropdown/GenreDropdown';
+import { useEffect, useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import GenreDropdown from '../GenreDropdown/GenreDropdown'
 import {
     getAvailableGenres,
     getSuggestions,
@@ -9,22 +9,22 @@ import {
     selectRefreshToken,
     selectSuggestions,
     getPlayingSong,
-    selectCurrentlyPlaying
-} from '../../../utils/state/spotifySlice';
-import { selectGenres } from '../../../utils/state/userSlice';
-import Suggestion from '../Suggestion/Suggestion';
-import useSWR from 'swr';
-import './Suggestions.scss';
+    selectCurrentlyPlaying,
+} from '../../../utils/state/spotifySlice'
+import { selectGenres } from '../../../utils/state/userSlice'
+import Suggestion from '../Suggestion/Suggestion'
+import useSWR from 'swr'
+import './Suggestions.scss'
 
 export default function Suggestions() {
-    const dispatch = useDispatch();
-    const availableGenres = useSelector(selectAvailableGenres);
-    const accessToken = useSelector(selectAccessToken);
-    const refreshToken = useSelector(selectRefreshToken);
-    const suggestions = useSelector(selectSuggestions);
-    const currentlyPlaying = useSelector(selectCurrentlyPlaying);
-    const genres = useSelector(selectGenres);
-    const firstRender = useRef(true);
+    const dispatch = useDispatch()
+    const availableGenres = useSelector(selectAvailableGenres)
+    const accessToken = useSelector(selectAccessToken)
+    const refreshToken = useSelector(selectRefreshToken)
+    const suggestions = useSelector(selectSuggestions)
+    const currentlyPlaying = useSelector(selectCurrentlyPlaying)
+    const genres = useSelector(selectGenres)
+    const firstRender = useRef(true)
 
     // poll for currently playing song every 5 seconds
     useSWR(
@@ -33,51 +33,63 @@ export default function Suggestions() {
             dispatch(
                 getPlayingSong({
                     accessToken,
-                    refreshToken
+                    refreshToken,
                 })
             ),
         {
             refreshInterval: 5000,
-            revalidateOnFocus: false
+            revalidateOnFocus: false,
         }
-    );
+    )
 
     // get genre list and song suggestions from Spotify on initial page load
     useEffect(() => {
         if (firstRender.current) {
-            firstRender.current = false;
+            firstRender.current = false
             if (accessToken !== '' && availableGenres.length === 0) {
                 dispatch(
                     getAvailableGenres({
                         accessToken,
-                        refreshToken
+                        refreshToken,
                     })
-                );
+                )
             }
-            if (suggestions.length === 0 && document.cookie && accessToken !== '') {
+            if (
+                suggestions.length === 0 &&
+                document.cookie &&
+                accessToken !== ''
+            ) {
                 dispatch(
                     getSuggestions({
                         accessToken,
                         refreshToken,
-                        genres
+                        genres,
                     })
-                );
+                )
             }
         }
-    });
+    })
 
-    let content;
+    let content
     if (suggestions.length === 0) {
-        content = <h5 className="sub-heading">Please select at least one genre to see suggestions.</h5>;
+        content = (
+            <h5 className="sub-heading">
+                Please select at least one genre to see suggestions.
+            </h5>
+        )
     } else {
         content = suggestions.map((track) => {
             return (
                 <Suggestion
-                    key={track.id + (currentlyPlaying.uri === track.uri && currentlyPlaying.isPlaying)}
+                    key={
+                        track.id +
+                        (currentlyPlaying.uri === track.uri &&
+                            currentlyPlaying.isPlaying)
+                    }
                     track={track}
                 />
-            );
-        });
+            )
+        })
     }
 
     return (
@@ -90,5 +102,5 @@ export default function Suggestions() {
                 <div id="suggestions-page">{content}</div>
             </div>
         </div>
-    );
+    )
 }

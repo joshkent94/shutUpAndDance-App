@@ -1,14 +1,12 @@
-import { Nav, Offcanvas } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
-import './SideNav.scss';
+import { Nav, Offcanvas } from 'react-bootstrap'
+import { NavLink } from 'react-router-dom'
+import './SideNav.scss'
 
 export default function SideNav({ show }) {
     return (
         <Offcanvas show={show} scroll={true} backdrop={false}>
             <Offcanvas.Header>
-                <Offcanvas.Title>
-                    Navigation
-                </Offcanvas.Title>
+                <Offcanvas.Title>Navigation</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
                 <Nav id="side-nav">
@@ -30,5 +28,5 @@ export default function SideNav({ show }) {
                 </Nav>
             </Offcanvas.Body>
         </Offcanvas>
-    );
-};
+    )
+}

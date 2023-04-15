@@ -1,31 +1,31 @@
 #new-thread-page {
-  padding-top: 1rem;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 #new-thread-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
 }
 
 #new-thread-form > .form-element:first-of-type {
-  margin-top: 2rem;
+    margin-top: 2rem;
 }
 
 #thread-comment {
-  height: 300px;
+    height: 300px;
 }
 
 #create-thread-button {
-  margin: 0.5rem 0 2rem 0;
-  width: 12rem;
+    margin: 0.5rem 0 2rem 0;
+    width: 12rem;
 }
 
 .new-thread-element {
-  width: 800px;
+    width: 800px;
 }

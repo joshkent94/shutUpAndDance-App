@@ -1,66 +1,66 @@
 .player-toggle {
-	height: 150px;
-	width: 50px;
-	position: fixed;
-	bottom: 25px;
-	right: 0px;
-	border: unset;
-	border-top-left-radius: 1rem;
-	border-bottom-left-radius: 1rem;
-	background-color: var(--primary-colour);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	transition: right 0.2s linear;
+    height: 150px;
+    width: 50px;
+    position: fixed;
+    bottom: 25px;
+    right: 0px;
+    border: unset;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    background-color: var(--primary-colour);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: right 0.2s linear;
 }
 
 .player-toggle > img {
-	transform: rotate(270deg);
-	margin: unset;
-	width: 120px;
+    transform: rotate(270deg);
+    margin: unset;
+    width: 120px;
 }
 
 .music-player {
-	height: 150px;
-	width: 350px;
-	z-index: 10000;
-	position: fixed;
-	top: unset;
-	bottom: 25px;
-	right: 25px;
-	display: flex !important;
-	border: unset;
-	margin: unset;
-	background: none;
-	transition: transform 0.3s linear;
+    height: 150px;
+    width: 350px;
+    z-index: 10000;
+    position: fixed;
+    top: unset;
+    bottom: 25px;
+    right: 25px;
+    display: flex !important;
+    border: unset;
+    margin: unset;
+    background: none;
+    transition: transform 0.3s linear;
 }
 
 .music-player:hover .close-player {
-	display: flex;
+    display: flex;
 }
 
 .close-player {
-	display: none;
-	position: absolute;
-	top: -6px;
-	right: -6px;
-	height: 20px;
-	width: 20px;
-	border: unset;
-	border-radius: 1rem;
-	justify-content: center;
-	align-items: center;
-	background-color: var(--secondary-colour);
-	color: var(--fourth-colour);
+    display: none;
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    height: 20px;
+    width: 20px;
+    border: unset;
+    border-radius: 1rem;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--secondary-colour);
+    color: var(--fourth-colour);
 }
 
 .player-body {
-	background-color: var(--primary-colour);
-	color: var(--secondary-colour);
-	border-radius: 1rem;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	padding: 0.5rem;
+    background-color: var(--primary-colour);
+    color: var(--secondary-colour);
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
 }

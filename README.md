@@ -4,13 +4,13 @@
 
 ## Table of contents
 
-- [General info](#general-info)
-- [Screenshots](#screenshots)
-- [Technologies](#technologies)
-- [Setup](#setup)
-- [Features](#features)
-- [Status](#status)
-- [Contact](#contact)
+-   [General info](#general-info)
+-   [Screenshots](#screenshots)
+-   [Technologies](#technologies)
+-   [Setup](#setup)
+-   [Features](#features)
+-   [Status](#status)
+-   [Contact](#contact)
 
 ## General info
 
@@ -22,14 +22,14 @@ A project to test out my PERN stack developer skills.
 
 ## Technologies
 
-- HTML
-- SASS
-- Typescript
-- React
-- Redux
-- Express
-- Node.js
-- Postgresql
+-   HTML
+-   SASS
+-   Typescript
+-   React
+-   Redux
+-   Express
+-   Node.js
+-   Postgresql
 
 ## Setup
 
@@ -39,11 +39,11 @@ Node is required to work on this app. Clone the repo and run npm install in both
 
 Features ready:
 
-- Register for an account, login and have sessions persist.
-- Create a custom dashboard by selecting and positioning widgets.
-- Select favourite music genres and receive song suggestions based on your choices.
-- Create, like and comment on threads.
-- Amend and save account details.
+-   Register for an account, login and have sessions persist.
+-   Create a custom dashboard by selecting and positioning widgets.
+-   Select favourite music genres and receive song suggestions based on your choices.
+-   Create, like and comment on threads.
+-   Amend and save account details.
 
 ## Status
 
