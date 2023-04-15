@@ -4,12 +4,11 @@ import session from 'express-session'
 import path from 'path'
 import https from 'https'
 import connect from 'connect-pg-simple'
-import { pool, isProduction } from './server/connectionConfig'
+import { isProduction, pool } from './server/connectionConfig'
 import { userRouter } from './server/routes/userRoutes'
 import { threadsRouter } from './server/routes/threadsRouter'
 import { commentsRouter } from './server/routes/commentsRouter'
-import * as dotenv from 'dotenv'
-dotenv.config({ path: __dirname + '/../.env' })
+require('dotenv').config()
 
 const pgSession = connect(session)
 const app = express()

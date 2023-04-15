@@ -7,7 +7,7 @@ client/build
 
 #connection
 server/httpsConfig.ts
-dist/server/httpsConfig.js
+dist
 
 # misc
 .DS_Store
