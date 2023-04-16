@@ -8,7 +8,7 @@
         "build": "tsc",
         "dev": "concurrently \"tsc --watch\" \"nodemon -q dist/server.js\"",
         "postinstall": "npm run build",
-        "heroku-postbuild": "cd client && npm install --legacy-peer-deps && npm run build",
+        "heroku-postbuild": "cd client && npm install && npm run build",
         "lint": "eslint . --ext .ts --fix",
         "format": "prettier --write --loglevel silent .",
         "correct": "npm run format && npm run lint"
