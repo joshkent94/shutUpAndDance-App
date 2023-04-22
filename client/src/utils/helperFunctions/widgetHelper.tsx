@@ -6,10 +6,10 @@ export const widgetArray = ['Suggestions', 'My Threads', 'Most Liked Threads']
 
 export const displayWidget = (widget) => {
     if (widget === 'Suggestions') {
-        return <SuggestionsWidget key={widget} />
+        return <SuggestionsWidget />
     } else if (widget === 'My Threads') {
-        return <MyThreadsWidget key={widget} />
+        return <MyThreadsWidget />
     } else if (widget === 'Most Liked Threads') {
-        return <MostLikedThreadsWidget key={widget} />
+        return <MostLikedThreadsWidget />
     }
 }

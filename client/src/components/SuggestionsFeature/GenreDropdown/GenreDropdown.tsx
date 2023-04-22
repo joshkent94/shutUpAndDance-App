@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useEffect, useRef, useState } from 'react'
 import GenreOption from '../GenreOption/GenreOption'
 import {
@@ -15,10 +15,11 @@ import { selectGenres, updateGenres } from '../../../utils/state/userSlice'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { useAppDispatch } from '../../../utils/state/store'
 import './GenreDropdown.scss'
 
 export default function GenreDropdown() {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const genreOptions = useSelector(selectAvailableGenres)
     const selectedGenres = useSelector(selectGenres)
     const accessToken = useSelector(selectAccessToken)

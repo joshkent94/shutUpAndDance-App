@@ -1,14 +1,15 @@
 import { useEffect, useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import {
     getThreadsByUserId,
     selectUserThreads,
 } from '../../../utils/state/forumSlice'
 import ThreadOverview from '../ThreadOverview/ThreadOverview'
+import { useAppDispatch } from '../../../utils/state/store'
 import './MyThreads.scss'
 
 export default function MyThreads({ searchTerm }) {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const userThreads = useSelector(selectUserThreads)
     const firstRender = useRef(true)
 

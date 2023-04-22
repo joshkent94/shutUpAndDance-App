@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import { useDispatch } from 'react-redux'
 import { widgetArray } from '../../../utils/helperFunctions/widgetHelper'
 import {
     hideCheckboxes,
@@ -7,9 +6,10 @@ import {
 } from '../../../utils/helperFunctions/toggleCheckboxes'
 import WidgetOption from '../WidgetOption/WidgetOption'
 import { updateWidgets } from '../../../utils/state/userSlice'
+import { useAppDispatch } from '../../../utils/state/store'
 
 export default function WidgetDropdown({ add, remove, selectedWidgets }) {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const [searchTerm, setSearchTerm] = useState('')
     const firstRender = useRef(true)
 

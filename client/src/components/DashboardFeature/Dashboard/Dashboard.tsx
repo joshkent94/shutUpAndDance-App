@@ -1,24 +1,25 @@
 import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import WidgetDropdown from '../WidgetDropdown/WidgetDropdown'
 import { displayWidget } from '../../../utils/helperFunctions/widgetHelper'
 import { selectWidgets, setWidgetOrder } from '../../../utils/state/userSlice'
-import { MuuriComponent } from 'muuri-react'
+import { useAppDispatch } from '../../../utils/state/store'
+import DraggableGrid, { DraggableItem } from 'ruuri'
+import { findWidgetName } from '../../../utils/helperFunctions/findWidgetName'
 import './Dashboard.scss'
 
 export default function Dashboard() {
     const selectedWidgets = useSelector(selectWidgets)
     const [items, setItems] = useState(selectedWidgets)
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     // functions passed down to widget selector to add/remove widgets from state
     const add = (widget) => {
-        const widgetArray = [widget]
-        setItems(widgetArray.concat(items))
+        setItems([widget, ...items])
     }
     const remove = (widget) => setItems(items.filter((item) => item !== widget))
 
-    // show widgets using muuri component based on widget selection or a prompt if none are selected
+    // show widgets based on widget selection or a prompt if none are selected
     let content
     if (items.length === 0) {
         content = (
@@ -27,18 +28,21 @@ export default function Dashboard() {
             </h5>
         )
     } else {
-        const children = items.map((widget) => displayWidget(widget))
+        const children = items.map((widget) => (
+            <DraggableItem key={widget}>{displayWidget(widget)}</DraggableItem>
+        ))
         const showPlaceholder = (item) => item.getElement().cloneNode(false)
         const sendItemOrder = (item) => {
             const grid = item.getGrid()
             const items = grid.getItems()
-            const orderedWidgets = items.map((item) => item.getKey())
+            const orderedWidgets = items.map((item) =>
+                findWidgetName(item.getElement())
+            )
             dispatch(setWidgetOrder(orderedWidgets))
+            setItems(orderedWidgets)
         }
         content = (
-            <MuuriComponent
-                key={items}
-                instantLayout
+            <DraggableGrid
                 dragEnabled
                 dragPlaceholder={{
                     enabled: true,
@@ -47,7 +51,7 @@ export default function Dashboard() {
                 onDragEnd={sendItemOrder}
             >
                 {children}
-            </MuuriComponent>
+            </DraggableGrid>
         )
     }
 

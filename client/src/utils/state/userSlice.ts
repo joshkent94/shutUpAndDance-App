@@ -32,11 +32,13 @@ export const submitSignUp = createAsyncThunk(
             body: JSON.stringify(data),
         })
         const jsonResponse = await response.json()
-        showMessage(jsonResponse.message)
+        if (response.status === 404) showMessage(jsonResponse.message)
         if (response.ok) {
             return {
                 ...data,
                 id: jsonResponse.id,
+                genres: jsonResponse.genres,
+                widgets: jsonResponse.widgets,
             }
         }
     }
@@ -202,6 +204,8 @@ const userSlice = createSlice({
                 state.firstName = action.payload.firstName
                 state.lastName = action.payload.lastName
                 state.email = action.payload.email
+                state.genres = action.payload.genres
+                state.widgets = action.payload.widgets
             }
         })
         builder.addCase(requestLogin.fulfilled, (state, action) => {

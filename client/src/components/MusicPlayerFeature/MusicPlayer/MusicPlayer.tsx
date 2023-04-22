@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Offcanvas } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
@@ -14,10 +14,11 @@ import {
 import SongDetails from '../SongDetails/SongDetails'
 import PlayerControls from '../PlayerControls/PlayerControls'
 import useSWR from 'swr'
+import { useAppDispatch } from '../../../utils/state/store'
 import './MusicPlayer.scss'
 
 export default function MusicPlayer() {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const accessToken = useSelector(selectAccessToken)
     const refreshToken = useSelector(selectRefreshToken)
     const currentlyPlaying = useSelector(selectCurrentlyPlaying)

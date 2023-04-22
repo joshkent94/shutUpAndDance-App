@@ -1,11 +1,12 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { likeCommentToggle } from '../../../utils/state/forumSlice'
 import { selectUserId } from '../../../utils/state/userSlice'
+import { useAppDispatch } from '../../../utils/state/store'
 import './Comment.scss'
 
 export default function Comment({ comment }) {
     const userId = useSelector(selectUserId)
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     // toggle between like and dislike
     const likeToggle = () => {

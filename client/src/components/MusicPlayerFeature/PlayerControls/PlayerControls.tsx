@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import {
     changeSongPosition,
     playNextSong,
@@ -8,19 +8,20 @@ import {
     selectRefreshToken,
     togglePlay,
 } from '../../../utils/state/spotifySlice'
-import Box from '@material-ui/core/Box'
-import Typography from '@material-ui/core/Typography'
-import Slider from '@material-ui/core/Slider'
-import IconButton from '@material-ui/core/IconButton'
-import PauseRounded from '@material-ui/icons/PauseRounded'
-import PlayArrowRounded from '@material-ui/icons/PlayArrowRounded'
-import FastForwardRounded from '@material-ui/icons/FastForwardRounded'
-import FastRewindRounded from '@material-ui/icons/FastRewindRounded'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import Slider from '@mui/material/Slider'
+import IconButton from '@mui/material/IconButton'
+import PauseRounded from '@mui/icons-material/PauseRounded'
+import PlayArrowRounded from '@mui/icons-material/PlayArrowRounded'
+import FastForwardRounded from '@mui/icons-material/FastForwardRounded'
+import FastRewindRounded from '@mui/icons-material/FastRewindRounded'
+import { useAppDispatch } from '../../../utils/state/store'
 import './PlayerControls.scss'
 
 // React component built using Material UI library
 export default function PlayerControls({ currentlyPlaying }) {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const accessToken = useSelector(selectAccessToken)
     const refreshToken = useSelector(selectRefreshToken)
     const duration = currentlyPlaying.duration

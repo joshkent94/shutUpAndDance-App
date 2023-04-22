@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import {
     getPlayingSong,
     getSuggestions,
@@ -14,10 +14,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import useSWR from 'swr'
+import { useAppDispatch } from '../../../utils/state/store'
 import './SuggestionsWidget.scss'
 
 export default function SuggestionsWidget() {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const suggestions = useSelector(selectSuggestions)
     const selectedGenres = useSelector(selectGenres)
     const accessToken = useSelector(selectAccessToken)
@@ -98,25 +99,21 @@ export default function SuggestionsWidget() {
     }
 
     return (
-        <div>
-            <div className="content-container widget animate__animated animate__fadeIn">
-                <div className="input-group">
-                    <h5 className="sub-heading content-container">
-                        Suggestions
-                    </h5>
-                    <div className="input-group-append">
-                        <button
-                            className="btn btn-outline-secondary"
-                            id="search-button"
-                            type="button"
-                            onClick={handleSuggestionSearch}
-                        >
-                            <FontAwesomeIcon icon={faSearchProp} />
-                        </button>
-                    </div>
+        <div className="content-container widget animate__animated animate__fadeIn">
+            <div className="input-group">
+                <h5 className="sub-heading content-container">Suggestions</h5>
+                <div className="input-group-append">
+                    <button
+                        className="btn btn-outline-secondary"
+                        id="search-button"
+                        type="button"
+                        onClick={handleSuggestionSearch}
+                    >
+                        <FontAwesomeIcon icon={faSearchProp} />
+                    </button>
                 </div>
-                <div className="widget-content">{content}</div>
             </div>
+            <div className="widget-content">{content}</div>
         </div>
     )
 }

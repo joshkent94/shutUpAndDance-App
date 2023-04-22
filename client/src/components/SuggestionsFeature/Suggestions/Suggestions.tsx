@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import GenreDropdown from '../GenreDropdown/GenreDropdown'
 import {
     getAvailableGenres,
@@ -14,10 +14,11 @@ import {
 import { selectGenres } from '../../../utils/state/userSlice'
 import Suggestion from '../Suggestion/Suggestion'
 import useSWR from 'swr'
+import { useAppDispatch } from '../../../utils/state/store'
 import './Suggestions.scss'
 
 export default function Suggestions() {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const availableGenres = useSelector(selectAvailableGenres)
     const accessToken = useSelector(selectAccessToken)
     const refreshToken = useSelector(selectRefreshToken)

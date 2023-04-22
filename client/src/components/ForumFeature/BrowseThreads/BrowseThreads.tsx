@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import {
     getMostLikedThreads,
     searchThreads,
@@ -7,10 +7,11 @@ import {
     selectThreads,
 } from '../../../utils/state/forumSlice'
 import ThreadOverview from '../ThreadOverview/ThreadOverview'
+import { useAppDispatch } from '../../../utils/state/store'
 import './BrowseThreads.scss'
 
 export default function BrowseThreads({ searchTerm }) {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const threads = useSelector(selectThreads)
     const mostLiked = useSelector(selectMostLiked)
 

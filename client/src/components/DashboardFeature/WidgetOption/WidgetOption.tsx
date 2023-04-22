@@ -1,8 +1,8 @@
-import { useDispatch } from 'react-redux'
 import { setWidgetSelection } from '../../../utils/state/userSlice'
+import { useAppDispatch } from '../../../utils/state/store'
 
 export default function WidgetOption({ widget, add, remove, selectedWidgets }) {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const handleWidgetSelect = (e) => {
         dispatch(setWidgetSelection(e.target.value))
