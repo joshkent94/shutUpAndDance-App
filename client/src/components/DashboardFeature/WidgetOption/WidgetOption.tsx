@@ -1,16 +1,11 @@
 import { setWidgetSelection } from '../../../utils/state/userSlice'
 import { useAppDispatch } from '../../../utils/state/store'
 
-export default function WidgetOption({ widget, add, remove, selectedWidgets }) {
+export default function WidgetOption({ widget, selectedWidgets }) {
     const dispatch = useAppDispatch()
 
     const handleWidgetSelect = (e) => {
         dispatch(setWidgetSelection(e.target.value))
-        if (selectedWidgets.includes(widget)) {
-            remove(widget)
-        } else {
-            add(widget)
-        }
     }
 
     return (

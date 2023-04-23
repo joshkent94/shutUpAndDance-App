@@ -158,18 +158,18 @@ const userSlice = createSlice({
         widgets: [],
     } as UserState,
     reducers: {
-        setGenres: (state, action) => {
+        setGenres: (state, { payload }) => {
             if (
-                state.genres.indexOf(action.payload) === -1 &&
+                state.genres.indexOf(payload) === -1 &&
                 state.genres.length < 5
             ) {
                 return {
                     ...state,
-                    genres: [...state.genres, action.payload],
+                    genres: [...state.genres, payload],
                 }
             } else {
                 const newGenres = state.genres.filter(
-                    (genre) => genre !== action.payload
+                    (genre) => genre !== payload
                 )
                 return {
                     ...state,
@@ -177,15 +177,15 @@ const userSlice = createSlice({
                 }
             }
         },
-        setWidgetSelection: (state, action) => {
-            if (state.widgets.indexOf(action.payload) === -1) {
+        setWidgetSelection: (state, { payload }) => {
+            if (state.widgets.indexOf(payload) === -1) {
                 return {
                     ...state,
-                    widgets: [action.payload, ...state.widgets],
+                    widgets: [payload, ...state.widgets],
                 }
             } else {
                 const newWidgets = state.widgets.filter(
-                    (widget) => widget !== action.payload
+                    (widget) => widget !== payload
                 )
                 return {
                     ...state,
@@ -193,30 +193,30 @@ const userSlice = createSlice({
                 }
             }
         },
-        setWidgetOrder: (state, action) => {
-            state.widgets = action.payload
+        setWidgetOrder: (state, { payload }) => {
+            state.widgets = [...payload]
         },
     },
     extraReducers: (builder) => {
-        builder.addCase(submitSignUp.fulfilled, (state, action) => {
-            if (action.payload) {
-                state.id = action.payload.id
-                state.firstName = action.payload.firstName
-                state.lastName = action.payload.lastName
-                state.email = action.payload.email
-                state.genres = action.payload.genres
-                state.widgets = action.payload.widgets
+        builder.addCase(submitSignUp.fulfilled, (state, { payload }) => {
+            if (payload) {
+                state.id = payload.id
+                state.firstName = payload.firstName
+                state.lastName = payload.lastName
+                state.email = payload.email
+                state.genres = payload.genres
+                state.widgets = payload.widgets
             }
         })
-        builder.addCase(requestLogin.fulfilled, (state, action) => {
-            if (action.payload) {
-                if (action.payload.id) {
-                    state.id = action.payload.id
-                    state.firstName = action.payload.firstName
-                    state.lastName = action.payload.lastName
-                    state.email = action.payload.email
-                    state.genres = action.payload.genres
-                    state.widgets = action.payload.widgets
+        builder.addCase(requestLogin.fulfilled, (state, { payload }) => {
+            if (payload) {
+                if (payload.id) {
+                    state.id = payload.id
+                    state.firstName = payload.firstName
+                    state.lastName = payload.lastName
+                    state.email = payload.email
+                    state.genres = payload.genres
+                    state.widgets = payload.widgets
                 }
             }
         })
@@ -228,11 +228,11 @@ const userSlice = createSlice({
             state.genres = []
             state.widgets = []
         })
-        builder.addCase(updateUserDetails.fulfilled, (state, action) => {
-            if (action.payload) {
-                state.firstName = action.payload.firstName
-                state.lastName = action.payload.lastName
-                state.email = action.payload.email
+        builder.addCase(updateUserDetails.fulfilled, (state, { payload }) => {
+            if (payload) {
+                state.firstName = payload.firstName
+                state.lastName = payload.lastName
+                state.email = payload.email
             }
         })
         builder.addCase(updateGenres.fulfilled, () => {

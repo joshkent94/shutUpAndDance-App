@@ -9,13 +9,14 @@ import {
 } from '../../../utils/state/spotifySlice'
 import Suggestion from '../../SuggestionsFeature/Suggestion/Suggestion'
 import { selectGenres } from '../../../utils/state/userSlice'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import useSWR from 'swr'
 import { useAppDispatch } from '../../../utils/state/store'
 import './SuggestionsWidget.scss'
+import Loading from '../../Loading/Loading'
 
 export default function SuggestionsWidget() {
     const dispatch = useAppDispatch()
@@ -25,6 +26,7 @@ export default function SuggestionsWidget() {
     const refreshToken = useSelector(selectRefreshToken)
     const currentlyPlaying = useSelector(selectCurrentlyPlaying)
     const firstRender = useRef(true)
+    const [loading, setLoading] = useState(false)
     const faSearchProp = faSearch as IconProp
 
     // poll for currently playing song every 5 seconds
@@ -47,13 +49,14 @@ export default function SuggestionsWidget() {
     const handleSuggestionSearch = (e) => {
         e.preventDefault()
         if (document.cookie && accessToken !== '') {
+            setLoading(true)
             dispatch(
                 getSuggestions({
                     accessToken,
                     refreshToken,
                     genres: selectedGenres,
                 })
-            )
+            ).then(() => setLoading(false))
         }
     }
 
@@ -66,13 +69,14 @@ export default function SuggestionsWidget() {
             firstRender.current
         ) {
             firstRender.current = false
+            setLoading(true)
             dispatch(
                 getSuggestions({
                     accessToken,
                     refreshToken,
                     genres: selectedGenres,
                 })
-            )
+            ).then(() => setLoading(false))
         }
     })
 
@@ -113,7 +117,10 @@ export default function SuggestionsWidget() {
                     </button>
                 </div>
             </div>
-            <div className="widget-content">{content}</div>
+            <div className="widget-content">
+                {loading && <Loading />}
+                {!loading && content}
+            </div>
         </div>
     )
 }

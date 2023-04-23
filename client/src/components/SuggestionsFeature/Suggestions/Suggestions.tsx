@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import GenreDropdown from '../GenreDropdown/GenreDropdown'
 import {
@@ -16,6 +16,7 @@ import Suggestion from '../Suggestion/Suggestion'
 import useSWR from 'swr'
 import { useAppDispatch } from '../../../utils/state/store'
 import './Suggestions.scss'
+import Loading from '../../Loading/Loading'
 
 export default function Suggestions() {
     const dispatch = useAppDispatch()
@@ -25,6 +26,7 @@ export default function Suggestions() {
     const suggestions = useSelector(selectSuggestions)
     const currentlyPlaying = useSelector(selectCurrentlyPlaying)
     const genres = useSelector(selectGenres)
+    const [loading, setLoading] = useState(false)
     const firstRender = useRef(true)
 
     // poll for currently playing song every 5 seconds
@@ -60,13 +62,14 @@ export default function Suggestions() {
                 document.cookie &&
                 accessToken !== ''
             ) {
+                setLoading(true)
                 dispatch(
                     getSuggestions({
                         accessToken,
                         refreshToken,
                         genres,
                     })
-                )
+                ).then(() => setLoading(false))
             }
         }
     })
@@ -97,10 +100,11 @@ export default function Suggestions() {
         <div className="page">
             <div className="page-header">
                 <h5 className="page-header-h5">Suggestions</h5>
-                <GenreDropdown />
+                <GenreDropdown setLoading={setLoading} />
             </div>
             <div className="page-content">
-                <div id="suggestions-page">{content}</div>
+                {loading && <Loading />}
+                {!loading && <div id="suggestions-page">{content}</div>}
             </div>
         </div>
     )

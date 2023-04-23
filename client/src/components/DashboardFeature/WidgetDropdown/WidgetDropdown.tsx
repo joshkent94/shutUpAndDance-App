@@ -8,7 +8,7 @@ import WidgetOption from '../WidgetOption/WidgetOption'
 import { updateWidgets } from '../../../utils/state/userSlice'
 import { useAppDispatch } from '../../../utils/state/store'
 
-export default function WidgetDropdown({ add, remove, selectedWidgets }) {
+export default function WidgetDropdown({ selectedWidgets }) {
     const dispatch = useAppDispatch()
     const [searchTerm, setSearchTerm] = useState('')
     const firstRender = useRef(true)
@@ -67,8 +67,6 @@ export default function WidgetDropdown({ add, remove, selectedWidgets }) {
                                 <WidgetOption
                                     key={widget}
                                     widget={widget}
-                                    add={add}
-                                    remove={remove}
                                     selectedWidgets={selectedWidgets}
                                 />
                             )
@@ -81,8 +79,6 @@ export default function WidgetDropdown({ add, remove, selectedWidgets }) {
                                 <WidgetOption
                                     key={widget}
                                     widget={widget}
-                                    add={add}
-                                    remove={remove}
                                     selectedWidgets={selectedWidgets}
                                 />
                             )

@@ -18,7 +18,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { useAppDispatch } from '../../../utils/state/store'
 import './GenreDropdown.scss'
 
-export default function GenreDropdown() {
+export default function GenreDropdown({ setLoading }) {
     const dispatch = useAppDispatch()
     const genreOptions = useSelector(selectAvailableGenres)
     const selectedGenres = useSelector(selectGenres)
@@ -37,13 +37,14 @@ export default function GenreDropdown() {
     const handleSuggestionSearch = (e) => {
         e.preventDefault()
         if (document.cookie && accessToken !== '') {
+            setLoading(true)
             dispatch(
                 getSuggestions({
                     accessToken,
                     refreshToken,
                     genres: selectedGenres,
                 })
-            )
+            ).then(() => setLoading(false))
         }
     }
 
