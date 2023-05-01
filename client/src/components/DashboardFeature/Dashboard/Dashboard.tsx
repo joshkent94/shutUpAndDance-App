@@ -10,34 +10,45 @@ import { useAppDispatch } from '../../../utils/state/store'
 import DraggableGrid, { DraggableItem } from 'ruuri'
 import { findWidgetName } from '../../../utils/helperFunctions/findWidgetName'
 import './Dashboard.scss'
+import { sortObjectsByName } from '../../../utils/helperFunctions/sortObjectsByName'
 
 export default function Dashboard() {
-    const selectedWidgets = useSelector(selectWidgets, (prev, next) => {
-        return prev.length === next.length
+    const widgets = useSelector(selectWidgets, (prev, next) => {
+        const prevLength = prev.filter((widget) => widget.show).length
+        const nextLength = next.filter((widget) => widget.show).length
+        return prevLength === nextLength;
     })
     const dispatch = useAppDispatch()
 
     // show widgets based on widget selection or a prompt if none are selected
     let content
-    if (selectedWidgets.length === 0) {
+    if (widgets.length === 0) {
         content = (
             <h5 className="sub-heading">
                 Please select at least one widget for your dashboard.
             </h5>
         )
     } else {
-        const children = selectedWidgets.map((widget) => (
-            <DraggableItem key={widget}>{displayWidget(widget)}</DraggableItem>
-        ))
-        const showPlaceholder = (item) => item.getElement().cloneNode(false)
-        const sendItemOrder = (item) => {
-            const grid = item.getGrid()
-            const items = grid.getItems()
-            const orderedWidgets = items.map((item) =>
-                findWidgetName(item.getElement())
+        const children = widgets
+            .filter((widget) => widget.show)
+            .map((widget) => (
+                <DraggableItem key={widget.name}>
+                    {displayWidget(widget.name)}
+                </DraggableItem>
+            ))
+        const showPlaceholder = (widget) => widget.getElement().cloneNode(false)
+        const updateWidgetOrder = (widget) => {
+            const grid = widget.getGrid()
+            const gridWidgets = grid.getItems()
+            const newlyOrderedWidgetsByName = gridWidgets.map((widget) =>
+                findWidgetName(widget.getElement())
             )
-            dispatch(setWidgetOrder(orderedWidgets))
-            dispatch(updateWidgets(orderedWidgets))
+            const newlyOrderedWidgets = sortObjectsByName(
+                widgets,
+                newlyOrderedWidgetsByName
+            )
+            dispatch(setWidgetOrder(newlyOrderedWidgets))
+            dispatch(updateWidgets(newlyOrderedWidgets))
         }
         content = (
             <DraggableGrid
@@ -46,7 +57,7 @@ export default function Dashboard() {
                     enabled: true,
                     createElement: showPlaceholder,
                 }}
-                onDragEnd={sendItemOrder}
+                onDragEnd={updateWidgetOrder}
             >
                 {children}
             </DraggableGrid>
@@ -57,7 +68,7 @@ export default function Dashboard() {
         <div className="page">
             <div className="page-header">
                 <h5 className="page-header-h5">Dashboard</h5>
-                <WidgetDropdown selectedWidgets={selectedWidgets} />
+                <WidgetDropdown />
             </div>
             <div className="page-content">
                 <div id="dashboard-page">{content}</div>

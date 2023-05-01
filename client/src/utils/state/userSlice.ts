@@ -34,11 +34,12 @@ export const submitSignUp = createAsyncThunk(
         const jsonResponse = await response.json()
         if (response.status === 404) showMessage(jsonResponse.message)
         if (response.ok) {
+            const formattedWidgets = jsonResponse.widgets.map((widget: any) => JSON.parse(widget))
             return {
                 ...data,
                 id: jsonResponse.id,
                 genres: jsonResponse.genres,
-                widgets: jsonResponse.widgets,
+                widgets: formattedWidgets
             }
         }
     }
@@ -62,13 +63,14 @@ export const requestLogin = createAsyncThunk(
         })
         const jsonResponse = await response.json()
         if (response.ok) {
+            const formattedWidgets = jsonResponse.widgets.map((widget: any) => JSON.parse(widget))
             return {
                 id: jsonResponse.id,
                 firstName: jsonResponse.firstName,
                 lastName: jsonResponse.lastName,
                 email: jsonResponse.email,
                 genres: jsonResponse.genres,
-                widgets: jsonResponse.widgets,
+                widgets: formattedWidgets,
             }
         } else {
             showMessage(jsonResponse.message)
@@ -138,13 +140,18 @@ export const updateWidgets = createAsyncThunk(
     }
 )
 
+interface Widget {
+    name: string
+    show: boolean
+}
+
 type UserState = {
     id: string
     firstName: string
     lastName: string
     email: string
     genres: any[]
-    widgets: any[]
+    widgets: Widget[]
 }
 
 const userSlice = createSlice({
@@ -178,20 +185,10 @@ const userSlice = createSlice({
             }
         },
         setWidgetSelection: (state, { payload }) => {
-            if (state.widgets.indexOf(payload) === -1) {
-                return {
-                    ...state,
-                    widgets: [payload, ...state.widgets],
-                }
-            } else {
-                const newWidgets = state.widgets.filter(
-                    (widget) => widget !== payload
-                )
-                return {
-                    ...state,
-                    widgets: newWidgets,
-                }
-            }
+            const widgetIndex = state.widgets.findIndex(
+                (widget) => widget.name === payload
+            )
+            state.widgets[widgetIndex].show = !state.widgets[widgetIndex].show
         },
         setWidgetOrder: (state, { payload }) => {
             state.widgets = [...payload]

@@ -1,8 +1,16 @@
-import { setWidgetSelection } from '../../../utils/state/userSlice'
+import {
+    selectWidgets,
+    setWidgetSelection,
+} from '../../../utils/state/userSlice'
 import { useAppDispatch } from '../../../utils/state/store'
+import { useSelector } from 'react-redux'
 
-export default function WidgetOption({ widget, selectedWidgets }) {
+export default function WidgetOption({ widget }) {
     const dispatch = useAppDispatch()
+    const widgets = useSelector(selectWidgets)
+    const widgetNames = widgets
+        .filter((widget) => widget.show)
+        .map((widget) => widget.name)
 
     const handleWidgetSelect = (e) => {
         dispatch(setWidgetSelection(e.target.value))
@@ -16,7 +24,7 @@ export default function WidgetOption({ widget, selectedWidgets }) {
                 id={widget}
                 value={widget}
                 onClick={handleWidgetSelect}
-                checked={selectedWidgets.includes(widget)}
+                checked={widgetNames.includes(widget)}
                 readOnly
             />
             <p className="genre">{widget}</p>

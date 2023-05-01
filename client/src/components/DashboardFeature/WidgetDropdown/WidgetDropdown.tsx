@@ -5,12 +5,14 @@ import {
     showCheckboxes,
 } from '../../../utils/helperFunctions/toggleCheckboxes'
 import WidgetOption from '../WidgetOption/WidgetOption'
-import { updateWidgets } from '../../../utils/state/userSlice'
+import { selectWidgets, updateWidgets } from '../../../utils/state/userSlice'
 import { useAppDispatch } from '../../../utils/state/store'
+import { useSelector } from 'react-redux'
 
-export default function WidgetDropdown({ selectedWidgets }) {
+export default function WidgetDropdown() {
     const dispatch = useAppDispatch()
     const [searchTerm, setSearchTerm] = useState('')
+    const widgets = useSelector(selectWidgets)
     const firstRender = useRef(true)
 
     const handleSearchTermChange = (e) => {
@@ -19,11 +21,23 @@ export default function WidgetDropdown({ selectedWidgets }) {
     }
 
     // calculate selected widgets filtered by search term and in alphabetical order
-    const filteredSortedWidgets = selectedWidgets
+    const filteredSortedWidgets = widgets
+        .filter((widget) => widget.show)
         .slice()
-        .sort()
+        .sort((a, b) => {
+            const nameA = a.name.toLowerCase()
+            const nameB = b.name.toLowerCase()
+            if (nameA < nameB) {
+                return -1
+            }
+            if (nameA > nameB) {
+                return 1
+            }
+
+            return 0
+        })
         .filter((widget) => {
-            return widget.toLowerCase().includes(searchTerm.toLowerCase())
+            return widget.name.toLowerCase().includes(searchTerm.toLowerCase())
         })
 
     // calculate available widgets filtered by search term and in alphabetical order
@@ -41,9 +55,9 @@ export default function WidgetDropdown({ selectedWidgets }) {
                 firstRender.current = false
                 return
             }
-            dispatch(updateWidgets(selectedWidgets))
+            dispatch(updateWidgets(widgets))
         }
-    }, [dispatch, selectedWidgets])
+    }, [dispatch, widgets])
 
     return (
         <form>
@@ -65,9 +79,8 @@ export default function WidgetDropdown({ selectedWidgets }) {
                         {filteredSortedWidgets.map((widget) => {
                             return (
                                 <WidgetOption
-                                    key={widget}
-                                    widget={widget}
-                                    selectedWidgets={selectedWidgets}
+                                    key={widget.name}
+                                    widget={widget.name}
                                 />
                             )
                         })}
@@ -75,13 +88,7 @@ export default function WidgetDropdown({ selectedWidgets }) {
                     <div id="genre-options">
                         <p className="dropdown-heading">Widget Options</p>
                         {filteredWidgets.map((widget) => {
-                            return (
-                                <WidgetOption
-                                    key={widget}
-                                    widget={widget}
-                                    selectedWidgets={selectedWidgets}
-                                />
-                            )
+                            return <WidgetOption key={widget} widget={widget} />
                         })}
                     </div>
                 </div>

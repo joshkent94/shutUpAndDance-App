@@ -40,10 +40,14 @@ const signUp = (req, res) => {
                     pool.query(
                         `INSERT INTO widgets
                                             VALUES ($1, $2)
-                                            RETURNING user_id`,
+                                            RETURNING user_id, widgets`,
                         [
                             data.rows[0].user_id,
-                            [['Most Liked Threads', 'Suggestions', 'My Threads']],
+                            [
+                                { name: 'Most Liked Threads', show: true },
+                                { name: 'Suggestions', show: true },
+                                { name: 'My Threads', show: true },
+                            ]
                         ]
                     ).then((data) => {
                         session.userId = data.rows[0].user_id
@@ -51,11 +55,7 @@ const signUp = (req, res) => {
                             message: `Account created successfully`,
                             id: data.rows[0].user_id,
                             genres: ['chill'],
-                            widgets: [
-                                'Most Liked Threads',
-                                'Suggestions',
-                                'My Threads',
-                            ],
+                            widgets: data.rows[0].widgets
                         })
                     })
                 })
