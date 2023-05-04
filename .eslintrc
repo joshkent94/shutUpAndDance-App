@@ -1,13 +1,23 @@
 {
-    "root": true,
     "parser": "@typescript-eslint/parser",
     "plugins": ["@typescript-eslint"],
     "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/eslint-recommended",
-        "plugin:@typescript-eslint/recommended"
+        "plugin:@typescript-eslint/recommended",
+        "next"
     ],
     "rules": {
-        "@typescript-eslint/no-var-requires": "off"
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off"
+    },
+    "globals": {
+        "window": true,
+        "document": true
+    },
+    "settings": {
+        "next": {
+            "rootDir": "."
+        }
     }
 }

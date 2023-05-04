@@ -1,0 +1,115 @@
+import { useSelector } from 'react-redux'
+import { useEffect, useRef, useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { IconProp } from '@fortawesome/fontawesome-svg-core'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import {
+    hideCheckboxes,
+    showCheckboxes,
+} from '@utils/helperFunctions/toggleCheckboxes'
+import {
+    getSuggestions,
+    selectAccessToken,
+    selectAvailableGenres,
+    selectRefreshToken,
+} from '@utils/state/spotifySlice'
+import { selectGenres, updateGenres } from '@utils/state/userSlice'
+import { useAppDispatch } from '@utils/state/store'
+import GenreOption from './GenreOption'
+
+export default function GenreDropdown({ setLoading }) {
+    const dispatch = useAppDispatch()
+    const genreOptions = useSelector(selectAvailableGenres)
+    const selectedGenres = useSelector(selectGenres)
+    const accessToken = useSelector(selectAccessToken)
+    const refreshToken = useSelector(selectRefreshToken)
+    const [searchTerm, setSearchTerm] = useState('')
+    const firstRender = useRef(true)
+    const faSearchProp = faSearch as IconProp
+
+    const handleSearchTermChange = (e) => {
+        e.preventDefault()
+        setSearchTerm(e.target.value)
+    }
+
+    // get suggestions from Spotify
+    const handleSuggestionSearch = (e) => {
+        e.preventDefault()
+        if (accessToken !== '') {
+            setLoading(true)
+            dispatch(
+                getSuggestions({
+                    accessToken,
+                    refreshToken,
+                    genres: selectedGenres,
+                })
+            ).then(() => setLoading(false))
+        }
+    }
+
+    // calculate selected genres filtered by search term and in alphabetical order
+    const filteredSortedGenres = selectedGenres
+        .slice()
+        .sort()
+        .filter((genre) => {
+            return genre.includes(searchTerm.toLowerCase())
+        })
+
+    // calculate available genres filtered by search term and in alphabetical order
+    const filteredGenres = genreOptions.filter((genre) => {
+        return genre.includes(searchTerm.toLowerCase())
+    })
+
+    // update genres in db whenever selected genres change
+    useEffect(() => {
+        if (firstRender.current) {
+            firstRender.current = false
+            return
+        }
+        dispatch(updateGenres(selectedGenres))
+    }, [dispatch, selectedGenres])
+
+    return (
+        <form>
+            <div id="multiselect">
+                <div className="input-group">
+                    <input
+                        className="form-control"
+                        id="genre-input"
+                        type="search"
+                        placeholder={`Select genres (5 max, ${selectedGenres.length} chosen)`}
+                        aria-label="search genres"
+                        onChange={handleSearchTermChange}
+                        onFocus={showCheckboxes}
+                        onBlur={hideCheckboxes}
+                        autoComplete="off"
+                    />
+                    <div className="input-group-append">
+                        <button
+                            className="btn btn-outline-secondary"
+                            id="search-button"
+                            type="button"
+                            onClick={handleSuggestionSearch}
+                        >
+                            <FontAwesomeIcon icon={faSearchProp} />
+                        </button>
+                    </div>
+                </div>
+                <div id="genres">
+                    <div id="selected-genres">
+                        <p className="dropdown-heading">Selected Genres</p>
+                        {filteredSortedGenres.map((genre) => {
+                            return <GenreOption key={genre} genre={genre} />
+                        })}
+                    </div>
+                    <div id="genre-options">
+                        <p className="dropdown-heading">Genre Options</p>
+                        {filteredGenres.map((genre) => {
+                            return <GenreOption key={genre} genre={genre} />
+                        })}
+                    </div>
+                </div>
+            </div>
+        </form>
+    )
+}

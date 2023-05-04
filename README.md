@@ -7,18 +7,17 @@
 -   [General info](#general-info)
 -   [Screenshots](#screenshots)
 -   [Technologies](#technologies)
--   [Setup](#setup)
 -   [Features](#features)
 -   [Status](#status)
 -   [Contact](#contact)
 
 ## General info
 
-A project to test out my PERN stack developer skills.
+A project to test out my developer skills.
 
 ## Screenshot
 
-![Screenshot of app working](./client/src/assets/in-action.png)
+![Screenshot of app working](./public/assets/in-action.png)
 
 ## Technologies
 
@@ -27,13 +26,8 @@ A project to test out my PERN stack developer skills.
 -   Typescript
 -   React
 -   Redux
--   Express
--   Node.js
+-   NextJS
 -   Postgresql
-
-## Setup
-
-Node is required to work on this app. Clone the repo and run npm install in both the root folder and client folder. Create a postgresql database and run the commands in init.sql file in the server folder to create database schema. Create a .env file in both the root folder and client folder. The one in the root folder should contain database connection details and a session secret, the one in the client folder should contain details to run a react https development server and the Spotify client ID and secret. Lastly, create a file called httpsConfig.ts in the server folder that should contain the credentials to run a https express server.
 
 ## Features
 

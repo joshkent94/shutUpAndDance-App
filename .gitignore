@@ -1,13 +1,5 @@
 # dependencies
 /node_modules
-/client/node_modules
-
-#production
-client/build
-
-#connection
-server/httpsConfig.ts
-dist
 
 # misc
 .DS_Store
@@ -18,4 +10,5 @@ dist
 .env.development
 .env.production
 .env
+.next
 npm-debug.log*

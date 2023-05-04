@@ -1,20 +1,33 @@
 {
     "compilerOptions": {
         "target": "es2016",
-        "module": "commonjs",
+        "module": "esnext",
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
         "strict": true,
+        "skipLibCheck": true,
+        "lib": ["dom", "dom.iterable", "esnext"],
         "allowJs": true,
         "allowSyntheticDefaultImports": true,
         "noFallthroughCasesInSwitch": true,
         "moduleResolution": "node",
         "resolveJsonModule": true,
         "isolatedModules": true,
-        "rootDir": "./",
-        "skipLibCheck": true,
-        "outDir": "./dist",
-        "noImplicitAny": false
+        "noEmit": true,
+        "jsx": "preserve",
+        "rootDir": ".",
+        "noImplicitAny": false,
+        "incremental": true,
+        "baseUrl": ".",
+        "paths": {
+            "@components/*": ["src/components/*"],
+            "@pages/*": ["src/pages*"],
+            "@utils/*": ["src/utils/*"],
+            "@styles/*": ["src/styles/*"],
+            "@db/*": ["src/db/*"],
+            "@assets/*": ["public/assets/*"]
+        }
     },
-    "include": ["./server/", "./server.ts"]
+    "exclude": ["node_modules", "queries/**/*"],
+    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }
