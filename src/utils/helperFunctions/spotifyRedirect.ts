@@ -13,7 +13,7 @@ export const spotifyRedirect = (location?) => {
         ['scope', 'user-read-playback-state user-modify-playback-state'],
         [
             'state',
-            [process.env.NEXT_PUBLIC_SPOTIFY_STATE, location || '/'].toString(),
+            [process.env.NEXT_PUBLIC_SPOTIFY_STATE, location || '/dashboard'].toString(),
         ],
         ['show_dialog', 'true'],
     ]

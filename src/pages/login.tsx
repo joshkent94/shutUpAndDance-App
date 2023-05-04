@@ -18,7 +18,7 @@ export default function LoginPage({ user }) {
     const [password, setPassword] = useState('')
 
     useLayoutEffect(() => {
-        if (user.isLoggedIn) router.replace('/')
+        if (user.isLoggedIn) router.replace('/dashboard')
     })
 
     const updateEmail = (e) => {
