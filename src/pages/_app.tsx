@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import '@styles/App.scss'
 import { useEffect, useState } from 'react'
 import ScreenSizePrompt from '@components/Layout/ScreenSizePrompt'
-
+import { Analytics } from '@vercel/analytics/react'
 declare global {
     interface Window {
         pendo: any
@@ -36,6 +36,7 @@ export default function App({ Component, pageProps }: AppProps) {
                     ) : (
                         <>
                             <Component {...pageProps} />
+                            <Analytics />
                         </>
                     )}
                 </PersistGate>
