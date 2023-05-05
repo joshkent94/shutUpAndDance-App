@@ -30,7 +30,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <>
             <Provider store={store}>
                 <PersistGate loading={null} persistor={persistor}>
-                    <Script src="https://cdn.pendo-voc.pendo-dev.com/agent/static/bed34ce7-a813-425a-5cd9-87d4f07017dd/pendo.js" />
+                    <Script src="https://cdn.pendo.io/agent/static/13d3fddb-5147-458a-690d-f29955f85c01/pendo.js" />
                     {viewportWidth < 992 ? (
                         <ScreenSizePrompt />
                     ) : (

@@ -54,7 +54,7 @@ export default function WidgetDropdown() {
             firstRender.current = false
             return
         }
-        dispatch(updateWidgets(widgets))
+        // dispatch(updateWidgets(widgets))
     }, [dispatch, widgets])
 
     return (
