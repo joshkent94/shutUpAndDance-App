@@ -18,7 +18,7 @@ export default function LoginPage({ user }) {
     const [password, setPassword] = useState('')
 
     useLayoutEffect(() => {
-        if (user.isLoggedIn && document.cookie.includes('shut-up-and-dance')) {
+        if (user.isLoggedIn) {
             router.push('/dashboard')
         }
     })

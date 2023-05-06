@@ -16,10 +16,7 @@ export default function DashboardPage({ user }) {
     const dispatch = useAppDispatch()
 
     useLayoutEffect(() => {
-        if (
-            !user.isLoggedIn ||
-            !document.cookie.includes('shut-up-and-dance')
-        ) {
+        if (!user.isLoggedIn) {
             dispatch(logout()).then(() => {
                 dispatch(resetForumDetails())
                 dispatch(resetSpotifyDetails())

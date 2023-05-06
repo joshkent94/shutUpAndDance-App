@@ -85,7 +85,7 @@ export const requestLogin = createAsyncThunk(
 
 export const logout = createAsyncThunk('user/logout', async () => {
     const response = await fetch(`/api/user/logout`, {
-        method: 'GET',
+        method: 'POST',
         credentials: 'include',
         mode: 'cors',
     })

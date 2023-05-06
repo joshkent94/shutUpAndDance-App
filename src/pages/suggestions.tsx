@@ -38,7 +38,7 @@ export default function SuggestionsPage({ user }) {
     const firstRender = useRef(true)
 
     useLayoutEffect(() => {
-        if (!user.isLoggedIn || !document.cookie.includes('shut-up-and-dance')) {
+        if (!user.isLoggedIn) {
             dispatch(logout()).then(() => {
                 dispatch(resetForumDetails())
                 dispatch(resetSpotifyDetails())
