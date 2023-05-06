@@ -30,7 +30,10 @@ export default function ForumPage({ user }) {
     }
 
     useLayoutEffect(() => {
-        if (!user.isLoggedIn) {
+        if (
+            !user.isLoggedIn ||
+            !document.cookie.includes('shut-up-and-dance')
+        ) {
             dispatch(logout()).then(() => {
                 dispatch(resetForumDetails())
                 dispatch(resetSpotifyDetails())

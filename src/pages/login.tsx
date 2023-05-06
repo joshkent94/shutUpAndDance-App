@@ -18,7 +18,9 @@ export default function LoginPage({ user }) {
     const [password, setPassword] = useState('')
 
     useLayoutEffect(() => {
-        if (user.isLoggedIn) router.replace('/dashboard')
+        if (user.isLoggedIn && document.cookie.includes('shut-up-and-dance')) {
+            router.push('/dashboard')
+        }
     })
 
     const updateEmail = (e) => {

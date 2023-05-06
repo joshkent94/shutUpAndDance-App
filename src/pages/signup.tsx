@@ -22,7 +22,9 @@ export default function SignUpPage({ user }) {
     const [validatedPassword, setValidatedPassword] = useState(null)
 
     useLayoutEffect(() => {
-        if (user.isLoggedIn) router.replace('/dashboard')
+        if (user.isLoggedIn && document.cookie.includes('shut-up-and-dance')) {
+            router.replace('/dashboard')
+        }
     })
 
     const updateFirstName = (e) => {

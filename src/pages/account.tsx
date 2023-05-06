@@ -33,7 +33,7 @@ export default function AccountPage({ user }) {
     const [confirmedPassword, setConfirmedPassword] = useState('')
 
     useLayoutEffect(() => {
-        if (!user.isLoggedIn) {
+        if (!user.isLoggedIn || !document.cookie.includes('shut-up-and-dance')) {
             dispatch(logout()).then(() => {
                 dispatch(resetForumDetails())
                 dispatch(resetSpotifyDetails())

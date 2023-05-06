@@ -31,7 +31,7 @@ async function genres(req: NextApiRequest, res: NextApiResponse) {
                                 VALUES ($1, $2)`,
                     [req.session.userId, req.body]
                 ).then(() => {
-                    res.status(201).send([])
+                    res.status(201).send([{ message: 'Genres updated' }])
                 })
             } else {
                 pool.query(

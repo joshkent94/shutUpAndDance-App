@@ -329,6 +329,10 @@ label {
     color: var(--fourth-colour);
 }
 
+.nav-link:focus {
+    color: var(----primary-colour);
+}
+
 #multiselect {
     width: 320px;
 }

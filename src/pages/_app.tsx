@@ -6,8 +6,11 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { useEffect, useState } from 'react'
 import ScreenSizePrompt from '@components/Layout/ScreenSizePrompt'
 import { Analytics } from '@vercel/analytics/react'
+import { config } from '@fortawesome/fontawesome-svg-core'
+import '@fortawesome/fontawesome-svg-core/styles.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '@utils/globals.scss'
+config.autoAddCss = false
 
 declare global {
     interface Window {
@@ -35,7 +38,7 @@ export default function App({ Component, pageProps }: AppProps) {
                         id="pendo"
                         // @ts-expect-error - force Pendo initialization
                         onLoad={(function () {
-                            if (process.browser) {
+                            if (typeof window !== 'undefined' && window) {
                                 ;(function (apiKey) {
                                     ;(function (p, e, n, d, o) {
                                         let v, w, x, y, z
