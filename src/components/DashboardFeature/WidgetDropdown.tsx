@@ -5,7 +5,7 @@ import {
     hideCheckboxes,
     showCheckboxes,
 } from '@utils/helperFunctions/toggleCheckboxes'
-import { selectWidgets, updateWidgets } from '@utils/state/userSlice'
+import { selectWidgets } from '@utils/state/userSlice'
 import { useAppDispatch } from '@utils/state/store'
 import WidgetOption from './WidgetOption'
 

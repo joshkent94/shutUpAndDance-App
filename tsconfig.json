@@ -23,11 +23,10 @@
             "@components/*": ["src/components/*"],
             "@pages/*": ["src/pages*"],
             "@utils/*": ["src/utils/*"],
-            "@styles/*": ["src/styles/*"],
             "@db/*": ["src/db/*"],
             "@assets/*": ["public/assets/*"]
         }
     },
-    "exclude": ["node_modules", "queries/**/*"],
+    "exclude": ["node_modules"],
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }
