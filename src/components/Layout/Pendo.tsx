@@ -11,7 +11,7 @@ export default function Pendo() {
     const userFirstName = useSelector(selectFirstName)
     const userLastName = useSelector(selectLastName)
 
-    // initialise Pendo if logged in
+    // initialize Pendo if logged in
     useEffect(() => {
         window.pendo?.initialize({
             disableCookies: true,
@@ -19,7 +19,6 @@ export default function Pendo() {
                 id: userEmail,
                 email: userEmail,
                 full_name: `${userFirstName} ${userLastName}`,
-                return_url: 'https://app.shutupanddance.io/dashboard',
             },
             account: {
                 id: userEmail,
