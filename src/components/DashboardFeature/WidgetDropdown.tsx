@@ -5,7 +5,7 @@ import {
     hideCheckboxes,
     showCheckboxes,
 } from '@utils/helperFunctions/toggleCheckboxes'
-import { selectWidgets } from '@utils/state/userSlice'
+import { selectWidgets, updateWidgets } from '@utils/state/userSlice'
 import { useAppDispatch } from '@utils/state/store'
 import WidgetOption from './WidgetOption'
 
@@ -54,7 +54,7 @@ export default function WidgetDropdown() {
             firstRender.current = false
             return
         }
-        // dispatch(updateWidgets(widgets))
+        dispatch(updateWidgets(widgets))
     }, [dispatch, widgets])
 
     return (
