@@ -34,7 +34,7 @@ export default function MusicPlayer() {
                 })
             ),
         {
-            refreshInterval: 1000,
+            refreshInterval: 5000,
             revalidateOnFocus: false,
         }
     )
@@ -72,7 +72,10 @@ export default function MusicPlayer() {
                     key={currentlyPlaying.id || 0}
                 />
                 <PlayerControls
-                    currentlyPlaying={currentlyPlaying}
+                    duration={currentlyPlaying.duration}
+                    position={currentlyPlaying.progress}
+                    isPlaying={currentlyPlaying.isPlaying}
+                    device={currentlyPlaying.device.id}
                     key={currentlyPlaying.progress || 1}
                 />
             </Offcanvas.Body>

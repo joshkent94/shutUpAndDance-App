@@ -783,8 +783,13 @@ label {
     color: var(--fourth-colour) !important;
 }
 
-.MuiSlider-thumb:hover {
-    color: var(--fourth-colour) !important;
+.MuiSlider-thumb {
+    width: 18px !important;
+    height: 18px !important;
+
+    &:hover {
+        color: var(--fourth-colour) !important;
+    }
 }
 
 .player-toggle {
@@ -852,7 +857,7 @@ label {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 0.5rem;
+    padding: 0.2rem 0.5rem;
 }
 
 .lds-ring {

@@ -10,6 +10,7 @@ import FastForwardRounded from '@mui/icons-material/FastForwardRounded'
 import FastRewindRounded from '@mui/icons-material/FastRewindRounded'
 import {
     changeSongPosition,
+    getPlayingSong,
     playNextSong,
     playPreviousSong,
     selectAccessToken,
@@ -19,13 +20,27 @@ import {
 import { useAppDispatch } from '@utils/state/store'
 
 // React component built using Material UI library
-export default function PlayerControls({ currentlyPlaying }) {
+export default function PlayerControls({
+    duration,
+    position,
+    isPlaying,
+    device,
+}) {
     const dispatch = useAppDispatch()
     const accessToken = useSelector(selectAccessToken)
     const refreshToken = useSelector(selectRefreshToken)
-    const duration = currentlyPlaying.duration
-    const [position, setPosition] = useState(currentlyPlaying.progress)
-    const [paused, setPaused] = useState(!currentlyPlaying.isPlaying)
+    const [localPosition, setLocalPosition] = useState(position)
+    const [localIsPlaying, setLocalIsPlaying] = useState(isPlaying)
+
+    // set an interval to update the song position every 100ms
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            if (localIsPlaying && localPosition < duration) {
+                setLocalPosition(localPosition + 0.1)
+            }
+        }, 100)
+        return () => clearInterval(intervalId)
+    }, [localPosition, duration, localIsPlaying, position])
 
     // convert times from seconds to a time format
     const formatTime = (value) => {
@@ -39,91 +54,97 @@ export default function PlayerControls({ currentlyPlaying }) {
         dispatch(
             changeSongPosition({
                 position: value,
-                deviceId: currentlyPlaying.device.id,
+                deviceId: device,
                 accessToken,
                 refreshToken,
             })
         )
-        setPosition(value)
     }
-
-    // set an interval to update the song position every half second
-    useEffect(() => {
-        const intervalId = setInterval(() => {
-            if (!paused) {
-                setPosition(position + 1)
-            }
-        }, 1000)
-
-        return () => clearInterval(intervalId)
-    }, [paused, position])
 
     // set pause state and send call to Spotify
     const togglePlayState = () => {
+        setLocalIsPlaying(!localIsPlaying)
         dispatch(
             togglePlay({
-                paused: paused,
-                deviceId: currentlyPlaying.device.id,
+                paused: !isPlaying,
+                deviceId: device,
                 accessToken,
                 refreshToken,
             })
         )
-        setPaused(!paused)
     }
 
     // send previous call to Spotify
     const playPrevious = () => {
         dispatch(
             playPreviousSong({
-                deviceId: currentlyPlaying.device.id,
+                deviceId: device,
                 accessToken,
                 refreshToken,
             })
         )
+            .unwrap()
+            .then(() => {
+                dispatch(
+                    getPlayingSong({
+                        accessToken,
+                        refreshToken,
+                    })
+                )
+            })
     }
 
     // send next call to Spotify
     const playNext = () => {
         dispatch(
             playNextSong({
-                deviceId: currentlyPlaying.device.id,
+                deviceId: device,
                 accessToken,
                 refreshToken,
             })
         )
+            .unwrap()
+            .then(() => {
+                dispatch(
+                    getPlayingSong({
+                        accessToken,
+                        refreshToken,
+                    })
+                )
+            })
     }
 
     return (
         <Box className="player-controls">
             <Slider
                 aria-label="time-indicator"
-                value={position}
+                value={localPosition}
                 min={0}
-                step={1}
                 max={duration}
-                onChange={setSongPosition}
+                onChange={(_, value) => setLocalPosition(value)}
+                onChangeCommitted={setSongPosition}
                 className="duration-slider"
             />
             <Box className="slider-times">
                 <Typography className="slider-time">
-                    {formatTime(position)}
+                    {formatTime(Math.floor(localPosition))}
                 </Typography>
                 <Typography className="slider-time">
-                    -{formatTime(duration - position)}
+                    -{formatTime(duration - Math.floor(localPosition))}
                 </Typography>
             </Box>
             <Box className="player-buttons">
-                <IconButton aria-label="previous song" onClick={playPrevious}>
+                <IconButton aria-label="previous-song" onClick={playPrevious}>
                     <FastRewindRounded
                         style={{ fontSize: 28 }}
                         htmlColor="white"
                     />
                 </IconButton>
                 <IconButton
-                    aria-label={paused ? 'play' : 'pause'}
+                    aria-label={!localIsPlaying ? 'play' : 'pause'}
                     onClick={togglePlayState}
                 >
-                    {paused ? (
+                    {!localIsPlaying ? (
                         <PlayArrowRounded
                             style={{ fontSize: 28 }}
                             htmlColor="white"
@@ -135,7 +156,7 @@ export default function PlayerControls({ currentlyPlaying }) {
                         />
                     )}
                 </IconButton>
-                <IconButton aria-label="next song" onClick={playNext}>
+                <IconButton aria-label="next-song" onClick={playNext}>
                     <FastForwardRounded
                         style={{ fontSize: 28 }}
                         htmlColor="white"
