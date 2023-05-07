@@ -33,14 +33,6 @@ export default function App({ Component, pageProps }: AppProps) {
 
     return (
         <>
-            <Head>
-                <title>Shut Up And Dance</title>
-                <meta
-                    name="description"
-                    content="Song suggestion and forum designed for music lovers, by music lovers"
-                    key="desc"
-                />
-            </Head>
             <Provider store={store}>
                 <PersistGate loading={null} persistor={persistor}>
                     <Script

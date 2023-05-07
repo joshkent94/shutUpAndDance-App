@@ -8,7 +8,9 @@ export const sortWidgetsByName = (
     namesArray: string[]
 ): Widget[] => {
     const sortedWidgets: Widget[] = []
-    const widgetsNotShown: Widget[] = widgetsArray.filter((widget) => !widget.show)
+    const widgetsNotShown: Widget[] = widgetsArray.filter(
+        (widget) => !widget.show
+    )
 
     // iterate over the namesArray
     for (let i = 0; i < namesArray.length; i++) {

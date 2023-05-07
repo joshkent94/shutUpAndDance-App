@@ -80,9 +80,7 @@ export default function SignUpPage({ user }) {
     return (
         <>
             <Head>
-                <title>
-                    Shut Up And Dance | Sign Up
-                </title>
+                <title>Shut Up And Dance | Sign Up</title>
                 <meta
                     name="description"
                     content="Sign up for our song suggestion and forum site"

@@ -121,7 +121,8 @@ export default function SuggestionsPage({ user }) {
         <>
             <Head>
                 <title>
-                    Suggestions | Get song suggestions based on your favorite genres
+                    Suggestions | Get song suggestions based on your favorite
+                    genres
                 </title>
                 <meta
                     name="description"
