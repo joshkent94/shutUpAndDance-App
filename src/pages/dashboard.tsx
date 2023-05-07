@@ -11,6 +11,7 @@ import { resetForumDetails } from '@utils/state/forumSlice'
 import { resetSpotifyDetails } from '@utils/state/spotifySlice'
 import Pendo from '@components/Layout/Pendo'
 import WidgetDropdown from '@components/DashboardFeature/WidgetDropdown'
+import Head from 'next/head'
 
 const WidgetGrid = React.lazy(
     () => import('@components/DashboardFeature/WidgetGrid')
@@ -31,6 +32,14 @@ export default function DashboardPage({ user }) {
 
     return (
         <>
+            <Head>
+                <title>Dashboard | Select your favourite widgets</title>
+                <meta
+                    name="description"
+                    content="Select your favourite widgets to display on your dashboard for easy access next time you login."
+                    key="desc"
+                />
+            </Head>
             <Pendo />
             <TopNav />
             <div className="main">

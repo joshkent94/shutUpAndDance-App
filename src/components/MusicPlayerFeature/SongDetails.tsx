@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export default function SongDetails({ currentlyPlaying }) {
     return (
-        <div className="player-details animate__animated animate__fadeIn">
+        <div className="player-details">
             <div className="player-image-container">
                 <Image
                     src={currentlyPlaying.images[0].url}

@@ -11,6 +11,7 @@ import sessionOptions from '@utils/helperFunctions/sessionOptions'
 import authCheck from '@utils/helperFunctions/authCheck'
 import { withIronSessionSsr } from 'iron-session/next'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 
 export default function SignUpPage({ user }) {
     const dispatch = useAppDispatch()
@@ -77,88 +78,101 @@ export default function SignUpPage({ user }) {
     }
 
     return (
-        <div id="sign-up">
-            <div id="pre-login-branding">
-                <Image src={Logo} alt="logo" priority />
-                <div id="pre-login-wording">
-                    <h1>Shut Up And Dance</h1>
-                    <h4>For the love of music</h4>
+        <>
+            <Head>
+                <title>
+                    Shut Up And Dance | Sign Up
+                </title>
+                <meta
+                    name="description"
+                    content="Sign up for our song suggestion and forum site"
+                    key="desc"
+                />
+            </Head>
+            <div id="sign-up">
+                <div id="pre-login-branding">
+                    <Image src={Logo} alt="logo" priority />
+                    <div id="pre-login-wording">
+                        <h1>Shut Up And Dance</h1>
+                        <h4>For the love of music</h4>
+                    </div>
+                </div>
+                <div id="pre-login-main">
+                    <h2>Sign Up</h2>
+                    <form id="sign-up-form" onSubmit={handleSignUpRequest}>
+                        <label className="form-element">
+                            First Name
+                            <input
+                                name="first name"
+                                type="text"
+                                placeholder="Josh"
+                                className="form-control sign-up-element"
+                                onChange={updateFirstName}
+                                required
+                            />
+                        </label>
+                        <label className="form-element">
+                            Last Name
+                            <input
+                                name="last name"
+                                type="text"
+                                placeholder="Kent"
+                                className="form-control sign-up-element"
+                                onChange={updateLastName}
+                                required
+                            />
+                        </label>
+                        <label className="form-element">
+                            Email
+                            <input
+                                name="email"
+                                type="email"
+                                placeholder="josh@example.com"
+                                className="form-control sign-up-element"
+                                onChange={updateEmail}
+                                required
+                            />
+                        </label>
+                        <label className="form-element">
+                            Password
+                            <input
+                                name="password"
+                                type="password"
+                                className="form-control sign-up-element"
+                                onChange={updatePassword}
+                                required
+                                autoComplete="new-password"
+                            />
+                            <p className="pre-login-prompt">
+                                1 upper, 1 lower, 1 special char, 1 number, min
+                                8 chars
+                            </p>
+                        </label>
+                        <label className="form-element">
+                            Retype Password
+                            <input
+                                name="retype password"
+                                type="password"
+                                className="form-control sign-up-element"
+                                onChange={updateValidatedPassword}
+                                required
+                            />
+                        </label>
+                        <button
+                            id="sign-up-button"
+                            type="submit"
+                            className="coolBeans"
+                        >
+                            Sign Up
+                        </button>
+                    </form>
+                    <p className="pre-login-prompt">
+                        Already have an account?{' '}
+                        <Link href="/login">Log in</Link>
+                    </p>
                 </div>
             </div>
-            <div id="pre-login-main">
-                <h2>Sign Up</h2>
-                <form id="sign-up-form" onSubmit={handleSignUpRequest}>
-                    <label className="form-element">
-                        First Name
-                        <input
-                            name="first name"
-                            type="text"
-                            placeholder="Josh"
-                            className="form-control sign-up-element"
-                            onChange={updateFirstName}
-                            required
-                        />
-                    </label>
-                    <label className="form-element">
-                        Last Name
-                        <input
-                            name="last name"
-                            type="text"
-                            placeholder="Kent"
-                            className="form-control sign-up-element"
-                            onChange={updateLastName}
-                            required
-                        />
-                    </label>
-                    <label className="form-element">
-                        Email
-                        <input
-                            name="email"
-                            type="email"
-                            placeholder="josh@example.com"
-                            className="form-control sign-up-element"
-                            onChange={updateEmail}
-                            required
-                        />
-                    </label>
-                    <label className="form-element">
-                        Password
-                        <input
-                            name="password"
-                            type="password"
-                            className="form-control sign-up-element"
-                            onChange={updatePassword}
-                            required
-                            autoComplete="new-password"
-                        />
-                        <p className="pre-login-prompt">
-                            1 upper, 1 lower, 1 special char, 1 number, min 8
-                            chars
-                        </p>
-                    </label>
-                    <label className="form-element">
-                        Retype Password
-                        <input
-                            name="retype password"
-                            type="password"
-                            className="form-control sign-up-element"
-                            onChange={updateValidatedPassword}
-                            required
-                        />
-                    </label>
-                    <button
-                        id="sign-up-button"
-                        type="submit"
-                        className="coolBeans"
-                    >
-                        Sign Up
-                    </button>
-                </form>
-                <p className="pre-login-prompt">
-                    Already have an account? <Link href="/login">Log in</Link>
-                </p>
-            </div>
-        </div>
+        </>
     )
 }
 

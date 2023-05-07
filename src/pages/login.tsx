@@ -9,6 +9,7 @@ import Logo from '@assets/inverted-logo.png'
 import { withIronSessionSsr } from 'iron-session/next'
 import authCheck from '@utils/helperFunctions/authCheck'
 import sessionOptions from '@utils/helperFunctions/sessionOptions'
+import Head from 'next/head'
 
 export default function LoginPage({ user }) {
     const dispatch = useAppDispatch()
@@ -51,52 +52,62 @@ export default function LoginPage({ user }) {
     }
 
     return (
-        <div id="login">
-            <div id="pre-login-branding">
-                <Image src={Logo} alt="logo" priority />
-                <div id="pre-login-wording">
-                    <h1>Shut Up And Dance</h1>
-                    <h4>For the love of music</h4>
+        <>
+            <Head>
+                <title>Shut Up And Dance | Log In</title>
+                <meta
+                    name="description"
+                    content="Log in to our song suggestion and forum site"
+                    key="desc"
+                />
+            </Head>
+            <div id="login">
+                <div id="pre-login-branding">
+                    <Image src={Logo} alt="logo" priority />
+                    <div id="pre-login-wording">
+                        <h1>Shut Up And Dance</h1>
+                        <h4>For the love of music</h4>
+                    </div>
+                </div>
+                <div id="pre-login-main">
+                    <h2>Log In</h2>
+                    <form id="login-form" onSubmit={handleLoginSubmit}>
+                        <label className="form-element">
+                            Email
+                            <input
+                                name="email"
+                                type="email"
+                                placeholder="josh@example.com"
+                                className="form-control login-element"
+                                onChange={updateEmail}
+                                required
+                            />
+                        </label>
+                        <label className="form-element">
+                            Password
+                            <input
+                                name="password"
+                                type="password"
+                                className="form-control login-element"
+                                onChange={updatePassword}
+                                required
+                            />
+                        </label>
+                        <button
+                            id="login-button"
+                            type="submit"
+                            className="coolBeans"
+                        >
+                            Log In
+                        </button>
+                    </form>
+                    <p className="pre-login-prompt">
+                        {"Don't have an account? "}
+                        <Link href="/signup">Sign up</Link>
+                    </p>
                 </div>
             </div>
-            <div id="pre-login-main">
-                <h2>Log In</h2>
-                <form id="login-form" onSubmit={handleLoginSubmit}>
-                    <label className="form-element">
-                        Email
-                        <input
-                            name="email"
-                            type="email"
-                            placeholder="josh@example.com"
-                            className="form-control login-element"
-                            onChange={updateEmail}
-                            required
-                        />
-                    </label>
-                    <label className="form-element">
-                        Password
-                        <input
-                            name="password"
-                            type="password"
-                            className="form-control login-element"
-                            onChange={updatePassword}
-                            required
-                        />
-                    </label>
-                    <button
-                        id="login-button"
-                        type="submit"
-                        className="coolBeans"
-                    >
-                        Log In
-                    </button>
-                </form>
-                <p className="pre-login-prompt">
-                    {"Don't have an account? "}
-                    <Link href="/signup">Sign up</Link>
-                </p>
-            </div>
-        </div>
+        </>
     )
 }
 

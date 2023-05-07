@@ -17,6 +17,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import BrowseThreads from '@components/ForumFeature/BrowseThreads'
 import MyThreads from '@components/ForumFeature/MyThreads'
 import NewThread from '@components/ForumFeature/NewThread'
+import Head from 'next/head'
 
 export default function ForumPage({ user }) {
     const dispatch = useAppDispatch()
@@ -40,6 +41,14 @@ export default function ForumPage({ user }) {
 
     return (
         <>
+            <Head>
+                <title>Forum | Browse and create chat threads</title>
+                <meta
+                    name="description"
+                    content="Browse and create chat threads to speak with other like-minded music lovers."
+                    key="desc"
+                />
+            </Head>
             <Pendo />
             <TopNav />
             <div className="main">

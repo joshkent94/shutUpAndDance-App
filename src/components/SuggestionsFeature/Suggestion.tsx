@@ -64,7 +64,7 @@ export default function Suggestion({ track }) {
     }
 
     return (
-        <div className="content-container track animate__animated animate__fadeIn">
+        <div className="content-container track">
             <div className="album-image-container">
                 <Image
                     src={track.images[1].url}

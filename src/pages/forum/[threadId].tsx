@@ -25,6 +25,7 @@ import {
 import { showMessage } from '@utils/helperFunctions/showMessage'
 import { useAppDispatch } from '@utils/state/store'
 import Comment from '@components/ForumFeature/Comment'
+import Head from 'next/head'
 
 export default function ThreadPage({ user }) {
     const dispatch = useAppDispatch()
@@ -115,6 +116,14 @@ export default function ThreadPage({ user }) {
 
     return (
         <>
+            <Head>
+                <title>{threadInfo.title}</title>
+                <meta
+                    name="description"
+                    content="Chat with other like minded music lovers in dedicated forum threads."
+                    key="desc"
+                />
+            </Head>
             <Pendo />
             <TopNav />
             <div className="main">
@@ -128,7 +137,7 @@ export default function ThreadPage({ user }) {
                         <div id="thread-expanded-page">
                             <div
                                 id="thread-heading"
-                                className="content-container animate__animated animate__fadeIn"
+                                className="content-container"
                             >
                                 <div
                                     id="thread-heading-text"
@@ -174,10 +183,7 @@ export default function ThreadPage({ user }) {
                                     </div>
                                 </div>
                             </div>
-                            <div
-                                id="add-new-comment"
-                                className="input-group animate__animated animate__fadeIn"
-                            >
+                            <div id="add-new-comment" className="input-group">
                                 <textarea
                                     id="add-new-comment-textarea"
                                     className="form-control"

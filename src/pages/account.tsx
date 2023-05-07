@@ -20,6 +20,7 @@ import {
     logout,
 } from '@utils/state/userSlice'
 import { useAppDispatch } from '@utils/state/store'
+import Head from 'next/head'
 
 export default function AccountPage({ user }) {
     const dispatch = useAppDispatch()
@@ -116,6 +117,14 @@ export default function AccountPage({ user }) {
 
     return (
         <>
+            <Head>
+                <title>Account | Change your account details</title>
+                <meta
+                    name="description"
+                    content="Change your account details such as email, first name, last name and password."
+                    key="desc"
+                />
+            </Head>
             <Pendo />
             <TopNav />
             <div className="main">

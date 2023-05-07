@@ -40,7 +40,7 @@ export default function NewThread() {
         <div id="new-thread-page">
             <form
                 id="new-thread-form"
-                className="content-container animate__animated animate__fadeIn"
+                className="content-container"
                 onSubmit={handleNewThread}
             >
                 <label className="form-element">

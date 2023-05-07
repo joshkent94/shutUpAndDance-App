@@ -69,7 +69,7 @@ export default function ThreadOverview(props) {
     const threadDate = new Date(thread.timestamp)
 
     return (
-        <div className="content-container thread animate__animated animate__fadeIn">
+        <div className="content-container thread">
             <div className="thread-container">
                 <p className="thread-title">{thread.title}</p>
                 <p className="thread-initial-comment">

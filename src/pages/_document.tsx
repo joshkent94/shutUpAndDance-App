@@ -8,7 +8,7 @@ export default function Document() {
                 <meta name="theme-color" content="#000000" />
                 <meta
                     name="description"
-                    content="Designed for music lovers, by music lovers"
+                    content="Song suggestion and forum designed for music lovers, by music lovers"
                 />
                 <meta
                     name="keywords"

@@ -25,6 +25,7 @@ import { useAppDispatch } from '@utils/state/store'
 import Loading from '@components/Layout/Loading'
 import Suggestion from '@components/SuggestionsFeature/Suggestion'
 import GenreDropdown from '@components/SuggestionsFeature/GenreDropdown'
+import Head from 'next/head'
 
 export default function SuggestionsPage({ user }) {
     const dispatch = useAppDispatch()
@@ -118,6 +119,16 @@ export default function SuggestionsPage({ user }) {
 
     return (
         <>
+            <Head>
+                <title>
+                    Suggestions | Get song suggestions based on your favorite genres
+                </title>
+                <meta
+                    name="description"
+                    content="Select your favorite genres and get song suggestions from Spotify based on your selections."
+                    key="desc"
+                />
+            </Head>
             <Pendo />
             <TopNav />
             <div className="main">

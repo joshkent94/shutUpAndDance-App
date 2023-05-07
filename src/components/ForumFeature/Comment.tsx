@@ -34,7 +34,7 @@ export default function Comment({ comment }) {
     const commentDate = new Date(comment.timestamp)
 
     return (
-        <div className="content-container comment animate__animated animate__fadeIn">
+        <div className="content-container comment">
             <div className="thread-container comment-text">
                 <p>{comment.comment}</p>
             </div>

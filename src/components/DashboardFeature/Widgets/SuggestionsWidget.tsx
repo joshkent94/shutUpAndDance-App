@@ -101,7 +101,7 @@ export default function SuggestionsWidget() {
     }
 
     return (
-        <div className="content-container widget animate__animated animate__fadeIn">
+        <div className="content-container widget">
             <div className="input-group">
                 <h5 className="sub-heading content-container">Suggestions</h5>
                 <div className="input-group-append">

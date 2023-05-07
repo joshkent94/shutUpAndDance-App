@@ -10,6 +10,7 @@ import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '@utils/globals.scss'
+import Head from 'next/head'
 config.autoAddCss = false
 
 declare global {
@@ -32,6 +33,14 @@ export default function App({ Component, pageProps }: AppProps) {
 
     return (
         <>
+            <Head>
+                <title>Shut Up And Dance</title>
+                <meta
+                    name="description"
+                    content="Song suggestion and forum designed for music lovers, by music lovers"
+                    key="desc"
+                />
+            </Head>
             <Provider store={store}>
                 <PersistGate loading={null} persistor={persistor}>
                     <Script

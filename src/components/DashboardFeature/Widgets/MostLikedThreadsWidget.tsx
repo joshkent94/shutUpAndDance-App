@@ -18,7 +18,7 @@ export default function MostLikedThreadsWidget() {
     })
 
     return (
-        <div className="content-container widget animate__animated animate__fadeIn">
+        <div className="content-container widget">
             <h5 className="sub-heading content-container">
                 Most Liked Threads
             </h5>

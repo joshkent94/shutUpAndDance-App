@@ -18,7 +18,7 @@ export default function MyThreadsWidget() {
     })
 
     return (
-        <div className="content-container widget animate__animated animate__fadeIn">
+        <div className="content-container widget">
             <h5 className="sub-heading content-container">My Threads</h5>
             <div className="widget-content">
                 {userThreads.map((thread) => {
