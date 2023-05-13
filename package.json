@@ -9,7 +9,8 @@
         "start": "next start",
         "format": "prettier --write --loglevel silent .",
         "lint": "next lint",
-        "correct": "npm run format && npm run lint"
+        "correct": "npm run format && npm run lint",
+        "postinstall": "prisma generate"
     },
     "dependencies": {
         "@emotion/react": "^11.10.6",

@@ -54,7 +54,6 @@ async function login(req: NextApiRequest, res: NextApiResponse<Data>) {
         })
         req.session.userId = user.id
         await req.session.save()
-        console.log(user)
         res.status(200).send({
             id: user.id,
             firstName: user.first_name,
