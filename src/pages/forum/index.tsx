@@ -51,23 +51,24 @@ export default function ForumPage({ user }) {
             </Head>
             <Pendo />
             <TopNav />
-            <div className="main">
-                <div className="page">
-                    <div className="page-header">
-                        <h5 className="page-header-h5">Forum</h5>
-                        <div id="search" className="input-group">
+            <div className="flex min-h-screen w-full flex-col bg-fifth pt-[3.925rem]">
+                <div className="flex grow flex-col px-8 py-4">
+                    <div className="flex h-[50px] items-center justify-between border-b border-b-third px-4 pb-4">
+                        <h5 className="m-0 text-[1.3rem] font-semibold leading-normal">
+                            Forum
+                        </h5>
+                        <div className="input-group w-[320px]">
                             <input
-                                className="form-control"
+                                className="form-control border border-third px-[0.7rem] py-[0.3rem] text-primary placeholder:text-third focus:border-primary focus:shadow-none"
                                 type="search"
                                 aria-label="search threads"
                                 placeholder="Search"
                                 onChange={handleSearchTermChange}
                                 autoComplete="off"
                             />
-                            <div className="input-group-append">
+                            <div>
                                 <button
-                                    className="btn btn-outline-secondary"
-                                    id="search-button"
+                                    className="btn btn-outline-secondary rounded-bl-none rounded-tl-none border-third bg-secondary text-primary focus:shadow-none"
                                     type="button"
                                 >
                                     <FontAwesomeIcon icon={faSearchProp} />
@@ -75,11 +76,11 @@ export default function ForumPage({ user }) {
                             </div>
                         </div>
                     </div>
-                    <div className="page-content">
-                        <div id="forum-page">
+                    <div className="flex grow flex-col">
+                        <div className="flex grow flex-col">
                             <Tabs
                                 defaultActiveKey="browse-threads"
-                                id="forum-tabs"
+                                className="border-third"
                             >
                                 <Tab
                                     eventKey="browse-threads"

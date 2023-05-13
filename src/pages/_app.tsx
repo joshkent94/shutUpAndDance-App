@@ -1,4 +1,5 @@
 import Script from 'next/script'
+import Head from 'next/head'
 import { Provider } from 'react-redux'
 import type { AppProps } from 'next/app'
 import { persistor, store } from '@utils/state/store'
@@ -9,7 +10,7 @@ import { Analytics } from '@vercel/analytics/react'
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import '@utils/globals.scss'
+import '@utils/globals.css'
 config.autoAddCss = false
 
 declare global {
@@ -88,9 +89,23 @@ export default function App({ Component, pageProps }: AppProps) {
                         })()}
                     />
                     {viewportWidth < 992 ? (
-                        <ScreenSizePrompt />
+                        <>
+                            <Head>
+                                <meta
+                                    name="viewport"
+                                    content="width=device-width, initial-scale=1"
+                                />
+                            </Head>
+                            <ScreenSizePrompt />
+                        </>
                     ) : (
                         <>
+                            <Head>
+                                <meta
+                                    name="viewport"
+                                    content="width=device-width, initial-scale=1"
+                                />
+                            </Head>
                             <Component {...pageProps} />
                             <Analytics debug={false} />
                         </>

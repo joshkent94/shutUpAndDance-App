@@ -3,9 +3,9 @@
  */
 
 export const showCheckboxes = (): void => {
-    const checkboxes = document.getElementById('genres')
+    const checkboxes = document.getElementById('dropdown')
     if (checkboxes) {
-        (checkboxes as HTMLElement).style.display = 'block'
+        (checkboxes as HTMLElement).setAttribute( 'style', 'display: block !important' )
     }
 }
 
@@ -14,8 +14,8 @@ export const showCheckboxes = (): void => {
  */
 
 export const hideCheckboxes = (): void => {
-    const checkboxes = document.getElementById('genres')
-    const labels = document.getElementsByClassName('genre-label')
+    const checkboxes = document.getElementById('dropdown')
+    const labels = document.getElementsByClassName('dropdown-option')
     let isActive = false
     if (labels) {
         for (let i = 0; i < (labels as HTMLCollectionOf<Element>).length; i++) {

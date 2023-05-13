@@ -81,7 +81,7 @@ export default function SuggestionsWidget() {
     let content
     if (suggestions.length === 0) {
         content = (
-            <h5 className="sub-heading">
+            <h5 className="m-auto text-[1.1rem] font-semibold">
                 Please select at least one genre to see suggestions.
             </h5>
         )
@@ -101,13 +101,14 @@ export default function SuggestionsWidget() {
     }
 
     return (
-        <div className="content-container widget">
-            <div className="input-group">
-                <h5 className="sub-heading content-container">Suggestions</h5>
-                <div className="input-group-append">
+        <div className="widget flex h-full w-full flex-col rounded-[0.2rem] border border-third bg-fifth bg-none p-2">
+            <div className="input-group mb-2 flex w-full">
+                <h5 className="widget-title grow rounded-[0.2rem] rounded-br-none rounded-tr-none border border-third bg-secondary p-2 text-[1.1rem] font-semibold">
+                    Suggestions
+                </h5>
+                <div>
                     <button
-                        className="btn btn-outline-secondary"
-                        id="search-button"
+                        className="btn btn-outline-secondary h-full rounded-bl-none rounded-tl-none border-third bg-secondary text-primary focus:shadow-none"
                         type="button"
                         onClick={handleSuggestionSearch}
                     >
@@ -115,7 +116,7 @@ export default function SuggestionsWidget() {
                     </button>
                 </div>
             </div>
-            <div className="widget-content">
+            <div className="flex grow flex-col overflow-y-auto">
                 {loading && <Loading />}
                 {!loading && content}
             </div>

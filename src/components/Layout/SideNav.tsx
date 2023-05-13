@@ -3,24 +3,40 @@ import Link from 'next/link'
 
 export default function SideNav({ show }) {
     return (
-        <Offcanvas show={show} scroll={true} backdrop={false}>
-            <Offcanvas.Header>
-                <Offcanvas.Title>Navigation</Offcanvas.Title>
+        <Offcanvas
+            show={show}
+            scroll={true}
+            backdrop={false}
+            className="mt-[3.925rem] w-96 border border-third bg-fifth"
+        >
+            <Offcanvas.Header className="mx-6 mt-4 h-[50px] border-b border-b-third p-0 pb-4">
+                <Offcanvas.Title className="font-semibold">
+                    Navigation
+                </Offcanvas.Title>
             </Offcanvas.Header>
-            <Offcanvas.Body>
-                <Nav id="side-nav">
-                    <Nav.Item>
-                        <Link href="/dashboard" className="nav-link">
+            <Offcanvas.Body className="px-6 py-4">
+                <Nav className="flex-col">
+                    <Nav.Item className="py-[0.2rem] font-semibold">
+                        <Link
+                            href="/dashboard"
+                            className="nav-link px-0 text-primary hover:text-fourth"
+                        >
                             Dashboard
                         </Link>
                     </Nav.Item>
-                    <Nav.Item>
-                        <Link href="/suggestions" className="nav-link">
+                    <Nav.Item className="py-[0.2rem] font-semibold">
+                        <Link
+                            href="/suggestions"
+                            className="nav-link px-0 text-primary hover:text-fourth"
+                        >
                             Suggestions
                         </Link>
                     </Nav.Item>
-                    <Nav.Item>
-                        <Link href="/forum" className="nav-link">
+                    <Nav.Item className="py-[0.2rem] font-semibold">
+                        <Link
+                            href="/forum"
+                            className="nav-link px-0 text-primary hover:text-fourth"
+                        >
                             Forum
                         </Link>
                     </Nav.Item>

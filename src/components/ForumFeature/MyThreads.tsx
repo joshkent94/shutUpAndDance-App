@@ -34,5 +34,7 @@ export default function MyThreads({ searchTerm }) {
         })
     }
 
-    return <div id="my-threads-page">{content}</div>
+    return (
+        <div className="flex h-full flex-col items-center pt-4">{content}</div>
+    )
 }

@@ -82,7 +82,7 @@ export default function ThreadPage({ user }) {
                     dispatch(getComments(threadId))
                 })
         } else {
-            showMessage('Comment can not be blank')
+            showMessage('Comment cannot be blank')
         }
     }
 
@@ -90,13 +90,19 @@ export default function ThreadPage({ user }) {
     let likeIcon
     if (threadInfo.likes.includes(userId)) {
         likeIcon = (
-            <button className="browse-threads-icon" onClick={likeToggle}>
+            <button
+                className="border-none bg-none align-middle text-[1.3rem] text-primary"
+                onClick={likeToggle}
+            >
                 <i className="bi bi-hand-thumbs-up-fill"></i>
             </button>
         )
     } else {
         likeIcon = (
-            <button className="browse-threads-icon" onClick={likeToggle}>
+            <button
+                className="border-none bg-none align-middle text-[1.3rem] text-primary"
+                onClick={likeToggle}
+            >
                 <i className="bi bi-hand-thumbs-up"></i>
             </button>
         )
@@ -126,38 +132,40 @@ export default function ThreadPage({ user }) {
             </Head>
             <Pendo />
             <TopNav />
-            <div className="main">
-                <div className="page">
-                    <div className="page-header">
-                        <h5 className="page-header-h5">
-                            <Link href="/forum">Forum</Link> {'>'} Thread
+            <div className="flex min-h-screen w-full flex-col bg-fifth pt-[3.925rem]">
+                <div className="flex grow flex-col px-8 py-4">
+                    <div className="flex h-[50px] items-center justify-between border-b border-b-third px-4 pb-4">
+                        <h5 className="m-0 text-[1.3rem] font-semibold leading-normal">
+                            <Link
+                                href="/forum"
+                                className="text-primary hover:text-fourth"
+                            >
+                                Forum
+                            </Link>{' '}
+                            {'>'} Thread
                         </h5>
                     </div>
-                    <div className="page-content">
-                        <div id="thread-expanded-page">
-                            <div
-                                id="thread-heading"
-                                className="content-container"
-                            >
-                                <div
-                                    id="thread-heading-text"
-                                    className="thread-container"
-                                >
-                                    <p id="thread-title-text">
+                    <div className="flex grow flex-col">
+                        <div className="mt-4 flex grow flex-col items-center">
+                            <div className="mb-[0.7rem] flex h-fit min-h-[150px] w-full items-center rounded-[0.2rem] border border-third bg-secondary p-2">
+                                <div className="my-2 flex h-[90%] min-h-[90%] w-4/5 flex-col justify-center border-r border-r-third px-[0.8rem]">
+                                    <p className="m-0 pb-2 text-[1.2rem] font-bold">
                                         {threadInfo.title}
                                     </p>
-                                    <p>{threadInfo.initialComment}</p>
+                                    <p className="m-0">
+                                        {threadInfo.initialComment}
+                                    </p>
                                 </div>
-                                <div className="thread-container">
-                                    <p>
-                                        <span className="thread-label">
+                                <div className="flex h-[90%] w-1/5 flex-col justify-center px-[0.8rem]">
+                                    <p className="m-0">
+                                        <span className="font-bold">
                                             Created by:
                                         </span>{' '}
                                         {threadInfo.firstName}{' '}
                                         {threadInfo.lastName}
                                     </p>
-                                    <p>
-                                        <span className="thread-label">
+                                    <p className="m-0">
+                                        <span className="font-bold">
                                             Created on:
                                         </span>{' '}
                                         {threadDate.toLocaleString('default', {
@@ -166,27 +174,26 @@ export default function ThreadPage({ user }) {
                                         {threadDate.getUTCDate()}{' '}
                                         {threadDate.getUTCFullYear()}
                                     </p>
-                                    <p>
-                                        <span className="thread-label">
+                                    <p className="m-0">
+                                        <span className="font-bold">
                                             Likes:
                                         </span>{' '}
                                         {threadInfo.likes.length}
                                     </p>
-                                    <p>
-                                        <span className="thread-label">
+                                    <p className="m-0">
+                                        <span className="font-bold">
                                             Comments:
                                         </span>{' '}
                                         {comments.length}
                                     </p>
-                                    <div className="icon-section">
+                                    <div className="flex items-center justify-evenly pt-[0.2rem]">
                                         {likeIcon}
                                     </div>
                                 </div>
                             </div>
-                            <div id="add-new-comment" className="input-group">
+                            <div className="input-group mb-8">
                                 <textarea
-                                    id="add-new-comment-textarea"
-                                    className="form-control"
+                                    className="form-control rounded-[0.2rem] rounded-br-none rounded-tr-none placeholder:text-third focus:border-primary focus:shadow-none"
                                     placeholder="Add a comment..."
                                     onChange={handleCommentChange}
                                     value={newComment}
@@ -194,9 +201,8 @@ export default function ThreadPage({ user }) {
                                 />
                                 <div className="input-group-append">
                                     <button
-                                        className="btn btn-outline-secondary"
+                                        className="btn btn-outline-secondary z-0 h-full rounded-[0.2rem] rounded-bl-none rounded-tl-none border border-third bg-secondary text-[1.2rem] text-primary focus:shadow-none"
                                         type="submit"
-                                        id="submit-comment"
                                         onClick={postComment}
                                     >
                                         <FontAwesomeIcon

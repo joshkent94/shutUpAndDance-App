@@ -53,13 +53,19 @@ export default function ThreadOverview(props) {
     let likeIcon
     if (thread.likes.includes(userId)) {
         likeIcon = (
-            <button className="browse-threads-icon" onClick={likeToggle}>
+            <button
+                className="border-none bg-none align-middle text-[1.3rem] text-primary"
+                onClick={likeToggle}
+            >
                 <i className="bi bi-hand-thumbs-up-fill"></i>
             </button>
         )
     } else {
         likeIcon = (
-            <button className="browse-threads-icon" onClick={likeToggle}>
+            <button
+                className="border-none bg-none align-middle text-[1.3rem] text-primary"
+                onClick={likeToggle}
+            >
                 <i className="bi bi-hand-thumbs-up"></i>
             </button>
         )
@@ -69,37 +75,37 @@ export default function ThreadOverview(props) {
     const threadDate = new Date(thread.timestamp)
 
     return (
-        <div className="content-container thread">
-            <div className="thread-container">
-                <p className="thread-title">{thread.title}</p>
-                <p className="thread-initial-comment">
-                    {thread.initialComment}
+        <div className="thread mb-[0.7rem] flex h-[160px] w-full items-center rounded-[0.2rem] border border-third bg-secondary p-2 text-primary">
+            <div className="thread-container my-2 flex h-[90%] min-h-[90%] w-4/5 flex-col justify-center border-r border-r-third px-[0.8rem]">
+                <p className="m-0 overflow-hidden text-ellipsis whitespace-nowrap pb-2 text-[1.2rem] font-bold">
+                    {thread.title}
                 </p>
+                <p className="m-0 line-clamp-3">{thread.initialComment}</p>
             </div>
-            <div className="thread-container thread-sub-info">
-                <p>
-                    <span className="thread-label">Created by:</span>{' '}
+            <div className="thread-container flex h-[90%] w-1/5 flex-col justify-center px-[0.8rem]">
+                <p className="m-0 overflow-hidden text-ellipsis whitespace-nowrap">
+                    <span className="font-bold">Created by:</span>{' '}
                     {thread.firstName} {thread.lastName}
                 </p>
-                <p>
-                    <span className="thread-label">Created on:</span>{' '}
+                <p className="m-0 overflow-hidden text-ellipsis whitespace-nowrap">
+                    <span className="font-bold">Created on:</span>{' '}
                     {threadDate.toLocaleString('default', { month: 'short' })}{' '}
                     {threadDate.getUTCDate()} {threadDate.getUTCFullYear()}
                 </p>
-                <p>
-                    <span className="thread-label">Likes:</span>{' '}
+                <p className="m-0 overflow-hidden text-ellipsis whitespace-nowrap">
+                    <span className="font-bold">Likes:</span>{' '}
                     {thread.likes.length}
                 </p>
-                <p>
-                    <span className="thread-label">Comments:</span>{' '}
+                <p className="m-0 overflow-hidden text-ellipsis whitespace-nowrap">
+                    <span className="font-bold">Comments:</span>{' '}
                     {thread.numberOfComments}
                 </p>
-                <div className="icon-section">
+                <div className="flex items-center justify-evenly pt-[0.2rem]">
                     {likeIcon}
                     <Link href={`/forum/${threadId}`}>
                         <FontAwesomeIcon
                             icon={faBookOpenProp}
-                            className="browse-threads-icon"
+                            className="border-none bg-none align-middle text-[1.3rem] text-primary"
                         />
                     </Link>
                 </div>

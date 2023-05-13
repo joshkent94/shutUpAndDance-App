@@ -42,14 +42,16 @@ export default function DashboardPage({ user }) {
             </Head>
             <Pendo />
             <TopNav />
-            <div className="main">
-                <div className="page">
-                    <div className="page-header">
-                        <h5 className="page-header-h5">Dashboard</h5>
+            <div className="flex min-h-screen w-full flex-col bg-fifth pt-[3.925rem]">
+                <div className="flex grow flex-col px-8 py-4">
+                    <div className="flex h-[50px] items-center justify-between border-b border-b-third px-4 pb-4">
+                        <h5 className="m-0 text-[1.3rem] font-semibold leading-normal">
+                            Dashboard
+                        </h5>
                         <WidgetDropdown />
                     </div>
-                    <div className="page-content">
-                        <div id="dashboard-page">
+                    <div className="flex grow flex-col">
+                        <div className="flex min-h-full">
                             {!isSSR && (
                                 <React.Suspense fallback={<div />}>
                                     <WidgetGrid />

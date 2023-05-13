@@ -61,49 +61,63 @@ export default function LoginPage({ user }) {
                     key="desc"
                 />
             </Head>
-            <div id="login">
-                <div id="pre-login-branding">
-                    <Image src={Logo} alt="logo" priority />
-                    <div id="pre-login-wording">
-                        <h1>Shut Up And Dance</h1>
-                        <h4>For the love of music</h4>
+            <div className="flex h-screen w-full">
+                <div className="flex w-1/4 flex-col justify-between bg-rapper bg-cover bg-scroll bg-center bg-no-repeat p-4 text-secondary">
+                    <Image
+                        src={Logo}
+                        alt="logo"
+                        priority
+                        className="mb-40 h-10 w-10"
+                    />
+                    <div className="mb-auto mt-auto">
+                        <h1 className="text-4xl font-medium">
+                            Shut Up And Dance
+                        </h1>
+                        <h4 className="text-3xl">For the love of music</h4>
                     </div>
                 </div>
-                <div id="pre-login-main">
-                    <h2>Log In</h2>
-                    <form id="login-form" onSubmit={handleLoginSubmit}>
-                        <label className="form-element">
+                <div className="flex w-3/4 flex-col items-center justify-center">
+                    <h2 className="mb-10 text-3xl font-semibold">Log In</h2>
+                    <form
+                        className="flex flex-col items-center font-semibold"
+                        onSubmit={handleLoginSubmit}
+                    >
+                        <label className="mb-8 font-semibold">
                             Email
                             <input
                                 name="email"
                                 type="email"
                                 placeholder="josh@example.com"
-                                className="form-control login-element"
+                                className="form-control mt-4 w-[400px] text-primary placeholder:text-third focus:border-primary focus:shadow-none"
                                 onChange={updateEmail}
                                 required
                             />
                         </label>
-                        <label className="form-element">
+                        <label className="mb-8 font-semibold">
                             Password
                             <input
                                 name="password"
                                 type="password"
-                                className="form-control login-element"
+                                className="form-control mt-4 w-[400px] text-primary placeholder:text-third focus:border-primary focus:shadow-none"
                                 onChange={updatePassword}
                                 required
                             />
                         </label>
                         <button
-                            id="login-button"
                             type="submit"
-                            className="coolBeans"
+                            className="coolBeans mb-12 mt-4 w-40 bg-primary text-secondary after:bg-secondary hover:text-primary focus-visible:outline-none"
                         >
                             Log In
                         </button>
                     </form>
-                    <p className="pre-login-prompt">
+                    <p className="text-[0.9rem] font-normal text-third">
                         {"Don't have an account? "}
-                        <Link href="/signup">Sign up</Link>
+                        <Link
+                            href="/signup"
+                            className="text-primary hover:underline focus-visible:outline-none"
+                        >
+                            Sign up
+                        </Link>
                     </p>
                 </div>
             </div>

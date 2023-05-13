@@ -3,7 +3,7 @@ import { pool } from '@db/connectionConfig'
 import sanitizeHtml from 'sanitize-html'
 
 export default function getThreads(req: NextApiRequest, res: NextApiResponse) {
-    const cleanSearch = sanitizeHtml(req.query).toLowerCase()
+    const cleanSearch = sanitizeHtml(req.query.searchTerm).toLowerCase()
     pool.query(
         `SELECT threads.id, threads.date_time, threads.title, threads.initial_comment, threads.likes, t1.first_name, t1.last_name, COALESCE(t2.number_of_comments, 0) AS number_of_comments
                 FROM threads

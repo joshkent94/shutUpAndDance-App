@@ -19,13 +19,19 @@ export default function Comment({ comment }) {
     let likeIcon
     if (comment.likes.includes(userId)) {
         likeIcon = (
-            <button className="browse-threads-icon" onClick={likeToggle}>
+            <button
+                className="border-none bg-none align-middle text-[1.3rem] text-primary"
+                onClick={likeToggle}
+            >
                 <i className="bi bi-hand-thumbs-up-fill"></i>
             </button>
         )
     } else {
         likeIcon = (
-            <button className="browse-threads-icon" onClick={likeToggle}>
+            <button
+                className="border-none bg-none align-middle text-[1.3rem] text-primary"
+                onClick={likeToggle}
+            >
                 <i className="bi bi-hand-thumbs-up"></i>
             </button>
         )
@@ -34,25 +40,27 @@ export default function Comment({ comment }) {
     const commentDate = new Date(comment.timestamp)
 
     return (
-        <div className="content-container comment">
-            <div className="thread-container comment-text">
-                <p>{comment.comment}</p>
+        <div className="comment mb-[0.7rem] flex h-fit w-full items-center rounded-[0.2rem] border border-third bg-secondary p-2">
+            <div className="my-2 flex h-[90%] min-h-[90%] w-4/5 flex-col justify-center border-r border-r-third px-[0.8rem]">
+                <p className="m-0">{comment.comment}</p>
             </div>
-            <div className="thread-container">
-                <p>
-                    <span className="thread-label">Commented by:</span>{' '}
+            <div className="flex h-[90%] w-1/5 flex-col justify-center px-[0.8rem]">
+                <p className="m-0">
+                    <span className="font-bold">Commented by:</span>{' '}
                     {comment.firstName} {comment.lastName}
                 </p>
-                <p>
-                    <span className="thread-label">Commented on:</span>{' '}
+                <p className="m-0">
+                    <span className="font-bold">Commented on:</span>{' '}
                     {commentDate.toLocaleString('default', { month: 'short' })}{' '}
                     {commentDate.getUTCDate()} {commentDate.getUTCFullYear()}
                 </p>
-                <p>
-                    <span className="thread-label">Likes:</span>{' '}
+                <p className="m-0">
+                    <span className="font-bold">Likes:</span>{' '}
                     {comment.likes.length}
                 </p>
-                <div className="icon-section">{likeIcon}</div>
+                <div className="flex items-center justify-evenly pt-[0.2rem]">
+                    {likeIcon}
+                </div>
             </div>
         </div>
     )

@@ -15,16 +15,16 @@ export default function ScreenSizePrompt() {
                     key="desc"
                 />
             </Head>
-            <div id="screen-size-prompt-page">
-                <Image src={Logo} alt="logo" id="logo" priority />
-                <h3 id="prompt">
+            <div className="flex flex-col items-center justify-between p-8">
+                <Image src={Logo} alt="logo" priority className="h-20 w-20" />
+                <h3 className="mt-8 w-11/12 text-center text-2xl">
                     Please access Shut Up And Dance on a larger screen, or
                     alternatively, you can download our mobile app.
                 </h3>
-                <p id="with-love">
-                    <span>With </span>
+                <p className="mt-5 flex items-center">
+                    <span className="px-1">With </span>
                     <FontAwesomeIcon icon={faHeart} height={18} fixedWidth />
-                    <span> from Shut Up And Dance Ltd.</span>
+                    <span className="px-1"> from Shut Up And Dance Ltd.</span>
                 </p>
             </div>
         </>

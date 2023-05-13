@@ -7,8 +7,8 @@ export default function Footer() {
     const faHeartProp = faHeart as IconProp
 
     return (
-        <div id="footer">
-            <p id="footer-message">
+        <div className="mt-auto bg-fifth px-8 pb-6 pt-2">
+            <p className="m-0 text-[0.9rem] font-normal">
                 Made with <FontAwesomeIcon icon={faHeartProp} /> by Shut Up And
                 Dance Ltd. <FontAwesomeIcon icon={faCopyrightProp} /> All rights
                 reserved.

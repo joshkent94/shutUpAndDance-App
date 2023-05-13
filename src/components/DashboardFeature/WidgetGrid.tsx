@@ -22,7 +22,7 @@ export default function WidgetGrid() {
     let content
     if (widgets.length === 0) {
         content = (
-            <h5 className="sub-heading">
+            <h5 className="m-auto text-[1.1rem] font-semibold">
                 Please select at least one widget for your dashboard.
             </h5>
         )

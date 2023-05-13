@@ -40,5 +40,7 @@ export default function BrowseThreads({ searchTerm }) {
         })
     }
 
-    return <div id="browse-threads-page">{content}</div>
+    return (
+        <div className="flex h-full flex-col items-center pt-4">{content}</div>
+    )
 }

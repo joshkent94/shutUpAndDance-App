@@ -127,81 +127,82 @@ export default function AccountPage({ user }) {
             </Head>
             <Pendo />
             <TopNav />
-            <div className="main">
-                <div className="page">
-                    <div className="page-header">
-                        <h5 className="page-header-h5">My Account</h5>
+            <div className="flex min-h-screen w-full flex-col bg-fifth pt-[3.925rem]">
+                <div className="flex grow flex-col px-8 py-4">
+                    <div className="flex h-[50px] items-center justify-between border-b border-b-third px-4 pb-4">
+                        <h5 className="m-0 text-[1.3rem] font-semibold leading-normal">
+                            My Account
+                        </h5>
                     </div>
-                    <div className="page-content">
-                        <div id="account-page" className="content-container">
+                    <div className="flex grow flex-col">
+                        <div className="mt-4 flex grow flex-col rounded-[0.2rem] border border-third bg-secondary p-2">
                             <form
-                                id="account-form"
+                                className="mt-6 flex grow flex-col items-center justify-center"
                                 onSubmit={handleDetailsSave}
                             >
-                                <label className="form-element">
+                                <label className="mb-8 font-semibold">
                                     First Name
                                     <input
                                         name="first name"
                                         type="text"
                                         value={newFirstName}
-                                        className="form-control sign-up-element"
+                                        className="form-control mt-4 w-[400px] text-primary placeholder:text-third focus:border-primary focus:shadow-none"
                                         onChange={handleFirstNameChange}
                                         required
                                     />
                                 </label>
-                                <label className="form-element">
+                                <label className="mb-8 font-semibold">
                                     Last Name
                                     <input
                                         name="last name"
                                         type="text"
                                         value={newLastName}
-                                        className="form-control sign-up-element"
+                                        className="form-control mt-4 w-[400px] text-primary placeholder:text-third focus:border-primary focus:shadow-none"
                                         onChange={handleLastNameChange}
                                         required
                                     />
                                 </label>
-                                <label className="form-element">
+                                <label className="mb-8 font-semibold">
                                     Email
                                     <input
                                         name="email"
                                         type="email"
                                         value={newEmail}
-                                        className="form-control sign-up-element"
+                                        className="form-control mt-4 w-[400px] text-primary placeholder:text-third focus:border-primary focus:shadow-none"
                                         onChange={handleEmailChange}
                                         required
                                     />
                                 </label>
-                                <label className="form-element">
+                                <label className="mb-8 font-semibold">
                                     Reset Password
                                     <input
                                         name="password"
                                         type="password"
                                         id="password-input"
-                                        className="form-control sign-up-element"
+                                        className="form-control mt-4 w-[400px] text-primary placeholder:text-third focus:border-primary focus:shadow-none"
                                         placeholder="Optional"
                                         onChange={handlePasswordChange}
                                         autoComplete="new-password"
                                     />
-                                    <p className="pre-login-prompt">
+                                    <p className="mb-0 mt-2 text-[0.9rem] font-normal text-third">
                                         1 upper, 1 lower, 1 special char, 1
                                         number, min 8 chars
                                     </p>
                                 </label>
-                                <label className="form-element">
+                                <label className="mb-8 font-semibold">
                                     Confirm New Password
                                     <input
                                         name="retype password"
                                         type="password"
                                         id="confirm-password-input"
-                                        className="form-control sign-up-element"
+                                        className="form-control mt-4 w-[400px] text-primary placeholder:text-third focus:border-primary focus:shadow-none"
                                         placeholder="Optional"
                                         onChange={handleConfirmedPasswordChange}
                                     />
                                 </label>
 
                                 <button
-                                    id="save-details-button"
-                                    className="coolBeans"
+                                    className="coolBeans mb-12 mt-4 w-40 bg-primary text-secondary after:bg-secondary hover:text-primary focus-visible:outline-none"
                                     type="submit"
                                 >
                                     Save

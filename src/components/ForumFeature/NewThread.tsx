@@ -37,28 +37,26 @@ export default function NewThread() {
     }
 
     return (
-        <div id="new-thread-page">
+        <div className="flex h-full flex-col pt-4">
             <form
-                id="new-thread-form"
-                className="content-container"
+                className="flex grow flex-col items-center justify-center rounded-[0.2rem] border border-third bg-secondary p-2"
                 onSubmit={handleNewThread}
             >
-                <label className="form-element">
+                <label className="mb-8 font-semibold">
                     Title
                     <input
-                        className="form-control sign-up-element new-thread-element"
+                        className="form-control mt-4 w-[800px] text-primary placeholder:text-third focus:border-primary focus:shadow-none"
                         type="text"
-                        id="thread-title"
                         placeholder="Title"
                         onChange={handleTitleChange}
+                        maxLength={255}
                         required
                     />
                 </label>
-                <label className="form-element">
+                <label className="mb-8 font-semibold">
                     Comment
                     <textarea
-                        className="form-control sign-up-element new-thread-element"
-                        id="thread-comment"
+                        className="form-control mt-4 h-[300px] w-[800px] text-primary placeholder:text-third focus:border-primary focus:shadow-none"
                         placeholder="What's on your mind..."
                         onChange={handleCommentChange}
                         required
@@ -66,8 +64,7 @@ export default function NewThread() {
                 </label>
 
                 <button
-                    className="coolBeans"
-                    id="create-thread-button"
+                    className="coolBeans mb-12 mt-4 w-48 bg-primary text-secondary after:bg-secondary hover:text-primary focus-visible:outline-none"
                     type="submit"
                 >
                     Create Thread

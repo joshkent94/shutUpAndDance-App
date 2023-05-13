@@ -87,86 +87,100 @@ export default function SignUpPage({ user }) {
                     key="desc"
                 />
             </Head>
-            <div id="sign-up">
-                <div id="pre-login-branding">
-                    <Image src={Logo} alt="logo" priority />
-                    <div id="pre-login-wording">
-                        <h1>Shut Up And Dance</h1>
-                        <h4>For the love of music</h4>
+            <div className="flex h-screen w-full">
+                <div className="flex w-1/4 flex-col justify-between bg-rapper bg-cover bg-scroll bg-center bg-no-repeat p-4 text-secondary">
+                    <Image
+                        src={Logo}
+                        alt="logo"
+                        priority
+                        className="mb-40 h-10 w-10"
+                    />
+                    <div className="mb-auto mt-auto">
+                        <h1 className="text-4xl font-medium">
+                            Shut Up And Dance
+                        </h1>
+                        <h4 className="text-3xl">For the love of music</h4>
                     </div>
                 </div>
-                <div id="pre-login-main">
-                    <h2>Sign Up</h2>
-                    <form id="sign-up-form" onSubmit={handleSignUpRequest}>
-                        <label className="form-element">
+                <div className="flex w-3/4 flex-col items-center justify-center">
+                    <h2 className="mb-10 text-3xl font-semibold">Sign Up</h2>
+                    <form
+                        className="flex flex-col items-center font-semibold"
+                        onSubmit={handleSignUpRequest}
+                    >
+                        <label className="mb-8 font-semibold">
                             First Name
                             <input
                                 name="first name"
                                 type="text"
                                 placeholder="Josh"
-                                className="form-control sign-up-element"
+                                className="form-control mt-4 w-[400px] text-primary placeholder:text-third focus:border-primary focus:shadow-none"
                                 onChange={updateFirstName}
                                 required
                             />
                         </label>
-                        <label className="form-element">
+                        <label className="mb-8 font-semibold">
                             Last Name
                             <input
                                 name="last name"
                                 type="text"
                                 placeholder="Kent"
-                                className="form-control sign-up-element"
+                                className="form-control mt-4 w-[400px] text-primary placeholder:text-third focus:border-primary focus:shadow-none"
                                 onChange={updateLastName}
                                 required
                             />
                         </label>
-                        <label className="form-element">
+                        <label className="mb-8 font-semibold">
                             Email
                             <input
                                 name="email"
                                 type="email"
                                 placeholder="josh@example.com"
-                                className="form-control sign-up-element"
+                                className="form-control mt-4 w-[400px] text-primary placeholder:text-third focus:border-primary focus:shadow-none"
                                 onChange={updateEmail}
                                 required
                             />
                         </label>
-                        <label className="form-element">
+                        <label className="mb-8 font-semibold">
                             Password
                             <input
                                 name="password"
                                 type="password"
-                                className="form-control sign-up-element"
+                                className="form-control mt-4 w-[400px] text-primary placeholder:text-third focus:border-primary focus:shadow-none"
                                 onChange={updatePassword}
                                 required
                                 autoComplete="new-password"
                             />
-                            <p className="pre-login-prompt">
+                            <p className="mb-0 mt-2 text-[0.9rem] font-normal text-third">
                                 1 upper, 1 lower, 1 special char, 1 number, min
                                 8 chars
                             </p>
                         </label>
-                        <label className="form-element">
+                        <label className="mb-8 font-semibold">
                             Retype Password
                             <input
                                 name="retype password"
                                 type="password"
-                                className="form-control sign-up-element"
+                                className="form-control mt-4 w-[400px] text-primary placeholder:text-third focus:border-primary focus:shadow-none"
                                 onChange={updateValidatedPassword}
                                 required
                             />
                         </label>
                         <button
-                            id="sign-up-button"
                             type="submit"
-                            className="coolBeans"
+                            className="coolBeans mb-12 mt-4 w-40 bg-primary text-secondary after:bg-secondary hover:text-primary focus-visible:outline-none"
                         >
                             Sign Up
                         </button>
                     </form>
-                    <p className="pre-login-prompt">
-                        Already have an account?{' '}
-                        <Link href="/login">Log in</Link>
+                    <p className="text-[0.9rem] font-normal text-third">
+                        {'Already have an account? '}
+                        <Link
+                            href="/login"
+                            className="text-primary hover:underline focus-visible:outline-none"
+                        >
+                            Log in
+                        </Link>
                     </p>
                 </div>
             </div>

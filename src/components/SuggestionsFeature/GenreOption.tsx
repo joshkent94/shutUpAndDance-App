@@ -12,9 +12,12 @@ export default function GenreOption(props) {
     }
 
     return (
-        <label htmlFor={genre} className="genre-label">
+        <label
+            htmlFor={genre}
+            className="dropdown-option flex h-[1.8rem] items-center hover:cursor-pointer hover:bg-fifth hover:text-primary"
+        >
             <input
-                className="genre-checkbox"
+                className="relative ml-[0.8rem] mr-4 box-border inline-block appearance-none rounded-[3px] border border-third p-[7px] checked:bg-secondary checked:after:absolute checked:after:-top-0.5 checked:after:left-px checked:after:text-[13px] checked:after:text-primary checked:after:content-['\2714'] hover:cursor-pointer"
                 type="checkbox"
                 id={genre}
                 value={genre.toLowerCase()}
@@ -22,7 +25,7 @@ export default function GenreOption(props) {
                 checked={selectedGenres.includes(genre.toLowerCase())}
                 readOnly
             />
-            <p className="genre">{genre}</p>
+            <p className="m-0 font-normal capitalize">{genre}</p>
         </label>
     )
 }

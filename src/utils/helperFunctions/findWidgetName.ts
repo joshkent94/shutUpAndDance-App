@@ -15,7 +15,7 @@ export const findWidgetName = (obj: any) => {
     for (let i = 0; i < flatArray.length; i++) {
         if (
             flatArray[i].classList &&
-            flatArray[i].classList.contains('content-container')
+            flatArray[i].classList.contains('widget-title')
         ) {
             return flatArray[i].innerText
         }

@@ -14,9 +14,12 @@ export default function WidgetOption({ widget }) {
     }
 
     return (
-        <label htmlFor={widget} className="genre-label">
+        <label
+            htmlFor={widget}
+            className="dropdown-option flex h-[1.8rem] items-center hover:cursor-pointer hover:bg-fifth hover:text-primary"
+        >
             <input
-                className="genre-checkbox"
+                className="relative ml-[0.8rem] mr-4 box-border inline-block appearance-none rounded-[3px] border border-third p-[7px] checked:bg-secondary checked:after:absolute checked:after:-top-0.5 checked:after:left-px checked:after:text-[13px] checked:after:text-primary checked:after:content-['\2714'] hover:cursor-pointer"
                 type="checkbox"
                 id={widget}
                 value={widget}
@@ -24,7 +27,7 @@ export default function WidgetOption({ widget }) {
                 checked={widgetNames.includes(widget)}
                 readOnly
             />
-            <p className="genre">{widget}</p>
+            <p className="m-0 font-normal capitalize">{widget}</p>
         </label>
     )
 }

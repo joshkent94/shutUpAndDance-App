@@ -18,9 +18,11 @@ export default function MyThreadsWidget() {
     })
 
     return (
-        <div className="content-container widget">
-            <h5 className="sub-heading content-container">My Threads</h5>
-            <div className="widget-content">
+        <div className="widget flex h-full w-full flex-col rounded-[0.2rem] border border-third bg-fifth bg-none p-2">
+            <h5 className="widget-title m-auto mb-2 w-full rounded-[0.2rem] border border-third bg-secondary p-2 text-[1.1rem] font-semibold">
+                My Threads
+            </h5>
+            <div className="flex grow flex-col overflow-y-auto">
                 {userThreads.map((thread) => {
                     return <ThreadOverview key={thread.id} thread={thread} />
                 })}

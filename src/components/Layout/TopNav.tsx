@@ -71,53 +71,63 @@ export default function TopNav() {
             <Navbar
                 collapseOnSelect
                 expand="lg"
-                id="top-nav"
-                className="fixed-top"
+                className="fixed left-0 right-0 top-0 z-50 flex w-screen border-b border-b-third bg-secondary"
             >
-                <Container>
+                <Container className="m-0 max-w-none px-[1.3rem]">
                     <Navbar.Brand
                         onClick={toggleShow}
                         onMouseEnter={showMenu}
                         onMouseLeave={showLogo}
+                        className="relative m-0 cursor-pointer"
                     >
-                        <Image src={logo} alt="logo" id="logo-icon" />
+                        <Image
+                            src={logo}
+                            alt="logo"
+                            id="logo-icon"
+                            className="h-[2.3rem] w-auto transition-opacity duration-300 ease-in-out"
+                        />
                         <Image
                             src={menuIcon}
                             alt="side-nav-toggle"
                             id="side-nav-toggle"
+                            className="absolute left-1 top-2 h-8 w-auto opacity-0 transition-opacity duration-300 ease-in-out"
                         />
                     </Navbar.Brand>
                     <Nav>
-                        <Nav.Item id="help">
-                            <i className="bi bi-question-circle-fill top-nav-icon"></i>
-                            <p>Help</p>
+                        <Nav.Item
+                            id="help"
+                            className="flex items-center border-r border-r-third px-4 pl-4 hover:cursor-pointer hover:text-fourth"
+                        >
+                            <i className="bi bi-question-circle-fill text-center text-2xl leading-[0.5rem]"></i>
+                            <p className="m-0 pl-2">Help</p>
                         </Nav.Item>
-                        <div id="user-details">
-                            <p id="user-name">
+                        <div className="pl-4">
+                            <p className="m-0 text-[0.95rem] leading-[1.3rem]">
                                 {firstName} {lastName}
                             </p>
-                            <p id="user-email">{email}</p>
+                            <p className="m-0 text-[0.95rem] leading-[1.3rem] text-third">
+                                {email}
+                            </p>
                         </div>
-                        <Nav.Item className="dropdown">
+                        <Nav.Item className="dropdown flex items-center pl-4 hover:cursor-pointer hover:text-fourth">
                             <button
-                                className="nav-link dropdown-toggle top"
+                                className="dropdown-toggle top border-none bg-none py-2 text-primary hover:text-fourth"
                                 data-bs-toggle="dropdown"
-                                id="account-button"
                             >
-                                <i className="bi bi-person-fill top-nav-icon"></i>
+                                <i className="bi bi-person-fill text-center text-2xl leading-[0.5rem]"></i>
                             </button>
-                            <ul className="dropdown-menu dropdown-menu-end fade-down">
-                                <li>
+                            <ul className="dropdown-menu dropdown-menu-end fade-down z-50">
+                                <li className="dropdown-item hover:bg-secondary">
                                     <Link
-                                        className="dropdown-item"
+                                        className="font-semibold text-primary"
                                         href="/account"
                                     >
                                         My Account
                                     </Link>
                                 </li>
-                                <li>
+                                <li className="dropdown-item hover:bg-secondary">
                                     <button
-                                        className="dropdown-item"
+                                        className="font-semibold text-primary"
                                         onClick={handleLogout}
                                     >
                                         Log Out

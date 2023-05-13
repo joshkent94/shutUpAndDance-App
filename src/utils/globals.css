@@ -1,0 +1,319 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --primary-colour: 0 0 0;
+        --secondary-colour: 255 255 255;
+        --third-colour: 211 211 211;
+        --fourth-colour: 29 185 84;
+        --fifth-colour: 245 245 245;
+    }
+
+    img {
+        max-width: unset;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body,
+#__next {
+    width: 100vw;
+    overflow-y: overlay;
+    font-family: 'Quicksand', sans-serif;
+}
+
+#__next {
+    display: flex;
+    justify-content: flex-end;
+    min-height: 100vh;
+    align-items: stretch;
+    flex: 1;
+}
+
+#message {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
+    padding: 0.5rem 1.5rem;
+    border-radius: 1rem;
+    z-index: 10000;
+}
+
+#message-inverted {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+    padding: 0.5rem 1.5rem;
+    border-radius: 1rem;
+    z-index: 10000;
+}
+
+.hide-logo {
+    opacity: 0 !important;
+}
+
+.show-menu-icon {
+    opacity: 1 !important;
+}
+
+.navbar .dropdown-menu-end {
+    right: 0;
+    left: auto;
+}
+
+.navbar .nav-item .dropdown-menu {
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    margin-top: 0.5rem;
+}
+
+.navbar .dropdown-menu.fade-down {
+    top: 80%;
+    transform: rotateX(-75deg);
+    transform-origin: 0% 0%;
+}
+
+.navbar .nav-item:hover .dropdown-menu {
+    transition: 0.3s;
+    opacity: 1;
+    visibility: visible;
+    top: 100%;
+    transform: rotateX(0deg);
+}
+
+.dropdown-menu .dropdown-item:hover * {
+    color: rgb(29, 185, 84) !important;
+}
+
+.lds-ring {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border: 8px solid black;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: black transparent transparent transparent;
+}
+
+.lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+}
+
+.lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+}
+
+.lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.coolBeans {
+    border: 2px solid currentColor;
+    border-radius: 3rem;
+    overflow: hidden;
+    padding: 1rem 2rem;
+    position: relative;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.2s transform ease-in-out;
+    will-change: transform;
+    z-index: 0;
+}
+
+.coolBeans::after {
+    border-radius: 3rem;
+    content: '';
+    display: block;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translate(-100%, 0) rotate(10deg);
+    transform-origin: top left;
+    transition: 0.2s transform ease-out;
+    will-change: transform;
+    z-index: -1;
+}
+
+.coolBeans:hover::after {
+    transform: translate(0, 0);
+}
+
+.coolBeans:hover {
+    border: 2px solid transparent;
+    transform: scale(1.05);
+    will-change: transform;
+}
+
+input[type='search']::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+    height: 16px;
+    width: 16px;
+    background-image: url('../../public/assets/x-circle-fill.svg');
+}
+
+input[type='search']:focus::-webkit-search-cancel-button {
+    opacity: 1;
+}
+
+input[type='search']::-webkit-search-cancel-button:hover {
+    cursor: pointer;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover {
+    border: 1px solid rgb(0, 0, 0);
+    -webkit-text-fill-color: rgb(0, 0, 0);
+    -webkit-box-shadow: 0 0 0px 1000px inset;
+    box-shadow: rgb(0, 0, 0);
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+input:-webkit-autofill:focus {
+    border: 1px solid rgb(0, 0, 0);
+    -webkit-text-fill-color: rgb(0, 0, 0);
+    -webkit-box-shadow: 0 0 0px 1000px inset;
+    box-shadow: rgb(0, 0, 0);
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.muuri {
+    min-height: fit-content !important;
+    width: 100%;
+}
+
+.draggable-item-content {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    cursor: grab;
+}
+
+.muuri-item {
+    min-width: calc((992px - 6rem) / 2);
+    width: calc((100% - 2rem) / 2);
+    height: 496px;
+    margin: 1rem 0.5rem 0 0.5rem;
+}
+
+.muuri-item-dragging {
+    border-color: rgb(0, 0, 0) !important;
+    z-index: 2;
+}
+
+.muuri-item-placeholder {
+    opacity: 0.9;
+    margin: 0;
+    border: 1px dashed rgb(211, 211, 211);
+}
+
+.widget .thread-container:first-of-type {
+    width: 65% !important;
+}
+
+.widget .thread-container:last-of-type {
+    width: 35% !important;
+}
+
+.tab-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.tab-pane {
+    flex-grow: 1;
+}
+
+.nav-tabs > .nav-item {
+    padding: 0;
+    border: 1px solid transparent;
+    margin-top: -1px;
+    margin-right: -1px;
+    margin-bottom: -1px;
+}
+
+.nav-tabs > .nav-item:has(.active) {
+    border: 1px solid rgb(211, 211, 211);
+}
+
+.nav-tabs > .nav-item > .nav-link {
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border-radius: unset;
+    color: rgb(0, 0, 0);
+    transition: none;
+    border: none;
+}
+
+.nav-tabs > .nav-item > .nav-link:hover {
+    color: rgb(29, 185, 84);
+}
+
+.nav-tabs > .nav-item > .nav-link.active {
+    background-color: rgb(245, 245, 245);
+}
+
+.track:last-of-type {
+    margin: 0 !important;
+}
+
+.thread:last-of-type {
+    margin: 0 !important;
+}
+
+.comment:last-of-type {
+    margin: 0 !important;
+}
+
+.music-player:hover .close-player {
+    display: flex !important;
+}
+
+.MuiSlider-thumb {
+    width: 18px !important;
+    height: 18px !important;
+}
+
+.MuiSlider-thumb:hover {
+    color: rgb(29, 185, 84) !important;
+}

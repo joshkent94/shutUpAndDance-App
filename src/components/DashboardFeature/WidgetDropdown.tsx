@@ -59,10 +59,9 @@ export default function WidgetDropdown() {
 
     return (
         <form>
-            <div id="multiselect">
+            <div className="w-[320px]">
                 <input
-                    className="form-control"
-                    id="genre-input"
+                    className="form-control border border-third px-[0.7rem] py-[0.3rem] text-primary placeholder:text-third focus:border-primary focus:shadow-none"
                     type="search"
                     placeholder={`Select widgets`}
                     aria-label="select widgets"
@@ -71,9 +70,14 @@ export default function WidgetDropdown() {
                     onBlur={hideCheckboxes}
                     autoComplete="off"
                 />
-                <div id="genres">
-                    <div id="selected-genres">
-                        <p className="dropdown-heading">Selected Widgets</p>
+                <div
+                    id="dropdown"
+                    className="absolute z-40 hidden max-h-[300px] w-[320px] overflow-y-scroll rounded border border-third bg-secondary p-[0.6rem] font-normal"
+                >
+                    <div className="border-b border-b-third pb-2.5">
+                        <p className="mb-[0.3rem] indent-[0.3rem] font-semibold">
+                            Selected Widgets
+                        </p>
                         {filteredSortedWidgets.map((widget) => {
                             return (
                                 <WidgetOption
@@ -83,8 +87,10 @@ export default function WidgetDropdown() {
                             )
                         })}
                     </div>
-                    <div id="genre-options">
-                        <p className="dropdown-heading">Widget Options</p>
+                    <div className="pt-2">
+                        <p className="mb-[0.3rem] indent-[0.3rem] font-semibold">
+                            Widget Options
+                        </p>
                         {filteredWidgets.map((widget) => {
                             return <WidgetOption key={widget} widget={widget} />
                         })}
