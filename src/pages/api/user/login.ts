@@ -1,73 +1,71 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { pool } from '@db/connectionConfig'
 import bcrypt from 'bcryptjs'
 import sanitizeHtml from 'sanitize-html'
 import { withIronSessionApiRoute } from 'iron-session/next'
 import sessionOptions from '@utils/helperFunctions/sessionOptions'
+import { PrismaClient } from '@prisma/client'
 
-interface Widget {
-    name: string
-    show: boolean
-}
+const prisma = new PrismaClient()
 
 type Data = {
     message?: string
     id?: string
     firstName?: string
     lastName?: string
-    email?: string
-    genres?: string[]
-    widgets?: Widget[]
+    email?: string | null
+    genres?: any[]
+    widgets?: any[]
 }
 
 async function login(req: NextApiRequest, res: NextApiResponse<Data>) {
     const cleanEmail = sanitizeHtml(req.body.email)
     const cleanPassword = sanitizeHtml(req.body.password)
     let hashedPassword
-    pool.query(
-        `SELECT id, salt, password
-                FROM users
-                WHERE email = $1`,
-        [cleanEmail]
-    ).then((data) => {
-        if (data.rows.length === 0) {
-            res.status(401).send({ message: 'Email address in incorrect' })
-        } else {
-            hashedPassword = data.rows[0].password
-            bcrypt.compare(cleanPassword, hashedPassword, (err, match) => {
-                if (err) {
-                    throw err
-                }
-                if (!match) {
-                    res.status(401).send({
-                        message: 'Password is incorrect',
-                    })
-                } else {
-                    pool.query(
-                        `SELECT *
-                            FROM users
-                            INNER JOIN genres
-                            ON (users.id = genres.user_id)
-                            INNER JOIN widgets
-                            ON (users.id = widgets.user_id)
-                            WHERE users.id = ($1)`,
-                        [data.rows[0].id]
-                    ).then(async (data) => {
-                        req.session.userId = data.rows[0].id
-                        await req.session.save()
-                        res.status(200).send({
-                            id: data.rows[0].id,
-                            firstName: data.rows[0].first_name,
-                            lastName: data.rows[0].last_name,
-                            email: data.rows[0].email,
-                            genres: data.rows[0].genres,
-                            widgets: data.rows[0].widgets,
-                        })
-                    })
-                }
-            })
-        }
+    const user = await prisma.users.findUnique({
+        where: {
+            email: cleanEmail,
+        },
+        include: {
+            genres: {
+                select: {
+                    genres: true,
+                },
+            },
+            widgets: {
+                select: {
+                    widgets: true,
+                },
+            },
+        },
     })
+    if (!user) {
+        res.status(401).send({ message: 'Email address is incorrect' })
+    } else {
+        hashedPassword = user.password
+        bcrypt.compare(cleanPassword, hashedPassword, (err, match) => {
+            if (err) {
+                throw err
+            }
+            if (!match) {
+                res.status(401).send({
+                    message: 'Password is incorrect',
+                })
+            }
+        })
+        req.session.userId = user.id
+        await req.session.save()
+        console.log(user)
+        res.status(200).send({
+            id: user.id,
+            firstName: user.first_name,
+            lastName: user.last_name,
+            email: user.email,
+            genres: user.genres[0].genres,
+            widgets: user.widgets[0].widgets.map((widget: any) =>
+                JSON.parse(widget)
+            ),
+        })
+    }
 }
 
 export default withIronSessionApiRoute(login, sessionOptions)

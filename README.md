@@ -22,12 +22,12 @@ A project to test out my developer skills.
 ## Technologies
 
 -   HTML
--   SASS
+-   CSS
 -   Typescript
--   React
--   Redux
 -   NextJS
--   Postgresql
+-   Redux
+-   Tailwind
+-   Prisma
 
 ## Features
 

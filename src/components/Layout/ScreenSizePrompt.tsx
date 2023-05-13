@@ -18,8 +18,7 @@ export default function ScreenSizePrompt() {
             <div className="flex flex-col items-center justify-between p-8">
                 <Image src={Logo} alt="logo" priority className="h-20 w-20" />
                 <h3 className="mt-8 w-11/12 text-center text-2xl">
-                    Please access Shut Up And Dance on a larger screen, or
-                    alternatively, you can download our mobile app.
+                    Please access Shut Up And Dance on a larger screen.
                 </h3>
                 <p className="mt-5 flex items-center">
                     <span className="px-1">With </span>

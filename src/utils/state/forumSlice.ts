@@ -25,8 +25,8 @@ export const createThread = createAsyncThunk(
                 initialComment: jsonResponse.initial_comment,
                 comments: [],
                 likes: jsonResponse.likes,
-                firstName: jsonResponse.first_name,
-                lastName: jsonResponse.last_name,
+                firstName: jsonResponse.users.first_name,
+                lastName: jsonResponse.users.last_name,
             }
             return thread
         }
@@ -52,8 +52,8 @@ export const searchThreads = createAsyncThunk(
                         initialComment: jsonResponse[i].initial_comment,
                         likes: jsonResponse[i].likes,
                         numberOfComments: jsonResponse[i].number_of_comments,
-                        firstName: jsonResponse[i].first_name,
-                        lastName: jsonResponse[i].last_name,
+                        firstName: jsonResponse[i].users.first_name,
+                        lastName: jsonResponse[i].users.last_name,
                     }
                     returnArray.push(threadObj)
                 }
@@ -81,8 +81,8 @@ export const getThread = createAsyncThunk(
                 initialComment: jsonResponse.initial_comment,
                 comments: [],
                 likes: jsonResponse.likes,
-                firstName: jsonResponse.first_name,
-                lastName: jsonResponse.last_name,
+                firstName: jsonResponse.users.first_name,
+                lastName: jsonResponse.users.last_name,
             }
             return thread
         }
@@ -107,8 +107,8 @@ export const getThreadsByUserId = createAsyncThunk(
                     initialComment: jsonResponse[i].initial_comment,
                     likes: jsonResponse[i].likes,
                     numberOfComments: jsonResponse[i].number_of_comments,
-                    firstName: jsonResponse[i].first_name,
-                    lastName: jsonResponse[i].last_name,
+                    firstName: jsonResponse[i].users.first_name,
+                    lastName: jsonResponse[i].users.last_name,
                 }
                 returnArray.push(threadObj)
             }
@@ -155,8 +155,8 @@ export const getMostLikedThreads = createAsyncThunk(
                     initialComment: jsonResponse[i].initial_comment,
                     likes: jsonResponse[i].likes,
                     numberOfComments: jsonResponse[i].number_of_comments,
-                    firstName: jsonResponse[i].first_name,
-                    lastName: jsonResponse[i].last_name,
+                    firstName: jsonResponse[i].users.first_name,
+                    lastName: jsonResponse[i].users.last_name,
                 }
                 returnArray.push(threadObj)
             }
@@ -181,8 +181,8 @@ export const getComments = createAsyncThunk(
                     timestamp: jsonResponse[i].date_time,
                     comment: jsonResponse[i].comment,
                     likes: jsonResponse[i].likes,
-                    firstName: jsonResponse[i].first_name,
-                    lastName: jsonResponse[i].last_name,
+                    firstName: jsonResponse[i].users.first_name,
+                    lastName: jsonResponse[i].users.last_name,
                 }
                 returnArray.push(commentObj)
             }

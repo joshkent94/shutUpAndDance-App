@@ -117,17 +117,17 @@ export default function TopNav() {
                                 <i className="bi bi-person-fill text-center text-2xl leading-[0.5rem]"></i>
                             </button>
                             <ul className="dropdown-menu dropdown-menu-end fade-down z-50">
-                                <li className="dropdown-item hover:bg-secondary">
+                                <li className="dropdown-item p-0 hover:bg-secondary">
                                     <Link
-                                        className="font-semibold text-primary"
+                                        className="block h-full w-full px-3 py-1 font-semibold text-primary"
                                         href="/account"
                                     >
                                         My Account
                                     </Link>
                                 </li>
-                                <li className="dropdown-item hover:bg-secondary">
+                                <li className="dropdown-item p-0 hover:bg-secondary">
                                     <button
-                                        className="font-semibold text-primary"
+                                        className="w-full px-3 py-1 text-left font-semibold text-primary"
                                         onClick={handleLogout}
                                     >
                                         Log Out

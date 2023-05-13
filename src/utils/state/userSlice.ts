@@ -35,14 +35,11 @@ export const submitSignUp = createAsyncThunk(
         const jsonResponse = await response.json()
         if (response.status === 404) showMessage(jsonResponse.message)
         if (response.ok) {
-            const formattedWidgets = jsonResponse.widgets.map((widget: any) =>
-                JSON.parse(widget)
-            )
             return {
                 ...data,
                 id: jsonResponse.id,
                 genres: jsonResponse.genres,
-                widgets: formattedWidgets,
+                widgets: jsonResponse.widgets,
             }
         }
     }
@@ -66,16 +63,13 @@ export const requestLogin = createAsyncThunk(
         })
         const jsonResponse = await response.json()
         if (response.ok) {
-            const formattedWidgets = jsonResponse.widgets.map((widget: any) =>
-                JSON.parse(widget)
-            )
             return {
                 id: jsonResponse.id,
                 firstName: jsonResponse.firstName,
                 lastName: jsonResponse.lastName,
                 email: jsonResponse.email,
                 genres: jsonResponse.genres,
-                widgets: formattedWidgets,
+                widgets: jsonResponse.widgets,
             }
         } else {
             showMessage(jsonResponse.message)

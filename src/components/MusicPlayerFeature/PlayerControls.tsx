@@ -115,7 +115,7 @@ export default function PlayerControls({
     }
 
     return (
-        <Box className="flex h-2/5 w-full flex-col items-center justify-center px-2 py-[0.3rem]">
+        <Box className="flex h-2/5 w-full flex-col items-center justify-center px-2 pt-[0.3rem]">
             <Slider
                 aria-label="time-indicator"
                 value={localPosition}
@@ -133,7 +133,7 @@ export default function PlayerControls({
                     -{formatTime(duration - Math.floor(localPosition))}
                 </Typography>
             </Box>
-            <Box className="mt-[-0.8rem] flex items-center justify-center">
+            <Box className="mt-[-1.1rem] flex items-center justify-center">
                 <IconButton aria-label="previous-song" onClick={playPrevious}>
                     <FastRewindRounded
                         style={{ fontSize: 28 }}
