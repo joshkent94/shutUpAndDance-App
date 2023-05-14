@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
@@ -10,6 +10,9 @@ import { withIronSessionSsr } from 'iron-session/next'
 import authCheck from '@utils/helperFunctions/authCheck'
 import sessionOptions from '@utils/helperFunctions/sessionOptions'
 import Head from 'next/head'
+import { resetUserDetails } from '@utils/state/userSlice'
+import { resetForumDetails } from '@utils/state/forumSlice'
+import { resetSpotifyDetails } from '@utils/state/spotifySlice'
 
 export default function LoginPage() {
     const dispatch = useAppDispatch()
@@ -17,6 +20,12 @@ export default function LoginPage() {
     const state = router.query.state
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+
+    useEffect(() => {
+        dispatch(resetUserDetails())
+        dispatch(resetForumDetails())
+        dispatch(resetSpotifyDetails())
+    })
 
     const updateEmail = (e) => {
         e.preventDefault()

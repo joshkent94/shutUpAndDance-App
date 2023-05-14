@@ -165,6 +165,14 @@ const userSlice = createSlice({
         widgets: [],
     } as UserState,
     reducers: {
+        resetUserDetails: (state) => {
+            state.id = ''
+            state.firstName = ''
+            state.lastName = ''
+            state.email = ''
+            state.genres = []
+            state.widgets = []
+        },
         setGenres: (state, { payload }) => {
             if (
                 state.genres.indexOf(payload) === -1 &&
@@ -242,7 +250,7 @@ export const selectLastName = (state) => state.user.lastName
 export const selectEmail = (state) => state.user.email
 export const selectGenres = (state) => state.user.genres
 export const selectWidgets = (state) => state.user.widgets
-export const { setGenres, setWidgetSelection, setWidgetOrder } =
+export const { resetUserDetails, setGenres, setWidgetSelection, setWidgetOrder } =
     userSlice.actions
 const userReducer = userSlice.reducer
 export default userReducer
