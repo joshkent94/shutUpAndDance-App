@@ -4,9 +4,8 @@ import Footer from '@components/Layout/Footer'
 import sessionOptions from '@utils/helperFunctions/sessionOptions'
 import authCheck from '@utils/helperFunctions/authCheck'
 import { withIronSessionSsr } from 'iron-session/next'
-import { resetForumDetails } from '@utils/state/forumSlice'
 import Pendo from '@components/Layout/Pendo'
-import { useEffect, useRef, useState, useLayoutEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import useSWR from 'swr'
 import {
@@ -18,16 +17,15 @@ import {
     selectSuggestions,
     getPlayingSong,
     selectCurrentlyPlaying,
-    resetSpotifyDetails,
 } from '@utils/state/spotifySlice'
-import { selectGenres, logout } from '@utils/state/userSlice'
+import { selectGenres } from '@utils/state/userSlice'
 import { useAppDispatch } from '@utils/state/store'
 import Loading from '@components/Layout/Loading'
 import Suggestion from '@components/SuggestionsFeature/Suggestion'
 import GenreDropdown from '@components/SuggestionsFeature/GenreDropdown'
 import Head from 'next/head'
 
-export default function SuggestionsPage({ user }) {
+export default function SuggestionsPage() {
     const dispatch = useAppDispatch()
     const availableGenres = useSelector(selectAvailableGenres)
     const accessToken = useSelector(selectAccessToken)
@@ -37,15 +35,6 @@ export default function SuggestionsPage({ user }) {
     const genres = useSelector(selectGenres)
     const [loading, setLoading] = useState(false)
     const firstRender = useRef(true)
-
-    useLayoutEffect(() => {
-        if (!user.isLoggedIn) {
-            dispatch(logout()).then(() => {
-                dispatch(resetForumDetails())
-                dispatch(resetSpotifyDetails())
-            })
-        }
-    })
 
     // poll for currently playing song every 5 seconds
     useSWR(

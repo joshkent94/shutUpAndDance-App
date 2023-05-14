@@ -4,11 +4,7 @@ import Footer from '@components/Layout/Footer'
 import sessionOptions from '@utils/helperFunctions/sessionOptions'
 import authCheck from '@utils/helperFunctions/authCheck'
 import { withIronSessionSsr } from 'iron-session/next'
-import React, { useLayoutEffect } from 'react'
-import { logout } from '@utils/state/userSlice'
-import { useAppDispatch } from '@utils/state/store'
-import { resetForumDetails } from '@utils/state/forumSlice'
-import { resetSpotifyDetails } from '@utils/state/spotifySlice'
+import React from 'react'
 import Pendo from '@components/Layout/Pendo'
 import WidgetDropdown from '@components/DashboardFeature/WidgetDropdown'
 import Head from 'next/head'
@@ -17,18 +13,8 @@ const WidgetGrid = React.lazy(
     () => import('@components/DashboardFeature/WidgetGrid')
 )
 
-export default function DashboardPage({ user }) {
-    const dispatch = useAppDispatch()
+export default function DashboardPage() {
     const isSSR = typeof window === 'undefined'
-
-    useLayoutEffect(() => {
-        if (!user.isLoggedIn) {
-            dispatch(logout()).then(() => {
-                dispatch(resetForumDetails())
-                dispatch(resetSpotifyDetails())
-            })
-        }
-    })
 
     return (
         <>

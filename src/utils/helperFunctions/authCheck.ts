@@ -1,12 +1,21 @@
-export default function authCheck({ req }) {
+export default async function authCheck({ req, resolvedUrl }) {
     const user = req.session.userId
+    const isPreLoginRoute = resolvedUrl === '/login' || resolvedUrl === '/signup'
 
-    if (user === undefined) {
+    if (!user && !isPreLoginRoute) {
         return {
-            props: {
-                user: {
-                    isLoggedIn: false,
-                },
+            redirect: {
+                destination: '/login',
+                permanent: false,
+            },
+        }
+    }
+
+    if (user && isPreLoginRoute) {
+        return {
+            redirect: {
+                destination: '/',
+                permanent: false,
             },
         }
     }

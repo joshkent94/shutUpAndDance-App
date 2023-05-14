@@ -5,9 +5,8 @@ import { useRouter } from 'next/router'
 import sessionOptions from '@utils/helperFunctions/sessionOptions'
 import authCheck from '@utils/helperFunctions/authCheck'
 import { withIronSessionSsr } from 'iron-session/next'
-import { useEffect, useLayoutEffect, useState } from 'react'
-import { logout, selectUserId } from '@utils/state/userSlice'
-import { resetSpotifyDetails } from '@utils/state/spotifySlice'
+import { useEffect, useState } from 'react'
+import { selectUserId } from '@utils/state/userSlice'
 import Pendo from '@components/Layout/Pendo'
 import { useSelector } from 'react-redux'
 import Link from 'next/link'
@@ -20,14 +19,13 @@ import {
     getThread,
     likeThreadToggle,
     selectThreadInfo,
-    resetForumDetails,
 } from '@utils/state/forumSlice'
 import { showMessage } from '@utils/helperFunctions/showMessage'
 import { useAppDispatch } from '@utils/state/store'
 import Comment from '@components/ForumFeature/Comment'
 import Head from 'next/head'
 
-export default function ThreadPage({ user }) {
+export default function ThreadPage() {
     const dispatch = useAppDispatch()
     const router = useRouter()
     const threadId = router.query.threadId
@@ -110,15 +108,6 @@ export default function ThreadPage({ user }) {
 
     // convert thread timestamp to new date object
     const threadDate = new Date(threadInfo.timestamp)
-
-    useLayoutEffect(() => {
-        if (!user.isLoggedIn) {
-            dispatch(logout()).then(() => {
-                dispatch(resetForumDetails())
-                dispatch(resetSpotifyDetails())
-            })
-        }
-    })
 
     return (
         <>

@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from 'react'
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import TopNav from '@components/Layout/TopNav'
 import MusicPlayer from '@components/MusicPlayerFeature/MusicPlayer'
@@ -6,8 +6,6 @@ import Footer from '@components/Layout/Footer'
 import sessionOptions from '@utils/helperFunctions/sessionOptions'
 import authCheck from '@utils/helperFunctions/authCheck'
 import { withIronSessionSsr } from 'iron-session/next'
-import { resetForumDetails } from '@utils/state/forumSlice'
-import { resetSpotifyDetails } from '@utils/state/spotifySlice'
 import Pendo from '@components/Layout/Pendo'
 import { hashFunction } from '@utils/helperFunctions/hashFunction'
 import { passwordCheck } from '@utils/helperFunctions/passwordCheck'
@@ -17,12 +15,11 @@ import {
     selectFirstName,
     selectLastName,
     updateUserDetails,
-    logout,
 } from '@utils/state/userSlice'
 import { useAppDispatch } from '@utils/state/store'
 import Head from 'next/head'
 
-export default function AccountPage({ user }) {
+export default function AccountPage() {
     const dispatch = useAppDispatch()
     const firstName = useSelector(selectFirstName)
     const lastName = useSelector(selectLastName)
@@ -32,15 +29,6 @@ export default function AccountPage({ user }) {
     const [newEmail, setNewEmail] = useState(email)
     const [newPassword, setNewPassword] = useState('')
     const [confirmedPassword, setConfirmedPassword] = useState('')
-
-    useLayoutEffect(() => {
-        if (!user.isLoggedIn) {
-            dispatch(logout()).then(() => {
-                dispatch(resetForumDetails())
-                dispatch(resetSpotifyDetails())
-            })
-        }
-    })
 
     const handleFirstNameChange = (e) => {
         e.preventDefault()

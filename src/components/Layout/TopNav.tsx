@@ -59,11 +59,6 @@ export default function TopNav() {
     const handleLogout = (e) => {
         e.preventDefault()
         dispatch(logout())
-            .unwrap()
-            .then(() => {
-                dispatch(resetSpotifyDetails())
-                dispatch(resetForumDetails())
-            })
     }
 
     return (

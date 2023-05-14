@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
@@ -11,18 +11,12 @@ import authCheck from '@utils/helperFunctions/authCheck'
 import sessionOptions from '@utils/helperFunctions/sessionOptions'
 import Head from 'next/head'
 
-export default function LoginPage({ user }) {
+export default function LoginPage() {
     const dispatch = useAppDispatch()
     const router = useRouter()
     const state = router.query.state
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-
-    useLayoutEffect(() => {
-        if (user.isLoggedIn) {
-            router.push('/dashboard')
-        }
-    })
 
     const updateEmail = (e) => {
         e.preventDefault()

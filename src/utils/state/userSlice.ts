@@ -217,13 +217,8 @@ const userSlice = createSlice({
                 }
             }
         })
-        builder.addCase(logout.fulfilled, (state) => {
-            state.id = ''
-            state.firstName = ''
-            state.lastName = ''
-            state.email = ''
-            state.genres = []
-            state.widgets = []
+        builder.addCase(logout.fulfilled, () => {
+            return
         })
         builder.addCase(updateUserDetails.fulfilled, (state, { payload }) => {
             if (payload) {

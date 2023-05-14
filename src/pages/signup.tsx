@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { submitSignUp } from '@utils/state/userSlice'
@@ -10,23 +10,15 @@ import Logo from '@assets/inverted-logo.png'
 import sessionOptions from '@utils/helperFunctions/sessionOptions'
 import authCheck from '@utils/helperFunctions/authCheck'
 import { withIronSessionSsr } from 'iron-session/next'
-import { useRouter } from 'next/router'
 import Head from 'next/head'
 
-export default function SignUpPage({ user }) {
+export default function SignUpPage() {
     const dispatch = useAppDispatch()
-    const router = useRouter()
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [validatedPassword, setValidatedPassword] = useState(null)
-
-    useLayoutEffect(() => {
-        if (user.isLoggedIn) {
-            router.replace('/dashboard')
-        }
-    })
 
     const updateFirstName = (e) => {
         e.preventDefault()

@@ -4,11 +4,7 @@ import Footer from '@components/Layout/Footer'
 import sessionOptions from '@utils/helperFunctions/sessionOptions'
 import authCheck from '@utils/helperFunctions/authCheck'
 import { withIronSessionSsr } from 'iron-session/next'
-import { useLayoutEffect, useState } from 'react'
-import { logout } from '@utils/state/userSlice'
-import { useAppDispatch } from '@utils/state/store'
-import { resetForumDetails } from '@utils/state/forumSlice'
-import { resetSpotifyDetails } from '@utils/state/spotifySlice'
+import { useState } from 'react'
 import Pendo from '@components/Layout/Pendo'
 import { Tab, Tabs } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -19,8 +15,7 @@ import MyThreads from '@components/ForumFeature/MyThreads'
 import NewThread from '@components/ForumFeature/NewThread'
 import Head from 'next/head'
 
-export default function ForumPage({ user }) {
-    const dispatch = useAppDispatch()
+export default function ForumPage() {
     const [searchTerm, setSearchTerm] = useState('')
     const faSearchProp = faSearch as IconProp
 
@@ -29,15 +24,6 @@ export default function ForumPage({ user }) {
         e.preventDefault()
         setSearchTerm(e.target.value)
     }
-
-    useLayoutEffect(() => {
-        if (!user.isLoggedIn) {
-            dispatch(logout()).then(() => {
-                dispatch(resetForumDetails())
-                dispatch(resetSpotifyDetails())
-            })
-        }
-    })
 
     return (
         <>
