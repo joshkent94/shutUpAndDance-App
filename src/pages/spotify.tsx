@@ -1,8 +1,7 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { showMessage } from '@utils/helperFunctions/showMessage'
-import { resetForumDetails } from '@utils/state/forumSlice'
-import { getAccessToken, resetSpotifyDetails } from '@utils/state/spotifySlice'
+import { getAccessToken } from '@utils/state/spotifySlice'
 import { logout } from '@utils/state/userSlice'
 import { useAppDispatch } from '@utils/state/store'
 
@@ -18,23 +17,15 @@ export default function SpotifyPage() {
     useEffect(() => {
         if (!code && !error) return
         if (security === process.env.NEXT_PUBLIC_SPOTIFY_STATE && code) {
+            router.push(location)
             // @ts-expect-error code is a string
             dispatch(getAccessToken(code))
-                .unwrap()
-                .then(() => {
-                    router.push(location)
-                })
         } else if (
             !code ||
             security !== process.env.NEXT_PUBLIC_SPOTIFY_STATE ||
             error
         ) {
             dispatch(logout())
-                .unwrap()
-                .then(() => {
-                    dispatch(resetSpotifyDetails())
-                    dispatch(resetForumDetails())
-                })
             showMessage(`Must allow access to Spotify to continue`)
         }
     })
