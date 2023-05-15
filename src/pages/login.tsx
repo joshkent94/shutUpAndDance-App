@@ -13,6 +13,7 @@ import Head from 'next/head'
 import { resetUserDetails } from '@utils/state/userSlice'
 import { resetForumDetails } from '@utils/state/forumSlice'
 import { resetSpotifyDetails } from '@utils/state/spotifySlice'
+import Loading from '@components/Layout/Loading'
 
 export default function LoginPage() {
     const dispatch = useAppDispatch()
@@ -20,6 +21,7 @@ export default function LoginPage() {
     const state = router.query.state
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         dispatch(resetUserDetails())
@@ -40,6 +42,7 @@ export default function LoginPage() {
     // log user into app and authenticate with Spotify
     const handleLoginSubmit = (e) => {
         e.preventDefault()
+        setLoading(true)
         dispatch(
             requestLogin({
                 email: email,
@@ -79,50 +82,53 @@ export default function LoginPage() {
                         <h4 className="text-3xl">For the love of music</h4>
                     </div>
                 </div>
-                <div className="flex w-3/4 flex-col items-center justify-center">
-                    <h2 className="mb-10 text-3xl font-semibold">Log In</h2>
-                    <form
-                        className="flex flex-col items-center font-semibold"
-                        onSubmit={handleLoginSubmit}
-                    >
-                        <label className="mb-8 font-semibold">
-                            Email
-                            <input
-                                name="email"
-                                type="email"
-                                placeholder="josh@example.com"
-                                className="form-control mt-4 w-[400px] text-primary placeholder:text-third focus:border-primary focus:shadow-none"
-                                onChange={updateEmail}
-                                required
-                            />
-                        </label>
-                        <label className="mb-8 font-semibold">
-                            Password
-                            <input
-                                name="password"
-                                type="password"
-                                className="form-control mt-4 w-[400px] text-primary placeholder:text-third focus:border-primary focus:shadow-none"
-                                onChange={updatePassword}
-                                required
-                            />
-                        </label>
-                        <button
-                            type="submit"
-                            className="coolBeans mb-12 mt-4 w-40 bg-primary text-secondary after:bg-secondary hover:text-primary focus-visible:outline-none"
+                {loading && <Loading />}
+                {!loading && (
+                    <div className="flex w-3/4 flex-col items-center justify-center">
+                        <h2 className="mb-10 text-3xl font-semibold">Log In</h2>
+                        <form
+                            className="flex flex-col items-center font-semibold"
+                            onSubmit={handleLoginSubmit}
                         >
-                            Log In
-                        </button>
-                    </form>
-                    <p className="text-[0.9rem] font-normal text-third">
-                        {"Don't have an account? "}
-                        <Link
-                            href="/signup"
-                            className="text-primary hover:underline focus-visible:outline-none"
-                        >
-                            Sign up
-                        </Link>
-                    </p>
-                </div>
+                            <label className="mb-8 font-semibold">
+                                Email
+                                <input
+                                    name="email"
+                                    type="email"
+                                    placeholder="josh@example.com"
+                                    className="form-control mt-4 w-[400px] text-primary placeholder:text-third focus:border-primary focus:shadow-none"
+                                    onChange={updateEmail}
+                                    required
+                                />
+                            </label>
+                            <label className="mb-8 font-semibold">
+                                Password
+                                <input
+                                    name="password"
+                                    type="password"
+                                    className="form-control mt-4 w-[400px] text-primary placeholder:text-third focus:border-primary focus:shadow-none"
+                                    onChange={updatePassword}
+                                    required
+                                />
+                            </label>
+                            <button
+                                type="submit"
+                                className="coolBeans mb-12 mt-4 w-40 bg-primary text-secondary after:bg-secondary hover:text-primary focus-visible:outline-none"
+                            >
+                                Log In
+                            </button>
+                        </form>
+                        <p className="text-[0.9rem] font-normal text-third">
+                            {"Don't have an account? "}
+                            <Link
+                                href="/signup"
+                                className="text-primary hover:underline focus-visible:outline-none"
+                            >
+                                Sign up
+                            </Link>
+                        </p>
+                    </div>
+                )}
             </div>
         </>
     )

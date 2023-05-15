@@ -1,6 +1,7 @@
 export default async function authCheck({ req, resolvedUrl }) {
     const user = req.session.userId
-    const isPreLoginRoute = resolvedUrl === '/login' || resolvedUrl === '/signup'
+    const isPreLoginRoute =
+        resolvedUrl === '/login' || resolvedUrl === '/signup'
 
     if (!user && !isPreLoginRoute) {
         return {

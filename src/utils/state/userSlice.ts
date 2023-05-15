@@ -250,7 +250,11 @@ export const selectLastName = (state) => state.user.lastName
 export const selectEmail = (state) => state.user.email
 export const selectGenres = (state) => state.user.genres
 export const selectWidgets = (state) => state.user.widgets
-export const { resetUserDetails, setGenres, setWidgetSelection, setWidgetOrder } =
-    userSlice.actions
+export const {
+    resetUserDetails,
+    setGenres,
+    setWidgetSelection,
+    setWidgetOrder,
+} = userSlice.actions
 const userReducer = userSlice.reducer
 export default userReducer

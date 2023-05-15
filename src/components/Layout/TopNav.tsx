@@ -6,8 +6,6 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import logo from '@assets/logo.png'
 import menuIcon from '@assets/bars-solid.svg'
-import { resetForumDetails } from '@utils/state/forumSlice'
-import { resetSpotifyDetails } from '@utils/state/spotifySlice'
 import {
     logout,
     selectEmail,
