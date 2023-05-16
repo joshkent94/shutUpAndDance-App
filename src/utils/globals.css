@@ -229,6 +229,14 @@ input:-webkit-autofill:focus {
     border: 1px dashed rgb(211, 211, 211);
 }
 
+@media (max-width: 992px) {
+    .muuri-item {
+        min-width: unset;
+        width: 100% !important;
+        margin: 1rem 0 0 0 !important;
+    }
+}
+
 .widget .thread-container:first-of-type {
     width: 65% !important;
 }

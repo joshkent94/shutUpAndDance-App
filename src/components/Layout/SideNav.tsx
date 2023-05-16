@@ -7,7 +7,7 @@ export default function SideNav({ show }) {
             show={show}
             scroll={true}
             backdrop={false}
-            className="mt-[3.925rem] w-96 border border-third bg-fifth"
+            className="mt-[3.925rem] w-48 md:w-64 border border-third bg-fifth"
         >
             <Offcanvas.Header className="mx-6 mt-4 h-[50px] border-b border-b-third p-0 pb-4">
                 <Offcanvas.Title className="font-semibold">

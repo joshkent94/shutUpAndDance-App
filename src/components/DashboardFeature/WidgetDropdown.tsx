@@ -58,7 +58,7 @@ export default function WidgetDropdown() {
     }, [dispatch, widgets])
 
     return (
-        <form>
+        <form className='hidden md:block'>
             <div className="w-[320px]">
                 <input
                     className="form-control border border-third px-[0.7rem] py-[0.3rem] text-primary placeholder:text-third focus:border-primary focus:shadow-none"

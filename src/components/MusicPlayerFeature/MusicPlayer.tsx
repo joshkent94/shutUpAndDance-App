@@ -98,7 +98,7 @@ export default function MusicPlayer() {
                 scroll={true}
                 backdrop={false}
                 placement="end"
-                className="music-player h-[150px] w-[350px] z-50 fixed bottom-[25px] right-[25px] flex border-none m-0 bg-none duration-300 ease-linear top-auto"
+                className="music-player h-[150px] w-[350px] z-50 fixed bottom-[25px] right-[25px] flex border-none m-0 bg-transparent duration-300 ease-linear top-auto"
             >
                 <button onClick={hidePlayer} className="close-player absolute hidden top-[-6px] right-[-6px] h-5 w-5 border-none rounded-2xl justify-center items-center bg-secondary text-fourth">
                     <FontAwesomeIcon icon={faTimesCircle} size="lg" />

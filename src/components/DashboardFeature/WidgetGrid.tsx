@@ -30,7 +30,7 @@ export default function WidgetGrid() {
         const children = widgets
             .filter((widget) => widget.show)
             .map((widget) => (
-                <DraggableItem key={widget.name}>
+                <DraggableItem key={widget.name} className='w-full'>
                     {displayWidget(widget.name)}
                 </DraggableItem>
             ))

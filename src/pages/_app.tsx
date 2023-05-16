@@ -4,7 +4,6 @@ import { Provider } from 'react-redux'
 import type { AppProps } from 'next/app'
 import { persistor, store } from '@utils/state/store'
 import { PersistGate } from 'redux-persist/integration/react'
-import { useEffect, useState } from 'react'
 import ScreenSizePrompt from '@components/Layout/ScreenSizePrompt'
 import { Analytics } from '@vercel/analytics/react'
 import { config } from '@fortawesome/fontawesome-svg-core'
@@ -20,17 +19,6 @@ declare global {
 }
 
 export default function App({ Component, pageProps }: AppProps) {
-    const [viewportWidth, setViewportWidth] = useState(992)
-
-    // add event listener to set state of app whenever screen size changes
-    useEffect(() => {
-        setViewportWidth(window.innerWidth)
-        const handleResize = () => {
-            setViewportWidth(window.innerWidth)
-        }
-        window.addEventListener('resize', handleResize)
-    }, [])
-
     return (
         <>
             <Provider store={store}>
@@ -88,28 +76,16 @@ export default function App({ Component, pageProps }: AppProps) {
                             }
                         })()}
                     />
-                    {viewportWidth < 992 ? (
-                        <>
-                            <Head>
-                                <meta
-                                    name="viewport"
-                                    content="width=device-width, initial-scale=1"
-                                />
-                            </Head>
-                            <ScreenSizePrompt />
-                        </>
-                    ) : (
-                        <>
-                            <Head>
-                                <meta
-                                    name="viewport"
-                                    content="width=device-width, initial-scale=1"
-                                />
-                            </Head>
-                            <Component {...pageProps} />
-                            <Analytics debug={false} />
-                        </>
-                    )}
+                    <>
+                        <Head>
+                            <meta
+                                name="viewport"
+                                content="width=device-width, initial-scale=1"
+                            />
+                        </Head>
+                        <Component {...pageProps} />
+                        <Analytics debug={false} />
+                    </>
                 </PersistGate>
             </Provider>
         </>

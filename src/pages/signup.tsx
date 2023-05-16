@@ -82,8 +82,8 @@ export default function SignUpPage() {
                     key="desc"
                 />
             </Head>
-            <div className="flex h-screen w-full">
-                <div className="flex w-1/4 flex-col justify-between bg-rapper bg-cover bg-scroll bg-center bg-no-repeat p-4 text-secondary">
+            <div className="flex w-full justify-center">
+                <div className="hidden h-full w-1/4 flex-col justify-between bg-rapper bg-cover bg-scroll bg-center bg-no-repeat p-4 text-secondary md:flex">
                     <Image
                         src={Logo}
                         alt="logo"
@@ -99,68 +99,70 @@ export default function SignUpPage() {
                 </div>
                 {loading && <Loading />}
                 {!loading && (
-                    <div className="flex w-3/4 flex-col items-center justify-center">
+                    <div className="my-12 flex w-3/4 flex-col items-center justify-center">
                         <h2 className="mb-10 text-3xl font-semibold">
                             Sign Up
                         </h2>
                         <form
-                            className="flex flex-col items-center font-semibold"
+                            className="flex w-full flex-col items-center font-semibold"
                             onSubmit={handleSignUpRequest}
                         >
-                            <label className="mb-8 font-semibold">
+                            <label className="mb-8 font-semibold md:w-[400px] w-72">
                                 First Name
                                 <input
                                     name="first name"
                                     type="text"
                                     placeholder="Josh"
-                                    className="form-control mt-4 w-[400px] text-primary placeholder:text-third focus:border-primary focus:shadow-none"
+                                    className="form-control mt-4 w-72 text-primary placeholder:text-third focus:border-primary focus:shadow-none md:w-[400px]"
                                     onChange={updateFirstName}
                                     required
                                 />
                             </label>
-                            <label className="mb-8 font-semibold">
+                            <label className="mb-8 font-semibold md:w-[400px] w-72">
                                 Last Name
                                 <input
                                     name="last name"
                                     type="text"
                                     placeholder="Kent"
-                                    className="form-control mt-4 w-[400px] text-primary placeholder:text-third focus:border-primary focus:shadow-none"
+                                    className="form-control mt-4 w-72 text-primary placeholder:text-third focus:border-primary focus:shadow-none md:w-[400px]"
                                     onChange={updateLastName}
                                     required
                                 />
                             </label>
-                            <label className="mb-8 font-semibold">
+                            <label className="mb-8 font-semibold md:w-[400px] w-72">
                                 Email
                                 <input
                                     name="email"
                                     type="email"
                                     placeholder="josh@example.com"
-                                    className="form-control mt-4 w-[400px] text-primary placeholder:text-third focus:border-primary focus:shadow-none"
+                                    className="form-control mt-4 w-72 text-primary placeholder:text-third focus:border-primary focus:shadow-none md:w-[400px]"
                                     onChange={updateEmail}
                                     required
                                 />
                             </label>
-                            <label className="mb-8 font-semibold">
-                                Password
+                            <label className="mb-8 flex flex-col items-center font-semibold md:w-[400px] w-72">
+                                <div className='flex justify-start w-full'>
+                                    Password
+                                </div>
                                 <input
                                     name="password"
                                     type="password"
-                                    className="form-control mt-4 w-[400px] text-primary placeholder:text-third focus:border-primary focus:shadow-none"
+                                    className="form-control mt-4 w-72 text-primary placeholder:text-third focus:border-primary focus:shadow-none md:w-[400px]"
                                     onChange={updatePassword}
                                     required
                                     autoComplete="new-password"
                                 />
-                                <p className="mb-0 mt-2 text-[0.9rem] font-normal text-third">
+                                <p className="mb-0 mt-2 text-[0.9rem] font-normal text-third text-center">
                                     1 upper, 1 lower, 1 special char, 1 number,
                                     min 8 chars
                                 </p>
                             </label>
-                            <label className="mb-8 font-semibold">
+                            <label className="mb-8 font-semibold md:w-[400px] w-72">
                                 Retype Password
                                 <input
                                     name="retype password"
                                     type="password"
-                                    className="form-control mt-4 w-[400px] text-primary placeholder:text-third focus:border-primary focus:shadow-none"
+                                    className="form-control mt-4 w-72 text-primary placeholder:text-third focus:border-primary focus:shadow-none md:w-[400px]"
                                     onChange={updateValidatedPassword}
                                     required
                                 />
