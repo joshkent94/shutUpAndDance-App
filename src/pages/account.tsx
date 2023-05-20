@@ -128,46 +128,46 @@ export default function AccountPage() {
                                 className="mt-6 flex grow flex-col items-center justify-center"
                                 onSubmit={handleDetailsSave}
                             >
-                                <label className="mb-8 font-semibold">
+                                <label className="mb-8 flex w-72 flex-col font-semibold md:w-[400px]">
                                     First Name
                                     <input
                                         name="first name"
                                         type="text"
                                         value={newFirstName}
-                                        className="form-control mt-4 w-[400px] text-primary placeholder:text-third focus:border-primary focus:shadow-none"
+                                        className="form-control mt-4 w-72 text-primary placeholder:text-third focus:border-primary focus:shadow-none md:w-[400px]"
                                         onChange={handleFirstNameChange}
                                         required
                                     />
                                 </label>
-                                <label className="mb-8 font-semibold">
+                                <label className="mb-8 flex w-72 flex-col font-semibold md:w-[400px]">
                                     Last Name
                                     <input
                                         name="last name"
                                         type="text"
                                         value={newLastName}
-                                        className="form-control mt-4 w-[400px] text-primary placeholder:text-third focus:border-primary focus:shadow-none"
+                                        className="form-control mt-4 w-72 text-primary placeholder:text-third focus:border-primary focus:shadow-none md:w-[400px]"
                                         onChange={handleLastNameChange}
                                         required
                                     />
                                 </label>
-                                <label className="mb-8 font-semibold">
+                                <label className="mb-8 flex w-72 flex-col font-semibold md:w-[400px]">
                                     Email
                                     <input
                                         name="email"
                                         type="email"
                                         value={newEmail}
-                                        className="form-control mt-4 w-[400px] text-primary placeholder:text-third focus:border-primary focus:shadow-none"
+                                        className="form-control mt-4 w-72 text-primary placeholder:text-third focus:border-primary focus:shadow-none md:w-[400px]"
                                         onChange={handleEmailChange}
                                         required
                                     />
                                 </label>
-                                <label className="mb-8 font-semibold">
+                                <label className="mb-8 flex w-72 flex-col font-semibold md:w-[400px]">
                                     Reset Password
                                     <input
                                         name="password"
                                         type="password"
                                         id="password-input"
-                                        className="form-control mt-4 w-[400px] text-primary placeholder:text-third focus:border-primary focus:shadow-none"
+                                        className="form-control mt-4 w-72 text-primary placeholder:text-third focus:border-primary focus:shadow-none md:w-[400px]"
                                         placeholder="Optional"
                                         onChange={handlePasswordChange}
                                         autoComplete="new-password"
@@ -177,13 +177,13 @@ export default function AccountPage() {
                                         number, min 8 chars
                                     </p>
                                 </label>
-                                <label className="mb-8 font-semibold">
+                                <label className="mb-8 flex w-72 flex-col font-semibold md:w-[400px]">
                                     Confirm New Password
                                     <input
                                         name="retype password"
                                         type="password"
                                         id="confirm-password-input"
-                                        className="form-control mt-4 w-[400px] text-primary placeholder:text-third focus:border-primary focus:shadow-none"
+                                        className="form-control mt-4 w-72 text-primary placeholder:text-third focus:border-primary focus:shadow-none md:w-[400px]"
                                         placeholder="Optional"
                                         onChange={handleConfirmedPasswordChange}
                                     />

@@ -42,10 +42,10 @@ export default function NewThread() {
                 className="flex grow flex-col items-center justify-center rounded-[0.2rem] border border-third bg-secondary p-2"
                 onSubmit={handleNewThread}
             >
-                <label className="mb-8 font-semibold">
+                <label className="mb-8 w-4/5 font-semibold">
                     Title
                     <input
-                        className="form-control mt-4 w-[800px] text-primary placeholder:text-third focus:border-primary focus:shadow-none"
+                        className="form-control mt-4 w-full text-primary placeholder:text-third focus:border-primary focus:shadow-none"
                         type="text"
                         placeholder="Title"
                         onChange={handleTitleChange}
@@ -53,10 +53,10 @@ export default function NewThread() {
                         required
                     />
                 </label>
-                <label className="mb-8 font-semibold">
+                <label className="mb-8 w-4/5 font-semibold">
                     Comment
                     <textarea
-                        className="form-control mt-4 h-[300px] w-[800px] text-primary placeholder:text-third focus:border-primary focus:shadow-none"
+                        className="form-control mt-4 h-[300px] w-full text-primary placeholder:text-third focus:border-primary focus:shadow-none"
                         placeholder="What's on your mind..."
                         onChange={handleCommentChange}
                         required

@@ -137,7 +137,7 @@ export default function ThreadPage() {
                     <div className="flex grow flex-col">
                         <div className="mt-4 flex grow flex-col items-center">
                             <div className="mb-[0.7rem] flex h-fit min-h-[150px] w-full items-center rounded-[0.2rem] border border-third bg-secondary p-2">
-                                <div className="my-2 flex h-[90%] min-h-[90%] w-4/5 flex-col justify-center border-r border-r-third px-[0.8rem]">
+                                <div className="my-2 flex h-[90%] min-h-[90%] w-1/2 flex-col justify-center border-r border-r-third px-[0.8rem] md:w-3/5 lg:w-4/5">
                                     <p className="m-0 pb-2 text-[1.2rem] font-bold">
                                         {threadInfo.title}
                                     </p>
@@ -145,7 +145,7 @@ export default function ThreadPage() {
                                         {threadInfo.initialComment}
                                     </p>
                                 </div>
-                                <div className="flex h-[90%] w-1/5 flex-col justify-center px-[0.8rem]">
+                                <div className="flex h-[90%] w-1/2 flex-col justify-center px-[0.8rem] md:w-2/5 lg:w-1/5">
                                     <p className="m-0">
                                         <span className="font-bold">
                                             Created by:

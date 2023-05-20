@@ -18,6 +18,7 @@ export default function BrowseThreads({ searchTerm }) {
     // search for threads whenever search term is updated
     useEffect(() => {
         if (!searchTerm) {
+            dispatch(searchThreads({ searchTerm: '' }))
             dispatch(getMostLikedThreads())
         }
         if (searchTerm) {

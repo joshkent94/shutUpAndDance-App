@@ -302,6 +302,7 @@ const forumSlice = createSlice({
         builder.addCase(likeThreadToggle.fulfilled, (state, action) => {
             if (action.payload) {
                 if (action.payload.method === 'threadOverviews') {
+                    console.log(action.payload)
                     const index = state.threadOverviews.findIndex(
                         ({ id }) => id === action.payload?.threadId
                     )

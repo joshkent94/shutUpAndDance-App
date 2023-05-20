@@ -255,16 +255,35 @@ input:-webkit-autofill:focus {
     flex-grow: 1;
 }
 
+@media (max-width: 768px) {
+    .nav-tabs > .nav-item {
+        width: calc(100% / 3) !important;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .nav-tabs > .nav-item > .nav-link {
+        max-width: 100%;
+        width: 100%;
+        padding: 0.5rem !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+        margin: 0 !important;
+    }
+}
+
 .nav-tabs > .nav-item {
     padding: 0;
-    border: 1px solid transparent;
+    border: 1px solid rgb(211, 211, 211);
     margin-top: -1px;
     margin-right: -1px;
     margin-bottom: -1px;
 }
 
 .nav-tabs > .nav-item:has(.active) {
-    border: 1px solid rgb(211, 211, 211);
+    border-bottom: 1px solid transparent;
 }
 
 .nav-tabs > .nav-item > .nav-link {
@@ -275,6 +294,7 @@ input:-webkit-autofill:focus {
     color: rgb(0, 0, 0);
     transition: none;
     border: none;
+    text-align: center !important;
 }
 
 .nav-tabs > .nav-item > .nav-link:hover {
@@ -283,6 +303,7 @@ input:-webkit-autofill:focus {
 
 .nav-tabs > .nav-item > .nav-link.active {
     background-color: rgb(245, 245, 245);
+    color: rgb(29, 185, 84);
 }
 
 .track:last-of-type {

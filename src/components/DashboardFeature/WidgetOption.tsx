@@ -27,7 +27,9 @@ export default function WidgetOption({ widget }) {
                 checked={widgetNames.includes(widget)}
                 readOnly
             />
-            <p className="m-0 font-normal capitalize">{widget}</p>
+            <p className="m-0 mr-1 overflow-hidden text-ellipsis whitespace-nowrap font-normal capitalize">
+                {widget}
+            </p>
         </label>
     )
 }

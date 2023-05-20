@@ -25,7 +25,9 @@ export default function GenreOption(props) {
                 checked={selectedGenres.includes(genre.toLowerCase())}
                 readOnly
             />
-            <p className="m-0 font-normal capitalize">{genre}</p>
+            <p className="m-0 mr-1 overflow-hidden text-ellipsis whitespace-nowrap font-normal capitalize">
+                {genre}
+            </p>
         </label>
     )
 }

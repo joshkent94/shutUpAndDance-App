@@ -43,7 +43,7 @@ export default function ForumPage() {
                         <h5 className="m-0 text-[1.3rem] font-semibold leading-normal">
                             Forum
                         </h5>
-                        <div className="input-group w-[320px]">
+                        <div className="input-group w-48 md:w-[320px]">
                             <input
                                 className="form-control border border-third px-[0.7rem] py-[0.3rem] text-primary placeholder:text-third focus:border-primary focus:shadow-none"
                                 type="search"
@@ -66,7 +66,7 @@ export default function ForumPage() {
                         <div className="flex grow flex-col">
                             <Tabs
                                 defaultActiveKey="browse-threads"
-                                className="border-third"
+                                className="justify-center border-b-0 border-third md:justify-start md:border-b"
                             >
                                 <Tab
                                     eventKey="browse-threads"

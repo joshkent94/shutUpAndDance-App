@@ -13,7 +13,7 @@ export default function SongDetails({ currentlyPlaying }) {
                 />
             </div>
             <div className="flex h-full w-[70%] flex-col justify-center">
-                <p className="m-0 w-[95%] overflow-hidden text-ellipsis whitespace-nowrap text-[0.95rem]">
+                <p className="m-0 w-[90%] overflow-hidden text-ellipsis whitespace-nowrap text-[0.95rem]">
                     {currentlyPlaying.name}
                 </p>
                 <p className="m-0 line-clamp-2 w-[95%] text-[0.95rem]">

@@ -71,7 +71,7 @@ export default function GenreDropdown({ setLoading }) {
 
     return (
         <form>
-            <div className="w-[320px]">
+            <div className="w-48 md:w-[320px]">
                 <div className="input-group">
                     <input
                         className="form-control z-40 border border-third px-[0.7rem] py-[0.3rem] text-primary placeholder:text-third focus:border-primary focus:shadow-none"
@@ -95,7 +95,7 @@ export default function GenreDropdown({ setLoading }) {
                 </div>
                 <div
                     id="dropdown"
-                    className="absolute z-40 hidden max-h-[300px] w-[320px] overflow-y-scroll rounded border border-third bg-secondary p-[0.6rem] font-normal"
+                    className="absolute z-40 hidden max-h-[300px] w-48 overflow-y-scroll rounded border border-third bg-secondary p-[0.6rem] font-normal md:w-[320px]"
                 >
                     <div className="border-b border-b-third pb-2.5">
                         <p className="mb-[0.3rem] indent-[0.3rem] font-semibold">

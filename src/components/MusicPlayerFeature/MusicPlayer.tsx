@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { Offcanvas } from 'react-bootstrap'
 import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimesCircle } from '@fortawesome/free-regular-svg-icons'
+import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import spotifyLogo from '@assets/Spotify_Logo_RGB_Green.png'
 import useSWR from 'swr'
 import {
@@ -100,8 +100,8 @@ export default function MusicPlayer() {
                 placement="end"
                 className="music-player h-[150px] w-[350px] z-50 fixed bottom-[25px] right-[25px] flex border-none m-0 bg-transparent duration-300 ease-linear top-auto"
             >
-                <button onClick={hidePlayer} className="close-player absolute hidden top-[-6px] right-[-6px] h-5 w-5 border-none rounded-2xl justify-center items-center bg-secondary text-fourth">
-                    <FontAwesomeIcon icon={faTimesCircle} size="lg" />
+                <button onClick={hidePlayer} className="close-player absolute hidden top-[6px] right-[6px] h-5 w-5 border-none justify-center items-center bg-primary text-fifth">
+                    <FontAwesomeIcon icon={faXmark} size="lg" />
                 </button>
                 {content}
             </Offcanvas>

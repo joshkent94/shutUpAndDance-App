@@ -107,7 +107,7 @@ export default function SignUpPage() {
                             className="flex w-full flex-col items-center font-semibold"
                             onSubmit={handleSignUpRequest}
                         >
-                            <label className="mb-8 font-semibold md:w-[400px] w-72">
+                            <label className="mb-8 w-72 font-semibold md:w-[400px]">
                                 First Name
                                 <input
                                     name="first name"
@@ -118,7 +118,7 @@ export default function SignUpPage() {
                                     required
                                 />
                             </label>
-                            <label className="mb-8 font-semibold md:w-[400px] w-72">
+                            <label className="mb-8 w-72 font-semibold md:w-[400px]">
                                 Last Name
                                 <input
                                     name="last name"
@@ -129,7 +129,7 @@ export default function SignUpPage() {
                                     required
                                 />
                             </label>
-                            <label className="mb-8 font-semibold md:w-[400px] w-72">
+                            <label className="mb-8 w-72 font-semibold md:w-[400px]">
                                 Email
                                 <input
                                     name="email"
@@ -140,8 +140,8 @@ export default function SignUpPage() {
                                     required
                                 />
                             </label>
-                            <label className="mb-8 flex flex-col items-center font-semibold md:w-[400px] w-72">
-                                <div className='flex justify-start w-full'>
+                            <label className="mb-8 flex w-72 flex-col items-center font-semibold md:w-[400px]">
+                                <div className="flex w-full justify-start">
                                     Password
                                 </div>
                                 <input
@@ -152,12 +152,12 @@ export default function SignUpPage() {
                                     required
                                     autoComplete="new-password"
                                 />
-                                <p className="mb-0 mt-2 text-[0.9rem] font-normal text-third text-center">
+                                <p className="mb-0 mt-2 text-center text-[0.9rem] font-normal text-third">
                                     1 upper, 1 lower, 1 special char, 1 number,
                                     min 8 chars
                                 </p>
                             </label>
-                            <label className="mb-8 font-semibold md:w-[400px] w-72">
+                            <label className="mb-8 w-72 font-semibold md:w-[400px]">
                                 Retype Password
                                 <input
                                     name="retype password"

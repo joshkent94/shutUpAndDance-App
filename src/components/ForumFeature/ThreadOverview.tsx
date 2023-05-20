@@ -76,13 +76,13 @@ export default function ThreadOverview(props) {
 
     return (
         <div className="thread mb-[0.7rem] flex h-[160px] w-full items-center rounded-[0.2rem] border border-third bg-secondary p-2 text-primary">
-            <div className="thread-container my-2 flex h-[90%] min-h-[90%] w-4/5 flex-col justify-center border-r border-r-third px-[0.8rem]">
+            <div className="thread-container my-2 flex h-[90%] min-h-[90%] w-1/2 flex-col justify-center border-r border-r-third px-[0.8rem] md:w-3/5 lg:w-4/5">
                 <p className="m-0 overflow-hidden text-ellipsis whitespace-nowrap pb-2 text-[1.2rem] font-bold">
                     {thread.title}
                 </p>
                 <p className="m-0 line-clamp-3">{thread.initialComment}</p>
             </div>
-            <div className="thread-container flex h-[90%] w-1/5 flex-col justify-center px-[0.8rem]">
+            <div className="thread-container flex h-[90%] w-1/2 flex-col justify-center px-[0.8rem] md:w-2/5 lg:w-1/5">
                 <p className="m-0 overflow-hidden text-ellipsis whitespace-nowrap">
                     <span className="font-bold">Created by:</span>{' '}
                     {thread.firstName} {thread.lastName}

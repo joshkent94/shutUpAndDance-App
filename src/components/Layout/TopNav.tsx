@@ -64,7 +64,7 @@ export default function TopNav() {
             <Navbar
                 collapseOnSelect
                 expand="lg"
-                className="md:py-2 fixed left-0 right-0 top-0 z-50 flex w-screen border-b border-b-third bg-secondary"
+                className="fixed left-0 right-0 top-0 z-50 flex w-screen border-b border-b-third bg-secondary md:py-2"
             >
                 <Container className="m-0 max-w-none px-5 md:px-[1.3rem]">
                     <Navbar.Brand
@@ -86,15 +86,15 @@ export default function TopNav() {
                             className="absolute left-1 top-2 h-8 w-auto opacity-0 transition-opacity duration-300 ease-in-out"
                         />
                     </Navbar.Brand>
-                    <Nav className='flex-row'>
+                    <Nav className="flex-row">
                         <Nav.Item
                             id="help"
-                            className="flex items-center md:border-r md:border-r-third px-1 md:px-4 pl-4 hover:cursor-pointer hover:text-fourth"
+                            className="flex items-center px-1 pl-4 hover:cursor-pointer hover:text-fourth md:border-r md:border-r-third md:px-4"
                         >
                             <i className="bi bi-question-circle-fill text-center text-2xl leading-[0.5rem]"></i>
-                            <p className="m-0 pl-2 hidden md:block">Help</p>
+                            <p className="m-0 hidden pl-2 md:block">Help</p>
                         </Nav.Item>
-                        <div className="hidden md:block pl-4">
+                        <div className="hidden pl-4 md:block">
                             <p className="m-0 text-[0.95rem] leading-[1.3rem]">
                                 {firstName} {lastName}
                             </p>
@@ -109,7 +109,7 @@ export default function TopNav() {
                             >
                                 <i className="bi bi-person-fill text-center text-2xl leading-[0.5rem]"></i>
                             </button>
-                            <ul className="dropdown-menu dropdown-menu-end fade-down z-50 absolute">
+                            <ul className="dropdown-menu dropdown-menu-end fade-down absolute z-50">
                                 <li className="dropdown-item p-0 hover:bg-secondary">
                                     <Link
                                         className="block h-full w-full px-3 py-1 font-semibold text-primary"

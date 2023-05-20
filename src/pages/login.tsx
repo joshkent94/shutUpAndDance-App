@@ -68,7 +68,7 @@ export default function LoginPage() {
                 />
             </Head>
             <div className="flex h-screen w-full justify-center">
-                <div className="hidden md:flex w-1/4 flex-col justify-between bg-rapper bg-cover bg-scroll bg-center bg-no-repeat p-4 text-secondary">
+                <div className="hidden w-1/4 flex-col justify-between bg-rapper bg-cover bg-scroll bg-center bg-no-repeat p-4 text-secondary md:flex">
                     <Image
                         src={Logo}
                         alt="logo"
@@ -96,7 +96,7 @@ export default function LoginPage() {
                                     name="email"
                                     type="email"
                                     placeholder="josh@example.com"
-                                    className="form-control mt-4 w-72 md:w-[400px] text-primary placeholder:text-third focus:border-primary focus:shadow-none"
+                                    className="form-control mt-4 w-72 text-primary placeholder:text-third focus:border-primary focus:shadow-none md:w-[400px]"
                                     onChange={updateEmail}
                                     required
                                 />
@@ -106,7 +106,7 @@ export default function LoginPage() {
                                 <input
                                     name="password"
                                     type="password"
-                                    className="form-control mt-4 w-72 md:w-[400px] text-primary placeholder:text-third focus:border-primary focus:shadow-none"
+                                    className="form-control mt-4 w-72 text-primary placeholder:text-third focus:border-primary focus:shadow-none md:w-[400px]"
                                     onChange={updatePassword}
                                     required
                                 />
